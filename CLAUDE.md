@@ -13,41 +13,40 @@ Figma reference: https://www.figma.com/design/2PhiSh4AgPs29bOkoCIjs9/vl-construc
 
 ## Stack
 
-**Astro 5** static site with SSG output. No backend. Key dependencies (all in `package.json`):
+**Astro 5** static site with SSG output. No backend, no adapter — plain static `dist/`. Key dependencies (all in `package.json`):
 - `astro` ^5.14 — framework and build
 - `@astrojs/sitemap` — emits `/sitemap-index.xml` + `/sitemap-0.xml` at build
-- `@astrojs/vercel` — Vercel adapter (Vercel Build Output API v3; emits `.vercel/output/config.json`)
 - `@astrojs/check` + `typescript` — strict type-checking
 - `tailwindcss` ^4 + `@tailwindcss/vite` — build-time Tailwind (no CDN)
 
-`astro.config.mjs` at the project root: sets `site: 'https://vl-construction.vercel.app'`, `trailingSlash: 'ignore'` (both `/foo` and `/foo/` resolve; canonicals use the trailing form), `build.format: 'directory'`, the sitemap integration, and the Vercel adapter with `imageService: true`.
+`astro.config.mjs` at the project root: sets `site: 'https://vl-proconstruction.pages.dev'`, `trailingSlash: 'ignore'` (both `/foo` and `/foo/` resolve; canonicals use the trailing form), `build.format: 'directory'`, and the sitemap integration.
 
 `tsconfig.json` extends `astro/tsconfigs/strict`. Path aliases: `@/*` → `src/*`, `@components/*` → `src/components/*`, `@layouts/*` → `src/layouts/*`, `@content/*` → `src/content/*`.
 
 ## Commands
 
 - `npm run dev` — `astro dev` at http://localhost:4321
-- `npm run build` — `astro build` (outputs to `dist/` + Vercel adapter writes `.vercel/output/`)
+- `npm run build` — `astro build` (outputs static site to `dist/`)
 - `npm run preview` — `astro preview`
 - `npm run check` — `astro check` (TypeScript type-check)
 
 ## Deployment
 
-Vercel autodetects Astro. No `vercel.json` needed — the `@astrojs/vercel` adapter emits `.vercel/output/config.json` which handles clean URLs, immutable `_astro/*` caching, the 404 route, and Vercel Image API config. Deploys go through the GitHub repo (`VLProconstructionDev/vl-proconstruction`, public — which is why the repo copy of `Code.gs` has an EMPTY `RECAPTCHA_SECRET`; the real secret lives only in the deployed Apps Script) → Vercel project serving `https://vl-construction.vercel.app`. History note: the project migrated here 2026-07-31 as a single squashed commit; the full early history lives in the old private repo `alexdatsyk/vl-construction` (local remote `old-origin`, local branch `main-old-history`). (An older abandoned project at `vl-construction-jxpr.vercel.app` may still exist — it serves a stale build and should be deleted in the Vercel dashboard.)
+**Cloudflare Pages**, connected to the GitHub repo `VLProconstructionDev/vl-proconstruction` (public — which is why the repo copy of `Code.gs` has an EMPTY `RECAPTCHA_SECRET`; the real secret lives only in the deployed Apps Script). Framework preset: Astro; build command `npm run build`; output directory `dist`. No adapter — the site is fully static. Cloudflare serves `dist/404.html` as the custom 404 automatically, and `public/_headers` sets immutable caching for `/_astro/*` (this replaced what the old Vercel adapter used to configure). History note: the project migrated to this repo 2026-07-31 as a single squashed commit; the full early history lives in the old private repo `alexdatsyk/vl-construction` (local remote `old-origin`, local branch `main-old-history`). The project previously deployed on Vercel (`vl-construction.vercel.app`) — those projects should be deleted in the Vercel dashboard.
 
-**⚠️ `https://vl-construction.vercel.app` is a TEMPORARY test URL** — a real production domain is coming. When it lands, update the URL in all three places (it feeds canonicals, og:url, sitemap, and JSON-LD):
+**⚠️ `https://vl-proconstruction.pages.dev` is a TEMPORARY test URL** — the real production domain (likely `vlproco.com`) is coming. When it lands, update the URL in all three places (it feeds canonicals, og:url, sitemap, and JSON-LD):
 1. `astro.config.mjs` — the `SITE` constant
 2. `src/lib/site.ts` — the `url` field
 3. `public/robots.txt` — the `Sitemap:` line
 
-Then rebuild and verify: `grep -r "vercel.app" dist/ --include="*.html" -l` should return nothing, and in Vercel set the old `.vercel.app` URL to redirect to the new primary domain.
+Then rebuild and verify: `grep -r "pages.dev" dist/ --include="*.html" -l` should return nothing, add the custom domain to the Cloudflare Pages project, and set a redirect from `*.pages.dev` to the primary domain (Pages → Custom domains, or a `_redirects` rule). Also update the Google-side allowlists: reCAPTCHA key domains + Maps key referrer restrictions.
 
 ## Architecture
 
 Multi-page marketing site generated at build time. No runtime server. Shared components (Header, Footer, EstimateWizard) live in `src/components/` and are composed via layouts — not duplicated per page. Page-specific CSS goes in `<style is:global>` blocks and page-specific JS in `<script is:inline>` blocks within the relevant `.astro` file.
 
 ### Project root files
-`astro.config.mjs`, `tsconfig.json`, `package.json`, `package-lock.json`, `CLAUDE.md`, `claude-design.md`, `claude-development.md`, `.gitignore`. Plus `docs/leads-webhook/` — the Google Apps Script (`Code.gs`) + setup guide (`SETUP.md`) for the estimate-form lead webhook (not part of the build). Gitignored: `dist/`, `.vercel/`, `.astro/`, `node_modules/`, `_pre-optimize-backup/` (pre-webp image/video originals).
+`astro.config.mjs`, `tsconfig.json`, `package.json`, `package-lock.json`, `CLAUDE.md`, `claude-design.md`, `claude-development.md`, `.gitignore`. Plus `docs/leads-webhook/` — the Google Apps Script (`Code.gs`) + setup guide (`SETUP.md`) for the estimate-form lead webhook (not part of the build). Gitignored: `dist/`, `.astro/`, `node_modules/`, `_pre-optimize-backup/` (pre-webp image/video originals).
 
 ### src/ layout
 
@@ -87,6 +86,7 @@ public/
   assets/images/           — webp/jpg/png; subdirs: gallery/, gallery-showers/, brand/
   assets/video/            — hero-0715.mp4 + hero-0715.webm (active); hero.mp4 + hero-custom-showers.mp4 (legacy, unreferenced)
   robots.txt               — points at sitemap
+  _headers                 — Cloudflare Pages headers (immutable /_astro/* caching)
 ```
 
 ### Design tokens (`src/styles/global.css`, Tailwind v4 `@theme`)
