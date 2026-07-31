@@ -1,0 +1,267 @@
+---
+import { site } from '@/lib/site';
+
+// On the home page, anchor links stay in-page ("#services").
+// On any other page, they need to hop back to the home page ("/#services").
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+const H = isHome ? '' : '/';
+---
+
+<header class="fixed top-3 sm:top-5 inset-x-0 z-50 px-5 sm:px-10 lg:px-[60px]">
+  <nav
+    id="navbar"
+    class="backdrop-blur-md border rounded-[55px] px-5 sm:px-8 h-[76px] sm:h-[80px] flex items-center justify-between gap-4"
+  >
+    <div class="flex items-center gap-5 lg:gap-6 min-w-0">
+      <a href="/" class="shrink-0">
+        <img
+          src="/assets/images/logo.svg"
+          alt={site.name}
+          class="nav-logo h-[52px] sm:h-[56px] w-auto"
+        />
+      </a>
+      <span class="nav-divider hidden lg:block h-6 w-px"></span>
+      <div class="hidden lg:flex items-center gap-[22px] text-[16px] font-medium capitalize tracking-[-0.03em]">
+        <div class="nav-item">
+          <a href={`${H}#`} aria-haspopup="true" class="flex items-center gap-1.5">
+            Home
+            <svg class="nav-dd-chev w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dd">
+            <div class="nav-dd-panel">
+              <a href={`${H}#services`} class="nav-dd-item">Services</a>
+              <a href={`${H}#benefits`} class="nav-dd-item">Why VL Pro</a>
+              <a href={`${H}#about`} class="nav-dd-item">About Us</a>
+              <a href={`${H}#process`} class="nav-dd-item">Our Process</a>
+              <a href={`${H}#gallery`} class="nav-dd-item">Our Work</a>
+              <a href={`${H}#reviews`} class="nav-dd-item">Reviews</a>
+              <a href="#estimate" class="nav-dd-item js-open-estimate">Get a Free Estimate</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a href="/services" aria-haspopup="true" class="flex items-center gap-1.5">
+            Services
+            <svg class="nav-dd-chev w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </a>
+          <div class="nav-dd">
+            <div class="nav-dd-panel">
+              <a href="/services/custom-showers" class="nav-dd-item">Custom Showers</a>
+              <a href="/services/tile-natural-stone" class="nav-dd-item">Tile &amp; Natural Stone</a>
+              <a href="/services/hard-surface-flooring" class="nav-dd-item">Hard Surface Flooring</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden lg:flex items-center gap-2 shrink-0">
+      <a href={site.phoneHref} class="flex items-center gap-2 hover:text-brand transition-colors">
+        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <span class="font-poppins font-bold uppercase text-[16px] tracking-tight">{site.phone}</span>
+      </a>
+      <a
+        href="#estimate"
+        id="navCta"
+        class="btn nav-cta js-open-estimate items-center h-11 rounded-full bg-brand hover:bg-[#e03f1c] text-white font-semibold text-[14px] capitalize"
+      >
+        Get a Free Estimate
+      </a>
+    </div>
+
+    <button
+      id="menuBtn"
+      aria-label="Open menu"
+      aria-expanded="false"
+      class="lg:hidden btn grid place-items-center h-12 w-12 -mr-1 rounded-full"
+    >
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </nav>
+
+  <div id="mobileMenu" class="lg:hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div class="mm-top">
+      <a href="/" class="shrink-0">
+        <img src="/assets/images/logo.svg" alt={site.name} class="h-[52px] w-auto" />
+      </a>
+      <button type="button" id="menuClose" class="mm-close btn" aria-label="Close menu">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <nav class="mm-nav">
+      <div class="mm-row">
+        <button type="button" class="js-mobile-sub-toggle mm-link btn" aria-expanded="false">
+          <span>Home</span>
+          <svg class="mm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="js-mobile-sub mm-sub">
+          <div>
+            <a href={`${H}#services`}>Services</a>
+            <a href={`${H}#benefits`}>Why VL Pro</a>
+            <a href={`${H}#about`}>About Us</a>
+            <a href={`${H}#process`}>Our Process</a>
+            <a href={`${H}#gallery`}>Our Work</a>
+            <a href={`${H}#reviews`}>Reviews</a>
+            <a href="#estimate" class="js-open-estimate">Get a Free Estimate</a>
+          </div>
+        </div>
+      </div>
+      <div class="mm-row">
+        <button type="button" class="js-mobile-sub-toggle mm-link btn" aria-expanded="false">
+          <span>Services</span>
+          <svg class="mm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="js-mobile-sub mm-sub">
+          <div>
+            <a href="/services">All Services</a>
+            <a href="/services/custom-showers">Custom Showers</a>
+            <a href="/services/tile-natural-stone">Tile &amp; Natural Stone</a>
+            <a href="/services/hard-surface-flooring">Hard Surface Flooring</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="mm-foot">
+      <a href="#estimate" class="mm-cta btn js-open-estimate">Get a Free Estimate</a>
+      <a href={site.phoneHref} class="mm-phone btn">
+        <svg class="w-[17px] h-[17px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <span>Call Now</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile sticky CTA bar — slides up once the visitor scrolls past the hero
+     (or a screen's worth on pages without one). Same actions as the mobile
+     menu footer; phones only (hidden md+). -->
+<div id="mobileCta" class="mcta" aria-hidden="true">
+  <a href="#estimate" class="mcta-estimate btn js-open-estimate" tabindex="-1">Get a Free Estimate</a>
+  <a href={site.phoneHref} class="mcta-call btn" tabindex="-1">
+    <svg class="w-[17px] h-[17px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+    <span>Call Now</span>
+  </a>
+</div>
+
+<script>
+  // ============================================================
+  // Navbar: theme-switch when scrolling past `[data-nav-theme]` sections,
+  // + reveal the "Get a Free Estimate" CTA once past the hero.
+  // On non-home pages there is no `#hero`; the navbar is always solid and the
+  // CTA is always visible.
+  // ============================================================
+  const navbar = document.getElementById('navbar');
+  const hero = document.getElementById('hero');
+  const navCta = document.getElementById('navCta');
+  const mobileCta = document.getElementById('mobileCta');
+  // The sticky bar reveals past the hero; on pages without one, after about
+  // a screen of scrolling (so it doesn't eat viewport from the first paint).
+  const setMobileCta = (show: boolean) => {
+    if (!mobileCta) return;
+    mobileCta.classList.toggle('is-visible', show);
+    mobileCta.setAttribute('aria-hidden', String(!show));
+    mobileCta.querySelectorAll('a').forEach((a) => (a.tabIndex = show ? 0 : -1));
+  };
+  if (navbar) {
+    const themed = Array.from(document.querySelectorAll<HTMLElement>('[data-nav-theme]'));
+    const updateNav = () => {
+      const probeY = navbar.getBoundingClientRect().bottom;
+      // On home, keep the navbar transparent + hide the CTA while over the hero.
+      if (hero && hero.getBoundingClientRect().bottom > probeY + 4) {
+        navbar.classList.remove('nav-light', 'nav-dark');
+        navCta?.classList.remove('is-visible');
+        setMobileCta(false);
+        return;
+      }
+      navCta?.classList.add('is-visible');
+      setMobileCta(hero ? true : window.scrollY > window.innerHeight * 0.6);
+      let theme = 'light';
+      for (const s of themed) {
+        const r = s.getBoundingClientRect();
+        if (r.top <= probeY && r.bottom > probeY) {
+          theme = s.dataset.navTheme ?? 'light';
+          break;
+        }
+      }
+      navbar.classList.toggle('nav-light', theme === 'light');
+      navbar.classList.toggle('nav-dark', theme === 'dark');
+    };
+    updateNav();
+    window.addEventListener('scroll', updateNav, { passive: true });
+    window.addEventListener('resize', updateNav, { passive: true });
+    // Re-check on load in case fonts/images shift layout.
+    window.addEventListener('load', updateNav);
+    // Exposed so page scripts (e.g. Lenis) can sync on smooth-scroll frames.
+    (window as unknown as { vlUpdateNav?: () => void }).vlUpdateNav = updateNav;
+  }
+
+  // Full-screen mobile menu: open/close, scroll lock, single-open accordions.
+  // Astro processes this at build time and outputs a normal <script> tag.
+  const menu = document.getElementById('mobileMenu');
+  const openBtn = document.getElementById('menuBtn');
+  const closeBtn = document.getElementById('menuClose');
+  if (menu && openBtn && closeBtn) {
+    let scrollY = 0;
+
+    const open = () => {
+      scrollY = window.scrollY || window.pageYOffset;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      menu.classList.add('is-open');
+      menu.setAttribute('aria-hidden', 'false');
+      openBtn.setAttribute('aria-expanded', 'true');
+      closeBtn.focus({ preventScroll: true });
+    };
+    const close = () => {
+      if (!menu.classList.contains('is-open')) return;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, scrollY);
+      menu.classList.remove('is-open');
+      menu.setAttribute('aria-hidden', 'true');
+      openBtn.setAttribute('aria-expanded', 'false');
+    };
+    // Exposed so per-page scripts (estimate overlay) can close the menu.
+    (window as unknown as { vlCloseMenu?: () => void }).vlCloseMenu = close;
+
+    openBtn.addEventListener('click', () => {
+      menu.classList.contains('is-open') ? close() : open();
+    });
+    closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+
+    // Single-open accordion.
+    const toggles = menu.querySelectorAll<HTMLButtonElement>('.js-mobile-sub-toggle');
+    toggles.forEach((t) => {
+      t.addEventListener('click', () => {
+        const row = t.closest('.mm-row');
+        if (!row) return;
+        const willOpen = !row.classList.contains('is-open');
+        toggles.forEach((other) => {
+          const r = other.closest('.mm-row');
+          r?.classList.remove('is-open');
+          other.setAttribute('aria-expanded', 'false');
+        });
+        if (willOpen) {
+          row.classList.add('is-open');
+          t.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+</script>

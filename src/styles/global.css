@@ -1,0 +1,542 @@
+@import "tailwindcss";
+
+/* Design tokens — ported from the legacy inline tailwind.config.
+   Access as text-brand, bg-brandhead, text-ink, font-poppins, etc. */
+@theme {
+  --color-brand: #f54b25;
+  --color-brand-hover: #c23c18;
+  --color-brand-hover-alt: #e03f1c;
+  --color-brandhead: #f64e28;
+  --color-ink: #1e1e1e;
+  --color-graydesc: #4e4e4e;
+  --color-graycard: #959595;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-serifd: "Source Serif 4", ui-serif, Georgia, serif;
+}
+
+/* Global resets carried over from the legacy pages.
+   overflow-x: clip (not hidden) prevents horizontal scroll WITHOUT creating a
+   scroll container — hidden makes html/body a scroller, which silently breaks
+   position: sticky (e.g. the home page's overlapping process steps). */
+html,
+body {
+  overflow-x: clip;
+}
+
+/* Hide native scrollbar but keep scroll functional. */
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Anchored sections clear the fixed floating navbar. */
+:where([id]) {
+  scroll-margin-top: 104px;
+}
+
+/* ============================================================
+   Shared navbar (Header component)
+   ============================================================ */
+#navbar {
+  background-color: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+#navbar.nav-dark {
+  background-color: rgba(15, 15, 15, 0.6);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+#navbar.nav-light {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #1e1e1e;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+#navbar .nav-divider {
+  background-color: currentColor;
+  opacity: 0.4;
+}
+#navbar .nav-logo {
+  transition: filter 0.3s ease;
+}
+#navbar.nav-light .nav-logo {
+  filter: invert(1);
+}
+
+/* Nav dropdowns */
+.nav-item {
+  position: relative;
+}
+.nav-dd {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  padding-top: 16px;
+  min-width: 240px;
+  z-index: 60;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(7px);
+  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.2s;
+  pointer-events: none;
+}
+.nav-item:hover > .nav-dd,
+.nav-item:focus-within > .nav-dd {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.nav-dd-panel {
+  background: rgba(16, 16, 16, 0.68);
+  border-radius: 16px;
+  padding: 10px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: 0 28px 70px -22px rgba(0, 0, 0, 0.6);
+}
+.nav-dd-item {
+  display: block;
+  padding: 11px 18px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  text-transform: capitalize;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  transition: color 0.18s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-dd-item:hover,
+.nav-dd-item:focus-visible {
+  color: #f54b25;
+  outline: none;
+  transform: translateX(3px);
+}
+/* The estimate CTA stands out from plain nav links in brand red. */
+.nav-dd-item.js-open-estimate {
+  color: #f54b25;
+}
+.nav-dd-item.js-open-estimate:hover,
+.nav-dd-item.js-open-estimate:focus-visible {
+  color: #e03f1c;
+}
+.nav-dd-chev {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-item:hover .nav-dd-chev,
+.nav-item:focus-within .nav-dd-chev {
+  transform: rotate(180deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-dd,
+  .nav-dd-item,
+  .nav-dd-chev {
+    transition: none;
+  }
+}
+
+/* Floating "Get a Free Estimate" CTA — reveals after the hero. */
+#navCta.nav-cta {
+  display: inline-flex;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0;
+  max-width: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 0;
+  transform: translateX(14px);
+  pointer-events: none;
+  transition: opacity 0.45s ease,
+    max-width 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    margin 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.2s ease,
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#navCta.nav-cta.is-visible {
+  opacity: 1;
+  max-width: 230px;
+  margin-left: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+#navCta.nav-cta.is-visible:hover {
+  background-color: #c23c18;
+}
+#navCta.nav-cta.is-visible:active {
+  transform: translateX(0) translateY(1px) scale(0.985);
+}
+@media (prefers-reduced-motion: reduce) {
+  #navCta.nav-cta {
+    transition: opacity 0.2s ease;
+  }
+}
+
+/* Buttons: subtle press feedback, only transform/opacity animate. */
+.btn {
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 0.18s, color 0.18s, border-color 0.18s, opacity 0.18s,
+    box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #f54b25;
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Mobile menu (full-screen overlay in Header)
+   ============================================================ */
+#mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #0b0b0b;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+#mobileMenu.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (min-width: 1024px) {
+  #mobileMenu {
+    display: none;
+  }
+}
+.mm-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 40px 0;
+  min-height: 88px;
+}
+.mm-close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  height: 46px;
+  width: 46px;
+  margin-right: -8px;
+  border-radius: 14px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.mm-close:hover {
+  color: #fff;
+}
+.mm-close:active {
+  transform: scale(0.94);
+}
+.mm-close:focus-visible {
+  outline: 2px solid #f54b25;
+  outline-offset: 3px;
+}
+.mm-nav {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 40px;
+}
+.mm-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+#mobileMenu.is-open .mm-row {
+  opacity: 1;
+  transform: none;
+}
+#mobileMenu.is-open .mm-row:nth-child(1) { transition-delay: 0.06s; }
+#mobileMenu.is-open .mm-row:nth-child(2) { transition-delay: 0.12s; }
+#mobileMenu.is-open .mm-row:nth-child(3) { transition-delay: 0.18s; }
+#mobileMenu.is-open .mm-row:nth-child(4) { transition-delay: 0.24s; }
+.mm-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 20px 0;
+  text-align: left;
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: -0.03em;
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.mm-link:hover,
+.mm-row.is-open > .mm-link {
+  color: #fff;
+}
+.mm-link:active {
+  transform: translateX(3px);
+}
+.mm-link:focus-visible {
+  outline: 2px solid #f54b25;
+  outline-offset: 4px;
+}
+.mm-chev {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  color: rgba(255, 255, 255, 0.55);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.mm-row.is-open .mm-chev {
+  transform: rotate(180deg);
+}
+.mm-sub {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.mm-row.is-open .mm-sub {
+  grid-template-rows: 1fr;
+}
+.mm-sub > div {
+  overflow: hidden;
+}
+.mm-sub a {
+  display: block;
+  padding: 11px 0;
+  padding-left: 2px;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.mm-sub a:hover {
+  color: #fff;
+}
+/* The estimate CTA stands out from plain menu links in brand red. */
+.mm-sub a.js-open-estimate {
+  color: #f54b25;
+  font-weight: 500;
+}
+.mm-sub a.js-open-estimate:hover {
+  color: #e03f1c;
+}
+.mm-sub a:active {
+  transform: translateX(3px);
+}
+.mm-sub a:focus-visible {
+  outline: 2px solid #f54b25;
+  outline-offset: 3px;
+}
+.mm-sub > div > :last-child {
+  margin-bottom: 14px;
+}
+.mm-foot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 40px 36px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease 0.3s,
+    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s;
+}
+#mobileMenu.is-open .mm-foot {
+  opacity: 1;
+  transform: none;
+}
+.mm-cta,
+.mm-phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 18px;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, transform 0.2s ease;
+}
+.mm-cta {
+  flex: 1 1 auto;
+  background: #f54b25;
+  color: #fff;
+}
+.mm-cta:hover {
+  background: #e03f1c;
+}
+.mm-cta:active,
+.mm-phone:active {
+  transform: scale(0.98);
+}
+.mm-cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.mm-phone {
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+}
+.mm-phone:hover {
+  border-color: #fff;
+  color: #fff;
+}
+.mm-phone:focus-visible {
+  outline: 2px solid #f54b25;
+  outline-offset: 3px;
+}
+@media (max-width: 379px) {
+  .mm-top {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .mm-nav,
+  .mm-foot {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #mobileMenu .mm-row,
+  #mobileMenu .mm-foot {
+    transform: none;
+    transition: opacity 0.01s;
+  }
+  .mm-sub,
+  .mm-chev,
+  .mm-close,
+  .mm-cta,
+  .mm-link {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Mobile sticky CTA bar (#mobileCta) — floating capsule that slides up
+   from the bottom once the visitor scrolls past the hero. Echoes the
+   navbar's blurred-capsule language and the mobile menu footer's buttons.
+   z-index: above content, below the navbar (50) / menu (60) / wizard (2000).
+   ============================================================ */
+.mcta {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 9999px;
+  background: rgba(11, 11, 11, 0.82);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform: translateY(calc(100% + 24px + env(safe-area-inset-bottom, 0px)));
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.35s ease;
+}
+.mcta.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+/* Phones only. A plain media query, not a Tailwind utility — these styles
+   are unlayered and would win over `md:hidden` anyway. */
+@media (min-width: 768px) {
+  .mcta {
+    display: none;
+  }
+}
+.mcta-estimate,
+.mcta-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, transform 0.2s ease;
+}
+.mcta-estimate {
+  flex: 1 1 auto;
+  background: #f54b25;
+  color: #fff;
+}
+.mcta-estimate:hover {
+  background: #e03f1c;
+}
+.mcta-estimate:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+.mcta-call {
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+}
+.mcta-call:hover {
+  border-color: #fff;
+  color: #fff;
+}
+.mcta-call:focus-visible {
+  outline: 2px solid #f54b25;
+  outline-offset: 3px;
+}
+.mcta-estimate:active,
+.mcta-call:active {
+  transform: scale(0.98);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mcta {
+    transform: none;
+    transition: opacity 0.01s;
+  }
+  .mcta-estimate,
+  .mcta-call {
+    transition: none;
+  }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vl-construction.vercel.app/sitemap-index.xml

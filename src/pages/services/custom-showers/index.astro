@@ -1,0 +1,902 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
+
+const description =
+  'Custom shower builders in Bradenton & Sarasota, FL. Curbless, waterproof, and built to spa standards — showers engineered to stay leak-free for decades.';
+
+const schema = [
+  serviceSchema({
+    name: 'Custom Shower Installation',
+    description,
+    slug: 'custom-showers',
+    areaServed: 'Bradenton–Sarasota, FL',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Services', url: '/services' },
+    { name: 'Custom Showers', url: '/services/custom-showers' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Custom Showers — VL Proconstruction"
+  description={description}
+  schema={schema}
+  navTheme="dark"
+>
+  <style is:global>
+    .gimg { transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+    .gcard:hover .gimg { transform: scale(1.05); }
+    @media (prefers-reduced-motion: reduce) { .gimg { transition: none; transform: none; } }
+
+    .feat-check { display: grid; place-items: center; flex: none; width: 22px; height: 22px; color: #f54b25; }
+    .feat-check svg { width: 19px; height: 19px; }
+
+    .tag { display: inline-flex; align-items: center; border: 1px solid rgba(0,0,0,.12); border-radius: 9999px; padding: 10px 20px; font-size: 14px; font-weight: 500; letter-spacing: -.02em; color: #1e1e1e; transition: border-color .2s, background-color .2s; }
+    .tag:hover { border-color: rgba(245,75,37,.45); background: #faf9f8; }
+
+    .svc-other { transition: border-color .2s, background-color .2s, transform .2s cubic-bezier(.22,1,.36,1); }
+    .svc-other:hover { border-color: rgba(245,75,37,.5); background: rgba(255,255,255,.08); transform: translateY(-2px); }
+
+    /* ----- FAQ accordion ----- */
+    .faq-item { border-bottom: 1px solid rgba(0,0,0,.1); }
+    .faq-item:first-child { border-top: 1px solid rgba(0,0,0,.1); }
+    .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 28px; text-align: left; padding: 26px 0; cursor: pointer; color: #1e1e1e; }
+    .faq-ico { position: relative; flex: none; width: 24px; height: 24px; }
+    .faq-ico::before, .faq-ico::after { content: ""; position: absolute; background: #1e1e1e; transition: transform .3s ease, opacity .3s ease; }
+    .faq-ico::before { top: 50%; left: 0; right: 0; height: 2px; transform: translateY(-50%); }
+    .faq-ico::after { left: 50%; top: 0; bottom: 0; width: 2px; transform: translateX(-50%); }
+    .faq-q[aria-expanded="true"] .faq-ico::after { transform: translateX(-50%) scaleY(0); opacity: 0; }
+    .faq-q[aria-expanded="true"] .faq-ico::before { background: #f54b25; }
+    .faq-a { overflow: hidden; }
+    .faq-a-inner { padding-bottom: 26px; }
+    .js-faq .faq-a { transition: height .32s cubic-bezier(.4,0,.2,1); }
+    @media (prefers-reduced-motion: reduce) { .js-faq .faq-a { transition: none; } }
+
+    /* ----- Reviews quote slide ----- */
+    .rev-fade { transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1); will-change: transform, opacity; }
+    @media (prefers-reduced-motion: reduce) { .rev-fade { transition: none !important; transform: none !important; } }
+    /* ----- Reviews pagination dots ----- */
+    .rev-dot { flex: none; height: 6px; width: 6px; border-radius: 9999px; background: rgba(30,30,30,.2); transition: transform .3s cubic-bezier(.2,.8,.2,1), background-color .25s ease; }
+    .rev-dot:hover { background: rgba(30,30,30,.38); }
+    .rev-dot:focus-visible { outline: 2px solid #f54b25; outline-offset: 3px; }
+    .rev-dot.is-active { background: #f54b25; transform: scale(1.35); }
+    @media (prefers-reduced-motion: reduce) { .rev-dot { transition: none; } }
+    /* ----- Process steps stick & overlap; parallax photos ----- */
+    .px-frame { position: relative; overflow: hidden; }
+    /* let grid tracks shrink so a fixed-width process image can't push past the viewport (tablet) */
+    .process-step > * { min-width: 0; }
+    .px-frame .px-img { position: absolute; left: 0; top: -20%; width: 100%; height: 140%; object-fit: cover; will-change: transform; }
+    @media (prefers-reduced-motion: reduce) { .px-frame .px-img { position: static; top: 0; height: 100%; transform: none; } }
+    .process-step { position: sticky; background: #faf9f8; }
+    .process-step:nth-child(1) { top: 92px; }
+    .process-step:nth-child(2) { top: 124px; }
+    .process-step:nth-child(3) { top: 156px; }
+    @media (prefers-reduced-motion: reduce) { .process-step { position: static; box-shadow: none; } }
+    /* ----- Service-area map edge fade ----- */
+    .area-map-fade { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.8) 10%, #000 14%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.8) 10%, #000 14%); }
+    @media (min-width: 1024px) {
+      .area-map-fade { -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 7%, rgba(0,0,0,.8) 11%, #000 15%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 7%, rgba(0,0,0,.8) 11%, #000 15%); }
+    }
+    .area-map-fade::before { content: ''; position: absolute; inset: 0; z-index: 450; pointer-events: none;
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 8%, transparent 11%);
+      mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 8%, transparent 11%); }
+    @media (min-width: 1024px) {
+      .area-map-fade::before { -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 9%, transparent 12%);
+        mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 9%, transparent 12%); }
+    }
+    /* ----- Vertical auto-scrolling photo wall ----- */
+    .vwall { position: relative; overflow: hidden; height: clamp(960px, 138vh, 1560px); }
+    #galleryWall { display: flex; gap: 8px; height: 100%; }
+    .vcol { flex: 1 1 0; min-width: 0; will-change: transform; animation: vUp linear infinite; }
+    .vcol-down { animation-name: vDown; }
+    .vcell { margin-bottom: 8px; }
+    @keyframes vUp   { from { transform: translateY(0); }    to { transform: translateY(-50%); } }
+    @keyframes vDown { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+    .vwall::before, .vwall::after { content: ""; position: absolute; left: 0; right: 0; pointer-events: none; z-index: 2; }
+    .vwall::before { top: 0;    height: 96px;  background: linear-gradient(to bottom, #000, rgba(0,0,0,0)); }
+    .vwall::after  { bottom: 0; height: 280px; background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.92) 18%, rgba(0,0,0,0.72) 38%, rgba(0,0,0,0.45) 58%, rgba(0,0,0,0.2) 78%, rgba(0,0,0,0) 100%); }
+    @media (prefers-reduced-motion: reduce) {
+      .vwall { height: auto; overflow: visible; }
+      .vcol { animation: none; }
+      .vwall::before, .vwall::after { display: none; }
+    }
+    /* ----- Services we offer (image tiles) ----- */
+    .svc-tile { display: flex; flex-direction: column; }
+    .svc-figure { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: #141414; }
+    .svc-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .svc-title { margin-top: 20px; font-family: 'Inter', system-ui, sans-serif; color: #1e1e1e; font-weight: 600; line-height: 1.1; letter-spacing: -.03em; font-size: clamp(1.45rem, 1.85vw, 1.95rem); }
+    .svc-desc { margin-top: 10px; color: #4e4e4e; font-size: 12px; line-height: 1.5; max-width: 42ch; }
+    /* ----- Consultation ----- */
+    .consult-chip { display: flex; align-items: center; gap: 12px; padding: 6px 0; font-size: 15px; font-weight: 600; letter-spacing: -.02em; color: #1e1e1e; }
+    .consult-check { display: grid; place-items: center; flex: none; width: 22px; height: 22px; border-radius: 9999px; background: transparent; color: #1e1e1e; }
+    .consult-check svg { width: 19px; height: 19px; }
+    .consult-photo { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 14%, #000 30%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 14%, #000 30%); }
+    @media (min-width: 1024px) { .consult-photo { -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.5) 16%, #000 34%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.5) 16%, #000 34%); } }
+
+    /* ----- Who we serve cards ----- */
+    .client-card .card-accent { display: none; }
+
+    /* ----- VL vs Others comparison ----- */
+    .cmp-photo { position: relative; overflow: hidden; }
+    .cmp-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+
+    .cmp-row { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: stretch; }
+    .cmp-row + .cmp-row { border-top: 1px solid rgba(0,0,0,.09); }
+    .cmp-cell { display: flex; align-items: center; gap: 11px; padding: 19px 16px; font-size: 14.5px; line-height: 1.3; letter-spacing: -.01em; }
+    .cmp-feature { font-weight: 600; color: #1e1e1e; }
+    .cmp-vl { width: 264px; justify-self: start; background: rgba(245,75,37,.06); border-left: 1px solid rgba(245,75,37,.28); border-right: 1px solid rgba(245,75,37,.28); color: #1e1e1e; font-weight: 500; }
+    .cmp-oth { color: rgba(30,30,30,.5); }
+    .cmp-head .cmp-cell { align-items: flex-end; padding-top: 4px; padding-bottom: 22px; }
+    .cmp-head .cmp-vl { border-top: 2px solid #f54b25; padding-top: 20px; }
+    .cmp-row:last-child .cmp-vl { border-bottom: 1px solid rgba(245,75,37,.28); }
+    .cmp-ic { flex: none; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 9999px; }
+    .cmp-ic svg { width: 14px; height: 14px; }
+    .cmp-yes { background: rgba(245,75,37,.14); color: #f54b25; }
+    .cmp-no { background: rgba(0,0,0,.05); color: rgba(30,30,30,.38); }
+    @media (max-width: 767px) {
+      .cmp-row { grid-template-columns: 1fr 1fr; }
+      .cmp-head .cmp-feature { display: none; }
+      .cmp-feature { grid-column: 1 / -1; padding: 20px 4px 6px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: rgba(30,30,30,.5); }
+      .cmp-vl, .cmp-oth { align-items: flex-start; padding: 6px 4px 18px; }
+      .cmp-vl { width: auto; justify-self: stretch; background: transparent; border: none; border-radius: 0 !important; }
+      .cmp-head .cmp-vl { border-top: none; padding-top: 4px; }
+      .cmp-row:last-child .cmp-vl { border: none; }
+    }
+    /* Service-area map — glowing 45-mile radius + text labels (no pins) */
+    .svc-radius { filter: drop-shadow(0 0 5px rgba(245,75,37,.85)) drop-shadow(0 0 13px rgba(245,75,37,.45)); }
+    .svc-dot { width: 9px; height: 9px; border-radius: 9999px; background: #f54b25;
+      box-shadow: 0 0 6px rgba(245,75,37,.95), 0 0 12px rgba(245,75,37,.5); }
+    .leaflet-tooltip.svc-tt { background: transparent; border: none; box-shadow: none; padding: 0;
+      color: #fff; font-family: 'Poppins', sans-serif; font-weight: 600; white-space: nowrap;
+      text-shadow: 0 1px 4px rgba(0,0,0,.9), 0 0 2px rgba(0,0,0,.6); }
+    .leaflet-tooltip.svc-tt::before { display: none; }
+    .leaflet-tooltip.svc-tt.lg { font-size: clamp(17px, 1.8vw, 26px); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: #7c7c7c; }
+    .leaflet-tooltip.svc-tt.md { font-size: 15px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; opacity: .8; }
+    .leaflet-tooltip.svc-tt.key { font-size: 12.5px; color: #f0f0f0; }
+    .leaflet-tooltip.svc-tt.county { font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+      color: #d98166; opacity: .8; font-weight: 600; }
+    /* Coastal keys — label + dashed leader line + dot, anchored at the real location */
+    .leaflet-div-icon { background: transparent; border: none; }
+    .svc-conn-inner { position: absolute; right: 0; top: 0; transform: translateY(-50%);
+      display: flex; align-items: center; white-space: nowrap; pointer-events: none; }
+    .svc-conn-label { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 12.5px; color: #f0f0f0;
+      text-shadow: 0 1px 4px rgba(0,0,0,.9), 0 0 2px rgba(0,0,0,.6); }
+    .svc-conn-line { width: 32px; height: 0; border-top: 1.5px dashed rgba(245,75,37,.85); margin: 0 8px; }
+    /* Inline red dot shown before town / county labels */
+    .svc-tt-dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; background: #f54b25;
+      margin-left: 7px; vertical-align: middle; position: relative; top: -1px;
+      box-shadow: 0 0 5px rgba(245,75,37,.9), 0 0 10px rgba(245,75,37,.45); }
+    /* ---- Service-area map (Leaflet) ---- */
+    #areaMap { height: 100%; width: 100%; background: #000; z-index: 0; }
+    #areaMap .leaflet-tile-pane { filter: saturate(0.85); } /* keep the dark basemap deep black */
+    /* hide attribution prefix flag, keep credits subtle */
+    #areaMap .leaflet-control-attribution { background: rgba(0,0,0,.55); color: rgba(255,255,255,.4); }
+    #areaMap .leaflet-control-attribution a { color: rgba(255,255,255,.6); }
+    /* zoom controls themed to match the dark/brand UI */
+    #areaMap .leaflet-bar a {
+      background: rgba(20,20,20,.92); color: #fff; border-bottom-color: rgba(255,255,255,.12);
+      transition: background-color .18s ease, color .18s ease;
+    }
+    #areaMap .leaflet-bar a:hover { background: #f54b25; color: #fff; }
+    #areaMap .leaflet-bar { border: 1px solid rgba(255,255,255,.14); box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+    /* custom red teardrop pin */
+    .area-pin { filter: drop-shadow(0 4px 6px rgba(0,0,0,.5)); }
+    .area-pin svg { display: block; transition: transform .2s cubic-bezier(.2,.8,.2,1); transform-origin: 50% 100%; }
+    .leaflet-marker-icon.area-pin:hover svg { transform: scale(1.14); }
+    /* popup styling */
+    #areaMap .leaflet-popup-content-wrapper {
+      background: #141414; color: #fff; border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,.55);
+    }
+    #areaMap .leaflet-popup-content { margin: 10px 14px; font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+    #areaMap .leaflet-popup-tip { background: #141414; border: 1px solid rgba(255,255,255,.12); }
+    #areaMap .leaflet-popup-close-button { color: rgba(255,255,255,.5); }
+    #areaMap a.leaflet-popup-close-button:hover { color: #fff; }
+  </style>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero" class="relative min-h-screen lg:h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
+    <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline preload="auto" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1">
+      <source src="/assets/video/hero-0715.webm" type="video/webm" />
+      <source src="/assets/video/hero-0715.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-black/65"></div>
+
+    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-20 lg:pb-[130px] pt-[150px] gap-8 lg:gap-10">
+      <div class="flex items-center gap-3.5 flex-wrap">
+        <a href="https://maps.app.goo.gl/7Yi5JeKD4vwVWFXo9" target="_blank" rel="noopener noreferrer" aria-label="View our Google reviews" class="inline-block rounded-md transition-transform duration-200 ease-out hover:scale-[1.14] active:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
+          <img src="/assets/images/google.webp" alt="Google" class="h-9 w-auto object-contain" />
+        </a>
+        <img src="/assets/images/bbb.webp" alt="BBB A+ rating" class="h-7 w-auto object-contain" />
+        <span class="h-6 w-px bg-white/40"></span>
+        <div class="flex items-center gap-1.5">
+          <span class="text-[#fbbf24] text-xl tracking-tight">★★★★★</span>
+          <span class="text-[15px] font-semibold uppercase">5.0</span>
+        </div>
+      </div>
+      <div class="font-semibold capitalize leading-[1.03] tracking-[-0.03em] text-[clamp(2.75rem,6.2vw,5.5rem)]">
+        <h1>
+          <span>Sarasota</span><br />
+          <span class="text-brand block">Custom Showers</span>
+        </h1>
+        <div class="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-8">
+          <span>Experts</span>
+          <p class="sm:mb-3 text-[14px] font-medium normal-case leading-[1.25] tracking-[-0.02em] text-[#f0f0f0] max-w-[480px]">We build custom showers and full wet rooms for homeowners and businesses across Sarasota and the surrounding areas — from waterproofing to frameless glass, a complete start to finish job backed by skilled craftsmanship and trusted local service.</p>
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Get a Free estimate</a>
+          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">call now</a>
+        </div>
+        <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-end">
+          <div class="flex flex-col items-start lg:items-end">
+            <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
+            <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of <br class="sm:hidden" />excellence</span>
+          </div>
+          <div class="flex flex-col items-start lg:items-end">
+            <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
+            <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Full Warranty <br class="sm:hidden" />Coverage</span>
+          </div>
+          <div class="flex flex-col items-start lg:items-end">
+            <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
+            <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects <br class="sm:hidden" />Completed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OVERVIEW ===================== -->
+  <section id="overview" class="bg-white" data-nav-theme="light">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+                    <h2 class="font-semibold capitalize leading-[1.05] tracking-[-0.04em] text-[clamp(2.5rem,4vw,3.75rem)]">Custom Showers<br class="hidden sm:block" /> Built to Last</h2>
+          <div class="mt-6 space-y-5 text-[15.5px] leading-[1.75] tracking-[-0.01em] text-graydesc max-w-[560px]">
+            <p>Every shower is carefully designed, waterproofed, and installed using proven systems and premium materials, giving homeowners peace of mind that their investment is protected for years to come.</p>
+            <p>From custom showers and full wet rooms to curbless entries, built-in benches, recessed niches, heated shower floors, and frameless glass enclosures, we create personalized spaces built for long-term performance with the craftsmanship and attention to detail needed to get it done right the first time.</p>
+          </div>
+          <div class="mt-11 grid grid-cols-3 gap-6 max-w-[560px]">
+            <div class="flex flex-col items-start gap-3.5">
+              <span class="grid place-items-center w-11 h-11 rounded-full bg-brand/10 text-brand">
+                <svg class="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>
+              </span>
+              <div>
+                <h3 class="text-[14px] font-semibold tracking-[-0.02em] leading-[1.2] text-ink">Certified Installers</h3>
+                <p class="mt-1 text-[12.5px] leading-[1.35] text-graycard">Schluter® &amp; Industry Certified</p>
+              </div>
+            </div>
+            <div class="flex flex-col items-start gap-3.5">
+              <span class="grid place-items-center w-11 h-11 rounded-full bg-brand/10 text-brand">
+                <svg class="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M12 15.6c-1.3-1-3-2-3-3.4 0-1.4 1.9-2.4 3-1 1.1-1.4 3-0.4 3 1 0 1.4-1.7 2.4-3 3.4z"/></svg>
+              </span>
+              <div>
+                <h3 class="text-[14px] font-semibold tracking-[-0.02em] leading-[1.2] text-ink">In-House Crews</h3>
+                <p class="mt-1 text-[12.5px] leading-[1.35] text-graycard">No Subcontractors</p>
+              </div>
+            </div>
+            <div class="flex flex-col items-start gap-3.5">
+              <span class="grid place-items-center w-11 h-11 rounded-full bg-brand/10 text-brand">
+                <svg class="w-[22px] h-[22px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4v-.5A1.5 1.5 0 0 1 10.5 2h3A1.5 1.5 0 0 1 15 3.5V4"/><path d="m9.5 12.5 1.8 1.8 3.2-3.4"/></svg>
+              </span>
+              <div>
+                <h3 class="text-[14px] font-semibold tracking-[-0.02em] leading-[1.2] text-ink">22+ Years Experience</h3>
+                <p class="mt-1 text-[12.5px] leading-[1.35] text-graycard">Trusted Craftsmanship Since 2004</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overflow-hidden aspect-[4/5]">
+          <img src="/assets/images/custom-showers-built-to-last.webp" alt="Marble master bath with a frameless glass shower, freestanding tub, and dual vanities" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CERTIFICATIONS ===================== -->
+  <section id="certifications" class="bg-[#141414] text-white border-y border-white/10" data-nav-theme="dark">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-12 lg:py-16">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:gap-14">
+        <div class="lg:w-[28%] lg:shrink-0">
+          <img src="/assets/images/logo.svg" alt="VL Proconstruction" class="h-10 w-auto mb-6" />
+          <h2 class="font-semibold leading-[1.04] tracking-[-0.03em] text-white text-[clamp(2.15rem,3vw,2.9rem)]">Certified for<br class="hidden lg:block" /> every surface</h2>
+        </div>
+        <div class="mt-9 lg:mt-0 grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-7 lg:flex-1">
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/10 text-brand shrink-0">
+              <svg class="w-[19px] h-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="text-[13.5px] font-semibold tracking-[-0.02em] leading-[1.25] text-white">Schluter® Waterproofing</p>
+              <p class="mt-0.5 text-[12px] leading-[1.3] text-white/60">Certified System</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/10 text-brand shrink-0">
+              <svg class="w-[19px] h-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="text-[13.5px] font-semibold tracking-[-0.02em] leading-[1.25] text-white">Large Format Tile</p>
+              <p class="mt-0.5 text-[12px] leading-[1.3] text-white/60">Certified Installer</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/10 text-brand shrink-0">
+              <svg class="w-[19px] h-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="text-[13.5px] font-semibold tracking-[-0.02em] leading-[1.25] text-white">XL Porcelain Slab</p>
+              <p class="mt-0.5 text-[12px] leading-[1.3] text-white/60">Certified Installer</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/10 text-brand shrink-0">
+              <svg class="w-[19px] h-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="text-[13.5px] font-semibold tracking-[-0.02em] leading-[1.25] text-white">Art Glass Panel</p>
+              <p class="mt-0.5 text-[12px] leading-[1.3] text-white/60">Certified Installer</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/10 text-brand shrink-0">
+              <svg class="w-[19px] h-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="text-[13.5px] font-semibold tracking-[-0.02em] leading-[1.25] text-white">Glass Tile</p>
+              <p class="mt-0.5 text-[12px] leading-[1.3] text-white/60">Certified Installer</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/10 text-brand shrink-0">
+              <svg class="w-[19px] h-[19px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="text-[13.5px] font-semibold tracking-[-0.02em] leading-[1.25] text-white">NTCA Member</p>
+              <p class="mt-0.5 text-[12px] leading-[1.3] text-white/60">Nat'l Tile Contractors Assoc.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICES WE OFFER ===================== -->
+  <section id="included" class="bg-white" data-nav-theme="light">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[100px]">
+      <h2 class="font-semibold capitalize leading-[1.05] tracking-[-0.04em] text-[clamp(2.5rem,4vw,3.75rem)]">Custom Shower Solutions</h2>
+      <p class="mt-5 text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc">From demolition and waterproofing to precision tile installation, we provide complete custom shower solutions built for lasting performance.</p>
+      <div class="mt-12 lg:mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <article class="svc-tile">
+          <div class="svc-figure">
+            <img class="svc-img" src="/assets/images/gallery-showers/showers-gray-curbless-glass.webp" alt="Curbless walk-in shower with gray stone tile, frameless glass, and a freestanding tub" loading="lazy" />
+          </div>
+          <h3 class="svc-title">Custom Showers</h3>
+          <p class="svc-desc">Custom tile layouts, curbless and curbed showers, built-in and lighted niches, custom and heated benches, heated shower floors, linear drains, arched entrances, mitered tile edges, large-format tile and porcelain slabs, and precision tile installation.</p>
+        </article>
+        <article class="svc-tile">
+          <div class="svc-figure">
+            <img class="svc-img" src="/assets/images/gallery-showers/showers-waterproofing-kerdi.webp" alt="Schluter Kerdi board waterproofing with sealed seams and shower pan drain" loading="lazy" />
+          </div>
+          <h3 class="svc-title">Waterproofing</h3>
+          <p class="svc-desc">Schluter® waterproofing systems, crack isolation membranes, shower pans, flood testing, moisture barriers, and installation of various waterproofing systems to manufacturer specifications.</p>
+        </article>
+        <article class="svc-tile">
+          <div class="svc-figure">
+            <img class="svc-img" src="/assets/images/gallery-showers/showers-glass-frameless.webp" alt="Frameless glass enclosure on a marble walk-in shower with rain head" loading="lazy" />
+          </div>
+          <h3 class="svc-title">Shower Glass</h3>
+          <p class="svc-desc">Custom frameless glass shower enclosures, sliding shower doors, hinged shower doors, fixed glass panels, heavy glass systems, custom glass configurations, and professional measurement and installation.</p>
+        </article>
+        <article class="svc-tile">
+          <div class="svc-figure">
+            <img class="svc-img" src="/assets/images/demolition-studs.webp" alt="Bathroom stripped to the studs with exposed framing, vapor barrier, and a protected tub" loading="lazy" />
+          </div>
+          <h3 class="svc-title">Demolition</h3>
+          <p class="svc-desc">Full bathroom demolition, shower and tub removal, vanity and tile demolition, mortar bed removal, debris haul-away, floor and surface protection, dust protection and dust control, subfloor inspection, and water damage assessment.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FREE DESIGN CONSULTATION ===================== -->
+  <section id="consultation" class="bg-white" data-nav-theme="light">
+    <div class="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-[60px] pt-16 lg:pt-24 pb-20 lg:pb-[90px]">
+      <div class="flex flex-col lg:flex-row lg:items-stretch overflow-hidden bg-[#faf9f8] shadow-[0_30px_60px_-32px_rgba(20,20,20,0.22)]">
+        <div class="flex flex-col items-start gap-8 lg:gap-10 p-8 sm:p-12 lg:p-14 lg:flex-1 lg:justify-center">
+          <div class="max-w-[680px]">
+            <h2 class="font-semibold tracking-[-0.035em] leading-[1.1] text-ink text-[clamp(1.7rem,2.8vw,2.6rem)]">
+              <span class="text-brand">Free</span> Design Consultation
+            </h2>
+            <p class="mt-4 text-[clamp(0.95rem,1.15vw,1.0625rem)] tracking-[-0.02em] text-graydesc">
+              Sit down with a shower specialist to plan every detail:
+            </p>
+            <ul class="consult-list mt-7 grid gap-3 sm:grid-cols-2">
+              <li class="consult-chip"><span class="consult-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Layout &amp; Curb Options</li>
+              <li class="consult-chip"><span class="consult-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Tile &amp; Glass Selection</li>
+              <li class="consult-chip"><span class="consult-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Waterproofing Plan</li>
+              <li class="consult-chip"><span class="consult-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Budget &amp; Timeline</li>
+            </ul>
+          </div>
+        </div>
+        <div class="relative w-full lg:w-[42%] shrink-0 min-h-[300px] sm:min-h-[380px] lg:min-h-0">
+          <img src="/assets/images/consultation.webp" alt="Modern powder room with a backlit round mirror, wood vanity, and vessel sink" class="consult-photo absolute inset-0 w-full h-full object-cover" />
+        </div>
+      </div>
+      <!-- TODO: real phone number -->
+      <div class="mt-6 flex justify-center">
+        <a href="tel:+15037814657" class="btn inline-flex items-center justify-center px-2 py-2 text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
+          Get a Free Design Consultation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESS ===================== -->
+  <section id="process" class="bg-white" data-nav-theme="light">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[120px]">
+      <h2 class="font-semibold capitalize text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.9rem,7.5vw,5.75rem)]">Our Process</h2>
+    </div>
+    <div class="bg-[#faf9f8] mt-10 lg:mt-14 pb-20 lg:pb-[100px]">
+      <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px]">
+        <div class="border-b border-black/10">
+        <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8">
+          <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
+            <img src="/assets/images/process-1.webp" alt="Consultation with the homeowner" class="absolute inset-0 w-full h-full object-cover object-top" />
+          </div>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">01</span>
+          <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Walkthrough &amp; Quote</h3>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We look at your bathroom, talk through layout, drainage, and glass, and walk you through waterproofing options, pricing, and timeline.</p>
+          </div>
+        </div>
+        <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
+          <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
+            <img src="/assets/images/process-2.webp" alt="Design and material planning" class="px-img" />
+          </div>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">02</span>
+          <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Layout &amp; Materials</h3>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We finalize the tile layout, niche and bench placement, slope, and drain type, then confirm every material selection before demo begins.</p>
+          </div>
+        </div>
+        <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
+          <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
+            <img src="/assets/images/process-3.webp" alt="Build and installation in progress" class="absolute inset-0 w-full h-full object-cover object-center scale-[1.12]" />
+          </div>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">03</span>
+          <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Waterproofing &amp; Tile</h3>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We frame, set the pan, install and flood-test the waterproofing, then set each tile by hand and seal the grout to spec.</p>
+          </div>
+        </div>
+        <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
+          <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
+            <img src="/assets/images/process-4.webp" alt="Finished, completed project" class="px-img" />
+          </div>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">04</span>
+          <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Glass &amp; Final Walkthrough</h3>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We coordinate the frameless glass, walk the finished shower with you, detail-clean everything, and explain care and warranty.</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALLERY ===================== -->
+  <section id="work" class="bg-black text-white" data-nav-theme="dark">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[100px]">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+        <div>
+          <h2 class="font-bold capitalize leading-[1.05] tracking-[-0.03em] text-[clamp(2.4rem,5vw,4rem)]">
+            Recent shower projects
+          </h2>
+          <p class="mt-4 text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[560px]">
+            A look at the custom showers and wet rooms we've built across Bradenton &amp; Sarasota — curbless entries, tiled niches, benches, and frameless glass.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="vwall mt-12 lg:mt-16 px-2">
+      <div id="galleryWall" aria-label="Recent project photos"></div>
+    </div>
+  </section>
+
+  <!-- ===================== TRUSTED BY / WHO WE SERVE ===================== -->
+  <section id="clients" class="bg-white text-ink" data-nav-theme="light">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
+      <div class="max-w-[820px]">
+        <h2 class="text-[clamp(1.9rem,3.4vw,2.9rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-ink">
+          The same craftsmanship for every client we serve.
+        </h2>
+        <p class="mt-5 max-w-[620px] text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc">
+          From single-family homes to commercial buildouts, VL Proconstruction brings the same reliability and finish quality to every project — no matter who's on the other side of the table.
+        </p>
+      </div>
+
+      <div class="mt-8 sm:mt-12 lg:mt-16 grid gap-0 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Homeowners -->
+        <article class="client-card group relative flex flex-col overflow-hidden rounded-none border border-black/[0.08] -ml-px -mt-px bg-white p-6 sm:p-9 sm:min-h-[420px]">
+          <span class="card-accent" aria-hidden="true"></span>
+          <span class="icon-tile grid place-items-center h-14 w-14 sm:h-[68px] sm:w-[68px] rounded-none bg-black/[0.05] text-ink">
+            <svg class="w-6 h-6 sm:w-[34px] sm:h-[34px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>
+          </span>
+          <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Homeowners</h3>
+          <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
+          <p class="mt-4 text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Turning your vision into a space you'll love, with honest guidance every step of the way.</p>
+        </article>
+
+        <!-- Builders -->
+        <article class="client-card group relative flex flex-col overflow-hidden rounded-none border border-black/[0.08] -ml-px -mt-px bg-white p-6 sm:p-9 sm:min-h-[420px]">
+          <span class="card-accent" aria-hidden="true"></span>
+          <span class="icon-tile grid place-items-center h-14 w-14 sm:h-[68px] sm:w-[68px] rounded-none bg-black/[0.05] text-ink">
+            <svg class="w-6 h-6 sm:w-[34px] sm:h-[34px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V5a2 2 0 0 1 4 0v5"/><path d="M4 16v-3a6 6 0 0 1 6-6"/><path d="M14 7a6 6 0 0 1 6 6v3"/></svg>
+          </span>
+          <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Builders</h3>
+          <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
+          <p class="mt-4 text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">A dependable partner who hits deadlines and delivers clean, quality work on every job.</p>
+        </article>
+
+        <!-- Remodeling Contractors -->
+        <article class="client-card group relative flex flex-col overflow-hidden rounded-none border border-black/[0.08] -ml-px -mt-px bg-white p-6 sm:p-9 sm:min-h-[420px]">
+          <span class="card-accent" aria-hidden="true"></span>
+          <span class="icon-tile grid place-items-center h-14 w-14 sm:h-[68px] sm:w-[68px] rounded-none bg-black/[0.05] text-ink">
+            <svg class="w-6 h-6 sm:w-[34px] sm:h-[34px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.4 8.4a1.4 1.4 0 0 1-2-2L13 10"/><path d="m18 15 3-3"/><path d="M21.5 11.5 19 9V7l-2.3-2.3a6 6 0 0 0-4.2-1.7L9 3l.9.8A6.2 6.2 0 0 1 12 8.4V10l2 2h1.2a2 2 0 0 1 1.4.6l1.9 1.9"/></svg>
+          </span>
+          <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Remodeling Contractors</h3>
+          <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
+          <p class="mt-4 text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Skilled hands for tile, flooring, and finish work when you need it done right.</p>
+        </article>
+
+        <!-- Commercial Clients -->
+        <article class="client-card group relative flex flex-col overflow-hidden rounded-none border border-black/[0.08] -ml-px -mt-px bg-white p-6 sm:p-9 sm:min-h-[420px]">
+          <span class="card-accent" aria-hidden="true"></span>
+          <span class="icon-tile grid place-items-center h-14 w-14 sm:h-[68px] sm:w-[68px] rounded-none bg-black/[0.05] text-ink">
+            <svg class="w-6 h-6 sm:w-[34px] sm:h-[34px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/></svg>
+          </span>
+          <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Commercial Clients</h3>
+          <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
+          <p class="mt-4 text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Professional, on-schedule renovations that keep your business moving.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== REVIEWS ===================== -->
+  <section id="reviews" class="bg-white" data-nav-theme="light">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px] overflow-hidden">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="lg:order-1 order-2">
+          <figure class="rev-fade">
+            <blockquote class="font-bold text-ink text-[clamp(0.98rem,1.8vw,1.7rem)] leading-[1.35] tracking-[-0.02em]">
+              <span class="text-brand inline-block align-text-top text-[1.7em] leading-[0.7] mr-1" aria-hidden="true">&#8220;</span><span id="revQuote">Abel and his brothers are top notch installers. I have been in the industry for 20 years and know great installers when I see them. I hired them to do a marble backsplash for me and they were extremely clean, calculated, presentable, and meticulous. They do things right the first time and take pride in their knowledge and work. Definitely will be using them again soon on other properties!</span>
+            </blockquote>
+          </figure>
+          <div id="revMeta" class="mt-10 rev-fade flex items-center gap-4">
+            <a href="https://www.google.com/maps/place/VL+Proconstruction+LLC/@27.725119,-82.6960629,11z/data=!4m8!3m7!1s0x88c331a0eef5c563:0x52b0ceed643943f2!8m2!3d27.4479297!4d-82.3633912!9m1!1b1!16s%2Fg%2F11lcbfsvwr?entry=ttu" target="_blank" rel="noopener noreferrer" aria-label="Read our reviews on Google" class="btn relative block h-14 w-14 shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60">
+              <img id="revAvatar" src="/assets/images/review-1-avatar.webp" alt="" class="h-14 w-14 rounded-full object-cover border border-black/10" />
+              <span class="absolute -bottom-0.5 -right-0.5 grid place-items-center h-6 w-6 rounded-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.18)] ring-1 ring-black/5">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 48 48" aria-hidden="true">
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                </svg>
+              </span>
+            </a>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <p id="revName" class="font-semibold text-[18px] tracking-[-0.01em] text-ink">Paul Lipowicz</p>
+              </div>
+              <p id="revRole" class="mt-1 text-[15px] text-graydesc hidden"></p>
+            </div>
+          </div>
+        </div>
+        <div class="lg:order-2 order-1 w-full overflow-hidden aspect-[4/3] rev-fade">
+          <img id="revImg" src="/assets/images/review-1.webp" alt="VL Proconstruction completed project" class="w-full h-full object-cover" />
+        </div>
+      </div>
+      <!-- Controls — desktop only; on mobile the carousel auto-advances and swipes -->
+      <div class="mt-8 lg:mt-10 flex items-center justify-center gap-3">
+        <button id="revPrev" aria-label="Previous review" class="btn hidden lg:grid place-items-center h-12 w-12 rounded-full border border-black/10 text-ink hover:border-brand hover:text-brand">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div id="revDots" class="flex lg:hidden items-center gap-2" role="tablist" aria-label="Choose a review"></div>
+        <button id="revNext" aria-label="Next review" class="btn hidden lg:grid place-items-center h-12 w-12 rounded-full border border-black/10 text-ink hover:border-brand hover:text-brand">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section id="faqs" class="bg-[#faf9f8]" data-nav-theme="light">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[100px]">
+      <h2 class="font-bold capitalize leading-[1.02] tracking-[-0.03em] text-[clamp(2.1rem,5vw,4rem)]">Frequently asked questions</h2>
+      <p class="mt-5 text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[600px]">Answers to what homeowners ask most about custom showers — waterproofing, timelines, and curbless designs. Still have a question? Give us a call.</p>
+      <div id="faqList" class="mt-12 lg:mt-16">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="true">
+            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">How long does a custom shower take?</span>
+            <span class="faq-ico" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Most custom showers take 1–2 weeks depending on size, waterproofing, and tile complexity. We give you a clear timeline before we start.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="true">
+            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Do you handle the waterproofing yourselves?</span>
+            <span class="faq-ico" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Yes. We install Schluter®/Kerdi waterproofing systems and flood-test the pan before tiling, so the assembly is watertight from the substrate out.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="true">
+            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Can you build a curbless, barrier-free shower?</span>
+            <span class="faq-ico" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Absolutely. Curbless entries with linear drains are one of our specialties — great for accessibility and a clean, modern look.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="true">
+            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Do you install the glass too?</span>
+            <span class="faq-ico" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">We coordinate frameless glass with our trusted supplier and set the tile to the exact tolerances the glass needs for a flush fit.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICE AREA ===================== -->
+  <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[260px] lg:min-h-[1040px] flex items-center">
+      <div class="lg:max-w-[44%]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
+          Custom Showers<br />Across the Gulf Coast
+        </h2>
+        <p class="mt-6 text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
+          We build custom showers and wet rooms for homeowners across the Bradenton–Sarasota metro — from Anna Maria Island to Venice — waterproofed and tiled to last.
+        </p>
+      </div>
+    </div>
+    <div class="area-map-fade relative overflow-hidden h-[460px] sm:h-[560px] lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[58%]">
+      <img src="/assets/images/service-area-map.webp" alt="Map of VL Proconstruction service areas across Florida's Gulf Coast — Bradenton, Sarasota, and surrounding cities including Parrish, Palmetto, Lakewood Ranch, Venice, and Siesta Key" class="absolute inset-0 h-full w-full object-cover object-center" />
+    </div>
+  </section>
+
+  <!-- ===================== OTHER SERVICES + ESTIMATE ===================== -->
+  <section id="estimate" class="bg-black text-white border-t border-white/10" data-nav-theme="dark">
+    <div>
+
+      <!-- Step 1 (inline). Choosing a project + Next opens the full-screen wizard overlay (steps 2–6). -->
+      <div class="px-5 sm:px-10 lg:px-[60px] py-16 lg:py-24 flex items-center justify-center">
+        <div class="w-full max-w-[440px]">
+          <h3 class="text-center font-bold capitalize leading-[1.1] tracking-[-0.025em] text-[clamp(2.4rem,4vw,3.75rem)]">Request your<br />free estimate</h3>
+          <p class="mt-6 text-center text-[15px] font-semibold text-white/85">What project are you interested in?</p>
+
+          <div class="mt-5 space-y-4" id="step1Options">
+            <label class="fopt"><input type="checkbox" name="s1project" value="Custom Showers" /><span class="pill-label">Custom Showers</span><span class="fradio" aria-hidden="true"></span></label>
+            <label class="fopt"><input type="checkbox" name="s1project" value="Tile & Natural Stone" /><span class="pill-label">Tile &amp; Natural Stone</span><span class="fradio" aria-hidden="true"></span></label>
+            <label class="fopt"><input type="checkbox" name="s1project" value="Hard Surface Flooring" /><span class="pill-label">Hard Surface Flooring</span><span class="fradio" aria-hidden="true"></span></label>
+            <label class="fopt" id="s1OtherPill"><input type="checkbox" name="s1project" value="Other" id="s1OtherRadio" /><span class="pill-label">Other</span><input type="text" id="s1OtherInput" class="other-inline-input" placeholder="Please describe your project…" autocomplete="off" aria-label="Describe your project" /><span class="fradio" aria-hidden="true"></span></label>
+          </div>
+
+          <p class="wiz-error text-center" id="step1Error">Please select a project to continue.</p>
+
+          <div class="mt-8">
+            <button type="button" class="btn w-full rounded-full bg-brand hover:bg-[#e03f1c] py-4 text-[15px] font-semibold capitalize text-white" id="step1Next">Next</button>
+          </div>
+          <!-- TODO: real phone -->
+          <p class="mt-5 text-center text-[14px] text-white/55">Questions? Call: <a href="tel:+15037814657" class="text-brand hover:underline">(503) 781-4657</a></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script is:inline>
+    // Count-up animation for hero stats
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const nums = document.querySelectorAll('.stat-num');
+      const fmt = (v, d) => d ? v.toFixed(d) : String(Math.round(v));
+      const runCount = (el) => {
+        const target = parseFloat(el.dataset.count);
+        const dec = (el.dataset.count.split('.')[1] || '').length;
+        const duration = 1500; let st = null;
+        const tick = (now) => { if (st === null) st = now; const p = Math.min((now - st) / duration, 1); const e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(target * e, dec); if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target, dec); };
+        requestAnimationFrame(tick);
+      };
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        nums.forEach((el) => { el.textContent = fmt(parseFloat(el.dataset.count), (el.dataset.count.split('.')[1] || '').length); });
+      } else {
+        nums.forEach((el) => { el.textContent = fmt(0, (el.dataset.count.split('.')[1] || '').length); });
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { runCount(e.target); io.unobserve(e.target); } }); }, { threshold: 0.6 });
+        nums.forEach((el) => io.observe(el));
+      }
+    })();
+
+    // Reviews quote carousel
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revQuote = document.getElementById('revQuote');
+      if (!revQuote) return;
+      const reviews = [
+        { name: 'Paul Lipowicz', role: '', quote: "Abel and his brothers are top notch installers. I have been in the industry for 20 years and know great installers when I see them. I hired them to do a marble backsplash for me and they were extremely clean, calculated, presentable, and meticulous. They do things right the first time and take pride in their knowledge and work. Definitely will be using them again soon on other properties!", img: '/assets/images/review-1.webp', avatar: '/assets/images/review-1-avatar.webp' },
+        { name: 'Valeriy Tsinovkin', role: '', quote: "I recently had my kitchen remodeled and couldn't be happier with the results. The entire process was smooth and professional, and the team kept everything clean and organized throughout the project. The craftsmanship and attention to detail were excellent, and my kitchen looks stunning. Highly recommend to anyone looking for a high-quality, hassle-free remodel.", img: '/assets/images/review-2.webp', avatar: '/assets/images/review-2-avatar.webp' },
+        { name: 'Avetal Mor', role: '', quote: "Absolutely amazing work fixed our floors after hurricane!", img: '/assets/images/review-3.webp', avatar: '/assets/images/review-3-avatar.webp' },
+        { name: 'Stacy Ramirez', role: '', quote: "Vlad and his team are phenomenal! We couldn't be happier with our new master bath. Their attention to detail is unmatched. They showed up, communicated well, and offered quality suggestions. We highly recommend and will use them for our next home project.", img: '/assets/images/review-4.webp', avatar: '/assets/images/review-4-avatar.webp' },
+      ];
+      const revName = document.getElementById('revName');
+      const revRole = document.getElementById('revRole');
+      const revImg = document.getElementById('revImg');
+      const revAvatar = document.getElementById('revAvatar');
+      const fades = [document.getElementById('revMeta'), revQuote.closest('.rev-fade'), revImg.closest('.rev-fade')];
+      let i = 0;
+      const paint = () => {
+        const r = reviews[i];
+        revName.textContent = r.name;
+        revRole.textContent = r.role;
+        revRole.classList.toggle('hidden', !r.role);
+        revQuote.textContent = r.quote;
+        revImg.src = r.img;
+        revAvatar.src = r.avatar;
+        syncDots();
+      };
+      const quoteCol = revQuote.closest('.rev-fade').parentElement;
+      const lockHeight = () => {
+        const current = reviews[i].quote;
+        quoteCol.style.minHeight = '';
+        let max = 0;
+        reviews.forEach((r) => { revQuote.textContent = r.quote; max = Math.max(max, quoteCol.offsetHeight); });
+        revQuote.textContent = current;
+        quoteCol.style.minHeight = max + 'px';
+      };
+      // Pagination dots — one per review; click jumps straight to it
+      const dotsWrap = document.getElementById('revDots');
+      let dots = [];
+      const syncDots = () => dots.forEach((d, n) => {
+        d.classList.toggle('is-active', n === i);
+        d.setAttribute('aria-current', n === i ? 'true' : 'false');
+      });
+      let animating = false;
+      const go = (dir) => {
+        if (animating) return;
+        i = (i + dir + reviews.length) % reviews.length;
+        if (reduceMotion) { paint(); return; }
+        animating = true;
+        const outX = dir > 0 ? -36 : 36;
+        const inX = dir > 0 ? 36 : -36;
+        fades.forEach((el) => { el.style.opacity = '0'; el.style.transform = `translateX(${outX}px)`; });
+        setTimeout(() => {
+          paint();
+          fades.forEach((el) => { el.style.transition = 'none'; el.style.transform = `translateX(${inX}px)`; });
+          void document.body.offsetWidth;
+          requestAnimationFrame(() => {
+            fades.forEach((el) => { el.style.transition = ''; el.style.opacity = '1'; el.style.transform = 'translateX(0)'; });
+            setTimeout(() => { animating = false; }, 450);
+          });
+        }, 350);
+      };
+      let timer = null;
+      const start = () => { timer = setInterval(() => go(1), 5000); };
+      const reset = () => { clearInterval(timer); start(); };
+      document.getElementById('revPrev').addEventListener('click', () => { go(-1); reset(); });
+      document.getElementById('revNext').addEventListener('click', () => { go(1); reset(); });
+      const reviewsSection = document.getElementById('reviews');
+      reviewsSection.addEventListener('mouseenter', () => clearInterval(timer));
+      reviewsSection.addEventListener('mouseleave', start);
+      // Finger swipe (mobile): a horizontal drag advances the carousel. Vertical drags
+      // fall through to normal page scroll (we only act on mostly-horizontal gestures).
+      let touchX = null, touchY = null;
+      reviewsSection.addEventListener('touchstart', (e) => {
+        touchX = e.changedTouches[0].clientX;
+        touchY = e.changedTouches[0].clientY;
+      }, { passive: true });
+      reviewsSection.addEventListener('touchend', (e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        const dy = e.changedTouches[0].clientY - touchY;
+        touchX = touchY = null;
+        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return; // ignore taps/vertical
+        go(dx < 0 ? 1 : -1); // swipe left → next, swipe right → prev
+        reset();
+      }, { passive: true });
+      lockHeight();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockHeight);
+      let revResizeT = null;
+      window.addEventListener('resize', () => { clearTimeout(revResizeT); revResizeT = setTimeout(lockHeight, 150); }, { passive: true });
+      if (dotsWrap) {
+        dots = reviews.map((r, n) => {
+          const d = document.createElement('button');
+          d.type = 'button';
+          d.className = 'rev-dot';
+          d.setAttribute('role', 'tab');
+          d.setAttribute('aria-label', 'Show review ' + (n + 1) + ' of ' + reviews.length);
+          d.addEventListener('click', () => { if (n !== i) { go(n - i); reset(); } });
+          dotsWrap.appendChild(d);
+          return d;
+        });
+        syncDots();
+      }
+      start();
+    })();
+
+    // FAQ accordion — single-open; content stays visible if JS is unavailable
+    (function () {
+      const faqList = document.getElementById('faqList');
+      if (!faqList) return;
+      faqList.classList.add('js-faq');
+      const fitems = [...faqList.querySelectorAll('.faq-item')].map((item) => ({ q: item.querySelector('.faq-q'), a: item.querySelector('.faq-a') }));
+      const collapse = (it) => { it.q.setAttribute('aria-expanded', 'false'); it.a.style.height = '0px'; };
+      const expand = (it) => { it.q.setAttribute('aria-expanded', 'true'); it.a.style.height = it.a.scrollHeight + 'px'; };
+      fitems.forEach((it) => { collapse(it); it.q.addEventListener('click', () => { const isOpen = it.q.getAttribute('aria-expanded') === 'true'; fitems.forEach(collapse); if (!isOpen) expand(it); }); });
+      window.addEventListener('resize', () => { const open = fitems.find((it) => it.q.getAttribute('aria-expanded') === 'true'); if (open) open.a.style.height = open.a.scrollHeight + 'px'; }, { passive: true });
+    })();
+
+    // Parallax process photos — each image drifts within its frame as the section scrolls
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const pxImgs = [...document.querySelectorAll('.px-img')];
+      if (!pxImgs.length || reduceMotion) return;
+      let pxTicking = false;
+      const renderParallax = () => {
+        const vh = window.innerHeight;
+        pxImgs.forEach((img) => {
+          const frame = img.parentElement;
+          const r = frame.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > vh) return;
+          const progress = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);
+          const shift = frame.offsetHeight * 0.20;
+          img.style.transform = `translateY(${(progress * shift).toFixed(1)}px)`;
+        });
+        pxTicking = false;
+      };
+      const onPxScroll = () => { if (!pxTicking) { pxTicking = true; requestAnimationFrame(renderParallax); } };
+      window.addEventListener('scroll', onPxScroll, { passive: true });
+      window.addEventListener('resize', onPxScroll, { passive: true });
+      renderParallax();
+    })();
+
+    // Vertical auto-scrolling photo wall
+    (function () {
+      const gWall = document.getElementById('galleryWall');
+      if (!gWall) return;
+      const gPhotos = [
+        '/assets/images/gallery-showers/showers-1.webp','/assets/images/gallery-showers/showers-2.webp','/assets/images/gallery-showers/showers-3.webp',
+        '/assets/images/gallery-showers/showers-4.webp','/assets/images/gallery-showers/showers-5.webp','/assets/images/gallery-showers/showers-6.webp',
+        '/assets/images/gallery-showers/showers-7.webp','/assets/images/gallery-showers/showers-8.webp','/assets/images/gallery-showers/showers-9.webp',
+        '/assets/images/gallery-showers/showers-10.webp',
+        '/assets/images/gallery-showers/showers-11.webp','/assets/images/gallery-showers/showers-12.webp',
+      ];
+      const gDur = [40, 32, 46, 36, 42];
+      const gColsFor = (w) => (w >= 1024 ? 5 : w >= 640 ? 3 : 2);
+      let gBuilt = 0;
+      const gCell = (src) => `<div class="vcell overflow-hidden aspect-[4/5]"><img src="${src}" alt="VL Proconstruction project" loading="lazy" class="gallery-img w-full h-full object-cover"/></div>`;
+      const gBuild = () => {
+        const n = gColsFor(window.innerWidth);
+        if (n === gBuilt && gWall.childElementCount) return;
+        gBuilt = n;
+        const cols = Array.from({ length: n }, () => []);
+        const total = Math.max(gPhotos.length, n * 3);
+        for (let i = 0; i < total; i++) cols[i % n].push(gPhotos[i % gPhotos.length]);
+        gWall.innerHTML = cols.map((imgs, ci) => {
+          const set = imgs.map(gCell).join('');
+          const dir = ci % 2 ? ' vcol-down' : '';
+          const dur = gDur[ci % gDur.length];
+          return `<div class="vcol${dir}" style="animation-duration:${dur}s">${set}${set}</div>`;
+        }).join('');
+      };
+      gBuild();
+      let gResizeT;
+      window.addEventListener('resize', () => { clearTimeout(gResizeT); gResizeT = setTimeout(gBuild, 200); }, { passive: true });
+    })();
+  </script>
+</BaseLayout>

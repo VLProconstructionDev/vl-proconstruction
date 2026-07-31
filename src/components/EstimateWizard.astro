@@ -1,0 +1,770 @@
+---
+import { site } from '@/lib/site';
+
+/**
+ * Full-screen "Get a Free Estimate" wizard.
+ * - Rendered site-wide from BaseLayout.
+ * - Opens whenever any `.js-open-estimate` element is clicked.
+ * - Inline Step 1 (in #estimate section on the home page) is handled if present,
+ *   otherwise the wizard opens directly at overlay Step 1.
+ * - Browser Back closes the overlay (via history.pushState).
+ */
+---
+
+<div
+  id="estimateOverlay"
+  class="est-overlay"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Request your free estimate"
+>
+  <div class="est-overlay-top">
+    <button type="button" class="est-close" id="estClose" aria-label="Close estimate form">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="est-overlay-body">
+    <form id="estimateForm" class="w-full max-w-[440px]" novalidate>
+
+      <fieldset class="wiz-step is-active" data-step="1">
+        <legend class="wiz-q w-full">What project are you<br />interested in?</legend>
+        <div class="mt-10 space-y-4" id="ovStep1Options">
+          <label class="fopt"><input type="checkbox" name="ovProject" value="Custom Showers" /><span class="pill-label">Custom Showers</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="checkbox" name="ovProject" value="Tile & Natural Stone" /><span class="pill-label">Tile &amp; Natural Stone</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="checkbox" name="ovProject" value="Hard Surface Flooring" /><span class="pill-label">Hard Surface Flooring</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt" id="ovOtherPill"><input type="checkbox" name="ovProject" value="Other" id="ovOtherRadio" /><span class="pill-label">Other</span><input type="text" id="ovOtherInput" class="other-inline-input" placeholder="Please describe your project…" autocomplete="off" aria-label="Describe your project" /><span class="fradio" aria-hidden="true"></span></label>
+        </div>
+        <p class="wiz-error" id="ovStep1Error">Please select at least one project to continue.</p>
+        <div class="wiz-actions mt-9">
+          <button type="button" class="wiz-next" id="ovStep1Next">Next</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="wiz-step" data-step="2">
+        <legend class="wiz-q w-full" style="font-size:clamp(1.8rem,8vw,2.5rem)">What is your estimated<br />project budget?</legend>
+        <div class="mt-10 space-y-4">
+          <label class="fopt"><input type="radio" name="budget" value="Under $15,000" /><span class="pill-label">Under $15,000</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="radio" name="budget" value="$15,000 – $30,000" /><span class="pill-label">$15,000 &ndash; $30,000</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="radio" name="budget" value="$30,000+" /><span class="pill-label">$30,000+</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="radio" name="budget" value="I'm not sure yet" /><span class="pill-label">I&rsquo;m not sure yet</span><span class="fradio" aria-hidden="true"></span></label>
+        </div>
+        <p class="wiz-error" id="step2Error">Please select an option to continue.</p>
+        <div class="wiz-actions mt-9">
+          <button type="button" class="wiz-back" data-target="1">Back</button>
+          <button type="button" class="wiz-next" id="step2Next">Next</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="wiz-step" data-step="3">
+        <legend class="wiz-q w-full">When are you<br />looking to start?</legend>
+        <div class="mt-10 space-y-4">
+          <label class="fopt"><input type="radio" name="timeline" value="ASAP" /><span class="pill-label">ASAP</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="radio" name="timeline" value="1-3 Months" /><span class="pill-label">1-3 Months</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="radio" name="timeline" value="3-6 Months" /><span class="pill-label">3-6 Months</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="radio" name="timeline" value="Just Exploring!" /><span class="pill-label">Just Exploring!</span><span class="fradio" aria-hidden="true"></span></label>
+        </div>
+        <p class="wiz-error" id="step3Error">Please select an option to continue.</p>
+        <div class="wiz-actions mt-9">
+          <button type="button" class="wiz-back" data-target="2">Back</button>
+          <button type="button" class="wiz-next" id="step3Next">Next</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="wiz-step" data-step="4">
+        <legend class="wiz-q w-full">Where is your<br />project located?</legend>
+        <div class="mt-10">
+          <label for="msAddress" class="sr-only">Address</label>
+          <input id="msAddress" class="wiz-input" type="text" name="address" placeholder="Address" autocomplete="street-address" />
+          <p class="wiz-error" id="msAddressError">Please enter your address.</p>
+          <p class="wiz-note mt-4">Your information is secure and will never be shared.</p>
+        </div>
+        <div class="wiz-actions mt-9">
+          <button type="button" class="wiz-back" data-target="3">Back</button>
+          <button type="button" class="wiz-next" id="step4Next">Next</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="wiz-step" data-step="5">
+        <legend class="wiz-q w-full" style="font-size:clamp(1.7rem,2.8vw,2.3rem); white-space:nowrap;">How can we reach you?</legend>
+        <div class="mt-10 space-y-5">
+          <div>
+            <label for="msName" class="sr-only">Name</label>
+            <input id="msName" class="wiz-input" type="text" name="name" placeholder="Name" autocomplete="name" />
+            <p class="wiz-error" id="msNameError">Please enter your name.</p>
+          </div>
+          <div>
+            <label for="msPhone" class="sr-only">Phone Number</label>
+            <input id="msPhone" class="wiz-input" type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" />
+            <p class="wiz-error" id="msPhoneError">Please enter a valid phone number.</p>
+          </div>
+          <div>
+            <label for="msEmail" class="sr-only">Email</label>
+            <input id="msEmail" class="wiz-input" type="email" name="email" placeholder="Email" autocomplete="email" />
+            <p class="wiz-error" id="msEmailError">Please enter a valid email address.</p>
+          </div>
+          <!-- Honeypot: invisible to humans; bots that fill it are dropped server-side. -->
+          <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+            <label for="msCompany">Company</label>
+            <input id="msCompany" type="text" name="company" tabindex="-1" autocomplete="off" />
+          </div>
+          <p class="wiz-note">Your information is secure and will never be shared.</p>
+        </div>
+        <p class="wiz-error" id="msSubmitError">Something went wrong. Please try again.</p>
+        <div class="wiz-actions mt-9">
+          <button type="button" class="wiz-back" data-target="4">Back</button>
+          <button type="submit" class="wiz-next" id="step5Submit">
+            <span id="step5SubmitLabel">Get my quote</span>
+            <span id="step5Spinner" style="display:none;">Sending…</span>
+          </button>
+        </div>
+        <!-- Required by Google while the reCAPTCHA badge is hidden — keep visible, may be subtle. -->
+        <p class="wiz-legal mt-7 text-center max-w-[520px] mx-auto">
+          This site is protected by reCAPTCHA and the Google
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and
+          <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+        </p>
+      </fieldset>
+
+      <div class="wiz-step" data-step="6">
+        <h3 class="wiz-q w-full">Thank you!</h3>
+        <p class="mt-6 text-center text-[16px] leading-[1.7] text-white/70 max-w-[480px] mx-auto">
+          We&rsquo;ve got your request. A {site.name} specialist will reach out shortly to schedule your free estimate.
+        </p>
+        <p class="mt-8 text-center text-[15px] text-white/55">
+          Need us sooner? Call <a href={site.phoneHref} class="text-brand hover:underline">{site.phone}</a>
+        </p>
+        <div class="mt-9 flex justify-center">
+          <button type="button" class="wiz-back" id="estCloseDone">Back to Home</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<style is:global>
+  /* Estimate form option pills (shared by inline step 1 and overlay). */
+  .fopt {
+    position: relative; display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; width: 100%; text-align: left; padding: 16px 26px; border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,.14); color: #fff; cursor: pointer;
+    transition: border-color .2s, background-color .2s;
+  }
+  .fopt:hover { border-color: rgba(255,255,255,.4); }
+  .fopt input { position: absolute; opacity: 0; pointer-events: none; }
+  .fradio {
+    flex: none; width: 20px; height: 20px; border-radius: 9999px;
+    border: 1.5px solid rgba(255,255,255,.4); position: relative; transition: border-color .2s;
+  }
+  .fopt:has(input:checked) { border-color: #fff; background: rgba(255,255,255,.08); }
+  .fopt:has(input:checked) .fradio { border-color: #fff; }
+  .fopt:has(input:checked) .fradio::after {
+    content: ""; position: absolute; inset: 3px; border-radius: 9999px; background: #fff;
+  }
+  .fopt:has(input:focus-visible) { outline: 2px solid #f54b25; outline-offset: 3px; }
+
+  /* Inline step 1 (home page) is multi-select — square checkbox with a checkmark. */
+  #step1Options .fradio { border-radius: 6px; }
+  #step1Options .fopt:has(input:checked) .fradio {
+    background: #f54b25; border-color: #f54b25;
+  }
+  #step1Options .fopt:has(input:checked) .fradio::after {
+    content: ""; position: absolute; inset: auto; left: 7px; top: 3px;
+    width: 5px; height: 10px; border: solid #fff; border-width: 0 2px 2px 0;
+    border-radius: 0; background: transparent; transform: rotate(45deg);
+  }
+
+  /* Wizard steps + controls. */
+  .wiz-step { display: none; }
+  .wiz-step.is-active {
+    display: block; animation: wizIn .35s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes wizIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .wiz-step.is-active { animation: none; } }
+  .wiz-q {
+    font-weight: 700; line-height: 1.1; letter-spacing: -0.025em;
+    text-transform: capitalize; text-align: center;
+    font-size: clamp(2rem, 3.2vw, 2.7rem);
+  }
+  .wiz-input {
+    width: 100%; border-radius: 9999px; border: 1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.03); color: #fff; padding: 16px 26px; font-size: 15px;
+    transition: border-color .2s, background-color .2s;
+  }
+  .wiz-input::placeholder { color: rgba(255,255,255,.5); }
+  .wiz-input:hover { border-color: rgba(255,255,255,.3); }
+  .wiz-input:focus { outline: none; border-color: #fff; background: rgba(255,255,255,.06); }
+
+  /* Google Places suggestion dropdown (address step) — restyled to match the
+     dark overlay. Google appends .pac-container to <body>, hence global. */
+  .pac-container {
+    z-index: 2100; /* above .est-overlay's 2000 */
+    margin-top: 10px; padding: 8px;
+    background: #141414;
+    border: 1px solid rgba(255,255,255,.14); border-radius: 20px;
+    box-shadow: 0 24px 48px -12px rgba(0,0,0,.8);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+  .pac-container::after { /* "powered by Google" — required attribution, kept small and quiet */
+    background-color: #fff; background-position: center; background-origin: content-box;
+    border-radius: 4px; height: 18px; width: 128px; padding: 2px 11px;
+    margin: 4px 4px 0 auto; opacity: .55;
+  }
+  .pac-item {
+    padding: 10px 14px; border: 0; border-radius: 12px; cursor: pointer;
+    background: transparent; color: rgba(255,255,255,.6);
+    font-size: 12px; line-height: 1.5;
+  }
+  .pac-item:hover, .pac-item-selected { background: rgba(255,255,255,.08); }
+  .pac-item-query { color: #fff; font-size: 14px; padding-right: 4px; }
+  .pac-matched { color: #fff; }
+  .pac-icon { display: none; }
+
+  /* reCAPTCHA v3 floating badge — hidden per Google's rules because the
+     wizard's step 5 shows the required reCAPTCHA disclosure text instead. */
+  .grecaptcha-badge { visibility: hidden !important; }
+  .wiz-actions { display: flex; align-items: center; gap: 22px; }
+  .wiz-next {
+    flex: 1; border-radius: 9999px; background: #f54b25; color: #fff; font-weight: 600;
+    text-transform: capitalize; font-size: 15px; padding: 18px 20px; cursor: pointer;
+    transition: background-color .2s, transform .08s;
+  }
+  .wiz-next:hover { background: #e03f1c; }
+  .wiz-next:active { transform: translateY(1px); }
+  .wiz-next:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .wiz-back {
+    flex: none; color: rgba(255,255,255,.85); text-decoration: underline;
+    text-underline-offset: 3px; font-size: 16px; padding: 6px 4px; cursor: pointer;
+    transition: color .2s;
+  }
+  .wiz-back:hover { color: #fff; }
+  .wiz-back:focus-visible { outline: 2px solid #f54b25; outline-offset: 3px; border-radius: 2px; }
+  .wiz-note { color: rgba(255,255,255,.55); font-size: 14px; line-height: 1.6; }
+  .wiz-note a { color: rgba(255,255,255,.7); text-decoration: underline; }
+  .wiz-note a:hover { color: #fff; }
+  /* Legally required fine print (reCAPTCHA disclosure) — as quiet as allowed. */
+  .wiz-legal { color: rgba(255,255,255,.26); font-size: 11px; line-height: 1.6; }
+  .wiz-legal a { color: rgba(255,255,255,.38); text-decoration: underline; }
+  .wiz-legal a:hover, .wiz-legal a:focus-visible { color: rgba(255,255,255,.7); }
+  .wiz-error { display: none; margin-top: 12px; font-size: 13px; color: #ff6a51; }
+  .wiz-error.visible { display: block; }
+  .wiz-input.error { border-color: #ff6a51; }
+
+  /* "Other → specify" pill turns into a text field when selected. */
+  .other-inline-input { display: none; }
+  .other-inline-input::placeholder { color: rgba(255,255,255,.45); }
+  .fopt.other-active .pill-label { display: none; }
+  .fopt.other-active .other-inline-input {
+    display: block; position: static; opacity: 1; pointer-events: auto;
+    flex: 1; min-width: 0; background: transparent; border: none;
+    color: #fff; font-size: 16px; padding: 0; outline: none;
+  }
+  .fopt.other-active:has(input:focus-visible) { outline: none; }
+
+  /* Success checkmark on step 6. */
+  .wiz-success-icon {
+    width: 84px; height: 84px; display: grid; place-items: center;
+    border-radius: 9999px; color: #f54b25;
+    border: 2px solid rgba(245,75,37,.5); background: rgba(245,75,37,.08);
+  }
+  .wiz-success-icon svg { width: 40px; height: 40px; }
+
+  /* Full-screen overlay. */
+  .est-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: #0a0a0a; color: #fff;
+    display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none;
+    transition: opacity .35s cubic-bezier(.2,.7,.2,1);
+    overflow-y: auto;
+  }
+  .est-overlay.open { opacity: 1; pointer-events: auto; }
+  .est-overlay-top {
+    position: sticky; top: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 22px 24px; background: #0a0a0a;
+  }
+  @media (min-width: 640px) { .est-overlay-top { padding: 26px 40px; } }
+  .est-close {
+    flex: none; width: 44px; height: 44px;
+    display: grid; place-items: center; border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.85);
+    cursor: pointer;
+    transition: color .2s, border-color .2s, background-color .2s;
+  }
+  .est-close svg { width: 18px; height: 18px; }
+  .est-close:hover { color: #fff; border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.06); }
+  .est-close:focus-visible { outline: 2px solid #f54b25; outline-offset: 3px; }
+  .est-overlay-body {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 24px 20px 88px;
+  }
+  @media (min-width: 640px) { .est-overlay-body { padding: 32px 40px 96px; } }
+</style>
+
+<script>
+  import { site } from '@/lib/site';
+
+  // --- Ad-campaign attribution (UTM params / click IDs) ------------------
+  // Runs on every page load (this component is site-wide). A visit that
+  // arrives with tracking params stores them, so the lead still carries its
+  // source after the visitor browses around before submitting. Last campaign
+  // touch wins; plain internal navigation never overwrites it.
+  const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
+  const UTM_STORE = 'vlUtm';
+  try {
+    const qs = new URLSearchParams(location.search);
+    if (UTM_KEYS.some((k) => qs.get(k))) {
+      const utm: Record<string, string> = { landing: location.pathname + location.search };
+      UTM_KEYS.forEach((k) => {
+        const v = qs.get(k);
+        if (v) utm[k] = v;
+      });
+      localStorage.setItem(UTM_STORE, JSON.stringify(utm));
+    }
+  } catch {
+    // Storage unavailable (private mode etc.) — attribution is best-effort.
+  }
+  function storedUtm(): Record<string, string> {
+    try {
+      return JSON.parse(localStorage.getItem(UTM_STORE) || '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  // Multi-step estimate wizard. Runs site-wide (rendered by BaseLayout).
+  // Overlay steps 1–6 always wired; the inline step 1 on the home page (`#step1Next`)
+  // is wired only if present.
+  const estOverlay = document.getElementById('estimateOverlay');
+  if (estOverlay) {
+    const wizForm = document.getElementById('estimateForm') as HTMLFormElement | null;
+    const overlaySteps = Array.from(estOverlay.querySelectorAll<HTMLElement>('.wiz-step'));
+    const $ = <T extends HTMLElement = HTMLElement>(id: string) =>
+      document.getElementById(id) as T | null;
+
+    const formData = {
+      project: '', budget: '', timeline: '', address: '', name: '', phone: '', email: '',
+    };
+
+    function showStep(n: number) {
+      overlaySteps.forEach((s) => s.classList.toggle('is-active', Number(s.dataset.step) === n));
+      estOverlay!.scrollTop = 0;
+      const active = overlaySteps.find((s) => Number(s.dataset.step) === n);
+      const field = active?.querySelector<HTMLInputElement>(
+        'input[type="text"], input[type="tel"], input[type="email"]',
+      );
+      field?.focus({ preventScroll: true });
+    }
+
+    let scrollY = 0;
+    let overlayPushed = false;
+    function openOverlay(step: number) {
+      scrollY = window.scrollY || window.pageYOffset;
+      // The body lock zeroes window scroll before pushState records it, so the
+      // browser's automatic restoration on history.back() would snap to 0 and
+      // clobber our own restore. Take over until the overlay is closed.
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      estOverlay!.classList.add('open');
+      estOverlay!.setAttribute('aria-hidden', 'false');
+      showStep(step);
+      loadPlaces();
+      loadRecaptcha();
+      if (!overlayPushed) {
+        history.pushState({ estimateOverlay: true }, '');
+        overlayPushed = true;
+      }
+    }
+    // Clears every field and error state. Called when the overlay closes
+    // after a successful submit — the next open starts a fresh request.
+    // Never called on a mid-fill close: an accidental ✕/Escape shouldn't
+    // cost the visitor what they already typed.
+    let submitted = false;
+    function resetWizard() {
+      wizForm?.reset();
+      (Object.keys(formData) as Array<keyof typeof formData>).forEach((k) => {
+        formData[k] = '';
+      });
+      $('ovOtherPill')?.classList.remove('other-active');
+      estOverlay!.querySelectorAll('.wiz-error.visible').forEach((el) => el.classList.remove('visible'));
+      estOverlay!.querySelectorAll('.error').forEach((el) => el.classList.remove('error'));
+    }
+    function closeOverlayDom() {
+      if (submitted) {
+        resetWizard();
+        submitted = false;
+      }
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, scrollY);
+      estOverlay!.classList.remove('open');
+      estOverlay!.setAttribute('aria-hidden', 'true');
+      // Hand scroll restoration back to the browser once the popstate-driven
+      // restore window has passed (its restore fires right after this handler).
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollY);
+        if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+      });
+    }
+    function closeOverlay() {
+      if (overlayPushed) history.back();
+      else closeOverlayDom();
+    }
+    window.addEventListener('popstate', () => {
+      if (overlayPushed || estOverlay!.classList.contains('open')) {
+        overlayPushed = false;
+        closeOverlayDom();
+      }
+    });
+    $('estClose')?.addEventListener('click', closeOverlay);
+    $('estCloseDone')?.addEventListener('click', closeOverlay);
+    // Capture phase: must read the Places dropdown's visibility BEFORE the
+    // widget's own Escape handler hides it — Escape closes the suggestions
+    // first, the wizard only on the next press.
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !estOverlay!.classList.contains('open')) return;
+      if (pacOpen()) return;
+      closeOverlay();
+    }, true);
+
+    // Any `.js-open-estimate` click opens the overlay at step 1.
+    document.querySelectorAll('.js-open-estimate').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const w = window as unknown as { vlCloseMenu?: () => void };
+        w.vlCloseMenu?.();
+        openOverlay(1);
+      });
+    });
+
+    const showErr = (id: string, msg?: string) => {
+      const el = $(id);
+      if (!el) return;
+      if (msg) el.textContent = msg;
+      el.classList.add('visible');
+    };
+    const hideErr = (id: string) => $(id)?.classList.remove('visible');
+
+    // Overlay Step 1 (project, multi-select) → Step 2.
+    const ovOtherPill = $('ovOtherPill');
+    document.querySelectorAll<HTMLInputElement>('input[name="ovProject"]').forEach((cb) => {
+      cb.addEventListener('change', () => {
+        const otherRadio = $<HTMLInputElement>('ovOtherRadio');
+        const otherChecked = otherRadio?.checked ?? false;
+        ovOtherPill?.classList.toggle('other-active', otherChecked);
+        if (otherChecked && cb === otherRadio) $<HTMLInputElement>('ovOtherInput')?.focus();
+      });
+    });
+    $('ovStep1Next')?.addEventListener('click', () => {
+      const checked = Array.from(
+        document.querySelectorAll<HTMLInputElement>('input[name="ovProject"]:checked'),
+      );
+      if (!checked.length) {
+        showErr('ovStep1Error', 'Please select at least one project to continue.');
+        return;
+      }
+      const values: string[] = [];
+      for (const c of checked) {
+        if (c.value === 'Other') {
+          const custom = $<HTMLInputElement>('ovOtherInput')?.value.trim() ?? '';
+          if (!custom) {
+            showErr('ovStep1Error', 'Please describe your project.');
+            return;
+          }
+          values.push(custom);
+        } else {
+          values.push(c.value);
+        }
+      }
+      hideErr('ovStep1Error');
+      formData.project = values.join(', ');
+      showStep(2);
+    });
+
+    // Inline Step 1 (home page only) → open overlay at Step 2.
+    const s1OtherPill = $('s1OtherPill');
+    if (s1OtherPill) {
+      document.querySelectorAll<HTMLInputElement>('input[name="s1project"]').forEach((cb) => {
+        cb.addEventListener('change', () => {
+          const otherRadio = $<HTMLInputElement>('s1OtherRadio');
+          const otherChecked = otherRadio?.checked ?? false;
+          s1OtherPill.classList.toggle('other-active', otherChecked);
+          if (otherChecked && cb === otherRadio) $<HTMLInputElement>('s1OtherInput')?.focus();
+        });
+      });
+      $('step1Next')?.addEventListener('click', () => {
+        const checked = Array.from(
+          document.querySelectorAll<HTMLInputElement>('input[name="s1project"]:checked'),
+        );
+        if (!checked.length) {
+          showErr('step1Error', 'Please select at least one project to continue.');
+          return;
+        }
+        const values: string[] = [];
+        for (const c of checked) {
+          if (c.value === 'Other') {
+            const custom = $<HTMLInputElement>('s1OtherInput')?.value.trim() ?? '';
+            if (!custom) {
+              showErr('step1Error', 'Please describe your project.');
+              return;
+            }
+            values.push(custom);
+          } else {
+            values.push(c.value);
+          }
+        }
+        hideErr('step1Error');
+        formData.project = values.join(', ');
+        openOverlay(2);
+      });
+    }
+
+    $('step2Next')?.addEventListener('click', () => {
+      const sel = document.querySelector<HTMLInputElement>('input[name="budget"]:checked');
+      if (!sel) return showErr('step2Error');
+      hideErr('step2Error');
+      formData.budget = sel.value;
+      showStep(3);
+    });
+    $('step3Next')?.addEventListener('click', () => {
+      const sel = document.querySelector<HTMLInputElement>('input[name="timeline"]:checked');
+      if (!sel) return showErr('step3Error');
+      hideErr('step3Error');
+      formData.timeline = sel.value;
+      showStep(4);
+    });
+
+    const addrEl = $<HTMLInputElement>('msAddress');
+    $('step4Next')?.addEventListener('click', () => {
+      const val = addrEl?.value.trim() ?? '';
+      if (!val) return showErr('msAddressError');
+      hideErr('msAddressError');
+      formData.address = val;
+      showStep(5);
+    });
+    addrEl?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        // Suggestions open → Enter picks the highlighted one (widget's own
+        // handler runs after this); only advance when the dropdown is closed.
+        if (pacOpen()) return;
+        $('step4Next')?.click();
+      }
+    });
+
+    // --- Google Places address autocomplete ------------------------------
+    // Lazy: the Maps JS API loads on first overlay open, not on page view.
+    // `.pac-container` is the widget's suggestion dropdown (styled in the
+    // global block above; z-index raised over the overlay's 2000).
+    function pacOpen() {
+      const pac = document.querySelector<HTMLElement>('.pac-container');
+      return !!pac && pac.style.display !== 'none' && pac.offsetHeight > 0;
+    }
+    let placesRequested = false;
+    function loadPlaces() {
+      if (placesRequested || !site.googleMapsApiKey || !addrEl) return;
+      placesRequested = true;
+      (window as any).__vlInitPlaces = () => {
+        const g = (window as any).google;
+        if (!g?.maps?.places?.Autocomplete || !addrEl) return;
+        const ac = new g.maps.places.Autocomplete(addrEl, {
+          types: ['address'],
+          componentRestrictions: { country: 'us' },
+          // Only the address string is used — keeps Place Details billing minimal.
+          fields: ['formatted_address'],
+          // Bias (not restrict) results toward the Bradenton–Sarasota service area.
+          bounds: { north: 27.95, south: 26.95, east: -82.05, west: -82.95 },
+        });
+        ac.addListener('place_changed', () => {
+          const place = ac.getPlace();
+          if (place?.formatted_address && addrEl) addrEl.value = place.formatted_address;
+          hideErr('msAddressError');
+        });
+      };
+      const s = document.createElement('script');
+      s.src =
+        'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(site.googleMapsApiKey) +
+        '&libraries=places&v=weekly&loading=async&callback=__vlInitPlaces';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+
+    // --- reCAPTCHA v3 (invisible, score-based spam check) -----------------
+    // Lazy-loaded on first overlay open. The floating badge is hidden via CSS,
+    // which Google permits because step 5 shows the reCAPTCHA disclosure text.
+    // Token verification happens in the Apps Script webhook (siteverify with
+    // the secret key) — see docs/leads-webhook/Code.gs.
+    let recaptchaRequested = false;
+    function loadRecaptcha() {
+      if (recaptchaRequested || !site.recaptchaSiteKey) return;
+      recaptchaRequested = true;
+      const s = document.createElement('script');
+      s.src = 'https://www.google.com/recaptcha/api.js?render=' + encodeURIComponent(site.recaptchaSiteKey);
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    async function recaptchaToken(): Promise<string> {
+      const g = (window as any).grecaptcha;
+      if (!site.recaptchaSiteKey || !g?.execute) return '';
+      try {
+        await new Promise<void>((resolve) => g.ready(resolve));
+        return await g.execute(site.recaptchaSiteKey, { action: 'estimate_submit' });
+      } catch {
+        // Fail-open client-side (blocked script, network) — the webhook decides.
+        return '';
+      }
+    }
+
+    // Phone mask: (NXX) NXX-XXXX
+    const phoneEl = $<HTMLInputElement>('msPhone');
+    phoneEl?.addEventListener('input', function () {
+      let d = this.value.replace(/\D/g, '');
+      if (d[0] === '1') d = d.slice(1);
+      d = d.slice(0, 10);
+      let out = '';
+      if (d.length > 0) out = '(' + d.slice(0, 3);
+      if (d.length >= 4) out += ') ' + d.slice(3, 6);
+      if (d.length >= 7) out += '-' + d.slice(6, 10);
+      this.value = out;
+    });
+
+    async function checkMX(email: string): Promise<boolean> {
+      try {
+        const domain = email.split('@')[1];
+        const res = await fetch(
+          `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=MX`,
+          { signal: AbortSignal.timeout(4000) },
+        );
+        const data = await res.json();
+        return data.Status === 0 && Array.isArray(data.Answer) && data.Answer.length > 0;
+      } catch {
+        return true;
+      }
+    }
+
+    function resetSubmit() {
+      const btn = $<HTMLButtonElement>('step5Submit');
+      if (btn) btn.disabled = false;
+      const label = $('step5SubmitLabel');
+      if (label) label.style.display = '';
+      const spinner = $('step5Spinner');
+      if (spinner) spinner.style.display = 'none';
+    }
+
+    wizForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const active = overlaySteps.find((s) => s.classList.contains('is-active'));
+      if (Number(active?.dataset.step) !== 5) return;
+
+      const nameEl = $<HTMLInputElement>('msName');
+      const emailEl = $<HTMLInputElement>('msEmail');
+      let valid = true;
+      [nameEl, phoneEl, emailEl].forEach((el) => el?.classList.remove('error'));
+      ['msNameError', 'msPhoneError', 'msEmailError', 'msSubmitError'].forEach(hideErr);
+
+      if (!nameEl?.value.trim()) {
+        nameEl?.classList.add('error');
+        showErr('msNameError');
+        valid = false;
+      }
+      let ph = phoneEl?.value.replace(/\D/g, '') ?? '';
+      if (ph.length > 10 && ph[0] === '1') ph = ph.slice(1);
+      const validUS = ph.length === 10 && /^[2-9]/.test(ph) && /^[2-9]/.test(ph.slice(3));
+      if (!validUS) {
+        phoneEl?.classList.add('error');
+        showErr('msPhoneError', 'Please enter a valid US phone number.');
+        valid = false;
+      }
+      const email = emailEl?.value.trim() ?? '';
+      if (!email) {
+        emailEl?.classList.add('error');
+        showErr('msEmailError', 'Please enter your email address.');
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailEl?.classList.add('error');
+        showErr('msEmailError', 'Please enter a valid email address.');
+        valid = false;
+      }
+      if (!valid) return;
+
+      const submitBtn = $<HTMLButtonElement>('step5Submit');
+      if (submitBtn) submitBtn.disabled = true;
+      const submitLabel = $('step5SubmitLabel');
+      if (submitLabel) submitLabel.style.display = 'none';
+      const spinner = $('step5Spinner');
+      if (spinner) spinner.style.display = 'inline-block';
+
+      // MX lookup and reCAPTCHA token don't depend on each other — run both
+      // at once so the submit only waits for the slower of the two.
+      const [mxOk, captchaToken] = await Promise.all([checkMX(email), recaptchaToken()]);
+      if (!mxOk) {
+        emailEl?.classList.add('error');
+        showErr('msEmailError', "This email domain can't receive mail. Please check the address.");
+        resetSubmit();
+        return;
+      }
+
+      formData.name = nameEl?.value.trim() ?? '';
+      formData.phone = phoneEl?.value.trim() ?? '';
+      formData.email = email;
+
+      try {
+        const utm = storedUtm();
+        const payload = {
+          ...formData,
+          // Honeypot — humans never see the field; the Apps Script drops filled ones.
+          company: $<HTMLInputElement>('msCompany')?.value ?? '',
+          page: location.pathname,
+          recaptchaToken: captchaToken,
+          utm_source: utm.utm_source || '',
+          utm_medium: utm.utm_medium || '',
+          utm_campaign: utm.utm_campaign || '',
+          utm_term: utm.utm_term || '',
+          utm_content: utm.utm_content || '',
+          clickId: utm.gclid ? 'gclid:' + utm.gclid : utm.fbclid ? 'fbclid:' + utm.fbclid : '',
+          landing: utm.landing || '',
+        };
+        if (site.estimateWebhook) {
+          // text/plain keeps this a CORS "simple request" — Apps Script web apps
+          // can't answer preflight OPTIONS, so application/json would fail.
+          const res = await fetch(site.estimateWebhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload),
+          });
+          const out = await res.json().catch(() => null);
+          if (!res.ok || !out?.ok) throw new Error('Lead submission failed');
+        } else {
+          console.log('Estimate request (no webhook configured):', payload);
+        }
+        submitted = true;
+        showStep(6);
+      } catch {
+        showErr('msSubmitError');
+      } finally {
+        resetSubmit();
+      }
+    });
+
+    // Back buttons: data-target="N" jumps to that step; target="0" closes.
+    estOverlay.querySelectorAll<HTMLButtonElement>('.wiz-back[data-target]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const t = parseInt(btn.dataset.target ?? '', 10);
+        if (Number.isNaN(t)) return;
+        if (t === 0) closeOverlay();
+        else showStep(t);
+      });
+    });
+  }
+</script>

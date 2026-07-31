@@ -1,0 +1,60 @@
+---
+import { site } from '@/lib/site';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  image?: string;
+}
+
+const { eyebrow, title, description, image } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-ink text-white" data-nav-theme="dark">
+  <div class="absolute inset-0">
+    {image ? (
+      <img
+        src={image}
+        alt=""
+        aria-hidden="true"
+        class="h-full w-full object-cover opacity-40"
+      />
+    ) : (
+      <div class="h-full w-full bg-gradient-to-br from-[#1a1a1a] via-[#0f0f0f] to-black"></div>
+    )}
+    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/30"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[1200px] px-5 sm:px-10 pt-[180px] pb-24 lg:pt-[220px] lg:pb-32">
+    {eyebrow && (
+      <p class="text-[12px] font-semibold uppercase tracking-[0.18em] text-brand">
+        {eyebrow}
+      </p>
+    )}
+    <h1 class="mt-4 text-4xl sm:text-6xl lg:text-[76px] font-semibold tracking-[-0.03em] leading-[1.02]">
+      {title}
+    </h1>
+    <p class="mt-6 max-w-[720px] text-lg text-white/75 leading-[1.65]">
+      {description}
+    </p>
+
+    <div class="mt-10 flex flex-wrap items-center gap-3">
+      <a
+        href="#estimate"
+        class="btn js-open-estimate inline-flex items-center h-12 px-7 rounded-full bg-brand hover:bg-[#e03f1c] text-white font-semibold text-[15px] capitalize"
+      >
+        Get a Free Estimate
+      </a>
+      <a
+        href={site.phoneHref}
+        class="btn inline-flex items-center h-12 px-6 rounded-full border border-white/25 hover:border-white text-white font-medium text-[15px]"
+      >
+        <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        {site.phone}
+      </a>
+    </div>
+  </div>
+</section>

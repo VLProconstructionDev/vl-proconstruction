@@ -1,0 +1,12 @@
+node_modules
+temporary screenshots
+screenshot.mjs
+serve.mjs
+_mshot.mjs
+_figcap.mjs
+package-lock.json
+.DS_Store
+CLAUDE.md
+claude-design.md
+claude-development.md
+.claude

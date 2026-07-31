@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import ServiceLayout from '@/layouts/ServiceLayout.astro';
+
+/**
+ * Cross-join services × locations at build time.
+ * Adding one location file generates N new pages (one per published service).
+ * This is the primary local-SEO reach lever.
+ */
+export async function getStaticPaths() {
+  const [services, locations] = await Promise.all([
+    getCollection('services', ({ data }) => data.published),
+    getCollection('locations', ({ data }) => data.published),
+  ]);
+
+  return services.flatMap((service) =>
+    locations.map((location) => ({
+      params: { service: service.id, location: location.id },
+      props: { service, location },
+    })),
+  );
+}
+
+const { service, location } = Astro.props;
+---
+
+<ServiceLayout service={service} location={location} />

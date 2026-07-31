@@ -1,0 +1,75 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/lib/site';
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description={`The page you're looking for can't be found. Head back to ${site.name}.`}
+  noindex
+  navTheme="dark"
+>
+  <style is:global>
+    .ghost-404 {
+      font-family: 'Poppins', system-ui, sans-serif;
+      font-weight: 800; line-height: .9; letter-spacing: -0.04em;
+      background: linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.12));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .rise-404 { animation: rise404 .7s cubic-bezier(.22,1,.36,1) both; }
+      @keyframes rise404 {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: none; }
+      }
+    }
+  </style>
+
+  <section class="relative min-h-[100svh] overflow-hidden bg-black text-white flex flex-col" data-nav-theme="dark">
+    <video
+      class="absolute inset-0 w-full h-full object-cover"
+      autoplay muted loop playsinline preload="auto"
+      poster="/assets/images/hero-poster-0715.webp"
+      aria-hidden="true" tabindex="-1"
+    >
+      <source src="/assets/video/hero-0715.webm" type="video/webm" />
+      <source src="/assets/video/hero-0715.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/70 to-black/90"></div>
+
+    <span
+      aria-hidden="true"
+      class="ghost-404 pointer-events-none select-none absolute top-1/2 right-0 lg:right-[60px] -translate-y-1/2 z-[5] leading-none text-right text-[clamp(7rem,22vw,19rem)]"
+    >
+      404
+    </span>
+
+    <div class="relative z-10 flex-1 mx-auto w-full max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex items-center pt-[120px]">
+      <div class="relative w-full max-w-[680px] py-16">
+        <div class="rise-404">
+          <h1 class="font-semibold capitalize leading-[1.02] tracking-[-0.03em] text-[clamp(2.5rem,6vw,4.5rem)]">
+            This page<br />took a wrong turn
+          </h1>
+          <p class="mt-6 text-[16px] sm:text-[17px] leading-[1.7] text-white/70 max-w-[520px]">
+            The page you're looking for isn't here — it may have moved or never existed.
+            Let's get you back on solid ground.
+          </p>
+
+          <div class="mt-9 flex flex-col sm:flex-row gap-3.5">
+            <a href="/" class="btn text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[16px] font-semibold capitalize text-white">
+              Back to home
+            </a>
+            <a href="/services" class="btn text-center border border-white/30 hover:border-white/70 hover:bg-white/5 rounded-full px-8 py-3.5 text-[16px] font-semibold capitalize text-white">
+              View our services
+            </a>
+          </div>
+
+          <p class="mt-9 text-[15px] text-white/55">
+            Need a hand? Call
+            <a href={site.phoneHref} class="text-brand hover:underline font-semibold">{site.phone}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

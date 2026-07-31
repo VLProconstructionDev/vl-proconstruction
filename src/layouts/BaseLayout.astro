@@ -1,0 +1,190 @@
+---
+import '@/styles/global.css';
+import SEO from '@/components/SEO.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import EstimateWizard from '@/components/EstimateWizard.astro';
+import { localBusinessSchema } from '@/lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  canonical?: string;
+  /**
+   * Kept for page-level intent/documentation. The navbar's actual theme comes
+   * from the `data-nav-theme` attribute on each SECTION (read by the observer
+   * in Header.astro) — never from <body>: a body-level attribute would always
+   * contain the probe point and pin the navbar to one theme.
+   */
+  navTheme?: 'light' | 'dark';
+}
+
+const {
+  title,
+  description,
+  image,
+  noindex,
+  schema,
+  canonical,
+  navTheme = 'light',
+} = Astro.props;
+
+// Always include the LocalBusiness schema site-wide, plus any page-specific schema.
+const pageSchema = schema
+  ? Array.isArray(schema)
+    ? schema
+    : [schema]
+  : [];
+const allSchema = [localBusinessSchema(), ...pageSchema];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/assets/images/favicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=Source+Serif+4:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <SEO
+      title={title}
+      description={description}
+      image={image}
+      noindex={noindex}
+      schema={allSchema}
+      canonical={canonical}
+    />
+
+    <!-- Page transition: subtle opacity crossfade on internal navigation. -->
+    <style>
+      html.pt-enter body { opacity: 0; }
+      body.pt-fade { transition: opacity .35s ease; will-change: opacity; }
+      body.pt-hide { opacity: 0; }
+      @media (prefers-reduced-motion: reduce) {
+        html.pt-enter body { opacity: 1; }
+        body.pt-fade { transition: none; }
+      }
+      html.no-lenis { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) { html.no-lenis { scroll-behavior: auto; } }
+    </style>
+    <script is:inline>
+      try {
+        if (
+          sessionStorage.getItem('vlPT') &&
+          !matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
+          document.documentElement.classList.add('pt-enter');
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body class="font-sans text-ink antialiased">
+    <!-- Page-transition fade controller (fires on internal link clicks). -->
+    <script is:inline>
+      (function () {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var html = document.documentElement;
+        var body = document.body;
+        if (html.classList.contains('pt-enter')) {
+          try { sessionStorage.removeItem('vlPT'); } catch (e) {}
+          body.classList.add('pt-fade');
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { html.classList.remove('pt-enter'); });
+          });
+        }
+        document.addEventListener('click', function (e) {
+          if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+          var a = e.target.closest && e.target.closest('a[href]');
+          if (!a || a.target === '_blank' || a.hasAttribute('download')) return;
+          var url;
+          try { url = new URL(a.href, location.href); } catch (_) { return; }
+          if (url.origin !== location.origin) return;
+          if (url.pathname === location.pathname) return;
+          e.preventDefault();
+          try { sessionStorage.setItem('vlPT', '1'); } catch (_) {}
+          body.classList.add('pt-fade');
+          void body.offsetWidth;
+          body.classList.add('pt-hide');
+          var done = false;
+          var go = function () { if (done) return; done = true; location.href = url.href; };
+          body.addEventListener('transitionend', go, { once: true });
+          setTimeout(go, 450);
+        });
+        window.addEventListener('pageshow', function (ev) {
+          if (ev.persisted) {
+            body.classList.remove('pt-fade', 'pt-hide');
+            html.classList.remove('pt-enter');
+          }
+        });
+      })();
+    </script>
+
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <EstimateWizard />
+
+    <!-- Smooth scroll (Lenis) — inertia + smooth anchor jumps -->
+    <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script is:inline>
+      (function () {
+        var reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion || !window.Lenis) {
+          document.documentElement.classList.add('no-lenis');
+          return;
+        }
+        var lenis = new window.Lenis({
+          duration: 1.1,
+          easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+        });
+        (function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        })(0);
+        // Keep the navbar theme in sync while smooth-scrolling.
+        lenis.on('scroll', function () { window.vlUpdateNav && window.vlUpdateNav(); });
+        // Smooth in-page anchor jumps with a navbar offset.
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            // Estimate CTAs open the full-screen wizard (EstimateWizard.astro),
+            // whose handler registers later than this one — never scroll for them.
+            if (a.classList.contains('js-open-estimate')) return;
+            var id = a.getAttribute('href');
+            if (!id || id.length < 2) return;
+            var target = document.querySelector(id);
+            if (!target) return;
+            e.preventDefault();
+            // Links inside the mobile menu: the open menu locks the body
+            // (position: fixed), making scrolling impossible, and its own
+            // close handler would restore the old scroll position anyway.
+            // Close it first, then start the scroll once the unlock and
+            // Lenis's internal sync have had a frame to settle.
+            if (window.vlCloseMenu) window.vlCloseMenu();
+            requestAnimationFrame(function () {
+              requestAnimationFrame(function () {
+                // While the body was locked the document's scrollable height
+                // was ~0 and Lenis cached it — without a resize, scrollTo
+                // clamps to that stale zero limit and goes nowhere.
+                lenis.resize();
+                lenis.scrollTo(target, { offset: -104 });
+              });
+            });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

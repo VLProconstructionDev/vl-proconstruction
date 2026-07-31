@@ -1,0 +1,106 @@
+---
+import { site } from '@/lib/site';
+
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+const H = isHome ? '' : '/';
+
+const currentYear = new Date().getFullYear();
+
+const serviceAreas = [
+  'Bradenton', 'Sarasota', 'Parrish', 'Manatee County', 'Sarasota County',
+  'Ellenton', 'Palmetto', 'Lakewood Ranch', 'University Park', 'Nokomis',
+  'Venice', 'Anna Maria', 'Holmes Beach', 'Bradenton Beach', 'Longboat Key',
+  'Siesta Key',
+];
+---
+
+<footer class="bg-black text-white" data-nav-theme="dark">
+  <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[100px] pb-12">
+    <div class="grid gap-12 lg:gap-10 md:grid-cols-2 lg:grid-cols-3">
+
+      <div>
+        <p class="text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">
+          Serving the Suncoast
+        </p>
+        <img src="/assets/images/logo.svg" alt={site.name} class="mt-7 h-[68px] w-auto" />
+      </div>
+
+      <div>
+        <p class="text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Navigate</p>
+        <ul class="mt-6 space-y-4 text-[15px] text-white/70">
+          <li><a href={`${H}#services`} class="hover:text-brand transition-colors">Services</a></li>
+          <li><a href={`${H}#gallery`} class="hover:text-brand transition-colors">Our Work</a></li>
+          <li><a href={`${H}#reviews`} class="hover:text-brand transition-colors">Reviews</a></li>
+          <li><a href={`${H}#process`} class="hover:text-brand transition-colors">Our Process</a></li>
+          <li><a href={`${H}#benefits`} class="hover:text-brand transition-colors">Why VL Pro</a></li>
+          <li><a href={`${H}#faqs`} class="hover:text-brand transition-colors">FAQ</a></li>
+          <li><a href="#estimate" class="js-open-estimate hover:text-brand transition-colors">Get a Free Estimate</a></li>
+        </ul>
+
+        <p class="mt-10 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Services</p>
+        <ul class="mt-6 space-y-4 text-[15px] text-white/70">
+          <li><a href="/services/custom-showers" class="hover:text-brand transition-colors">Custom Showers</a></li>
+          <li><a href="/services/tile-natural-stone" class="hover:text-brand transition-colors">Tile &amp; Natural Stone</a></li>
+          <li><a href="/services/hard-surface-flooring" class="hover:text-brand transition-colors">Hard Surface Flooring</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Get in touch</p>
+
+        <p class="mt-6 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Phone</p>
+        <a href={site.phoneHref} class="mt-2 inline-block text-[16px] text-white hover:text-brand transition-colors">
+          {site.phone}
+        </a>
+
+        <p class="mt-7 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Email</p>
+        <a href={`mailto:${site.email}`} class="mt-2 inline-block text-[16px] text-white hover:text-brand transition-colors">
+          {site.email}
+        </a>
+
+        <div class="mt-7 h-px bg-white/10"></div>
+
+        <p class="mt-7 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Join the conversation</p>
+        <div class="mt-4 flex items-center gap-3">
+          <a
+            href={site.social.googleMaps}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Find ${site.name} on Google Maps`}
+            class="btn grid place-items-center h-11 w-11 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+          >
+            <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </a>
+          <a
+            href={site.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Follow ${site.name} on Instagram`}
+            class="btn grid place-items-center h-11 w-11 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+          >
+            <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </div>
+
+        <p class="mt-9 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Service areas</p>
+        <p class="mt-3 text-[14px] leading-[1.8] text-white/55 max-w-[420px]">
+          {serviceAreas.join(' · ')}
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-6 text-center">
+      <p class="text-[13px] text-white/50">All Rights Reserved © {site.name} {currentYear}</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,59 @@
+---
+import { site } from '@/lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+  /** JSON-LD objects to embed. Can be a single object or an array. */
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  /** Override canonical (defaults to Astro.url). */
+  canonical?: string;
+}
+
+const {
+  title,
+  description,
+  image = site.defaultOgImage,
+  noindex = false,
+  schema,
+  canonical,
+} = Astro.props;
+
+const canonicalURL = new URL(canonical ?? Astro.url.pathname, site.url).toString();
+const ogImageURL = new URL(image, site.url).toString();
+
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+
+const schemaArray = schema
+  ? Array.isArray(schema)
+    ? schema
+    : [schema]
+  : [];
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
+
+<!-- Structured data -->
+{schemaArray.map((s) => (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(s)} />
+))}

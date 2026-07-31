@@ -1,0 +1,157 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { breadcrumbSchema } from '@/lib/schema';
+import { site } from '@/lib/site';
+
+export async function getStaticPaths() {
+  const locations = await getCollection('locations', ({ data }) => data.published);
+  return locations.map((location) => ({
+    params: { location: location.id },
+    props: { location },
+  }));
+}
+
+const { location } = Astro.props;
+const l = location.data;
+
+const services = (await getCollection('services', ({ data }) => data.published)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const title = `${site.name} in ${l.name}, ${l.state}`;
+const description = `${site.tagline} in ${l.name}, ${l.state}. ${l.intro ?? ''}`.trim();
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Service Areas', url: '/service-areas' },
+  { name: `${l.name}, ${l.state}` },
+];
+
+// Place schema pins the business to this city for local pack signals.
+const schema = [
+  breadcrumbSchema(
+    crumbs.map((c, i) => ({
+      name: c.name,
+      url: c.url ?? `/service-areas/${location.id}`,
+    })),
+  ),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Place',
+    name: `${site.name} — ${l.name}`,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: l.name,
+      addressRegion: l.state,
+      addressCountry: 'US',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: l.lat,
+      longitude: l.lng,
+    },
+    containedInPlace: l.county
+      ? { '@type': 'AdministrativeArea', name: l.county }
+      : undefined,
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={l.heroImage}
+  schema={schema}
+  navTheme="dark"
+>
+  <section class="relative overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <div class="absolute inset-0">
+      {l.heroImage ? (
+        <img src={l.heroImage} alt="" aria-hidden="true" class="h-full w-full object-cover opacity-40" />
+      ) : (
+        <div class="h-full w-full bg-gradient-to-br from-[#1a1a1a] via-[#0f0f0f] to-black"></div>
+      )}
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/30"></div>
+    </div>
+    <div class="relative mx-auto max-w-[1200px] px-5 sm:px-10 pt-[180px] pb-24 lg:pt-[220px]">
+      <p class="text-[12px] font-semibold uppercase tracking-[0.18em] text-brand">
+        {l.county ?? l.state}
+      </p>
+      <h1 class="mt-4 text-4xl sm:text-6xl lg:text-[76px] font-semibold tracking-[-0.03em] leading-[1.02]">
+        {l.name}, {l.state}
+      </h1>
+      {l.intro && (
+        <p class="mt-6 max-w-[720px] text-lg text-white/75 leading-[1.65]">
+          {l.intro}
+        </p>
+      )}
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-[1200px] px-5 sm:px-10 pt-10">
+    <Breadcrumbs items={crumbs} />
+  </div>
+
+  {l.neighborhoods.length > 0 && (
+    <section class="mx-auto max-w-[1200px] px-5 sm:px-10 mt-14">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-graycard">
+        Neighborhoods we serve
+      </p>
+      <div class="mt-3 flex flex-wrap gap-2">
+        {l.neighborhoods.map((n) => (
+          <span class="inline-flex items-center h-8 px-3.5 rounded-full border border-black/10 text-[13px] text-ink">{n}</span>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="mx-auto max-w-[1200px] px-5 sm:px-10 mt-16 mb-24">
+    <h2 class="text-3xl sm:text-4xl font-semibold tracking-[-0.02em]">
+      Services in {l.name}
+    </h2>
+    <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <a
+          href={`/services/${s.id}/${location.id}`}
+          class="group flex flex-col overflow-hidden rounded-2xl border border-black/10 bg-white transition-transform hover:-translate-y-0.5"
+        >
+          <div class="aspect-[4/3] overflow-hidden bg-gray-100">
+            {s.data.heroImage ? (
+              <img
+                src={s.data.heroImage}
+                alt={s.data.title}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                loading="lazy"
+              />
+            ) : (
+              <div class="h-full w-full bg-gradient-to-br from-brand/10 to-brand/5"></div>
+            )}
+          </div>
+          <div class="flex-1 p-6">
+            <h3 class="text-xl font-semibold tracking-[-0.02em] text-ink">
+              {s.data.shortName} in {l.name}
+            </h3>
+            <p class="mt-2 text-[15px] text-graydesc leading-[1.6]">{s.data.description}</p>
+            <span class="mt-4 inline-flex items-center gap-1.5 text-[14px] font-medium text-brand">
+              Learn more
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {l.zips.length > 0 && (
+      <div class="mt-16">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-graycard">
+          ZIP codes served
+        </p>
+        <p class="mt-3 text-[14px] text-graydesc leading-[1.9] max-w-[820px]">
+          {l.zips.join(' · ')}
+        </p>
+      </div>
+    )}
+  </section>
+</BaseLayout>
