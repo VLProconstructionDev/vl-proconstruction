@@ -33,7 +33,7 @@ Figma reference: https://www.figma.com/design/2PhiSh4AgPs29bOkoCIjs9/vl-construc
 
 ## Deployment
 
-Vercel autodetects Astro. No `vercel.json` needed — the `@astrojs/vercel` adapter emits `.vercel/output/config.json` which handles clean URLs, immutable `_astro/*` caching, the 404 route, and Vercel Image API config. Deploys go through the GitHub repo (`alexdatsyk/vl-construction`) → Vercel project serving `https://vl-construction.vercel.app`. (An older abandoned project at `vl-construction-jxpr.vercel.app` may still exist — it serves a stale build and should be deleted in the Vercel dashboard.)
+Vercel autodetects Astro. No `vercel.json` needed — the `@astrojs/vercel` adapter emits `.vercel/output/config.json` which handles clean URLs, immutable `_astro/*` caching, the 404 route, and Vercel Image API config. Deploys go through the GitHub repo (`VLProconstructionDev/vl-proconstruction`, public — which is why the repo copy of `Code.gs` has an EMPTY `RECAPTCHA_SECRET`; the real secret lives only in the deployed Apps Script) → Vercel project serving `https://vl-construction.vercel.app`. History note: the project migrated here 2026-07-31 as a single squashed commit; the full early history lives in the old private repo `alexdatsyk/vl-construction` (local remote `old-origin`, local branch `main-old-history`). (An older abandoned project at `vl-construction-jxpr.vercel.app` may still exist — it serves a stale build and should be deleted in the Vercel dashboard.)
 
 **⚠️ `https://vl-construction.vercel.app` is a TEMPORARY test URL** — a real production domain is coming. When it lands, update the URL in all three places (it feeds canonicals, og:url, sitemap, and JSON-LD):
 1. `astro.config.mjs` — the `SITE` constant
