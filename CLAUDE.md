@@ -34,12 +34,12 @@ Figma reference: https://www.figma.com/design/2PhiSh4AgPs29bOkoCIjs9/vl-construc
 
 **Cloudflare Pages**, connected to the GitHub repo `VLProconstructionDev/vl-proconstruction` (public — which is why the repo copy of `Code.gs` has an EMPTY `RECAPTCHA_SECRET`; the real secret lives only in the deployed Apps Script). Framework preset: Astro; build command `npm run build`; output directory `dist`. No adapter — the site is fully static. Cloudflare serves `dist/404.html` as the custom 404 automatically, and `public/_headers` sets immutable caching for `/_astro/*` (this replaced what the old Vercel adapter used to configure). History note: the project migrated to this repo 2026-07-31 as a single squashed commit; the full early history lives in the old private repo `alexdatsyk/vl-construction` (local remote `old-origin`, local branch `main-old-history`). The project previously deployed on Vercel (`vl-construction.vercel.app`) — those projects should be deleted in the Vercel dashboard.
 
-**⚠️ `https://vl-proconstruction.pages.dev` is a TEMPORARY test URL** — the real production domain (likely `vlproco.com`) is coming. When it lands, update the URL in all three places (it feeds canonicals, og:url, sitemap, and JSON-LD):
+**Production domain: `https://vlproco.com`** (custom domain on the Cloudflare Pages project; `vl-proconstruction.pages.dev` is the underlying Pages URL). The site URL lives in three places — if it ever changes, update all three (it feeds canonicals, og:url, sitemap, and JSON-LD), then rebuild and grep `dist/` for the old host:
 1. `astro.config.mjs` — the `SITE` constant
 2. `src/lib/site.ts` — the `url` field
 3. `public/robots.txt` — the `Sitemap:` line
 
-Then rebuild and verify: `grep -r "pages.dev" dist/ --include="*.html" -l` should return nothing, add the custom domain to the Cloudflare Pages project, and set a redirect from `*.pages.dev` to the primary domain (Pages → Custom domains, or a `_redirects` rule). Also update the Google-side allowlists: reCAPTCHA key domains + Maps key referrer restrictions.
+The Google-side allowlists must include the domain: reCAPTCHA key domains (`vlproco.com` is listed) + Maps key referrer restrictions.
 
 ## Architecture
 

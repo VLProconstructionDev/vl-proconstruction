@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vl-proconstruction.pages.dev/sitemap-index.xml
+Sitemap: https://vlproco.com/sitemap-index.xml

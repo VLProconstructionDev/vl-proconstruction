@@ -7,7 +7,7 @@ export const site = {
   // Legal name as it appears on the business's Google Maps listing.
   legalName: 'VL Proconstruction LLC',
   tagline: 'Custom Showers, Tile & Natural Stone, Hard-Surface Flooring',
-  url: 'https://vl-proconstruction.pages.dev',
+  url: 'https://vlproco.com',
   logo: '/assets/images/favicon.png',
   phone: '(503) 781-4657',
   phoneHref: 'tel:+15037814657',

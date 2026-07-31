@@ -3,10 +3,10 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Update SITE when the production domain is finalized.
+// Production domain. Feeds canonicals, og:url, sitemap, and JSON-LD.
 // Fully static output (no adapter) — deployed on Cloudflare Pages,
 // which serves `dist/` as-is (build: npm run build, output: dist).
-const SITE = 'https://vl-proconstruction.pages.dev';
+const SITE = 'https://vlproco.com';
 
 export default defineConfig({
   site: SITE,
