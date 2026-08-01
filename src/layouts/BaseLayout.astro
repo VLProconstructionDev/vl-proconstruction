@@ -51,10 +51,10 @@ const allSchema = [localBusinessSchema(), ...pageSchema];
     <link rel="apple-touch-icon" href="/assets/images/favicon.png" />
 
     <!-- Fonts are self-hosted (@font-face in global.css, files in /assets/fonts)
-         — no render-blocking Google Fonts request. Preload only the two faces
-         nearly every page paints first; the rest load on demand. -->
-    <link rel="preload" href="/assets/fonts/Inter-400.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/fonts/Inter-700.woff2" as="font" type="font/woff2" crossorigin />
+         — no render-blocking Google Fonts request. Inter is a single variable
+         file (wght 300–800) covering every weight the site uses; Poppins
+         weights load on demand (~8 KB each). -->
+    <link rel="preload" href="/assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin />
 
     <SEO
       title={title}
@@ -135,6 +135,28 @@ const allSchema = [localBusinessSchema(), ...pageSchema];
     </main>
     <Footer />
     <EstimateWizard />
+
+    <!-- Hero video: the HTML ships NO <source> elements — phones show only the
+         poster (saves ~2 MB on the connection that decides mobile LCP). Sources
+         are injected and played on desktop-width viewports only, skipping
+         reduced-motion and Save-Data users. -->
+    <script is:inline>
+      (function () {
+        if (matchMedia('(max-width: 767px)').matches) return;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (navigator.connection && navigator.connection.saveData) return;
+        document.querySelectorAll('video[data-webm]').forEach(function (v) {
+          [['data-webm', 'video/webm'], ['data-mp4', 'video/mp4']].forEach(function (p) {
+            var s = document.createElement('source');
+            s.src = v.getAttribute(p[0]);
+            s.type = p[1];
+            v.appendChild(s);
+          });
+          v.load();
+          v.play().catch(function () {});
+        });
+      })();
+    </script>
 
     <!-- Smooth scroll (Lenis) — inertia + smooth anchor jumps -->
     <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
