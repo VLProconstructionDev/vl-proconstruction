@@ -2,3 +2,9 @@
 # Astro's hashed build assets never change under the same URL — cache forever.
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Media/images/video aren't content-hashed but are replaced under NEW names
+# in practice (e.g. hero-0715) — 30 days is safe and fixes the "no cache TTL"
+# audit (uncached looping video can even be re-fetched mid-session).
+/assets/*
+  Cache-Control: public, max-age=2592000
