@@ -14,6 +14,9 @@ export default defineConfig({
   trailingSlash: 'ignore',
   build: {
     format: 'directory',
+    // Inline all CSS into the HTML — the two small stylesheets were the last
+    // render-blocking requests (fonts are self-hosted @font-face already).
+    inlineStylesheets: 'always',
   },
   integrations: [
     sitemap({

@@ -91,7 +91,7 @@ public/
 
 ### Design tokens (`src/styles/global.css`, Tailwind v4 `@theme`)
 - Colors: `brand` `#f54b25` (hover `#c23c18`/`#e03f1c`), `brandhead` `#f64e28`, `ink` `#1e1e1e`, `graydesc` `#4e4e4e`, `graycard` `#959595`.
-- Fonts: `font-sans` Inter (body), `font-poppins` Poppins, `font-serifd` Source Serif 4. All loaded from Google Fonts in `BaseLayout.astro`'s `<head>`.
+- Fonts: `font-sans` Inter (body), `font-poppins` Poppins, `font-serifd` Source Serif 4. Self-hosted: latin woff2 files in `public/assets/fonts/` + `@font-face` rules at the top of `global.css` (no Google Fonts request; browsers fetch only the faces a page uses). `BaseLayout.astro` preloads `Inter-400`/`Inter-700`. CSS is fully inlined into the HTML (`build.inlineStylesheets: 'always'`) — zero render-blocking requests.
 - `global.css` also holds shared `#navbar`/`.nav-*`/`#mobileMenu`/`.mm-*`/`.btn` styles that apply to the Header component site-wide, plus `scroll-margin-top: 104px` on all `[id]` elements and the scrollbar-hide + `overflow-x: hidden` resets.
 
 ### `src/lib/site.ts`
