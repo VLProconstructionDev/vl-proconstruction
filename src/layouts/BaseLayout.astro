@@ -55,6 +55,9 @@ const allSchema = [localBusinessSchema(), ...pageSchema];
          file (wght 300–800) covering every weight the site uses; Poppins
          weights load on demand (~8 KB each). -->
     <link rel="preload" href="/assets/fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- The hero poster is every page's above-fold visual (phones never load
+         the video at all) — fetch it ahead of the below-fold image queue. -->
+    <link rel="preload" href="/assets/images/hero-poster-0715.webp" as="image" fetchpriority="high" />
 
     <SEO
       title={title}
