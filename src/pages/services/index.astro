@@ -15,6 +15,10 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     .card:hover .card-img { transform: scale(1.04); }
     .card-img-hover { opacity: 0; transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
     .card:hover .card-img-hover { opacity: 1; transform: scale(1.04); }
+    /* Touch devices have no hover — the second photo reveals as the card scrolls into view */
+    @media (hover: none) {
+      .card.is-inview .card-img-hover { opacity: 1; transform: scale(1.04); }
+      .card.is-inview .card-arrow { transform: translate(3px,-3px); } }
     @media (prefers-reduced-motion: reduce) { .card-img-hover { transition: opacity .3s ease; } }
     .card:hover .card-arrow { transform: translate(3px,-3px); }
     .card-arrow { transition: transform .25s ease; }
@@ -383,6 +387,17 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
         }, { threshold: 0.6 });
         nums.forEach((el) => io.observe(el));
       }
+    })();
+
+    // ===== Touch devices: swap each service card to its hover photo while it sits in view =====
+    (function () {
+      if (!window.matchMedia('(hover: none)').matches) return;
+      const cards = document.querySelectorAll('.card');
+      if (!cards.length || !('IntersectionObserver' in window)) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => e.target.classList.toggle('is-inview', e.isIntersecting));
+      }, { rootMargin: '-30% 0px -30% 0px' });
+      cards.forEach((c) => io.observe(c));
     })();
   </script>
 </BaseLayout>

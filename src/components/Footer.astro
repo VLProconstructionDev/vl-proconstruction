@@ -91,7 +91,9 @@ const serviceAreas = [
 
         <p class="mt-9 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Service areas</p>
         <p class="mt-3 text-[14px] leading-[1.8] text-white/55 max-w-[420px]">
-          {serviceAreas.join(' · ')}
+          {/* Non-breaking space glues each separator to the name before it, so a
+              wrapped line never starts with a stray "·" */}
+          <Fragment set:html={serviceAreas.join('&nbsp;· ')} />
         </p>
       </div>
 
@@ -99,8 +101,62 @@ const serviceAreas = [
   </div>
 
   <div class="border-t border-white/10">
-    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-6 text-center">
-      <p class="text-[13px] text-white/50">All Rights Reserved © {site.name} {currentYear}</p>
+    <div class="mcta-clear mx-auto max-w-[1920px] px-4 sm:px-10 lg:px-[60px] py-3 flex flex-row items-center justify-between gap-2 sm:gap-3">
+      {/* Phone type scales with the viewport so the full line + pill never wrap */}
+      <p class="text-[clamp(0.5rem,2.45vw,0.8125rem)] tracking-[-0.01em] text-white/50 whitespace-nowrap">
+        All Rights Reserved © {site.name} {currentYear}
+      </p>
+      <a
+        href="https://synertech.ai"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Built by Synertech — opens synertech.ai in a new tab"
+        class="synertech btn inline-flex shrink-0 items-center gap-1.5 sm:gap-2.5 rounded-full border border-white/15 bg-white/[0.04] pl-2.5 sm:pl-3.5 pr-1 py-1 font-poppins text-[clamp(0.625rem,2.4vw,0.8125rem)] text-white/60 whitespace-nowrap"
+      >
+        <span>Built by <span class="font-bold text-white">synertech</span></span>
+        <span class="synertech-mark grid place-items-center h-[clamp(1.375rem,5.9vw,1.625rem)] w-[clamp(1.375rem,5.9vw,1.625rem)] rounded-full bg-white text-black">
+          <svg class="w-[clamp(0.625rem,2.7vw,0.75rem)] h-auto" viewBox="0 0 36 41" fill="currentColor" aria-hidden="true">
+            <path d="M3.58013 12.665L0 19.0545H7.16026L0 31.7195H7.16026L17.8447 12.665L3.58013 12.665Z"/>
+            <path d="M32.2601 12.4141L28.5091 6.12739L25.0448 12.5181L17.6407 -0.000132421L14.1764 6.39061L25.3586 25.1457L32.2601 12.4141Z"/>
+            <path d="M18.0064 37.8314L25.2224 37.8254L21.6648 31.4882L35.9997 31.5329L32.4421 25.1956L10.9191 25.2065L18.0064 37.8314Z"/>
+          </svg>
+        </span>
+      </a>
     </div>
   </div>
 </footer>
+
+<style is:global>
+  /* Attribution pill — only transform/color animate, never `transition-all` */
+  .synertech {
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+  .synertech-mark {
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .synertech:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background-color: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .synertech:hover .synertech-mark {
+    transform: rotate(-12deg);
+  }
+  .synertech:focus-visible {
+    outline: 2px solid #f54b25;
+    outline-offset: 3px;
+  }
+  .synertech:active {
+    transform: scale(0.98);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .synertech,
+    .synertech-mark {
+      transition: none;
+    }
+    .synertech:hover .synertech-mark,
+    .synertech:active {
+      transform: none;
+    }
+  }
+</style>

@@ -578,6 +578,14 @@ button:focus-visible {
     display: none;
   }
 }
+/* The sticky capsule floats over the end of the page, so the last strip of
+   content (footer copyright) needs room to scroll clear of it on phones.
+   Capsule height 64px + its 14px bottom offset + safe area + breathing room. */
+@media (max-width: 767px) {
+  .mcta-clear {
+    padding-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+  }
+}
 .mcta-estimate,
 .mcta-call {
   display: flex;
