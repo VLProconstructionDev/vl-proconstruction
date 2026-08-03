@@ -47,8 +47,11 @@ const allSchema = [localBusinessSchema(), ...pageSchema];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
-    <link rel="apple-touch-icon" href="/assets/images/favicon.png" />
+    <!-- Google Search favicons require a square multiple of 48px — the
+         original 1000px logo png fails that; 96px + root /favicon.ico pass. -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-96.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
 
     <!-- Fonts are self-hosted (@font-face in global.css, files in /assets/fonts)
          — no render-blocking Google Fonts request. Inter is a single variable
