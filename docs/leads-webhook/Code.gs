@@ -11,7 +11,7 @@
 
 // Bump on every script update — echoed in webhook responses (`v`) so the
 // live deployment's version can be checked without opening the editor.
-var VERSION = 3;
+var VERSION = 4;
 // Where new-lead notifications go. Comma-separate for multiple recipients.
 // TODO: switch to the client's inbox (vlconstruction100@gmail.com) at launch.
 var NOTIFY_EMAIL = 'developer@vlproco.com';
@@ -32,6 +32,22 @@ var RECAPTCHA_MIN_SCORE = 0.5;
 var STATUSES = ['New', 'Contacted', 'Estimate scheduled', 'Quote sent', 'Won', 'Lost', 'Spam'];
 
 function doPost(e) {
+  // Wrapped so an unexpected crash returns clean JSON (the site can show a
+  // real message) AND leaves a row on the "Log" tab — instead of a bare HTML
+  // error page that the browser sees as "Failed to fetch" with no trace.
+  var t0 = Date.now();
+  try {
+    var out = handleLead(e);
+    var ms = Date.now() - t0;
+    if (ms > 8000) logIssue('slow', 'doPost took ' + ms + ' ms');
+    return out;
+  } catch (err) {
+    logIssue('doPost crashed', err);
+    return respond({ ok: false, error: 'server', message: String(err).slice(0, 200) });
+  }
+}
+
+function handleLead(e) {
   var data;
   try {
     data = JSON.parse(e.postData.contents);
@@ -126,6 +142,7 @@ function queueLeadEmail(payload) {
       JSON.stringify(payload)
     );
   } catch (err) {
+    logIssue('email trigger failed — sent inline instead', err);
     sendLeadEmail(payload);
   }
 }
@@ -171,8 +188,28 @@ function sendLeadEmail(payload) {
       ].join('\n'),
     });
   } catch (err) {
-    // Lead row is already saved — a mail hiccup must not break anything.
+    // Lead row is already saved — a mail hiccup must not break anything,
+    // but it must not be invisible either.
+    logIssue('notification email failed (lead row IS saved)', err);
   }
+}
+
+// Appends a row to the "Log" tab (created on first use). Errors, slow runs,
+// and silent fallbacks land here so problems are visible in the spreadsheet
+// itself — no digging through Apps Script's Executions screen.
+// Logging must never break lead handling, hence its own try/catch.
+function logIssue(type, detail) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var log = ss.getSheetByName('Log');
+    if (!log) {
+      log = ss.insertSheet('Log');
+      log.appendRow(['Date', 'What happened', 'Details']);
+      log.setFrozenRows(1);
+    }
+    var msg = detail && detail.stack ? detail.stack : String(detail || '');
+    log.appendRow([new Date(), type, msg.slice(0, 800)]);
+  } catch (ignore) {}
 }
 
 function respond(obj) {

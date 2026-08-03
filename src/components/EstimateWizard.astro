@@ -767,16 +767,26 @@ import { site } from '@/lib/site';
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(payload),
-          });
+          }).catch(() => null);
+          if (!res) throw { code: 'network' };
           const out = await res.json().catch(() => null);
-          if (!res.ok || !out?.ok) throw new Error('Lead submission failed');
+          if (!res.ok || !out?.ok) throw { code: (out && out.error) || 'http_' + res.status, detail: out };
         } else {
           console.log('Estimate request (no webhook configured):', payload);
         }
         submitted = true;
         showStep(6);
-      } catch {
-        showErr('msSubmitError');
+      } catch (err) {
+        // Name the actual problem — "something went wrong" helps nobody, and
+        // the console line gives whoever debugs it the full picture.
+        console.error('[estimate] submit failed:', err);
+        const code = (err && (err as { code?: string }).code) || 'unknown';
+        const messages: Record<string, string> = {
+          network: "Couldn't reach the server — please check your connection and try again.",
+          captcha: 'Security check failed — please reload the page and try again.',
+          server: 'The server hit a temporary problem — please try again in a minute.',
+        };
+        showErr('msSubmitError', (messages[code] || 'Something went wrong. Please try again.') + ' (' + code + ')');
       } finally {
         resetSubmit();
       }
