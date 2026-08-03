@@ -597,6 +597,12 @@ import { site } from '@/lib/site';
         'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(site.googleMapsApiKey) +
         '&libraries=places&v=weekly&loading=async&callback=__vlInitPlaces';
       s.async = true;
+      // A single failed fetch (flaky network, ad blocker) must not kill
+      // autocomplete for the whole visit — allow the next overlay open to retry.
+      s.onerror = () => {
+        placesRequested = false;
+        s.remove();
+      };
       document.head.appendChild(s);
     }
 

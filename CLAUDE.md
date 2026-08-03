@@ -46,7 +46,7 @@ The Google-side allowlists must include the domain: reCAPTCHA key domains (`vlpr
 Multi-page marketing site generated at build time. No runtime server. Shared components (Header, Footer, EstimateWizard) live in `src/components/` and are composed via layouts — not duplicated per page. Page-specific CSS goes in `<style is:global>` blocks and page-specific JS in `<script is:inline>` blocks within the relevant `.astro` file.
 
 ### Project root files
-`astro.config.mjs`, `tsconfig.json`, `package.json`, `package-lock.json`, `CLAUDE.md`, `claude-design.md`, `claude-development.md`, `.gitignore`. Plus `docs/leads-webhook/` — the Google Apps Script (`Code.gs`) + setup guide (`SETUP.md`) for the estimate-form lead webhook (not part of the build). Gitignored: `dist/`, `.astro/`, `node_modules/`, `_pre-optimize-backup/` (pre-webp image/video originals).
+`astro.config.mjs`, `tsconfig.json`, `package.json`, `package-lock.json`, `CLAUDE.md`, `claude-design.md`, `claude-development.md`, `.gitignore`, `README.md` (plain-language guide FOR THE CLIENT — leads workflow, sheet statuses, costs; keep it non-technical). Plus `docs/leads-webhook/` — the Google Apps Script (`Code.gs`) + setup guide (`SETUP.md`) for the estimate-form lead webhook (not part of the build). Gitignored: `dist/`, `.astro/`, `node_modules/`, `_pre-optimize-backup/` (pre-webp image/video originals).
 
 ### src/ layout
 
