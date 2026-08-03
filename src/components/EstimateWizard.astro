@@ -93,17 +93,17 @@ import { site } from '@/lib/site';
         <div class="mt-10 space-y-5">
           <div>
             <label for="msName" class="sr-only">Name</label>
-            <input id="msName" class="wiz-input" type="text" name="name" placeholder="Name" autocomplete="name" />
+            <input id="msName" class="wiz-input" type="text" name="name" placeholder="Name" autocomplete="name" enterkeyhint="next" />
             <p class="wiz-error" id="msNameError">Please enter your name.</p>
           </div>
           <div>
             <label for="msPhone" class="sr-only">Phone Number</label>
-            <input id="msPhone" class="wiz-input" type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" />
+            <input id="msPhone" class="wiz-input" type="tel" name="phone" placeholder="Phone Number" autocomplete="tel" enterkeyhint="next" />
             <p class="wiz-error" id="msPhoneError">Please enter a valid phone number.</p>
           </div>
           <div>
             <label for="msEmail" class="sr-only">Email</label>
-            <input id="msEmail" class="wiz-input" type="email" name="email" placeholder="Email" autocomplete="email" />
+            <input id="msEmail" class="wiz-input" type="email" name="email" placeholder="Email" autocomplete="email" enterkeyhint="done" />
             <p class="wiz-error" id="msEmailError">Please enter a valid email address.</p>
           </div>
           <!-- Honeypot: invisible to humans; bots that fill it are dropped server-side. -->
@@ -202,6 +202,13 @@ import { site } from '@/lib/site';
   /* Google Places suggestion dropdown (address step) — restyled to match the
      dark overlay. Google appends .pac-container to <body>, hence global. */
   .pac-container {
+    /* Google inlines position:absolute + body-relative coords — but the open
+       overlay locks the body with `top: -scrollY`, shoving the dropdown that
+       many px off-screen whenever the wizard opens from a scrolled page
+       (header CTA, mobile bar, burger menu). During the lock window.scrollY
+       is 0, so Google's numbers are exactly viewport coords — position:fixed
+       makes them land right where the input is. */
+    position: fixed !important;
     z-index: 2100; /* above .est-overlay's 2000 */
     margin-top: 10px; padding: 8px;
     background: #141414;
@@ -631,6 +638,18 @@ import { site } from '@/lib/site';
         return '';
       }
     }
+
+    // Contact step: Enter hops to the next field instead of prematurely
+    // submitting the form (mobile keyboards show "next"/"done" via
+    // enterkeyhint); Enter on the last field submits as usual.
+    [['msName', 'msPhone'], ['msPhone', 'msEmail']].forEach(([from, to]) => {
+      $(from)?.addEventListener('keydown', (e) => {
+        if ((e as KeyboardEvent).key === 'Enter') {
+          e.preventDefault();
+          $<HTMLInputElement>(to)?.focus();
+        }
+      });
+    });
 
     // Phone mask: (NXX) NXX-XXXX
     const phoneEl = $<HTMLInputElement>('msPhone');
