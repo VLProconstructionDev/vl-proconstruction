@@ -246,6 +246,17 @@ function setupStatusColumn(sheet) {
   sheet.setConditionalFormatRules(rules);
 }
 
+// One-time: run this from the editor to grant the trigger permission
+// (Apps Script only asks for the permissions the function you RUN needs —
+// running testSetup is not enough). Creates and immediately deletes a
+// throwaway trigger, forcing the authorization prompt.
+function authorizeTriggers() {
+  var t = ScriptApp.newTrigger('sendQueuedLeadEmail').timeBased().after(60000).create();
+  ScriptApp.deleteTrigger(t);
+  PropertiesService.getScriptProperties().getProperty('warmup');
+  Logger.log('✅ Trigger permission granted — async email is active. No redeploy needed.');
+}
+
 // Setup self-test — run manually in the Apps Script editor:
 // select "testSetup" in the toolbar dropdown → Run → read the log below.
 function testSetup() {
