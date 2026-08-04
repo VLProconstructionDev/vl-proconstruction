@@ -11,10 +11,15 @@
 
 // Bump on every script update — echoed in webhook responses (`v`) so the
 // live deployment's version can be checked without opening the editor.
-var VERSION = 4;
-// Where new-lead notifications go. Comma-separate for multiple recipients.
+var VERSION = 5;
+// Where new-lead notifications go — add as many addresses as needed.
+// Every recipient counts against the daily Gmail send quota (~100/day on a
+// consumer account), so 3 recipients = 3 quota units per lead.
 // TODO: switch to the client's inbox (vlconstruction100@gmail.com) at launch.
-var NOTIFY_EMAIL = 'developer@vlproco.com';
+var NOTIFY_EMAILS = [
+  'vlad@vlproco.com',
+  'abel@vlproco.com'
+];
 var SHEET_NAME = 'Leads';
 // Display timezone for the sheet (the client's local time, not the visitor's).
 var SHEET_TIME_ZONE = 'America/New_York';
@@ -165,7 +170,7 @@ function sendLeadEmail(payload) {
   var flag = payload.flag;
   try {
     MailApp.sendEmail({
-      to: NOTIFY_EMAIL,
+      to: NOTIFY_EMAILS.join(','),
       subject:
         (flag ? '[possible spam] ' : '') +
         'New estimate request — ' + (data.name || 'Unknown') + (data.project ? ' (' + data.project + ')' : ''),
