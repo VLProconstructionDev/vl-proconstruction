@@ -185,8 +185,8 @@ const schema = [
     </video>
     <div class="absolute inset-0 bg-black/65"></div>
 
-    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-20 lg:pb-[130px] pt-[150px] gap-8 lg:gap-10">
-      <div class="flex items-center gap-3.5 flex-wrap">
+    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-9 sm:pb-12 lg:pb-[62px] pt-[150px] gap-8 lg:gap-10">
+      <div class="flex items-center gap-3.5 flex-wrap -mb-3 lg:-mb-4">
         <a href="https://maps.app.goo.gl/7Yi5JeKD4vwVWFXo9" target="_blank" rel="noopener noreferrer" aria-label="View our Google reviews" class="inline-block rounded-md transition-transform duration-200 ease-out hover:scale-[1.14] active:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
           <img src="/assets/images/google.webp" alt="Google" class="h-9 w-auto object-contain" />
         </a>
@@ -876,22 +876,35 @@ const schema = [
       {
         const gWall = document.getElementById('galleryWall');
         if (gWall) {
+          // Real hard-surface-flooring job photos (client set, Aug 2026).
           const gPhotos = [
-            '/assets/images/gallery/gallery-1.webp','/assets/images/gallery/gallery-2.webp','/assets/images/gallery/gallery-3.webp',
-            '/assets/images/gallery/gallery-4.webp','/assets/images/gallery/gallery-5.webp','/assets/images/gallery/gallery-6.webp',
-            '/assets/images/gallery/gallery-7.webp','/assets/images/gallery/gallery-8.webp','/assets/images/gallery/gallery-9.webp',
+            '/assets/images/gallery-flooring/flooring-1.webp','/assets/images/gallery-flooring/flooring-2.webp',
+            '/assets/images/gallery-flooring/flooring-3.webp','/assets/images/gallery-flooring/flooring-4.webp',
+            '/assets/images/gallery-flooring/flooring-5.webp','/assets/images/gallery-flooring/flooring-6.webp',
+            '/assets/images/gallery-flooring/flooring-7.webp','/assets/images/gallery-flooring/flooring-8.webp',
+            '/assets/images/gallery-flooring/flooring-9.webp','/assets/images/gallery-flooring/flooring-10.webp',
           ];
           const gDur = [40, 32, 46, 36, 42];
-          const gColsFor = (w) => (w >= 1024 ? 5 : w >= 640 ? 3 : 2);
+          const gColsFor = (w) => (w >= 1024 ? 4 : w >= 640 ? 3 : 2);
           let gBuilt = 0;
           const gCell = (src) => `<div class="vcell overflow-hidden aspect-[4/5]"><img src="${src}" alt="VL Proconstruction project" loading="lazy" class="gallery-img w-full h-full object-cover"/></div>`;
           const gBuild = () => {
             const n = gColsFor(window.innerWidth);
             if (n === gBuilt && gWall.childElementCount) return;
             gBuilt = n;
-            const cols = Array.from({ length: n }, () => []);
-            const total = Math.max(gPhotos.length, n * 3);
-            for (let i = 0; i < total; i++) cols[i % n].push(gPhotos[i % gPhotos.length]);
+            // Split the list into n CONTIGUOUS slices — never a round-robin, which used
+            // to drop the same photo into neighbouring columns a row apart. A short slice
+            // repeats inside its OWN column (>= 3 cells) so the doubled set always covers
+            // the wall height; no photo is ever shared between two columns.
+            const gBase = Math.floor(gPhotos.length / n), gExtra = gPhotos.length % n;
+            let gAt = 0;
+            const cols = Array.from({ length: n }, (_, ci) => {
+              let cells = gPhotos.slice(gAt, gAt + gBase + (ci < gExtra ? 1 : 0));
+              gAt += cells.length;
+              if (!cells.length) cells = [gPhotos[ci % gPhotos.length]];
+              while (cells.length < 3) cells = cells.concat(cells);
+              return cells;
+            });
             gWall.innerHTML = cols.map((imgs, ci) => {
               const set = imgs.map(gCell).join('');
               const dir = ci % 2 ? ' vcol-down' : '';

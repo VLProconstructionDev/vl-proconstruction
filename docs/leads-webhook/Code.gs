@@ -13,7 +13,7 @@
 // live deployment's version can be checked without opening the editor.
 var VERSION = 4;
 // Where new-lead notifications go. Comma-separate for multiple recipients.
-// TODO: switch to the client's inbox (vlconstruction100@gmail.com) at launch.
+// TODO: switch to the client's inbox (info@vlproco.com) at launch.
 var NOTIFY_EMAIL = 'developer@vlproco.com';
 var SHEET_NAME = 'Leads';
 // Display timezone for the sheet (the client's local time, not the visitor's).

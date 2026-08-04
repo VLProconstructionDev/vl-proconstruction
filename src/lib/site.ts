@@ -11,7 +11,7 @@ export const site = {
   logo: '/assets/images/favicon.png',
   phone: '(503) 781-4657',
   phoneHref: 'tel:+15037814657',
-  email: 'vlconstruction100@gmail.com',
+  email: 'info@vlproco.com',
   address: {
     // TODO: real street address + ZIP
     streetAddress: '',
