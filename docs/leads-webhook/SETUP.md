@@ -25,6 +25,16 @@ lead sheet (ideally the client's):
 5. **Test** — submit the form on the live site. A row should appear on the
    **Leads** tab and the notification email should arrive within a minute.
 
+## Testing from localhost (no email, separate tab)
+
+Submissions made from `localhost` (or `127.0.0.1`) are tagged `test: true` by
+the wizard. The webhook files those on a separate **Test Leads** tab (created
+automatically on the first test submit) and sends **no notification email** —
+so the full pipeline can be exercised during development without pinging
+anyone or polluting the real Leads tab. Everything else (honeypot, reCAPTCHA,
+UTM columns) behaves exactly like production. Requires script `VERSION = 5`+
+deployed.
+
 ## Working the leads (Status column)
 
 Every lead arrives with **Status = New** (column B). The column has a
