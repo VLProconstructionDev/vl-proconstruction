@@ -115,6 +115,10 @@ const schema = [
     .consult-check { display: grid; place-items: center; flex: none; width: 22px; height: 22px; border-radius: 9999px; background: transparent; color: #1e1e1e; }
     .consult-check svg { width: 19px; height: 19px; }
     .consult-photo { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 14%, #000 30%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 14%, #000 30%); }
+    /* phones: tighter rows so the card doesn't dominate the scroll */
+    @media (max-width: 639px) {
+      .consult-chip { padding: 2px 0; gap: 10px; }
+      .consult-photo { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 10%, #000 22%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 10%, #000 22%); } }
     @media (min-width: 1024px) { .consult-photo { -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.5) 16%, #000 34%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.5) 16%, #000 34%); } }
 
     /* ----- Who we serve cards ----- */
@@ -204,8 +208,8 @@ const schema = [
     </video>
     <div class="absolute inset-0 bg-black/65"></div>
 
-    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-20 lg:pb-[130px] pt-[150px] gap-8 lg:gap-10">
-      <div class="flex items-center gap-3.5 flex-wrap">
+    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-9 sm:pb-12 lg:pb-[62px] pt-[150px] gap-8 lg:gap-10">
+      <div class="flex items-center gap-3.5 flex-wrap -mb-3 lg:-mb-4">
         <a href="https://maps.app.goo.gl/7Yi5JeKD4vwVWFXo9" target="_blank" rel="noopener noreferrer" aria-label="View our Google reviews" class="inline-block rounded-md transition-transform duration-200 ease-out hover:scale-[1.14] active:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
           <img src="/assets/images/google.webp" alt="Google" class="h-9 w-auto object-contain" />
         </a>
@@ -404,17 +408,17 @@ const schema = [
 
   <!-- ===================== FREE DESIGN CONSULTATION ===================== -->
   <section id="consultation" class="bg-white" data-nav-theme="light">
-    <div class="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-[60px] pt-16 lg:pt-24 pb-20 lg:pb-[90px]">
+    <div class="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-[60px] pt-10 sm:pt-16 lg:pt-24 pb-12 sm:pb-20 lg:pb-[90px]">
       <div class="flex flex-col lg:flex-row lg:items-stretch overflow-hidden bg-[#faf9f8] shadow-[0_30px_60px_-32px_rgba(20,20,20,0.22)]">
-        <div class="flex flex-col items-start gap-8 lg:gap-10 p-8 sm:p-12 lg:p-14 lg:flex-1 lg:justify-center">
+        <div class="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 p-6 sm:p-12 lg:p-14 lg:flex-1 lg:justify-center">
           <div class="max-w-[680px]">
             <h2 class="font-semibold tracking-[-0.035em] leading-[1.1] text-ink text-[clamp(1.7rem,2.8vw,2.6rem)]">
               <span class="text-brand">Free</span> Design Consultation
             </h2>
-            <p class="mt-4 text-[clamp(0.95rem,1.15vw,1.0625rem)] tracking-[-0.02em] text-graydesc">
+            <p class="mt-3 sm:mt-4 text-[clamp(0.95rem,1.15vw,1.0625rem)] tracking-[-0.02em] text-graydesc">
               Sit down with a shower specialist to plan every detail:
             </p>
-            <ul class="consult-list mt-7 grid gap-3 sm:grid-cols-2">
+            <ul class="consult-list mt-4 sm:mt-7 grid gap-1.5 sm:gap-3 sm:grid-cols-2">
               <li class="consult-chip"><span class="consult-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Layout &amp; Curb Options</li>
               <li class="consult-chip"><span class="consult-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Tile &amp; Glass Selection</li>
               <li class="consult-chip"><span class="consult-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Waterproofing Plan</li>
@@ -422,13 +426,13 @@ const schema = [
             </ul>
           </div>
         </div>
-        <div class="relative w-full lg:w-[42%] shrink-0 min-h-[300px] sm:min-h-[380px] lg:min-h-0">
+        <div class="relative w-full lg:w-[42%] shrink-0 min-h-[210px] sm:min-h-[380px] lg:min-h-0">
           <img loading="lazy" decoding="async" src="/assets/images/consultation.webp" alt="Modern powder room with a backlit round mirror, wood vanity, and vessel sink" class="consult-photo absolute inset-0 w-full h-full object-cover" />
         </div>
       </div>
       <!-- TODO: real phone number -->
-      <div class="mt-6 flex justify-center">
-        <a href="tel:+15037814657" class="btn inline-flex items-center justify-center px-2 py-2 text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
+      <div class="mt-4 sm:mt-6 flex justify-center">
+        <a href="tel:+15037814657" class="btn inline-flex items-center justify-center px-2 py-2 text-[16px] sm:text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
           Get a Free Design Consultation
         </a>
       </div>
@@ -867,24 +871,36 @@ const schema = [
     (function () {
       const gWall = document.getElementById('galleryWall');
       if (!gWall) return;
+      // Real custom-shower job photos (client set, Aug 2026).
       const gPhotos = [
-        '/assets/images/gallery-showers/showers-1.webp','/assets/images/gallery-showers/showers-2.webp','/assets/images/gallery-showers/showers-3.webp',
-        '/assets/images/gallery-showers/showers-4.webp','/assets/images/gallery-showers/showers-5.webp','/assets/images/gallery-showers/showers-6.webp',
-        '/assets/images/gallery-showers/showers-7.webp','/assets/images/gallery-showers/showers-8.webp','/assets/images/gallery-showers/showers-9.webp',
-        '/assets/images/gallery-showers/showers-10.webp',
-        '/assets/images/gallery-showers/showers-11.webp','/assets/images/gallery-showers/showers-12.webp',
+        '/assets/images/gallery-showers-2026/showers-1.webp','/assets/images/gallery-showers-2026/showers-2.webp',
+        '/assets/images/gallery-showers-2026/showers-3.webp','/assets/images/gallery-showers-2026/showers-4.webp',
+        '/assets/images/gallery-showers-2026/showers-5.webp','/assets/images/gallery-showers-2026/showers-6.webp',
+        '/assets/images/gallery-showers-2026/showers-7.webp','/assets/images/gallery-showers-2026/showers-8.webp',
+        '/assets/images/gallery-showers-2026/showers-9.webp','/assets/images/gallery-showers-2026/showers-10.webp',
+        '/assets/images/gallery-showers-2026/showers-11.webp','/assets/images/gallery-showers-2026/showers-12.webp',
       ];
       const gDur = [40, 32, 46, 36, 42];
-      const gColsFor = (w) => (w >= 1024 ? 5 : w >= 640 ? 3 : 2);
+      const gColsFor = (w) => (w >= 1024 ? 4 : w >= 640 ? 3 : 2);
       let gBuilt = 0;
       const gCell = (src) => `<div class="vcell overflow-hidden aspect-[4/5]"><img src="${src}" alt="VL Proconstruction project" loading="lazy" class="gallery-img w-full h-full object-cover"/></div>`;
       const gBuild = () => {
         const n = gColsFor(window.innerWidth);
         if (n === gBuilt && gWall.childElementCount) return;
         gBuilt = n;
-        const cols = Array.from({ length: n }, () => []);
-        const total = Math.max(gPhotos.length, n * 3);
-        for (let i = 0; i < total; i++) cols[i % n].push(gPhotos[i % gPhotos.length]);
+        // Split the list into n CONTIGUOUS slices — never a round-robin, which used
+        // to drop the same photo into neighbouring columns a row apart. A short slice
+        // repeats inside its OWN column (>= 3 cells) so the doubled set always covers
+        // the wall height; no photo is ever shared between two columns.
+        const gBase = Math.floor(gPhotos.length / n), gExtra = gPhotos.length % n;
+        let gAt = 0;
+        const cols = Array.from({ length: n }, (_, ci) => {
+          let cells = gPhotos.slice(gAt, gAt + gBase + (ci < gExtra ? 1 : 0));
+          gAt += cells.length;
+          if (!cells.length) cells = [gPhotos[ci % gPhotos.length]];
+          while (cells.length < 3) cells = cells.concat(cells);
+          return cells;
+        });
         gWall.innerHTML = cols.map((imgs, ci) => {
           const set = imgs.map(gCell).join('');
           const dir = ci % 2 ? ' vcol-down' : '';

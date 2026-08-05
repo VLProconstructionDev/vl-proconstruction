@@ -23,9 +23,17 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     .consult-photo { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 14%, #000 30%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 14%, #000 30%); }
     @media (min-width: 1024px) {
       .consult-photo { -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.5) 16%, #000 34%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.5) 16%, #000 34%); } }
+    /* phones: tighter rows so the card doesn't dominate the scroll */
+    @media (max-width: 639px) {
+      .consult-chip { padding: 2px 0; gap: 10px; }
+      .consult-photo { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 10%, #000 22%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 10%, #000 22%); } }
     @media (prefers-reduced-motion: reduce) { .consult-chip { transition: none; } }
     .card-img-hover { opacity: 0; transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
     .card:hover .card-img-hover { opacity: 1; transform: scale(1.04); }
+    /* Touch devices have no hover — the second photo reveals as the card scrolls into view */
+    @media (hover: none) {
+      .card.is-inview .card-img-hover { opacity: 1; transform: scale(1.04); }
+      .card.is-inview .card-arrow { transform: translate(3px,-3px); } }
     @media (prefers-reduced-motion: reduce) { .card-img-hover { transition: opacity .3s ease; } }
     .card:hover .card-arrow { transform: translate(3px,-3px); }
     .card-arrow { transition: transform .25s ease; }
@@ -213,9 +221,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     <div class="absolute inset-0 bg-black/65"></div>
 
     <!-- Hero content -->
-    <div class="relative z-20 h-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-20 lg:pb-[130px] pt-[150px] gap-8 lg:gap-10">
+    <div class="relative z-20 h-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-9 sm:pb-12 lg:pb-[62px] pt-[150px] gap-8 lg:gap-10">
       <!-- Trust row -->
-      <div class="flex items-center gap-3.5 flex-wrap">
+      <div class="flex items-center gap-3.5 flex-wrap -mb-3 lg:-mb-4">
         <a href="https://maps.app.goo.gl/7Yi5JeKD4vwVWFXo9" target="_blank" rel="noopener noreferrer" aria-label="View our Google reviews" class="inline-block rounded-md transition-transform duration-200 ease-out hover:scale-[1.14] active:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
           <img src="/assets/images/google.webp" alt="Google" class="h-9 w-auto object-contain" />
         </a>
@@ -327,17 +335,17 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
   <!-- ===================== FREE DESIGN CONSULTATION ===================== -->
   <section id="consultation" class="bg-white" data-nav-theme="light">
-    <div class="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-[60px] pt-8 lg:pt-14 pb-20 lg:pb-[90px]">
+    <div class="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-[60px] pt-6 sm:pt-8 lg:pt-14 pb-12 sm:pb-20 lg:pb-[90px]">
       <div class="flex flex-col lg:flex-row lg:items-stretch overflow-hidden bg-[#faf9f8] shadow-[0_30px_60px_-32px_rgba(20,20,20,0.22)]">
-        <div class="flex flex-col items-start gap-8 lg:gap-10 p-8 sm:p-12 lg:p-14 lg:flex-1 lg:justify-center">
+        <div class="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 p-6 sm:p-12 lg:p-14 lg:flex-1 lg:justify-center">
         <div class="max-w-[680px]">
           <h2 class="font-semibold tracking-[-0.035em] leading-[1.1] text-ink text-[clamp(1.7rem,2.8vw,2.6rem)]">
             <span class="text-brand">Free</span> Design Consultation
           </h2>
-          <p class="mt-4 text-[clamp(0.95rem,1.15vw,1.0625rem)] tracking-[-0.02em] text-graydesc">
+          <p class="mt-3 sm:mt-4 text-[clamp(0.95rem,1.15vw,1.0625rem)] tracking-[-0.02em] text-graydesc">
             Meet with an experienced installation specialist to discuss:
           </p>
-          <ul class="consult-list mt-7 grid gap-3 sm:grid-cols-2">
+          <ul class="consult-list mt-4 sm:mt-7 grid gap-1.5 sm:gap-3 sm:grid-cols-2">
             <li class="consult-chip">
               <span class="consult-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>
               Design Ideas
@@ -358,13 +366,13 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
         </div>
         </div>
         <!-- Photo -->
-        <div class="relative w-full lg:w-[42%] shrink-0 min-h-[300px] sm:min-h-[380px] lg:min-h-0">
+        <div class="relative w-full lg:w-[42%] shrink-0 min-h-[210px] sm:min-h-[380px] lg:min-h-0">
           <img loading="lazy" decoding="async" src="/assets/images/consultation.webp" alt="Modern powder room with a backlit round mirror, wood vanity, and vessel sink" class="consult-photo absolute inset-0 w-full h-full object-cover" />
         </div>
       </div>
       <!-- TODO: real phone number -->
-      <div class="mt-6 flex justify-center">
-        <a href="tel:+15037814657" class="btn inline-flex items-center justify-center px-2 py-2 text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
+      <div class="mt-4 sm:mt-6 flex justify-center">
+        <a href="tel:+15037814657" class="btn inline-flex items-center justify-center px-2 py-2 text-[16px] sm:text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
           Get a Free Design Consultation
         </a>
       </div>
@@ -865,99 +873,38 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
     // Vertical auto-scrolling photo wall (home-page build: swaps columns 1 and 3)
     const wall = document.getElementById('galleryWall');
     if (wall) {
+      // Real job photos, Aug 2026 client sets — the three service galleries
+      // (flooring / custom showers / tile & natural stone) interleaved so no
+      // column of the wall reads as one single trade.
       const photos = [
-        '/assets/images/gallery/work-1.webp',
-        '/assets/images/gallery/work-2.webp',
-        '/assets/images/gallery/work-4.webp',
-        '/assets/images/gallery/work-5.webp',
-        '/assets/images/gallery/work-6.webp',
-        '/assets/images/gallery/work-7.webp',
-        '/assets/images/gallery/work-8.webp',
-        '/assets/images/gallery/work-9.webp',
-        '/assets/images/gallery/work-10.webp',
-        '/assets/images/gallery/work-11.webp',
-        '/assets/images/gallery/work-12.webp',
-        '/assets/images/gallery/work-13.webp',
-        '/assets/images/gallery/work-14.webp',
-        '/assets/images/gallery/work-15.webp',
-        '/assets/images/gallery/work-16.webp',
-        '/assets/images/gallery/work-17.webp',
-        '/assets/images/gallery/work-18.webp',
-        '/assets/images/gallery/work-19.webp',
-        '/assets/images/gallery/work-20.webp',
-        '/assets/images/gallery/work-21.webp',
-        '/assets/images/gallery/work-22.webp',
-        '/assets/images/gallery/work-23.webp',
-        '/assets/images/gallery/work-24.webp',
-        '/assets/images/gallery/work-25.webp',
-        '/assets/images/gallery/work-26.webp',
-        '/assets/images/gallery/work-27.webp',
-        '/assets/images/gallery/work-28.webp',
-        '/assets/images/gallery/work-29.webp',
-        '/assets/images/gallery/work-30.webp',
-        '/assets/images/gallery/work-31.webp',
-        '/assets/images/gallery/work-32.webp',
-        '/assets/images/gallery/work-33.webp',
-        '/assets/images/gallery/work-34.webp',
-        '/assets/images/gallery/work-35.webp',
-        '/assets/images/gallery/work-36.webp',
-        '/assets/images/gallery/work-37.webp',
-        '/assets/images/gallery/work-38.webp',
-        '/assets/images/gallery/work-39.webp',
-        '/assets/images/gallery/work-40.webp',
-        '/assets/images/gallery/work-41.webp',
-        '/assets/images/gallery/work-42.webp',
-        '/assets/images/gallery/work-43.webp',
-        '/assets/images/gallery/work-44.webp',
-        '/assets/images/gallery/work-45.webp',
-        '/assets/images/gallery/work-46.webp',
-        '/assets/images/gallery/work-47.webp',
-        '/assets/images/gallery/work-48.webp',
-        '/assets/images/gallery/work-49.webp',
-        '/assets/images/gallery/work-50.webp',
-        '/assets/images/gallery/work-51.webp',
-        '/assets/images/gallery/work-52.webp',
-        '/assets/images/gallery/work-53.webp',
-        '/assets/images/gallery/work-54.webp',
-        '/assets/images/gallery/work-55.webp',
-        '/assets/images/gallery/work-56.webp',
-        '/assets/images/gallery/work-57.webp',
-        '/assets/images/gallery/work-58.webp',
-        '/assets/images/gallery/work-59.webp',
-        '/assets/images/gallery/work-60.webp',
-        '/assets/images/gallery/work-61.webp',
-        '/assets/images/gallery/work-62.webp',
-        '/assets/images/gallery/work-63.webp',
-        '/assets/images/gallery/work-64.webp',
-        '/assets/images/gallery/work-65.webp',
-        '/assets/images/gallery/work-66.webp',
-        '/assets/images/gallery/work-67.webp',
-        '/assets/images/gallery/work-68.webp',
-        '/assets/images/gallery/work-69.webp',
-        '/assets/images/gallery/work-70.webp',
-        '/assets/images/gallery/work-71.webp',
-        '/assets/images/gallery/work-72.webp',
-        '/assets/images/gallery/work-73.webp',
-        '/assets/images/gallery/work-74.webp',
-        '/assets/images/gallery/work-75.webp',
-        '/assets/images/gallery/work-76.webp',
-        '/assets/images/gallery/work-77.webp',
-        '/assets/images/gallery/work-78.webp',
-        '/assets/images/gallery/work-79.webp',
-        '/assets/images/gallery/work-80.webp',
-        '/assets/images/gallery/work-81.webp',
-        '/assets/images/gallery/work-82.webp',
-        '/assets/images/gallery/work-83.webp',
-        '/assets/images/gallery/work-84.webp',
-        '/assets/images/gallery/work-85.webp',
-        '/assets/images/gallery/work-86.webp',
-        '/assets/images/gallery/work-87.webp',
-        '/assets/images/gallery/work-88.webp',
-        '/assets/images/gallery/work-89.webp',
-        '/assets/images/gallery/work-90.webp',
-        '/assets/images/gallery/work-91.webp',
-        '/assets/images/gallery/work-92.webp',
-        '/assets/images/gallery/work-93.webp',
+        '/assets/images/gallery-flooring/flooring-1.webp',
+        '/assets/images/gallery-showers-2026/showers-1.webp',
+        '/assets/images/gallery-tile-2026/tile-1.webp',
+        '/assets/images/gallery-flooring/flooring-2.webp',
+        '/assets/images/gallery-showers-2026/showers-2.webp',
+        '/assets/images/gallery-tile-2026/tile-2.webp',
+        '/assets/images/gallery-flooring/flooring-3.webp',
+        '/assets/images/gallery-showers-2026/showers-3.webp',
+        '/assets/images/gallery-tile-2026/tile-3.webp',
+        '/assets/images/gallery-flooring/flooring-4.webp',
+        '/assets/images/gallery-showers-2026/showers-4.webp',
+        '/assets/images/gallery-tile-2026/tile-4.webp',
+        '/assets/images/gallery-flooring/flooring-5.webp',
+        '/assets/images/gallery-showers-2026/showers-5.webp',
+        '/assets/images/gallery-tile-2026/tile-5.webp',
+        '/assets/images/gallery-flooring/flooring-6.webp',
+        '/assets/images/gallery-showers-2026/showers-6.webp',
+        '/assets/images/gallery-tile-2026/tile-6.webp',
+        '/assets/images/gallery-flooring/flooring-7.webp',
+        '/assets/images/gallery-showers-2026/showers-7.webp',
+        '/assets/images/gallery-flooring/flooring-8.webp',
+        '/assets/images/gallery-showers-2026/showers-8.webp',
+        '/assets/images/gallery-flooring/flooring-9.webp',
+        '/assets/images/gallery-showers-2026/showers-9.webp',
+        '/assets/images/gallery-flooring/flooring-10.webp',
+        '/assets/images/gallery-showers-2026/showers-10.webp',
+        '/assets/images/gallery-showers-2026/showers-11.webp',
+        '/assets/images/gallery-showers-2026/showers-12.webp',
       ];
       const durations = [40, 32, 46, 36, 42];
       const colsFor = (w) => (w >= 1024 ? 5 : w >= 640 ? 3 : 2);
@@ -1206,5 +1153,16 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
       });
       set(pos);
     });
+
+    // ===== Touch devices: swap each service card to its hover photo while it sits in view =====
+    (function () {
+      if (!window.matchMedia('(hover: none)').matches) return;
+      const cards = document.querySelectorAll('.card');
+      if (!cards.length || !('IntersectionObserver' in window)) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => e.target.classList.toggle('is-inview', e.isIntersecting));
+      }, { rootMargin: '-30% 0px -30% 0px' });
+      cards.forEach((c) => io.observe(c));
+    })();
   </script>
 </BaseLayout>

@@ -746,8 +746,13 @@ import { site } from '@/lib/site';
 
       try {
         const utm = storedUtm();
+        // Local-dev submits are tagged so the webhook files them on a
+        // "Test Leads" tab and skips the notification email — testing the
+        // full pipeline from localhost never pings the client.
+        const isLocalDev = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
         const payload = {
           ...formData,
+          test: isLocalDev,
           // Honeypot — humans never see the field; the Apps Script drops filled ones.
           company: $<HTMLInputElement>('msCompany')?.value ?? '',
           page: location.pathname,
@@ -780,7 +785,7 @@ import { site } from '@/lib/site';
         // Name the actual problem — "something went wrong" helps nobody, and
         // the console line gives whoever debugs it the full picture.
         console.error('[estimate] submit failed:', err);
-        const code = (err && (err as { code?: string }).code) || 'unknown';
+        const code = (err as { code?: string } | null)?.code || 'unknown';
         const messages: Record<string, string> = {
           network: "Couldn't reach the server — please check your connection and try again.",
           captcha: 'Security check failed — please reload the page and try again.',

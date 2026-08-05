@@ -3,7 +3,9 @@
  *
  * Lives inside the client's Google Sheet (Extensions → Apps Script).
  * Receives a JSON POST from the website's estimate wizard, appends the lead
- * as a row on the "Leads" tab, and emails a notification.
+ * as a row on the "Leads" tab, and emails a notification. Submits from
+ * localhost arrive with `test: true` — those go to a "Test Leads" tab
+ * instead and send NO email.
  *
  * Deploy as: Web app → Execute as "Me" → Who has access: "Anyone".
  * Paste the resulting /exec URL into `estimateWebhook` in src/lib/site.ts.
@@ -20,7 +22,11 @@ var NOTIFY_EMAILS = [
   'vlad@vlproco.com',
   'abel@vlproco.com'
 ];
+
 var SHEET_NAME = 'Leads';
+// Where leads submitted from localhost land (the wizard sends `test: true`).
+// Kept out of the real pipeline: separate tab, no notification email.
+var TEST_SHEET_NAME = 'Test Leads';
 // Display timezone for the sheet (the client's local time, not the visitor's).
 var SHEET_TIME_ZONE = 'America/New_York';
 // reCAPTCHA v3 SECRET key (from https://www.google.com/recaptcha/admin —
@@ -77,6 +83,11 @@ function handleLead(e) {
     'UTM Source', 'UTM Medium', 'UTM Campaign', 'UTM Term', 'UTM Content', 'Click ID', 'Landing page',
   ];
 
+  // Localhost test submits: same pipeline, but the row goes to the
+  // "Test Leads" tab and no notification email is sent.
+  var isTest = data.test === true;
+  var sheetName = isTest ? TEST_SHEET_NAME : SHEET_NAME;
+
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
@@ -87,9 +98,9 @@ function handleLead(e) {
     if (ss.getSpreadsheetTimeZone() !== SHEET_TIME_ZONE) {
       ss.setSpreadsheetTimeZone(SHEET_TIME_ZONE);
     }
-    var sheet = ss.getSheetByName(SHEET_NAME);
+    var sheet = ss.getSheetByName(sheetName);
     if (!sheet) {
-      sheet = ss.insertSheet(SHEET_NAME);
+      sheet = ss.insertSheet(sheetName);
       sheet.appendRow(HEADERS);
       sheet.setFrozenRows(1);
       setupStatusColumn(sheet);
@@ -131,9 +142,10 @@ function handleLead(e) {
 
   // Email is sent OUTSIDE this request (one-shot trigger fires ~seconds
   // later) so the visitor isn't kept waiting on the mail service.
-  queueLeadEmail({ data: data, flag: captcha.flag });
+  // Test leads never email — the client must not be pinged by dev testing.
+  if (!isTest) queueLeadEmail({ data: data, flag: captcha.flag });
 
-  return respond({ ok: true });
+  return respond(isTest ? { ok: true, test: true } : { ok: true });
 }
 
 // Queue the notification email via a one-shot time-based trigger. If the
