@@ -13,7 +13,7 @@
 
 // Bump on every script update — echoed in webhook responses (`v`) so the
 // live deployment's version can be checked without opening the editor.
-var VERSION = 5;
+var VERSION = 6;
 // Where new-lead notifications go — add as many addresses as needed.
 // Every recipient counts against the daily Gmail send quota (~100/day on a
 // consumer account), so 3 recipients = 3 quota units per lead.

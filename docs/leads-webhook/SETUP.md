@@ -33,8 +33,8 @@ the wizard. The webhook files those on a separate **Test Leads** tab (created
 automatically on the first test submit) and sends **no notification email** —
 so the full pipeline can be exercised during development without pinging
 anyone or polluting the real Leads tab. Everything else (honeypot, reCAPTCHA,
-UTM columns) behaves exactly like production. Requires script `VERSION = 5`+
-deployed.
+UTM columns) behaves exactly like production. Requires script `VERSION = 6`+
+deployed (v6 = test mode + multiple notification emails combined).
 
 ## Working the leads (Status column)
 
