@@ -14,9 +14,15 @@
 // Bump on every script update — echoed in webhook responses (`v`) so the
 // live deployment's version can be checked without opening the editor.
 var VERSION = 5;
-// Where new-lead notifications go. Comma-separate for multiple recipients.
-// TODO: switch to the client's inbox (info@vlproco.com) at launch.
-var NOTIFY_EMAIL = 'developer@vlproco.com';
+// Where new-lead notifications go — add as many addresses as needed.
+// Every recipient counts against the daily Gmail send quota (~100/day on a
+// consumer account), so 3 recipients = 3 quota units per lead.
+// TODO: switch to the client's inbox (vlconstruction100@gmail.com) at launch.
+var NOTIFY_EMAILS = [
+  'vlad@vlproco.com',
+  'abel@vlproco.com'
+];
+
 var SHEET_NAME = 'Leads';
 // Where leads submitted from localhost land (the wizard sends `test: true`).
 // Kept out of the real pipeline: separate tab, no notification email.
@@ -176,7 +182,7 @@ function sendLeadEmail(payload) {
   var flag = payload.flag;
   try {
     MailApp.sendEmail({
-      to: NOTIFY_EMAIL,
+      to: NOTIFY_EMAILS.join(','),
       subject:
         (flag ? '[possible spam] ' : '') +
         'New estimate request — ' + (data.name || 'Unknown') + (data.project ? ' (' + data.project + ')' : ''),

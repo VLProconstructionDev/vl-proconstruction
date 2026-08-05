@@ -11,8 +11,9 @@ lead sheet (ideally the client's):
    `VL Proconstruction — Leads`.
 2. **Add the script** — in the sheet: **Extensions → Apps Script**. Delete the
    placeholder code and paste the contents of [`Code.gs`](./Code.gs).
-   Adjust `NOTIFY_EMAIL` at the top if leads should go somewhere other than
-   the business Gmail.
+   Adjust the `NOTIFY_EMAILS` list at the top — add one line per address that
+   should get the new-lead alert (every recipient counts against the daily
+   send quota, see "Costs & limits" below).
 3. **Deploy** — click **Deploy → New deployment**, gear icon → **Web app**:
    - Description: `estimate form webhook`
    - Execute as: **Me**
@@ -86,7 +87,8 @@ open for the same reason.
   next lead.
 - **Empty `estimateWebhook`**: the site still works — submissions just log to
   the browser console and show the success screen (dev-friendly default).
-- **Email quota**: consumer Gmail Apps Script can send ~100 emails/day —
-  far above expected lead volume.
+- **Email quota**: consumer Gmail Apps Script can send ~100 recipients/day —
+  each address in `NOTIFY_EMAILS` counts (3 recipients = 3 quota units per
+  lead). Still far above expected lead volume.
 - The row is written before the email is sent, so a mail failure never loses
   a lead.
