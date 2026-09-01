@@ -13,17 +13,20 @@ export const site = {
   phoneHref: 'tel:+15037814657',
   email: 'info@vlproco.com',
   address: {
-    // TODO: real street address + ZIP
-    streetAddress: '',
+    streetAddress: '17416 Harvest Moon Way',
     addressLocality: 'Bradenton',
     addressRegion: 'FL',
-    postalCode: '',
+    postalCode: '34211',
     addressCountry: 'US',
   },
   geo: {
-    // Bradenton, FL (approximate city center — TODO: exact business coords)
-    latitude: 27.4989,
-    longitude: -82.5748,
+    // TODO: exact coordinates for 17416 Harvest Moon Way. These are the
+    // approximate centre of ZIP 34211 (Lakewood Ranch, east of I-75) — close
+    // enough to place the business in the right area, but NOT the parcel.
+    // Replace with the pin from the Google Business Profile once it exists so
+    // this matches the listing exactly.
+    latitude: 27.4585,
+    longitude: -82.396,
   },
   areaServed: [
     'Bradenton', 'Sarasota', 'Parrish', 'Manatee County', 'Sarasota County',

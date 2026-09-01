@@ -1,0 +1,43 @@
+---
+/**
+ * /services/[service]/[city]-[state] — e.g. /services/custom-showers/bradenton-fl
+ *
+ * One page per `cityServices` entry — NOT a blind services × locations
+ * cross-join: sections 4, 6 and 7 are 100% unique per pair, so a page exists
+ * only where someone has written its content file. Add
+ * `src/content/city-services/<city>--<service>.md` to ship another one.
+ *
+ * The `[service]` segment is dynamic, but the hand-designed service pages at
+ * `src/pages/services/<service>/index.astro` still win for `/services/<service>`
+ * — Astro gives static path segments priority over dynamic ones.
+ */
+import { getCollection, getEntry } from 'astro:content';
+import LocationServiceLayout from '@/layouts/LocationServiceLayout.astro';
+import { locationSlug } from '@/lib/urls';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('cityServices', ({ data }) => data.published);
+
+  return await Promise.all(
+    entries.map(async (entry) => {
+      const [location, service] = await Promise.all([
+        getEntry('locations', entry.data.city),
+        getEntry('services', entry.data.service),
+      ]);
+      if (!location || !service) {
+        throw new Error(
+          `city-services/${entry.id}: unknown city "${entry.data.city}" or service "${entry.data.service}".`,
+        );
+      }
+      return {
+        params: { service: service.id, location: locationSlug(location) },
+        props: { entry, location, service },
+      };
+    }),
+  );
+}
+
+const { entry, location, service } = Astro.props;
+---
+
+<LocationServiceLayout entry={entry} location={location} service={service} />
