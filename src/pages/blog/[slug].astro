@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPostLayout from '@layouts/BlogPostLayout.astro';
+import { sortPosts, visible } from '@/lib/blog';
+
+// Thin route — the whole page lives in BlogPostLayout.
+export async function getStaticPaths() {
+  const posts = sortPosts(await getCollection('blog', visible));
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      // "Keep reading" — the newest other posts.
+      related: posts.filter((p) => p.id !== post.id).slice(0, 3),
+    },
+  }));
+}
+
+const { post, related } = Astro.props;
+---
+
+<BlogPostLayout post={post} related={related} />

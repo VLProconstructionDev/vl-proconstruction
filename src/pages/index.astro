@@ -1,6 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostCard from '@components/PostCard.astro';
+import { sortPosts, visible } from '@/lib/blog';
 import ServiceAreaMap from '@components/ServiceAreaMap.astro';
+import EstimateInline from '@components/EstimateInline.astro';
+
+// Home-page "Advice & insights" teaser — the three newest posts, same cards
+// as the /blog index (.bl-* in global.css).
+const latestPosts = sortPosts(await getCollection('blog', visible)).slice(0, 3);
 ---
 
 <BaseLayout
@@ -684,35 +692,9 @@ import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 
   </section>
 
-  <!-- ===================== ESTIMATE FORM ===================== -->
-  <section id="estimate" class="bg-black text-white border-t border-white/10" data-nav-theme="dark">
-    <div>
-
-      <!-- Step 1 (inline). Choosing a project + Next opens the full-screen wizard overlay (steps 2–6). -->
-      <div class="px-5 sm:px-10 lg:px-[60px] py-16 lg:py-24 flex items-center justify-center">
-        <div class="w-full max-w-[440px]">
-          <h3 class="text-center font-bold capitalize leading-[1.1] tracking-[-0.025em] text-[clamp(2.4rem,4vw,3.75rem)]">Request your<br />free estimate</h3>
-          <p class="mt-6 text-center text-[15px] font-semibold text-white/85">What project are you interested in?</p>
-
-          <div class="mt-5 space-y-4" id="step1Options">
-            <label class="fopt"><input type="checkbox" name="s1project" value="Custom Showers" /><span class="pill-label">Custom Showers</span><span class="fradio" aria-hidden="true"></span></label>
-            <label class="fopt"><input type="checkbox" name="s1project" value="Tile & Natural Stone" /><span class="pill-label">Tile &amp; Natural Stone</span><span class="fradio" aria-hidden="true"></span></label>
-            <label class="fopt"><input type="checkbox" name="s1project" value="Hard Surface Flooring" /><span class="pill-label">Hard Surface Flooring</span><span class="fradio" aria-hidden="true"></span></label>
-            <label class="fopt" id="s1OtherPill"><input type="checkbox" name="s1project" value="Other" id="s1OtherRadio" /><span class="pill-label">Other</span><input type="text" id="s1OtherInput" class="other-inline-input" placeholder="Please describe your project…" autocomplete="off" aria-label="Describe your project" /><span class="fradio" aria-hidden="true"></span></label>
-          </div>
-
-          <p class="wiz-error text-center" id="step1Error">Please select a project to continue.</p>
-
-          <div class="mt-8">
-            <button type="button" class="btn w-full rounded-full bg-brand hover:bg-[#e03f1c] py-4 text-[15px] font-semibold capitalize text-white" id="step1Next">Next</button>
-          </div>
-          <!-- TODO: real phone -->
-          <p class="mt-5 text-center text-[14px] text-white/55">Questions? Call: <a href="tel:+15037814657" class="text-brand hover:underline">(503) 781-4657</a></p>
-        </div>
-      </div>
-
-    </div>
-  </section>
+  <!-- ===================== ESTIMATE FORM =====================
+       Inline step 1; Next hands off to the wizard overlay (steps 2–6). -->
+  <EstimateInline />
 
   <!-- ===================== FAQ ===================== -->
   <section id="faqs" class="bg-white" data-nav-theme="light">
@@ -798,6 +780,25 @@ import ServiceAreaMap from '@components/ServiceAreaMap.astro';
           </button>
           <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Yes. We can help you choose tile, grout color, layouts, trim, and finishes that match your style and budget.</p></div></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BLOG / ADVICE =====================
+       The three newest posts. Cards use the shared .bl-* styles in
+       global.css so this list and /blog stay identical. -->
+  <section id="advice" class="bg-white" data-nav-theme="light">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pb-20 lg:pb-[110px]">
+
+      <div class="flex flex-wrap items-center justify-between gap-6">
+        <h2 class="font-bold capitalize text-ink leading-[1.02] tracking-[-0.03em] text-[clamp(2.1rem,5vw,4rem)]">
+          Advice &amp; insights
+        </h2>
+        <a href="/blog" class="btn bl-more">See more blogs</a>
+      </div>
+
+      <div class="mt-12 lg:mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {latestPosts.map((post) => <PostCard post={post} headingLevel="h3" />)}
       </div>
     </div>
   </section>

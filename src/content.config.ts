@@ -201,10 +201,14 @@ const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
+    // Shorter <title> for search results — set it when the h1 runs long.
+    seoTitle: z.string().optional(),
     description: z.string(),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
-    author: z.string().default('VL Construction'),
+    author: z.string().default('VL Proconstruction'),
+    // Author avatar. Falls back to the brand mark on a dark disc (PostMeta).
+    authorImage: z.string().optional(),
     heroImage: z.string().optional(),
     tags: z.array(z.string()).default([]),
     // If both are set the article page can cross-link back.
