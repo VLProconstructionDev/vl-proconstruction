@@ -10,8 +10,10 @@ const SITE = 'https://vlproco.com';
 
 export default defineConfig({
   site: SITE,
-  // 'ignore' so both `/foo` and `/foo/` work in dev and in prod.
-  trailingSlash: 'ignore',
+  // 'always' — canonicals/sitemap already use the trailing form, so pin it
+  // here too. Keeps internal links from drifting back to the non-slash URLs
+  // that Cloudflare redirects (which Google files under "Page with redirect").
+  trailingSlash: 'always',
   build: {
     format: 'directory',
     // Inline all CSS into the HTML — the two small stylesheets were the last
