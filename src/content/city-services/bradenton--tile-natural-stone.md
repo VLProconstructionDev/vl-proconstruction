@@ -8,11 +8,11 @@ service: tile-natural-stone
 # of the Locations nav and the sitemap. Flip to `true` to ship it.
 published: false
 
-seoTitle: Tile & Natural Stone in Bradenton, FL — Set Flat, Sealed, Built to Last
+seoTitle: Tile & Natural Stone Bradenton, FL
 seoDescription: >-
-  Tile and natural-stone installers in Bradenton, FL. Porcelain, marble,
-  travertine — crack isolation over slab, lippage control, sealed stone. Most
-  Bradenton floors run $9–$26/sq ft. Free estimate.
+  Tile & natural-stone installers in Bradenton, FL. Porcelain, marble,
+  travertine — crack isolation, lippage control, sealed stone. $9–$26/sq ft.
+  Free estimate.
 
 heroCity: Bradenton
 heroService: Tile & Natural Stone

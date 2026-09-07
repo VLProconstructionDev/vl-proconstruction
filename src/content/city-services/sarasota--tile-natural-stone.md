@@ -5,11 +5,11 @@
 city: sarasota
 service: tile-natural-stone
 
-seoTitle: Tile & Natural Stone in Sarasota, FL — Set Flat, Sealed, Built to Last
+seoTitle: Tile & Natural Stone Sarasota, FL
 seoDescription: >-
-  Tile and natural-stone installers in Sarasota, FL. Porcelain, marble,
-  travertine — crack isolation over slab, condo sound ratings, sealed stone.
-  Most Sarasota floors run $10–$30/sq ft. Free estimate.
+  Tile & natural-stone installers in Sarasota, FL. Porcelain, marble,
+  travertine — crack isolation, sound ratings, sealed stone. $10–$30/sq
+  ft. Free estimate.
 
 heroCity: Sarasota
 heroService: Tile & Natural Stone

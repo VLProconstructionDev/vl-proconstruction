@@ -10,7 +10,11 @@ const SITE = 'https://vlproco.com';
 
 export default defineConfig({
   site: SITE,
-  // 'ignore' so both `/foo` and `/foo/` work in dev and in prod.
+  // 'ignore' so both `/foo` and `/foo/` resolve in dev (and Astro's dev
+  // server doesn't hard-404 the non-slash form). Canonicals + sitemap still
+  // emit the trailing form (directory build + explicit paths in src/lib/urls),
+  // and internal links all use it — so the "Page with redirect" fix holds
+  // without the dev-server strictness that 'always' would impose.
   trailingSlash: 'ignore',
   build: {
     format: 'directory',

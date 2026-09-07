@@ -8,7 +8,7 @@ service: custom-showers
 # of the Locations nav and the sitemap. Flip to `true` to ship it.
 published: false
 
-seoTitle: Custom Showers in Bradenton, FL — Curbless, Waterproofed, Built to Last
+seoTitle: Custom Showers Bradenton, FL
 seoDescription: >-
   Custom shower builders in Bradenton, FL. Curbless entries, Schluter
   waterproofing, frameless glass. Most Bradenton showers run $9,500–$22,000.

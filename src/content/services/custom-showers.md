@@ -2,7 +2,7 @@
 title: Custom Shower Installation
 shortName: Custom Showers
 description: Fully custom walk-in showers with waterproofing that lasts, from tile selection through the final grout line.
-seoTitle: Custom Shower Builders — Waterproof, Tile-Ready
+seoTitle: Custom Shower Installation
 seoDescription: Design-and-build custom showers with proper waterproofing, curbless entries, and premium tile. Free in-home estimates.
 heroImage: /assets/images/custom-showers-built-to-last.webp
 order: 1

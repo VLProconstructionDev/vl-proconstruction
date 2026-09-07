@@ -5,7 +5,7 @@
 city: sarasota
 service: custom-showers
 
-seoTitle: Custom Showers in Sarasota, FL — Curbless, Waterproofed, Built to Last
+seoTitle: Custom Showers Sarasota, FL
 seoDescription: >-
   Custom shower builders in Sarasota, FL. Curbless entries, Schluter
   waterproofing, frameless glass. Most Sarasota showers run $11,000–$26,000.

@@ -9,11 +9,11 @@ service: hard-surface-flooring
 # of the Locations nav and the sitemap. Flip to `true` to ship it.
 published: false
 
-seoTitle: Hard-Surface Flooring in Sarasota, FL — Hardwood, Engineered & LVP
+seoTitle: Hard-Surface Flooring Sarasota, FL
 seoDescription: >-
-  Hardwood, engineered wood, and LVP flooring installers in Sarasota, FL. Slab
-  moisture testing, condo sound ratings, NWFA-spec installs. Most Sarasota
-  floors run $7–$20/sq ft. Free estimate.
+  Hardwood, engineered & LVP flooring installers in Sarasota, FL. Slab
+  moisture testing, condo sound ratings, NWFA-spec installs. $7–$20/sq ft. Free
+  estimate.
 
 heroCity: Sarasota
 heroService: Hard Surface Flooring
