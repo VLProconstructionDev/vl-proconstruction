@@ -1,11 +1,29 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ServiceAreaMap from '@components/ServiceAreaMap.astro';
+import { breadcrumbSchema, itemListSchema } from '@/lib/schema';
+
+// The three cards below, as structured data — order matches the page.
+const schema = [
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Services', url: '/services' },
+  ]),
+  itemListSchema({
+    name: 'VL Proconstruction services',
+    items: [
+      { name: 'Custom Shower Installation', url: '/services/custom-showers' },
+      { name: 'Tile & Natural Stone Installation', url: '/services/tile-natural-stone' },
+      { name: 'Hard-Surface Flooring Installation', url: '/services/hard-surface-flooring' },
+    ],
+  }),
+];
 ---
 
 <BaseLayout
   title="Services — VL Proconstruction | Showers, Tile & Flooring"
   description="Custom showers, tile & natural stone, and hard surface flooring — designed, waterproofed, and installed by a family crew serving Bradenton & Sarasota."
+  schema={schema}
   navTheme="dark"
 >
   <style is:global>

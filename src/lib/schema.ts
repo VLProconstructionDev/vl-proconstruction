@@ -2,9 +2,11 @@ import { site } from './site';
 
 /** Reusable JSON-LD builders. Return plain objects — SEO.astro serializes them. */
 
-// TODO(after Google Business Profile is set up): enrich with description, email,
-// logo, priceRange, sameAs, openingHoursSpecification, hasCredential, and
-// aggregateRating — pulling the values from the GBP listing so they match exactly.
+// TODO(after Google Business Profile is set up): add openingHoursSpecification and
+// hasCredential (license number), pulling the values from the GBP listing so they
+// match exactly. aggregateRating is deliberately NOT emitted: the reviews shown on
+// this site are the business's own, and Google treats self-serving LocalBusiness
+// review markup as ineligible for rich results.
 export function localBusinessSchema() {
   // Omit address fields that are still empty rather than emitting "".
   const address = Object.fromEntries(
@@ -16,9 +18,15 @@ export function localBusinessSchema() {
     '@type': 'GeneralContractor',
     '@id': `${site.url}/#business`,
     name: site.legalName,
+    alternateName: site.name,
+    description: site.tagline,
     url: site.url,
     telephone: site.phoneHref.replace('tel:', ''),
-    image: new URL(site.logo, site.url).toString(),
+    email: site.email,
+    image: new URL(site.defaultOgImage, site.url).toString(),
+    logo: new URL(site.logo, site.url).toString(),
+    priceRange: '$$',
+    currenciesAccepted: 'USD',
     address: {
       '@type': 'PostalAddress',
       ...address,
@@ -30,6 +38,70 @@ export function localBusinessSchema() {
     areaServed: site.areaServed.map((name) => ({
       '@type': 'AdministrativeArea',
       name,
+    })),
+    sameAs: Object.values(site.social).filter(Boolean),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Construction services',
+      itemListElement: SERVICE_CATALOG.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: s.name,
+          url: new URL(`/services/${s.slug}`, site.url).toString(),
+        },
+      })),
+    },
+  };
+}
+
+/** The three live service pages — the catalog the business actually offers. */
+const SERVICE_CATALOG = [
+  { slug: 'custom-showers', name: 'Custom Shower Installation' },
+  { slug: 'tile-natural-stone', name: 'Tile & Natural Stone Installation' },
+  { slug: 'hard-surface-flooring', name: 'Hard-Surface Flooring Installation' },
+];
+
+/** WebSite node — names the site for Google and links it back to the business. */
+export function websiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${site.url}/#website`,
+    name: site.name,
+    url: site.url,
+    inLanguage: 'en-US',
+    publisher: { '@id': `${site.url}/#business` },
+  };
+}
+
+/** FAQPage — only ever from Q&As that are visible on the page itself. */
+export function faqSchema(items: { q: string; a: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  };
+}
+
+/** ItemList — an ordered list of linked pages (e.g. the services index). */
+export function itemListSchema(input: {
+  name: string;
+  items: { name: string; url: string; description?: string }[];
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: input.name,
+    itemListElement: input.items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      url: new URL(item.url, site.url).toString(),
     })),
   };
 }
@@ -83,6 +155,10 @@ export function articleSchema(input: {
     headline: input.title,
     description: input.description,
     url: `${site.url}/blog/${input.slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${site.url}/blog/${input.slug}`,
+    },
     datePublished: input.datePublished,
     dateModified: input.dateModified ?? input.datePublished,
     image: input.image

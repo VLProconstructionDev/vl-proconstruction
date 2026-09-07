@@ -5,15 +5,67 @@ import PostCard from '@components/PostCard.astro';
 import { sortPosts, visible } from '@/lib/blog';
 import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 import EstimateInline from '@components/EstimateInline.astro';
+import { websiteSchema, faqSchema } from '@/lib/schema';
 
 // Home-page "Advice & insights" teaser — the three newest posts, same cards
 // as the /blog index (.bl-* in global.css).
 const latestPosts = sortPosts(await getCollection('blog', visible)).slice(0, 3);
+
+// Single source for the #faqs accordion AND the FAQPage JSON-LD — Google
+// requires the marked-up Q&As to be the ones visible on the page, so both
+// render from this array and cannot drift apart. `list` renders as bullets;
+// `a` is then the plain-text equivalent the schema needs.
+const faqs: { q: string; a: string; list?: string[] }[] = [
+  {
+    q: 'How much does a bathroom remodel cost?',
+    a: 'Every project is different depending on the size, materials, and scope of work. We provide a free on-site consultation and a written estimate before work begins.',
+  },
+  {
+    q: 'How long does a bathroom renovation take?',
+    a: 'Most bathroom remodels take 2–4 weeks depending on demolition, plumbing changes, tile installation, custom showers, and material availability.',
+  },
+  {
+    q: 'Do you offer free estimates?',
+    a: 'Yes. We offer free in-home consultations where we discuss your ideas, take measurements, and provide a detailed estimate.',
+  },
+  {
+    q: 'Are you licensed and insured?',
+    a: 'Yes. VL Proconstruction LLC is licensed and insured in Florida.',
+  },
+  {
+    q: 'Can I stay in my home during the remodel?',
+    a: 'In most cases, yes. We work to minimize dust and disruption and keep the job site clean throughout the project.',
+  },
+  {
+    q: 'Do you provide a warranty?',
+    a: 'Yes. We stand behind our workmanship and use quality installation methods and premium materials designed for long-term performance.',
+  },
+  {
+    q: 'Why should I choose VL Proconstruction?',
+    a: 'Over 22 years of experience, Schluter-certified waterproofing, attention to detail, professional communication, clean job sites, transparent pricing, and high-quality craftsmanship.',
+    list: [
+      'Over 22 years of experience',
+      'Schluter-certified waterproofing',
+      'Attention to detail',
+      'Professional communication',
+      'Clean job sites',
+      'Transparent pricing',
+      'High-quality craftsmanship',
+    ],
+  },
+  {
+    q: 'Do you help with tile selection and design?',
+    a: 'Yes. We can help you choose tile, grout color, layouts, trim, and finishes that match your style and budget.',
+  },
+];
+
+const schema = [websiteSchema(), faqSchema(faqs)];
 ---
 
 <BaseLayout
   title="VL Proconstruction — Bradenton Sarasota Construction Experts"
   description="Professional tile installation, flooring, custom showers, bathroom upgrades, demolition, and subfloor prep for homeowners and businesses in the Bradenton area."
+  schema={schema}
   navTheme="dark"
 >
   <style is:global>
@@ -707,79 +759,21 @@ const latestPosts = sortPosts(await getCollection('blog', visible)).slice(0, 3);
       </p>
 
       <div id="faqList" class="mt-12 lg:mt-16">
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="true">
-            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">How much does a bathroom remodel cost?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Every project is different depending on the size, materials, and scope of work. We provide a free on-site consultation and a written estimate before work begins.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="true">
-            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">How long does a bathroom renovation take?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Most bathroom remodels take 2–4 weeks depending on demolition, plumbing changes, tile installation, custom showers, and material availability.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="true">
-            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Do you offer free estimates?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Yes. We offer free in-home consultations where we discuss your ideas, take measurements, and provide a detailed estimate.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="true">
-            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Are you licensed and insured?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Yes. VL Proconstruction LLC is licensed and insured in Florida.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="true">
-            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Can I stay in my home during the remodel?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">In most cases, yes. We work to minimize dust and disruption and keep the job site clean throughout the project.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="true">
-            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Do you provide a warranty?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Yes. We stand behind our workmanship and use quality installation methods and premium materials designed for long-term performance.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="true">
-            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Why should I choose VL Proconstruction?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner">
-            <ul class="grid sm:grid-cols-2 gap-x-10 gap-y-1.5 text-[15px] leading-[1.7] text-graydesc list-disc pl-5 max-w-[860px]">
-              <li>Over 22 years of experience</li>
-              <li>Schluter-certified waterproofing</li>
-              <li>Attention to detail</li>
-              <li>Professional communication</li>
-              <li>Clean job sites</li>
-              <li>Transparent pricing</li>
-              <li>High-quality craftsmanship</li>
-            </ul>
-          </div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="true">
-            <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Do you help with tile selection and design?</span>
-            <span class="faq-ico" aria-hidden="true"></span>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Yes. We can help you choose tile, grout color, layouts, trim, and finishes that match your style and budget.</p></div></div>
-        </div>
+        {faqs.map((faq) => (
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="true">
+              <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">{faq.q}</span>
+              <span class="faq-ico" aria-hidden="true"></span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">
+              {faq.list
+                ? <ul class="grid sm:grid-cols-2 gap-x-10 gap-y-1.5 text-[15px] leading-[1.7] text-graydesc list-disc pl-5 max-w-[860px]">
+                    {faq.list.map((point) => <li>{point}</li>)}
+                  </ul>
+                : <p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">{faq.a}</p>}
+            </div></div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
