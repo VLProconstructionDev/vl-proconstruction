@@ -1,6 +1,6 @@
 ---
 title: 'Tub to Shower Conversion in Bradenton: What It Costs, What It Takes, and How to Do It Right'
-seoTitle: 'Tub to Shower Conversion in Bradenton, FL: Cost & Curbless'
+seoTitle: 'Tub to Shower Conversion Bradenton, FL'
 description: 'Tub to shower conversion in Bradenton and Lakewood Ranch: 2026 costs, curbless vs. curbed, ADA shower sizes, and Manatee County permit rules.'
 publishedAt: 2026-09-04
 author: VL Proconstruction
