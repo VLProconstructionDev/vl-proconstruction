@@ -749,3 +749,107 @@ button:focus-visible {
     transition: none;
   }
 }
+
+/* ============================================================
+   Post cards (.bl-*) — shared by the home page's "Advice & insights"
+   teaser and the /blog index, so both lists read identically.
+   ============================================================ */
+.bl-img {
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.bl-card:hover .bl-img,
+.bl-card:focus-within .bl-img {
+  transform: scale(1.04);
+}
+.bl-card:hover .bl-title,
+.bl-card:focus-within .bl-title {
+  color: #f54b25;
+}
+.bl-title-link:focus-visible {
+  outline: 2px solid rgba(245, 75, 37, 0.6);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+/* Fixed row height so a card without a badge keeps the same baseline */
+.bl-meta {
+  min-height: 22px;
+}
+.bl-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 9999px;
+  background: rgba(245, 75, 37, 0.1);
+  color: #c23c18;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+/* Two lines, whatever the excerpt length */
+.bl-excerpt {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.bl-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.7;
+}
+/* "See more blogs" pill — same outline treatment as the reviews controls */
+.bl-more {
+  display: inline-flex;
+  align-items: center;
+  height: 46px;
+  padding: 0 24px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 9999px;
+  color: #1e1e1e;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.bl-more:hover {
+  border-color: #f54b25;
+  color: #f54b25;
+}
+.bl-more:focus-visible {
+  outline: 2px solid rgba(245, 75, 37, 0.6);
+  outline-offset: 3px;
+}
+.bl-more:active {
+  transform: scale(0.98);
+}
+/* Card with no hero image yet — a quiet brand-tinted surface, never a gap */
+.bl-noimg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(120% 100% at 20% 0%, rgba(245, 75, 37, 0.09), transparent 60%),
+    #f4f2f0;
+}
+
+/* "New" ribbon — sits on the photo's top-right corner */
+.bl-ribbon {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  padding: 10px 7px 22px;
+  /* Slightly translucent so the photo reads through it */
+  background: rgba(245, 75, 37, 0.82);
+  -webkit-backdrop-filter: saturate(1.1);
+  backdrop-filter: saturate(1.1);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+}

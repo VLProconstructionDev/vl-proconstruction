@@ -1,0 +1,322 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostCard from '@components/PostCard.astro';
+import PostMeta from '@components/PostMeta.astro';
+import EstimateInline from '@components/EstimateInline.astro';
+import { fullDate } from '@/lib/blog';
+import { articleSchema, breadcrumbSchema } from '@/lib/schema';
+import { site } from '@/lib/site';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  /** Up to three other posts, already sorted newest-first. */
+  related: CollectionEntry<'blog'>[];
+}
+
+const { post, related } = Astro.props;
+const p = post.data;
+const { Content, headings } = await render(post);
+// Sidebar table of contents — the post's h2s (Astro slugs their ids for us).
+const toc = headings.filter((h) => h.depth === 2);
+// First tag doubles as the category chip over the title.
+const category = p.tags[0];
+
+const canonical = `/blog/${post.id}`;
+
+// Cross-link back to the service the post is about, when it names one.
+const relatedService = p.relatedService ? await getEntry('services', p.relatedService) : undefined;
+
+const schema = [
+  articleSchema({
+    title: p.title,
+    description: p.description,
+    slug: post.id,
+    datePublished: p.publishedAt.toISOString(),
+    dateModified: p.updatedAt?.toISOString(),
+    image: p.heroImage,
+    author: p.author,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog' },
+    { name: p.title, url: canonical },
+  ]),
+];
+---
+
+<BaseLayout
+  title={p.seoTitle ?? p.title}
+  description={p.description}
+  image={p.heroImage}
+  schema={schema}
+  canonical={canonical}
+  noindex={p.draft}
+  navTheme="light"
+>
+  <style is:global>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+
+    /* The article measure is narrower than the site's full-bleed sections —
+       one centred column, article + rail, like a magazine page. */
+    .post-wrap { max-width: 1400px; margin-inline: auto; }
+
+    /* ----- Article body -----
+       Hand-rolled instead of a typography plugin: the site ships no prose
+       styles anywhere else, and these match the FAQ/service-page type scale. */
+    /* Prose stays capped inside the wider column — a 900px line of 17px text
+       is past the comfortable measure. */
+    .post-body { max-width: 860px; color: #4e4e4e; font-size: 17px; line-height: 1.8; }
+    .post-body > * + * { margin-top: 1.35em; }
+    .post-body h2 {
+      margin-top: 2.4em; color: #1e1e1e; font-weight: 700;
+      font-size: clamp(1.35rem, 2.2vw, 1.8rem); line-height: 1.22; letter-spacing: -0.025em;
+    }
+    .post-body h3 {
+      margin-top: 2em; color: #1e1e1e; font-weight: 600;
+      font-size: clamp(1.1rem, 1.6vw, 1.3rem); line-height: 1.3; letter-spacing: -0.02em;
+    }
+    .post-body strong { color: #1e1e1e; font-weight: 600; }
+    .post-body a { color: #f54b25; text-decoration: underline; text-underline-offset: 3px; }
+    .post-body a:hover { color: #c23c18; }
+    .post-body a:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
+    .post-body ul, .post-body ol { padding-left: 1.35em; }
+    .post-body ul { list-style: disc; }
+    .post-body ol { list-style: decimal; }
+    .post-body li + li { margin-top: 0.5em; }
+    .post-body img { width: 100%; height: auto; }
+    .post-body blockquote {
+      padding-left: 22px; border-left: 2px solid #f54b25;
+      color: #1e1e1e; font-size: 1.05em; line-height: 1.6;
+    }
+    .post-body hr { margin-top: 2.4em; border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); }
+    /* A comparison table is wider than a phone — it scrolls in its own box
+       rather than pushing the page sideways (html/body use overflow-x: clip,
+       so an overflowing table would just be cut off). */
+    .post-body table {
+      display: block; width: 100%; max-width: 100%; overflow-x: auto;
+      border-collapse: collapse; font-size: 15px;
+    }
+    .post-body thead, .post-body tbody { min-width: 560px; }
+    .post-body tr { display: table; width: 100%; table-layout: fixed; }
+    .post-body th, .post-body td { padding: 12px 14px; border-bottom: 1px solid rgba(0, 0, 0, 0.1); text-align: left; }
+    .post-body th { color: #1e1e1e; font-weight: 600; }
+
+    /* GFM task list — a design checklist, not bullets. */
+    .post-body ul.contains-task-list { padding-left: 0; list-style: none; }
+    .post-body li.task-list-item { display: flex; gap: 11px; }
+    .post-body li.task-list-item input[type='checkbox'] {
+      flex: none; width: 15px; height: 15px; margin-top: 7px;
+      accent-color: #f54b25; opacity: 0.75;
+    }
+
+    /* ----- Category chip over the title ----- */
+    .post-cat {
+      display: inline-flex; align-items: center; height: 26px; padding: 0 11px;
+      border-radius: 9999px;
+      background: rgba(245, 75, 37, 0.1); color: #c23c18;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+
+    /* ----- Sticky rail -----
+       On a laptop the three cards are taller than the viewport, and a sticky
+       box taller than the viewport pins its TOP — the bottom card can never be
+       scrolled to. So the rail is capped at the viewport and laid out as a
+       column: the CTA and the phone card keep their height, and the TOC (the
+       one part that grows with the post) scrolls inside its own card. */
+    .rail-sticky {
+      position: sticky; top: 112px;
+      display: flex; flex-direction: column; gap: 20px;
+      max-height: calc(100dvh - 112px - 28px);
+    }
+    .rail-sticky > .rail-cta,
+    .rail-sticky > .rail-card:last-child { flex: none; }
+    /* min-height:0 is what lets a flex child actually shrink below its content. */
+    .rail-toc { display: flex; flex-direction: column; min-height: 0; }
+    .toc-scroll {
+      min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+      scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+    }
+    .toc-scroll::-webkit-scrollbar { width: 4px; }
+    .toc-scroll::-webkit-scrollbar-thumb {
+      border-radius: 9999px; background: rgba(0, 0, 0, 0.18);
+    }
+
+    .rail-eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.01em; color: #959595;
+    }
+    .rail-card { padding: 22px; border: 1px solid rgba(0, 0, 0, 0.1); background: #fff; }
+    /* Estimate card — same white surface as the others; the brand button carries it. */
+    .rail-cta { padding: 26px 24px; border: 1px solid rgba(0, 0, 0, 0.1); background: #fff; text-align: center; }
+
+    /* TOC — hairline between rows, dot marker, brand on the current section */
+    .toc-list { margin-top: 14px; }
+    .toc-item + .toc-item { border-top: 1px solid rgba(0, 0, 0, 0.08); }
+    .toc-link {
+      display: flex; gap: 10px; padding: 11px 0;
+      font-size: 14px; line-height: 1.45; letter-spacing: -0.01em; color: #4e4e4e;
+      transition: color 0.2s ease;
+    }
+    .toc-link::before {
+      content: ''; flex: none; width: 5px; height: 5px; margin-top: 7px;
+      border-radius: 9999px; background: rgba(0, 0, 0, 0.22);
+      transition: background-color 0.2s ease;
+    }
+    .toc-link:hover { color: #1e1e1e; }
+    .toc-link:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
+    .toc-link.is-active { color: #f54b25; font-weight: 600; }
+    .toc-link.is-active::before { background: #f54b25; }
+  </style>
+
+  <article>
+    <!-- ===== Title band — full width, closed by a hairline ===== -->
+    <header class="bg-[#f6f5f3] border-b border-black/10" data-nav-theme="light">
+      <div class="post-wrap px-5 sm:px-10 lg:px-[60px] pt-[132px] lg:pt-[160px] pb-12 lg:pb-14">
+        {category && <p><span class="post-cat">{category}</span></p>}
+
+        <h1 class="mt-5 font-bold text-ink leading-[1.06] tracking-[-0.03em] text-[clamp(2.1rem,4.4vw,3.75rem)] max-w-[1000px]">
+          {p.title}
+        </h1>
+
+        <PostMeta post={post} variant="post" class="mt-7" />
+
+        <p class="mt-7 text-[clamp(1rem,1.25vw,1.15rem)] leading-[1.65] tracking-[-0.01em] text-graydesc max-w-[860px]">
+          {p.description}
+        </p>
+
+        {p.updatedAt && (
+          <p class="mt-4 text-[13px] text-graycard">Updated {fullDate.format(p.updatedAt)}</p>
+        )}
+      </div>
+    </header>
+
+    <!-- ===== Article + rail ===== -->
+    <div class="bg-[#f6f5f3]" data-nav-theme="light">
+      <div class="post-wrap px-5 sm:px-10 lg:px-[60px] py-12 lg:py-16">
+        <div class="grid gap-x-[60px] xl:gap-x-[80px] gap-y-12 lg:grid-cols-[minmax(0,1fr)_340px]">
+
+          <div class="min-w-0">
+            {p.heroImage && (
+              <div class="overflow-hidden aspect-[16/10] mb-10 lg:mb-12">
+                <img src={p.heroImage} alt="" class="w-full h-full object-cover" />
+              </div>
+            )}
+
+            <div class="post-body">
+              <Content />
+            </div>
+
+            {relatedService && (
+              <p class="mt-12 pt-8 border-t border-black/10 text-[15px] leading-[1.7] text-graydesc">
+                More on this work:
+                <a href={`/services/${relatedService.id}`} class="text-brand font-semibold hover:underline underline-offset-4">
+                  {relatedService.data.shortName}
+                </a>
+              </p>
+            )}
+          </div>
+
+          <!-- Rail — desktop only: on a phone it would only push the article
+               down, and the sticky mobile CTA already covers the action. -->
+          <aside class="hidden lg:block">
+            <div class="rail-sticky">
+              <div class="rail-cta">
+                <p class="text-[22px] font-bold leading-[1.2] tracking-[-0.025em] text-ink">
+                  Get a free<br />project estimate
+                </p>
+                <p class="mt-3 text-[13.5px] leading-[1.55] text-graydesc">
+                  We walk the space with you, then put the scope and the price in writing.
+                </p>
+                <a href="#estimate" class="btn js-open-estimate mt-6 inline-flex items-center justify-center w-full h-12 rounded-full bg-brand hover:bg-[#e03f1c] text-white font-semibold text-[14px] capitalize">
+                  Request Estimate
+                </a>
+              </div>
+
+              {toc.length > 1 && (
+                <nav class="rail-card rail-toc" aria-labelledby="tocTitle">
+                  <p id="tocTitle" class="rail-eyebrow">In this article</p>
+                  <!-- data-lenis-prevent: without it Lenis eats the wheel event
+                       over this box and scrolls the page instead of the list. -->
+                  <ol class="toc-list toc-scroll" data-lenis-prevent>
+                    {toc.map((h) => (
+                      <li class="toc-item">
+                        <a href={`#${h.slug}`} class="toc-link">{h.text}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+              )}
+
+              <div class="rail-card text-center">
+                <p class="text-[13.5px] leading-[1.55] text-graydesc">
+                  Call us directly — we answer weekdays, 8am–6pm.
+                </p>
+                <a href={site.phoneHref} class="btn mt-3 inline-block font-poppins text-[20px] font-bold tracking-[-0.01em] text-ink hover:text-brand">
+                  {site.phone}
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Keep reading — the same .bl-* cards as /blog ===== -->
+    {related.length > 0 && (
+      <div class="bg-white" data-nav-theme="light">
+        <div class="post-wrap px-5 sm:px-10 lg:px-[60px] py-16 lg:py-20">
+          <div class="flex flex-wrap items-center justify-between gap-6">
+            <h2 class="font-bold capitalize text-ink leading-[1.05] tracking-[-0.03em] text-[clamp(1.6rem,3vw,2.4rem)]">
+              Keep reading
+            </h2>
+            <a href="/blog" class="btn bl-more">See more blogs</a>
+          </div>
+
+          <div class="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((other) => <PostCard post={other} headingLevel="h3" />)}
+          </div>
+        </div>
+      </div>
+    )}
+  </article>
+
+  <!-- Closing form — inline step 1 of the estimate wizard. -->
+  <EstimateInline />
+
+  <script is:inline>
+    // Highlights the section the reader is in. Nothing here moves the page —
+    // the links are plain anchors, so this only paints the current one.
+    (() => {
+      const links = [...document.querySelectorAll('.toc-link')];
+      if (!links.length) return;
+      const byId = new Map(
+        links.map((a) => [decodeURIComponent(a.hash.slice(1)), a]).filter(([id]) => id),
+      );
+      const targets = [...byId.keys()]
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+      if (!targets.length) return;
+
+      let current = null;
+      const setActive = (id) => {
+        if (id === current) return;
+        current = id;
+        links.forEach((a) => a.classList.remove('is-active'));
+        byId.get(id)?.classList.add('is-active');
+      };
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          // The topmost heading in the reading band wins.
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+          if (visible) setActive(visible.target.id);
+        },
+        { rootMargin: '-120px 0px -65% 0px' },
+      );
+      targets.forEach((t) => io.observe(t));
+    })();
+  </script>
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { fullDate, monthYear, readTime } from '@/lib/blog';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  /**
+   * `card` — date · read time, 13px (post lists).
+   * `post` — date · read time, 14px (post header).
+   */
+  variant?: 'card' | 'post';
+  class?: string;
+}
+
+const { post, variant = 'card', class: className = '' } = Astro.props;
+const p = post.data;
+const isPost = variant === 'post';
+
+const date = (isPost ? fullDate : monthYear).format(p.publishedAt);
+---
+
+<p
+  class:list={[
+    'bl-meta flex flex-wrap items-center gap-x-2.5 gap-y-1.5 font-semibold tracking-[-0.01em] text-graycard',
+    isPost ? 'text-[14px]' : 'text-[13px]',
+    className,
+  ]}
+>
+  {p.draft && <span class="bl-tag">Draft</span>}
+
+  {isPost ? (
+    <span class="flex items-center gap-1.5">
+      <svg class="w-[15px] h-[15px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4" />
+      </svg>
+      <span>{date}</span>
+    </span>
+  ) : (
+    <span>{date}</span>
+  )}
+
+  <span class="bl-dot" aria-hidden="true"></span>
+
+  <span class="flex items-center gap-1.5">
+    <svg class:list={['shrink-0', isPost ? 'w-[15px] h-[15px]' : 'w-[14px] h-[14px]']} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" /><path d="M12 7.5V12l3 1.8" />
+    </svg>
+    <span>{readTime(post.body)}</span>
+  </span>
+</p>

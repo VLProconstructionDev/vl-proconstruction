@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostMeta from '@components/PostMeta.astro';
+import { isNew } from '@/lib/blog';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  /** h2 in a page's main list, h3 when the list sits under another heading. */
+  headingLevel?: 'h2' | 'h3';
+  /** Off on /blog, where every recent post would wear one. */
+  showNew?: boolean;
+}
+
+const { post, headingLevel = 'h2', showNew = true } = Astro.props;
+const Heading = headingLevel;
+const href = `/blog/${post.id}`;
+---
+
+<article class="bl-card">
+  <!-- The photo is a second link to the same post, so it stays out of the tab order. -->
+  <a href={href} class="relative block overflow-hidden aspect-[4/3]" tabindex="-1" aria-hidden="true">
+    {post.data.heroImage
+      ? <img loading="lazy" decoding="async" src={post.data.heroImage} alt="" class="bl-img w-full h-full object-cover" />
+      : <span class="bl-noimg"></span>}
+    {showNew && isNew(post.data.publishedAt) && <span class="bl-ribbon">New</span>}
+  </a>
+
+  <PostMeta post={post} class="mt-5" />
+
+  <Heading class="bl-title mt-4 text-[clamp(1.15rem,1.5vw,1.4rem)] font-semibold leading-[1.25] tracking-[-0.02em] text-ink transition-colors">
+    <a href={href} class="bl-title-link">{post.data.title}</a>
+  </Heading>
+
+  <p class="bl-excerpt mt-3 text-[15px] leading-[1.7] text-graydesc">{post.data.description}</p>
+</article>

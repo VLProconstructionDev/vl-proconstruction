@@ -1,0 +1,55 @@
+---
+import { site } from '@/lib/site';
+
+/**
+ * Inline step 1 of the estimate form. Picking a project and pressing Next hands
+ * off to the full-screen wizard overlay (steps 2–6) — EstimateWizard.astro
+ * wires `#step1Next` up conditionally, so this can sit on any page, but only
+ * ONCE per page (the ids below are unique).
+ */
+interface Props {
+  /** Two lines, so the rule stays out of the markup at each call site. */
+  headingTop?: string;
+  headingBottom?: string;
+}
+
+const { headingTop = 'Request your', headingBottom = 'free estimate' } = Astro.props;
+
+const projects = ['Custom Showers', 'Tile & Natural Stone', 'Hard Surface Flooring'];
+---
+
+<section id="estimate" class="bg-black text-white border-t border-white/10" data-nav-theme="dark">
+  <div class="px-5 sm:px-10 lg:px-[60px] py-16 lg:py-24 flex items-center justify-center">
+    <div class="w-full max-w-[440px]">
+      <h2 class="text-center font-bold capitalize leading-[1.1] tracking-[-0.025em] text-[clamp(2.4rem,4vw,3.75rem)]">
+        {headingTop}<br />{headingBottom}
+      </h2>
+      <p class="mt-6 text-center text-[15px] font-semibold text-white/85">What project are you interested in?</p>
+
+      <div class="mt-5 space-y-4" id="step1Options">
+        {projects.map((label) => (
+          <label class="fopt">
+            <input type="checkbox" name="s1project" value={label} />
+            <span class="pill-label" set:html={label.replace('&', '&amp;')} />
+            <span class="fradio" aria-hidden="true"></span>
+          </label>
+        ))}
+        <label class="fopt" id="s1OtherPill">
+          <input type="checkbox" name="s1project" value="Other" id="s1OtherRadio" />
+          <span class="pill-label">Other</span>
+          <input type="text" id="s1OtherInput" class="other-inline-input" placeholder="Please describe your project…" autocomplete="off" aria-label="Describe your project" />
+          <span class="fradio" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <p class="wiz-error text-center" id="step1Error">Please select a project to continue.</p>
+
+      <div class="mt-8">
+        <button type="button" class="btn w-full rounded-full bg-brand hover:bg-[#e03f1c] py-4 text-[15px] font-semibold capitalize text-white" id="step1Next">Next</button>
+      </div>
+      <p class="mt-5 text-center text-[14px] text-white/55">
+        Questions? Call: <a href={site.phoneHref} class="text-brand hover:underline">{site.phone}</a>
+      </p>
+    </div>
+  </div>
+</section>
