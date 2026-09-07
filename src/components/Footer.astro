@@ -48,31 +48,35 @@ const serviceAreas = [
       <div>
         <p class="text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Get in touch</p>
 
-        <p class="mt-6 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Phone</p>
-        <a href={site.phoneHref} class="mt-2 inline-block text-[16px] text-white hover:text-brand transition-colors">
-          {site.phone}
-        </a>
-
-        <p class="mt-7 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Email</p>
-        <a href={`mailto:${site.email}`} class="mt-2 inline-block text-[16px] text-white hover:text-brand transition-colors">
-          {site.email}
-        </a>
-
-        <p class="mt-7 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Address</p>
-        <a
-          href={site.social.googleMaps}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Open ${site.name}'s address in Google Maps`}
-          class="mt-2 inline-block max-w-[300px] text-[16px] leading-[1.6] text-white hover:text-brand transition-colors"
-        >
-          {site.address.streetAddress}, {site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}
-        </a>
+        {/* No per-field eyebrows — a phone number, an email and a street
+            address each read as what they are without a label. */}
+        <ul class="mt-6 space-y-4 text-[16px] text-white">
+          <li>
+            <a href={site.phoneHref} class="inline-block hover:text-brand transition-colors">
+              {site.phone}
+            </a>
+          </li>
+          <li>
+            <a href={`mailto:${site.email}`} class="inline-block hover:text-brand transition-colors">
+              {site.email}
+            </a>
+          </li>
+          <li>
+            <a
+              href={site.social.googleMaps}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${site.name}'s address in Google Maps`}
+              class="inline-block max-w-[300px] leading-[1.6] hover:text-brand transition-colors"
+            >
+              {site.address.streetAddress}, {site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}
+            </a>
+          </li>
+        </ul>
 
         <div class="mt-7 h-px bg-white/10"></div>
 
-        <p class="mt-7 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Join the conversation</p>
-        <div class="mt-4 flex items-center gap-3">
+        <div class="mt-7 flex items-center gap-3">
           <a
             href={site.social.instagram}
             target="_blank"
