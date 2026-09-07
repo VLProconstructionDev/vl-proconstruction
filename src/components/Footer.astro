@@ -58,22 +58,21 @@ const serviceAreas = [
           {site.email}
         </a>
 
+        <p class="mt-7 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Address</p>
+        <a
+          href={site.social.googleMaps}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Open ${site.name}'s address in Google Maps`}
+          class="mt-2 inline-block max-w-[300px] text-[16px] leading-[1.6] text-white hover:text-brand transition-colors"
+        >
+          {site.address.streetAddress}, {site.address.addressLocality}, {site.address.addressRegion} {site.address.postalCode}
+        </a>
+
         <div class="mt-7 h-px bg-white/10"></div>
 
         <p class="mt-7 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Join the conversation</p>
         <div class="mt-4 flex items-center gap-3">
-          <a
-            href={site.social.googleMaps}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Find ${site.name} on Google Maps`}
-            class="btn grid place-items-center h-11 w-11 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
-          >
-            <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-          </a>
           <a
             href={site.social.instagram}
             target="_blank"
