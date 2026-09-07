@@ -5,26 +5,35 @@ interface Crumb {
 }
 interface Props {
   items: Crumb[];
+  /** `dark` inverts the colours for placement over a dark hero. */
+  tone?: 'light' | 'dark';
 }
-const { items } = Astro.props;
+const { items, tone = 'light' } = Astro.props;
+const dark = tone === 'dark';
 ---
 
-<nav aria-label="Breadcrumb" class="text-[13px] text-graycard">
+<nav
+  aria-label="Breadcrumb"
+  class:list={['text-[13px]', dark ? 'text-white/55' : 'text-graycard']}
+>
   <ol class="flex flex-wrap items-center gap-1.5">
     {items.map((item, i) => (
       <li class="flex items-center gap-1.5">
         {item.url && i < items.length - 1 ? (
           <a
             href={item.url}
-            class="hover:text-brand transition-colors underline-offset-4 hover:underline"
+            class:list={[
+              'transition-colors underline-offset-4 hover:underline focus-visible:outline-none focus-visible:underline',
+              dark ? 'hover:text-white focus-visible:text-white' : 'hover:text-brand focus-visible:text-brand',
+            ]}
           >
             {item.name}
           </a>
         ) : (
-          <span class="text-ink">{item.name}</span>
+          <span class={dark ? 'text-white' : 'text-ink'}>{item.name}</span>
         )}
         {i < items.length - 1 && (
-          <span aria-hidden="true" class="text-graycard/60">/</span>
+          <span aria-hidden="true" class={dark ? 'text-white/30' : 'text-graycard/60'}>/</span>
         )}
       </li>
     ))}

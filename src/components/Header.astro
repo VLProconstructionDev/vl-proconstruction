@@ -1,5 +1,35 @@
 ---
+import { getCollection } from 'astro:content';
 import { site } from '@/lib/site';
+import { cityServicePath } from '@/lib/urls';
+
+// Locations dropdown — built from the city × service pages that actually exist
+// (src/content/city-services/*.md), grouped by city. Adding a pair file adds a
+// row here automatically; the panel stays hidden while there are none
+// (.nav-dd-panel:empty).
+const [cityServices, locations, services] = await Promise.all([
+  getCollection('cityServices', ({ data }) => data.published),
+  getCollection('locations'),
+  getCollection('services'),
+]);
+const locationById = new Map(locations.map((l) => [l.id, l]));
+const serviceById = new Map(services.map((s) => [s.id, s]));
+
+const locationGroups = [...locationById.values()]
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((location) => ({
+    // "Bradenton, FL" — the flyout trigger; the bare name is the aria context.
+    label: `${location.data.name}, ${location.data.state}`,
+    links: cityServices
+      .filter((cs) => cs.data.city === location.id)
+      .map((cs) => ({
+        label: serviceById.get(cs.data.service)?.data.shortName ?? cs.data.service,
+        order: serviceById.get(cs.data.service)?.data.order ?? 0,
+        href: cityServicePath(location, cs.data.service),
+      }))
+      .sort((a, b) => a.order - b.order),
+  }))
+  .filter((g) => g.links.length > 0);
 
 // On the home page, anchor links stay in-page ("#services").
 // On any other page, they need to hop back to the home page ("/#services").
@@ -50,6 +80,33 @@ const H = isHome ? '' : '/';
               <a href="/services/custom-showers/" class="nav-dd-item">Custom Showers</a>
               <a href="/services/tile-natural-stone/" class="nav-dd-item">Tile &amp; Natural Stone</a>
               <a href="/services/hard-surface-flooring/" class="nav-dd-item">Hard Surface Flooring</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <button type="button" aria-haspopup="true" class="nav-trigger flex items-center gap-1.5">
+            Locations
+            <svg class="nav-dd-chev w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="nav-dd">
+            <!-- Two levels: cities here, that city's services in a flyout to the right. -->
+            <div class="nav-dd-panel">
+              {locationGroups.map((group) => (
+                <div class="nav-city-row">
+                  <button type="button" class="nav-city" aria-haspopup="true">
+                    <span>{group.label}</span>
+                    <svg class="nav-city-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+                  </button>
+                  <div class="nav-sub-dd">
+                    <div class="nav-dd-panel">
+                      {group.links.map((link) => (
+                        <a href={link.href} aria-label={`${link.label} in ${group.label}`} class="nav-dd-item">{link.label}</a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -121,6 +178,24 @@ const H = isHome ? '' : '/';
             <a href="/services/custom-showers/">Custom Showers</a>
             <a href="/services/tile-natural-stone/">Tile &amp; Natural Stone</a>
             <a href="/services/hard-surface-flooring/">Hard Surface Flooring</a>
+          </div>
+        </div>
+      </div>
+      <div class="mm-row">
+        <button type="button" class="js-mobile-sub-toggle mm-link btn" aria-expanded="false">
+          <span>Locations</span>
+          <svg class="mm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="js-mobile-sub mm-sub">
+          <div>
+            {locationGroups.map((group) => (
+              <>
+                <p class="mm-sub-label">{group.label}</p>
+                {group.links.map((link) => (
+                  <a href={link.href} aria-label={`${link.label} in ${group.label}`} class="mm-sub-item">{link.label}</a>
+                ))}
+              </>
+            ))}
           </div>
         </div>
       </div>

@@ -186,6 +186,22 @@ html::-webkit-scrollbar {
   transform: translateY(0);
   pointer-events: auto;
 }
+/* Button-based dropdown trigger (a nav item with no page of its own) —
+   matches the sibling <a> triggers exactly. */
+.nav-trigger {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+/* An empty panel would hover as a stray blurred pill — hide it until it has links. */
+.nav-dd-panel:empty {
+  display: none;
+}
 .nav-dd-panel {
   background: rgba(16, 16, 16, 0.68);
   border-radius: 16px;
@@ -221,6 +237,83 @@ html::-webkit-scrollbar {
 .nav-dd-item.js-open-estimate:hover,
 .nav-dd-item.js-open-estimate:focus-visible {
   color: #e03f1c;
+}
+/* Locations panel — two levels. Level 1 lists cities; hovering (or focusing) a
+   city opens level 2 to the right with that city's pages. Both levels reuse
+   .nav-dd-panel, so the glass treatment stays identical. */
+.nav-city-row {
+  position: relative;
+}
+.nav-city {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 11px 18px;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  text-transform: none;
+  text-align: left;
+  color: #fff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.nav-city-row:hover > .nav-city,
+.nav-city-row:focus-within > .nav-city {
+  background: rgba(255, 255, 255, 0.09);
+}
+.nav-city:focus-visible {
+  outline: 2px solid #f54b25;
+  outline-offset: -2px;
+}
+.nav-city-chev {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.45);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), color 0.18s ease;
+}
+.nav-city-row:hover .nav-city-chev,
+.nav-city-row:focus-within .nav-city-chev {
+  color: #f54b25;
+  transform: translateX(3px);
+}
+/* Level 2. The 10px left padding is a hover bridge — without it the pointer
+   crosses a dead gap between the panels and the flyout closes mid-travel. */
+.nav-sub-dd {
+  position: absolute;
+  left: 100%;
+  top: -10px;
+  padding-left: 10px;
+  min-width: 232px;
+  z-index: 61;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-6px);
+  transition: opacity 0.18s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.18s;
+  pointer-events: none;
+}
+.nav-city-row:hover > .nav-sub-dd,
+.nav-city-row:focus-within > .nav-sub-dd {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-city,
+  .nav-city-chev,
+  .nav-sub-dd {
+    transition: none;
+  }
 }
 .nav-dd-chev {
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -452,6 +545,21 @@ button:focus-visible {
 }
 .mm-sub > div > :last-child {
   margin-bottom: 14px;
+}
+/* Locations sub-menu — city label above its indented pages. */
+.mm-sub-label {
+  padding: 12px 0 2px 2px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: rgba(255, 255, 255, 0.38);
+}
+.mm-sub-label:first-child {
+  padding-top: 4px;
+}
+.mm-sub a.mm-sub-item {
+  padding-left: 14px;
 }
 .mm-foot {
   position: relative;

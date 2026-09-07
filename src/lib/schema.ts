@@ -39,6 +39,8 @@ export function serviceSchema(input: {
   description: string;
   slug: string;
   areaServed?: string;
+  /** Override when the Service lives at its own URL (e.g. a city × service page). */
+  url?: string;
 }) {
   return {
     '@context': 'https://schema.org',
@@ -46,7 +48,7 @@ export function serviceSchema(input: {
     name: input.name,
     description: input.description,
     provider: { '@id': `${site.url}/#business` },
-    url: `${site.url}/services/${input.slug}`,
+    url: new URL(input.url ?? `/services/${input.slug}`, site.url).toString(),
     ...(input.areaServed && {
       areaServed: { '@type': 'Place', name: input.areaServed },
     }),

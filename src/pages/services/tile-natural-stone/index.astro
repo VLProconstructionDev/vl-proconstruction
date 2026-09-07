@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
+import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 
 const description =
   'Tile & natural stone installation in Bradenton & Sarasota, FL. Precise layouts and seamless finishes — large-format porcelain to marble mosaic.';
@@ -682,9 +683,8 @@ const schema = [
         </p>
       </div>
     </div>
-    <div class="area-map-fade relative overflow-hidden h-[460px] sm:h-[560px] lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[58%]">
-      <img loading="lazy" decoding="async" src="/assets/images/service-area-map.webp" alt="Map of VL Proconstruction service areas across Florida's Gulf Coast — Bradenton, Sarasota, and surrounding cities including Parrish, Palmetto, Lakewood Ranch, Venice, and Siesta Key" class="absolute inset-0 h-full w-full object-cover object-center" />
-    </div>
+    <!-- Florida service-area map — interactive (Leaflet); static image is the fallback -->
+    <ServiceAreaMap service="tile-natural-stone" />
   </section>
 
   <!-- ===================== OTHER SERVICES + ESTIMATE ===================== -->

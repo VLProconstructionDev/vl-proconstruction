@@ -1,0 +1,574 @@
+---
+/**
+ * Interactive service-area map (MapLibre GL + OpenFreeMap, lazy-loaded).
+ *
+ * Rendered inside the `#service-area` section of the home page and every
+ * service page — replaces what used to be a flat PNG. That PNG still ships as
+ * the instant paint + no-JS fallback: the live map loads from the CDN only once
+ * the section scrolls near the viewport, then fades in over it.
+ *
+ * The basemap is OpenFreeMap's vector "dark" style (keyless) with every label
+ * layer hidden and the fills recolored to the placeholder's tones — near-black
+ * land, lighter water, a faint street grid. Raster dark basemaps either
+ * watermark keyless use (CARTO) or bake in their own place names (Esri).
+ */
+import { getCollection } from 'astro:content';
+import { cityServicePath } from '@/lib/urls';
+
+interface Props {
+  /**
+   * Service id of the page the map is on (e.g. `custom-showers`). When given,
+   * every label whose city has a PUBLISHED `cityServices` pair for that service
+   * becomes a link to it — so the Sarasota label on /services/custom-showers
+   * goes to /services/custom-showers/sarasota-fl. Omit it (home page, services
+   * index) and the labels stay non-navigating controls.
+   */
+  service?: string;
+}
+const { service } = Astro.props;
+
+// Keyed by the label text in PLACES below, which is the location's `name`.
+const LINKS: Record<string, string> = {};
+if (service) {
+  const [pairs, locations] = await Promise.all([
+    getCollection('cityServices', ({ data }) => data.published && data.service === service),
+    getCollection('locations'),
+  ]);
+  for (const pair of pairs) {
+    const location = locations.find((l) => l.id === pair.data.city);
+    if (!location) continue;
+    const href = cityServicePath(location, service);
+    // No self-link: on the city × service page itself the label stays inert.
+    if (href !== Astro.url.pathname.replace(/\/$/, '')) LINKS[location.data.name] = href;
+  }
+}
+
+const ALT =
+  "Map of VL Proconstruction service areas across Florida's Gulf Coast — Bradenton, Sarasota, and surrounding cities including Parrish, Palmetto, Lakewood Ranch, Venice, and Siesta Key";
+---
+
+<div class="area-map-fade area-map-wrap relative overflow-hidden h-[460px] sm:h-[560px] lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[58%]">
+  <!-- Instant paint + no-JS view; fades out once the live map has painted. -->
+  <img
+    class="area-map-still absolute inset-0 h-full w-full object-cover object-center"
+    src="/assets/images/service-area-map.webp"
+    alt={ALT}
+    loading="lazy"
+    decoding="async"
+  />
+
+  <div id="areaMap" role="application" aria-label={ALT}></div>
+
+  <!-- Touch only: the map holds still until tapped, so a swipe over it scrolls the page. -->
+  <button type="button" class="area-map-unlock btn" hidden>Tap to explore the map</button>
+</div>
+
+<style is:global>
+  .area-map-wrap .area-map-still {
+    transition: opacity 0.6s ease;
+  }
+  .area-map-wrap.is-live .area-map-still {
+    opacity: 0;
+  }
+  .area-map-wrap #areaMap {
+    position: absolute;
+    inset: 0;
+    background: #0c0c0c;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .area-map-wrap.is-live #areaMap {
+    opacity: 1;
+  }
+
+  /* ---- Place labels (HTML markers) ----
+     Same treatment as the placeholder: gray metro names, white town names with
+     a brand-red dot on the point side, brand-tinted county lines. */
+  .svc-lbl {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    pointer-events: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9), 0 0 2px rgba(0, 0, 0, 0.6);
+    transition: opacity 0.25s ease;
+  }
+  .svc-lbl.lg {
+    font-size: clamp(15px, 1.45vw, 21px);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #7c7c7c;
+  }
+  /* Towns, coastal keys and counties all share one treatment — only the two
+     metro names above are set apart. */
+  .svc-lbl.md,
+  .svc-lbl.key,
+  .svc-lbl.county {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .svc-lbl .svc-tt-dot {
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background: #f54b25;
+    margin-left: 6px;
+    box-shadow: 0 0 5px rgba(245, 75, 37, 0.9), 0 0 10px rgba(245, 75, 37, 0.45);
+  }
+  /* The label is an inner span because MapLibre writes inline opacity and
+     transform onto marker roots — hover/scale has to live one level down. */
+  .svc-lbl-in {
+    display: flex;
+    align-items: center;
+    /* the label is the only part of the map that takes pointer events, so a
+       drag anywhere else still pans */
+    pointer-events: auto;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 2px 0;
+    margin: -2px 0;
+    font: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    text-decoration: none;
+    /* --flip is 100% on a flipped label (below) — it composes with the hover
+       and active scales, which is why every transform here carries it. */
+    transform: translateX(var(--flip, 0px));
+    transition: opacity 0.25s ease, color 0.18s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .svc-lbl-in:hover,
+  .svc-lbl-in:focus-visible {
+    color: #fff;
+    transform: translateX(var(--flip, 0px)) scale(1.06);
+    outline: none;
+  }
+  .svc-lbl:not(.lg) .svc-lbl-in:hover .svc-tt-dot,
+  .svc-lbl:not(.lg) .svc-lbl-in:focus-visible .svc-tt-dot {
+    transform: scale(1.35);
+  }
+  .svc-lbl-in:focus-visible {
+    text-decoration: underline;
+    text-decoration-color: #f54b25;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+  }
+  .svc-lbl-in:active {
+    transform: translateX(var(--flip, 0px)) scale(1.01);
+  }
+  /* The metro names grow from their own centre; town labels are anchored at
+     their dot, so they should grow leftwards from it. */
+  .svc-lbl.lg .svc-lbl-in {
+    transform-origin: 50% 50%;
+  }
+  .svc-lbl:not(.lg) .svc-lbl-in {
+    transform-origin: 100% 50%;
+  }
+  /* ---- Narrow panel (a phone, or the 58% desktop panel on a small laptop) ----
+     Every service area is labelled from the opening frame — the map can't be
+     zoomed on touch until the "Tap to explore" pill is used, so anything
+     hidden behind a zoom step is, in practice, never seen. What gives instead
+     is size: the two county lines drop out (widest labels, least useful) and
+     the rest set a step down so 14 of them fit across ~390px. */
+  #areaMap.is-narrow .svc-lbl.county {
+    display: none;
+  }
+  #areaMap.is-narrow .svc-lbl.lg {
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+  #areaMap.is-narrow .svc-lbl.md,
+  #areaMap.is-narrow .svc-lbl.key {
+    font-size: 12px;
+    letter-spacing: 0.03em;
+  }
+  #areaMap.is-narrow .svc-lbl .svc-tt-dot {
+    width: 6px;
+    height: 6px;
+    margin-left: 5px;
+  }
+  /* A label whose tail would crowd the column beside it runs the other way
+     from its dot instead — the marker is still anchored at the point, so the
+     inner span is pushed back across its own width (`flipN` in PLACES). */
+  #areaMap.is-narrow .svc-lbl.flip-n .svc-lbl-in {
+    --flip: 100%;
+    flex-direction: row-reverse;
+    transform-origin: 0 50%;
+  }
+  #areaMap.is-narrow .svc-lbl.flip-n .svc-tt-dot {
+    margin-left: 0;
+    margin-right: 5px;
+  }
+
+  /* ---- Controls, themed to the dark/brand UI ---- */
+  #areaMap .maplibregl-ctrl-group {
+    background: rgba(20, 20, 20, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+  #areaMap .maplibregl-ctrl-group button + button {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  #areaMap .maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+    filter: invert(1);
+  }
+  #areaMap .maplibregl-ctrl-group button:hover {
+    background: #f54b25;
+  }
+  #areaMap .maplibregl-ctrl-attrib {
+    background: rgba(0, 0, 0, 0.55);
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 6px 0 0 0;
+  }
+  #areaMap .maplibregl-ctrl-attrib a {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  /* The collapsed (i) chip on narrow panels */
+  #areaMap .maplibregl-ctrl-attrib.maplibregl-compact {
+    background: rgba(20, 20, 20, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 9999px;
+  }
+  #areaMap .maplibregl-ctrl-attrib-button {
+    background-color: transparent;
+    filter: invert(1);
+  }
+  /* The phones-only sticky CTA capsule owns the viewport bottom — keep the
+     zoom buttons and attribution above it. */
+  @media (max-width: 767px) {
+    #areaMap .maplibregl-ctrl-bottom-right {
+      bottom: 62px;
+    }
+  }
+
+  /* Pan/zoom hint on touch devices */
+  .area-map-unlock {
+    position: absolute;
+    z-index: 500;
+    left: 50%;
+    top: 24px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 9999px;
+    background: rgba(16, 16, 16, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: opacity 0.3s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .area-map-unlock:hover,
+  .area-map-unlock:focus-visible {
+    transform: translateX(-50%) scale(1.03);
+  }
+  .area-map-unlock:active {
+    transform: translateX(-50%) scale(0.99);
+  }
+  .area-map-unlock[hidden] {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .area-map-wrap .area-map-still,
+    .area-map-wrap #areaMap,
+    .svc-lbl,
+    .svc-lbl-in,
+    .svc-lbl .svc-tt-dot,
+    .area-map-unlock {
+      transition: none;
+    }
+    .svc-lbl-in:hover,
+    .svc-lbl-in:focus-visible,
+    .svc-lbl-in:active {
+      transform: none;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ LINKS }}>
+  (function () {
+    var wrap = document.querySelector('.area-map-wrap');
+    var host = document.getElementById('areaMap');
+    if (!wrap || !host || wrap.dataset.mapInit) return;
+    wrap.dataset.mapInit = '1';
+
+    var GL_CSS = 'https://cdn.jsdelivr.net/npm/maplibre-gl@5.4.0/dist/maplibre-gl.css';
+    var GL_JS = 'https://cdn.jsdelivr.net/npm/maplibre-gl@5.4.0/dist/maplibre-gl.js';
+    var STYLE = 'https://tiles.openfreemap.org/styles/dark';
+
+    // size: 'lg' = metro name (no dot), 'md' town, 'key' coastal, 'county'.
+    // dy nudges labels that would otherwise collide with a neighbour; dyN is
+    // the same nudge for a narrow panel, where the areas sit closer together,
+    // and flipN runs the label right of its dot there instead of left.
+    // Where a label links comes from LINKS (injected above) — keyed by name,
+    // populated only for cities with a published page for this service.
+    var PLACES = [
+      { name: 'Bradenton', lat: 27.4989, lng: -82.5748, size: 'lg', dyN: 20 },
+      { name: 'Sarasota', lat: 27.3364, lng: -82.5307, size: 'lg' },
+      { name: 'Parrish', lat: 27.5716, lng: -82.4276, size: 'md' },
+      { name: 'Manatee County', lat: 27.5479, lng: -82.3452, size: 'county' },
+      { name: 'Ellenton', lat: 27.5231, lng: -82.5279, size: 'md', dy: -11 },
+      { name: 'Palmetto', lat: 27.5214, lng: -82.5726, size: 'md', dy: 11, flipN: true },
+      { name: 'Anna Maria', lat: 27.5306, lng: -82.7343, size: 'key', dy: -7 },
+      { name: 'Holmes Beach', lat: 27.5142, lng: -82.7126, size: 'key', dy: 7 },
+      { name: 'Bradenton Beach', lat: 27.4675, lng: -82.7, size: 'key' },
+      { name: 'Longboat Key', lat: 27.4128, lng: -82.6584, size: 'key' },
+      { name: 'Lakewood Ranch', lat: 27.4222, lng: -82.3843, size: 'md' },
+      { name: 'University Park', lat: 27.3853, lng: -82.457, size: 'md' },
+      { name: 'Siesta Key', lat: 27.2665, lng: -82.549, size: 'key' },
+      { name: 'Sarasota County', lat: 27.2, lng: -82.38, size: 'county' },
+      { name: 'Nokomis', lat: 27.1189, lng: -82.4443, size: 'md', dy: -9 },
+      { name: 'Venice', lat: 27.0998, lng: -82.4543, size: 'md', dy: 9 },
+    ];
+
+    // The placeholder's palette: near-black land, lighter water, faint grid.
+    var PAINT = [
+      ['background', 'background-color', '#0c0c0c'],
+      ['water', 'fill-color', '#222222'],
+      ['landcover_wood', 'fill-color', '#101010'],
+      ['landuse_park', 'fill-color', '#111111'],
+      ['landuse_residential', 'fill-color', '#101010'],
+      ['building', 'fill-color', '#161616'],
+      ['highway_minor', 'line-color', '#161616'],
+      ['highway_major_casing', 'line-color', '#131313'],
+      ['highway_major_inner', 'line-color', '#1b1b1b'],
+      ['highway_major_subtle', 'line-color', '#171717'],
+      ['highway_motorway_casing', 'line-color', '#131313'],
+      ['highway_motorway_inner', 'line-color', '#202020'],
+      ['highway_motorway_subtle', 'line-color', '#1a1a1a'],
+      ['railway', 'line-color', '#1b1b1b'],
+      ['railway_minor', 'line-color', '#1b1b1b'],
+      ['railway_transit', 'line-color', '#1b1b1b'],
+      ['waterway', 'line-color', '#242424'],
+      ['boundary_state', 'line-color', '#262626'],
+    ];
+
+    function loadOnce() {
+      if (window.__vlMapLibre) return window.__vlMapLibre;
+      window.__vlMapLibre = new Promise(function (resolve, reject) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = GL_CSS;
+        document.head.appendChild(link);
+        var s = document.createElement('script');
+        s.src = GL_JS;
+        s.async = true;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+      return window.__vlMapLibre;
+    }
+
+    function build() {
+      var gl = window.maplibregl;
+      if (!gl) return;
+      var coarse = matchMedia('(hover: none)').matches;
+      // "wide" means the tall desktop panel, not just a wide box: a 768px
+      // tablet is full-width but only 560px tall, and the desktop framing
+      // (241px of bottom padding) collapses its labels into each other.
+      var wide = host.clientWidth >= 700 && host.clientHeight >= 700;
+      // Zoom levels to pull back from the fitted bounds (1 level = 2x scale).
+      var OPEN_ZOOM_OUT = 0.25;
+
+      var map = new gl.Map({
+        container: host,
+        style: STYLE,
+        center: [-82.53, 27.34],
+        zoom: 9,
+        maxZoom: 13,
+        maxBounds: [
+          [-83.35, 26.6],
+          [-81.75, 28.05],
+        ],
+        // The wheel keeps scrolling the page — zoom is on the +/- buttons,
+        // double-click and pinch, so the section never traps a scroll.
+        scrollZoom: false,
+        dragPan: !coarse,
+        dragRotate: false,
+        pitchWithRotate: false,
+        // The style ships its own OpenFreeMap / OpenMapTiles / OSM credit;
+        // MapLibre collapses it behind an (i) button on narrow panels.
+        attributionControl: true,
+      });
+      map.touchZoomRotate.disableRotation();
+      map.keyboard.enable();
+      map.addControl(
+        new gl.NavigationControl({ showCompass: false, visualizePitch: false }),
+        'bottom-right'
+      );
+
+      map.on('load', function () {
+        // Every place name on the map is ours — drop the basemap's own labels
+        // (and with them all glyph requests).
+        map.getStyle().layers.forEach(function (l) {
+          if (l.type === 'symbol') map.setLayoutProperty(l.id, 'visibility', 'none');
+        });
+        PAINT.forEach(function (p) {
+          if (map.getLayer(p[0])) {
+            try { map.setPaintProperty(p[0], p[1], p[2]); } catch (e) {}
+          }
+        });
+
+        // Opening frame: every service area on a wide panel (extra left padding
+        // because the island labels run leftwards into the panel's fade mask),
+        // the Bradenton–Sarasota corridor one step in on a phone.
+        var lats = PLACES.map(function (p) { return p.lat; });
+        var lngs = PLACES.map(function (p) { return p.lng; });
+        map.fitBounds(
+          [
+            [Math.min.apply(null, lngs), Math.min.apply(null, lats)],
+            [Math.max.apply(null, lngs), Math.max.apply(null, lats)],
+          ],
+          {
+            // Wide-panel padding is calibrated against the placeholder image's
+            // framing: the coast sits in the panel's upper-left half, leaving
+            // the island labels room to run leftwards.
+            // A narrow panel is framed the other way round: the extra padding
+            // goes LEFT, pushing the coast off-centre so the island labels
+            // have open water to run their tails into instead of the edge.
+            // Top and bottom keep every label clear of the two things that
+            // float over a phone's map — the unlock pill and the sticky CTA.
+            padding: wide
+              ? { top: 141, bottom: 241, left: 84, right: 60 }
+              : { top: 62, bottom: 76, left: 104, right: 12 },
+            animate: false,
+          }
+        );
+        // Back the opening frame off the tight fit so the region breathes
+        // instead of filling the panel edge to edge.
+        map.setZoom(map.getZoom() - OPEN_ZOOM_OUT);
+        map.setMinZoom(map.getZoom());
+
+        var down = null;
+        PLACES.forEach(function (p) {
+          var el = document.createElement('div');
+          el.className = 'svc-lbl ' + p.size + (p.flipN ? ' flip-n' : '');
+          // The label itself is the control: hoverable, focusable, clickable.
+          // A city with a page for this service navigates; the rest stay
+          // buttons, so nothing ever links to a route that isn't built.
+          var href = LINKS[p.name] || null;
+          var inner = document.createElement(href ? 'a' : 'button');
+          inner.className = 'svc-lbl-in';
+          if (href) {
+            inner.href = href;
+          } else {
+            inner.type = 'button';
+          }
+          inner.setAttribute(
+            'aria-label',
+            href ? p.name + ' service area — see this service in ' + p.name : p.name + ' service area',
+          );
+          var text = document.createElement('span');
+          text.textContent = p.name;
+          inner.appendChild(text);
+          if (p.size !== 'lg') {
+            var dot = document.createElement('span');
+            dot.className = 'svc-tt-dot';
+            inner.appendChild(dot);
+          }
+          el.appendChild(inner);
+          // A pan can start and end on a label, which the browser still counts
+          // as a click — swallow those so a drag never triggers the label.
+          inner.addEventListener('pointerdown', function (e) {
+            down = [e.clientX, e.clientY];
+          });
+          inner.addEventListener('click', function (e) {
+            if (
+              down &&
+              Math.abs(e.clientX - down[0]) + Math.abs(e.clientY - down[1]) > 6
+            ) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          });
+          new gl.Marker({
+            element: el,
+            // Town labels run leftwards from their dot, so the dot lands on the
+            // real location; metro names sit centred over theirs.
+            anchor: p.size === 'lg' ? 'center' : 'right',
+            // Offsets are read once, at the width the map was built at — a
+            // resize across the narrow/wide boundary keeps the labels it has.
+            offset: [p.size === 'lg' ? 0 : 4, (!wide && p.dyN != null ? p.dyN : p.dy) || 0],
+          })
+            .setLngLat([p.lng, p.lat])
+            .addTo(map);
+        });
+
+        // On a narrow panel MapLibre renders the credit as an open <details>;
+        // start it collapsed behind the (i) button.
+        var attrib = host.querySelector('details.maplibregl-ctrl-attrib');
+        if (attrib) {
+          attrib.open = false;
+          attrib.classList.remove('maplibregl-compact-show');
+        }
+
+        tier();
+        wrap.classList.add('is-live');
+      });
+
+      // A narrow panel labels the same areas at a smaller size and without the
+      // county lines (see `is-narrow` in the styles above) — never by hiding
+      // them behind a zoom step, which on touch is behind the unlock pill too.
+      function tier() {
+        host.classList.toggle('is-narrow', !wide);
+      }
+
+      // The panel is 58% width on desktop and full width below it; the map
+      // needs a nudge whenever that box changes size.
+      var resize = function () {
+        map.resize();
+        wide = host.clientWidth >= 700 && host.clientHeight >= 700;
+        tier();
+      };
+      if (window.ResizeObserver) new ResizeObserver(resize).observe(wrap);
+      else window.addEventListener('resize', resize);
+
+      if (coarse) {
+        var unlock = wrap.querySelector('.area-map-unlock');
+        if (unlock) {
+          unlock.hidden = false;
+          unlock.addEventListener('click', function () {
+            map.dragPan.enable();
+            unlock.hidden = true;
+          });
+        }
+      }
+    }
+
+    function start() {
+      loadOnce().then(build).catch(function () {
+        /* CDN unreachable — the static map image stays as-is. */
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          if (entries.some(function (e) { return e.isIntersecting; })) {
+            io.disconnect();
+            start();
+          }
+        },
+        { rootMargin: '400px' }
+      );
+      io.observe(wrap);
+    } else {
+      start();
+    }
+  })();
+</script>

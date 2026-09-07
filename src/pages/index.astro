@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 ---
 
 <BaseLayout
@@ -678,10 +679,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
       </div>
     </div>
 
-    <!-- Florida service-area map (static image) — full section height, bleeds to the right edge on desktop -->
-    <div class="area-map-fade relative h-[460px] sm:h-[560px] lg:h-auto lg:absolute lg:inset-y-0 lg:right-0 lg:w-[58%]">
-      <img loading="lazy" decoding="async" src="/assets/images/service-area-map.webp" alt="Map of VL Proconstruction service areas across Florida's Gulf Coast — Bradenton, Sarasota, and surrounding cities including Parrish, Palmetto, Lakewood Ranch, Venice, and Siesta Key" class="absolute inset-0 h-full w-full object-cover object-center" />
-    </div>
+    <!-- Florida service-area map — interactive (Leaflet); static image is the fallback -->
+    <ServiceAreaMap />
 
   </section>
 
