@@ -8,11 +8,11 @@ service: hard-surface-flooring
 # of the Locations nav and the sitemap. Flip to `true` to ship it.
 published: false
 
-seoTitle: Hard-Surface Flooring in Bradenton, FL — Hardwood, Engineered & LVP
+seoTitle: Hard-Surface Flooring Bradenton, FL
 seoDescription: >-
-  Hardwood, engineered wood, and LVP flooring installers in Bradenton, FL. Slab
-  moisture testing, vapor barriers, NWFA-spec installs. Most Bradenton floors
-  run $6–$18/sq ft. Free estimate.
+  Hardwood, engineered & LVP flooring installers in Bradenton, FL. Slab
+  moisture testing, vapor barriers, NWFA-spec installs. $6–$18/sq ft. Free
+  estimate.
 
 heroCity: Bradenton
 heroService: Hard Surface Flooring

@@ -2,7 +2,7 @@
 title: Hard-Surface Flooring Installation
 shortName: Hard Surface Flooring
 description: Hardwood, engineered wood, and luxury vinyl plank installation with proper subfloor prep and manufacturer-spec finishes.
-seoTitle: "Hardwood, Engineered & LVP Flooring Installation"
+seoTitle: "Hardwood, Engineered & LVP Flooring"
 seoDescription: Solid hardwood, engineered wood, and LVP installation. Correct subfloor prep, acclimation, and finish schedules — every job.
 heroImage: /assets/images/hsf-hardwood.webp
 order: 3
