@@ -67,7 +67,7 @@ const schema = [
        styles anywhere else, and these match the FAQ/service-page type scale. */
     /* Prose stays capped inside the wider column — a 900px line of 17px text
        is past the comfortable measure. */
-    .post-body { max-width: 860px; color: #4e4e4e; font-size: 17px; line-height: 1.8; }
+    .post-body { max-width: 860px; color: #2b2b2b; font-size: 18px; line-height: 1.75; }
     .post-body > * + * { margin-top: 1.35em; }
     .post-body h2 {
       margin-top: 2.4em; color: #1e1e1e; font-weight: 700;
@@ -133,12 +133,53 @@ const schema = [
        so an overflowing table would just be cut off). */
     .post-body table {
       display: block; width: 100%; max-width: 100%; overflow-x: auto;
-      border-collapse: collapse; font-size: 15px;
+      border-collapse: collapse; font-size: 14px; line-height: 1.45;
     }
     .post-body thead, .post-body tbody { min-width: 560px; }
     .post-body tr { display: table; width: 100%; table-layout: fixed; }
-    .post-body th, .post-body td { padding: 12px 14px; border-bottom: 1px solid rgba(0, 0, 0, 0.1); text-align: left; }
-    .post-body th { color: #1e1e1e; font-weight: 600; }
+    .post-body th, .post-body td { padding: 9px 12px; border-bottom: 1px solid rgba(0, 0, 0, 0.09); text-align: left; }
+    /* Dark header band — the table reads as its own object on the page ground,
+       not as loose rules between paragraphs. */
+    .post-body thead th {
+      background: #000; color: #fff; font-weight: 600;
+      padding-top: 15px; padding-bottom: 15px;
+      font-size: 13px; letter-spacing: 0.01em; border-bottom: 0;
+    }
+    /* A row marked with .row-us is us — a brand tint plus a left edge, enough
+       to find it at a glance without shouting. Opt-in per row (the star span
+       in the markdown), so other posts' tables are unaffected. */
+    .post-body tbody tr:has(.row-us) { background: rgba(245, 75, 37, 0.055); }
+    .post-body tbody tr:has(.row-us) td:first-child { box-shadow: inset 3px 0 0 #f54b25; }
+    .post-body .row-us { font-style: normal; }
+
+    /* ----- Company fact box -----
+       The at-a-glance card under a company heading in a roundup post. Written
+       as plain HTML in the markdown (label + value per cell) because a two-row
+       markdown table would put the labels in the dark <thead> band, and five
+       of those down one page reads like five separate tables. Cells share
+       hairlines via a 1px gap over a ruled ground, and auto-fit so four cells
+       sit in a row on desktop and stack two-up on a phone. */
+    .factbox {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+      gap: 1px; margin-top: 1.6em; background: rgba(0, 0, 0, 0.11);
+      border: 1px solid rgba(0, 0, 0, 0.11); border-radius: 2px; overflow: hidden;
+    }
+    .factbox > div { padding: 11px 14px; background: #f6f5f3; }
+    .factbox dt, .factbox .fb-k {
+      display: block; margin-bottom: 3px;
+      color: #959595; font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .factbox .fb-v { display: block; color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 1.45; }
+    /* Values stay ink, links included — the box is reference data, so a brand
+       colour on one cell reads as the only thing worth looking at. */
+    .factbox .fb-v a { color: inherit; text-decoration: none; }
+    .factbox .fb-v a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .factbox .fb-v a:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 2px; }
+    @media (max-width: 520px) {
+      .factbox { grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); }
+      .factbox > div { padding: 9px 11px; }
+    }
 
     /* GFM task list — a design checklist, not bullets. */
     .post-body ul.contains-task-list { padding-left: 0; list-style: none; }
@@ -218,8 +259,8 @@ const schema = [
 
         <PostMeta post={post} variant="post" class="mt-7" />
 
-        <p class="mt-7 text-[clamp(1rem,1.25vw,1.15rem)] leading-[1.65] tracking-[-0.01em] text-graydesc max-w-[860px]">
-          {p.description}
+        <p class="mt-7 text-[clamp(1.0625rem,1.3vw,1.1875rem)] leading-[1.65] tracking-[-0.01em] text-ink max-w-[860px]">
+          {p.lede ?? p.description}
         </p>
 
         {p.updatedAt && (

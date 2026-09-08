@@ -212,6 +212,10 @@ const blog = defineCollection({
     heroImage: z.string().optional(),
     // Alt text for the hero image. Falls back to the post title (BlogPostLayout).
     heroImageAlt: z.string().optional(),
+    // On-page standfirst under the title. `description` is the meta tag and has
+    // to stay under 160 chars for SEO; this is the longer editorial opener and
+    // falls back to `description` when unset (BlogPostLayout).
+    lede: z.string().optional(),
     tags: z.array(z.string()).default([]),
     // If both are set the article page can cross-link back.
     relatedService: z.string().optional(),
