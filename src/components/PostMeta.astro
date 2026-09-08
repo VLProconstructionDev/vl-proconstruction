@@ -28,6 +28,27 @@ const date = (isPost ? fullDate : monthYear).format(p.publishedAt);
 >
   {p.draft && <span class="bl-tag">Draft</span>}
 
+  <span class="flex items-center gap-2">
+    {p.authorImage ? (
+      <img
+        class:list={['bl-avatar', isPost ? 'bl-avatar-lg' : '']}
+        src={p.authorImage}
+        alt=""
+        width="44"
+        height="44"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <span class:list={['bl-avatar bl-avatar-mark', isPost ? 'bl-avatar-lg' : '']}>
+        <img src="/favicon.png" alt="" width="44" height="44" loading="lazy" decoding="async" />
+      </span>
+    )}
+    <span>{p.author}</span>
+  </span>
+
+  <span class="bl-dot" aria-hidden="true"></span>
+
   {isPost ? (
     <span class="flex items-center gap-1.5">
       <svg class="w-[15px] h-[15px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

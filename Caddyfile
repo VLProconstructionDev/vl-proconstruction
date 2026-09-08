@@ -1,0 +1,25 @@
+{
+	admin off
+	auto_https off
+}
+
+:{$PORT:8080} {
+	root * /srv
+	encode gzip
+
+	# This is a review copy of the production site — never let it be indexed,
+	# or it competes with vlproco.com for the same queries.
+	header X-Robots-Tag "noindex, nofollow"
+
+	# Astro's build.format: 'directory' → /foo/index.html; trailingSlash: 'ignore'
+	# means /foo must resolve too.
+	try_files {path} {path}/index.html {path}.html {path}/
+
+	file_server
+
+	handle_errors {
+		@404 expression {err.status_code} == 404
+		rewrite @404 /404.html
+		file_server
+	}
+}
