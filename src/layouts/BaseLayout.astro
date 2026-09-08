@@ -228,5 +228,16 @@ const allSchema = [localBusinessSchema(), ...pageSchema];
         });
       })();
     </script>
+    <!-- Client feedback widget (self-hosted, ~/markup). Inert unless the URL
+         carries ?fb=<token>: no DOM, no listeners, not one request — so it
+         ships site-wide rather than being gated on an env flag. `is:inline`
+         keeps the data-project attribute (Astro would otherwise process the
+         script and drop it); the widget reads the API origin off its own src. -->
+    <script
+      is:inline
+      src="https://feedback-worker.datsykoleksandr1.workers.dev/widget.js"
+      data-project="vl-proconstruction"
+      defer
+    ></script>
   </body>
 </html>
