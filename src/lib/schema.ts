@@ -164,10 +164,16 @@ export function articleSchema(input: {
     image: input.image
       ? new URL(input.image, site.url).toString()
       : new URL(site.defaultOgImage, site.url).toString(),
-    author: {
-      '@type': 'Organization',
-      name: input.author ?? site.name,
-    },
+    // A named person authors the post; a post credited to the company itself
+    // stays an Organization so the type always matches the byline.
+    author:
+      !input.author || input.author === site.name || input.author === site.legalName
+        ? { '@type': 'Organization', name: input.author ?? site.name }
+        : {
+            '@type': 'Person',
+            name: input.author,
+            worksFor: { '@id': `${site.url}/#business` },
+          },
     publisher: { '@id': `${site.url}/#business` },
   };
 }

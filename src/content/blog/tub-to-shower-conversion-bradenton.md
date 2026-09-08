@@ -3,8 +3,10 @@ title: 'Tub to Shower Conversion in Bradenton: What It Costs, What It Takes, and
 seoTitle: 'Tub to Shower Conversion Bradenton, FL'
 description: 'Tub to shower conversion in Bradenton and Lakewood Ranch: 2026 costs, curbless vs. curbed, ADA shower sizes, and Manatee County permit rules.'
 publishedAt: 2026-09-04
-author: VL Proconstruction
+author: Vlad Leytner
+authorImage: /assets/images/blog/authors/vlad-leytner.webp
 heroImage: /assets/images/blog/tub-to-shower-hero.webp
+heroImageAlt: 'Alcove bathtub with a tiled surround and shower riser — the starting point for a tub-to-shower conversion'
 tags: ['showers', 'bradenton']
 relatedService: custom-showers
 relatedLocation: bradenton
@@ -114,6 +116,10 @@ A quick honest note: the "one-day" conversion ads you see are almost always acry
 systems. They are fast and they work for some homeowners. They are not the same product as a
 tiled, flood-tested, curbless shower, and they should not be priced against one.
 
+> **Worth remembering:** budget by what's behind the tile, not by the tile. Waterproofing,
+> slope, and drain work are where a conversion is won or lost — and the cheapest quote is
+> usually the one that skipped them.
+
 ## ADA dimensions worth knowing (even if you're not building to code)
 
 Most private homes are not legally required to meet ADA standards. But the
@@ -178,6 +184,10 @@ For our part: VL Proconstruction is a family-owned, licensed and insured Florida
 Our installers are Schluter-certified and we're an NTCA member and XL porcelain slab
 certified installer. We do the waterproofing in-house, we flood-test every shower before
 tile, and every project carries 100% full warranty coverage.
+
+> **Before you sign anything:** ask for the waterproofing system by name, ask whether the
+> shower gets flood-tested before tile, and get the workmanship warranty in writing. Those
+> three answers separate a shower that lasts decades from one that leaks in five.
 
 ## Frequently asked questions
 

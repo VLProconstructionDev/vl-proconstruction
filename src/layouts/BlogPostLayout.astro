@@ -81,15 +81,52 @@ const schema = [
     .post-body a { color: #f54b25; text-decoration: underline; text-underline-offset: 3px; }
     .post-body a:hover { color: #c23c18; }
     .post-body a:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
-    .post-body ul, .post-body ol { padding-left: 1.35em; }
-    .post-body ul { list-style: disc; }
-    .post-body ol { list-style: decimal; }
+    .post-body ul { padding-left: 1.35em; list-style: disc; }
     .post-body li + li { margin-top: 0.5em; }
     .post-body img { width: 100%; height: auto; }
-    .post-body blockquote {
-      padding-left: 22px; border-left: 2px solid #f54b25;
-      color: #1e1e1e; font-size: 1.05em; line-height: 1.6;
+
+    /* ----- Numbered steps -----
+       Every ordered list in a post renders as dark counter discs rather than
+       browser decimals: these lists are always "N things to do / ask / expect",
+       and the disc gives each item a scannable anchor at a glance. Markdown
+       authoring stays plain `1.` — no wrapper markup in the .md files. */
+    .post-body ol { padding-left: 0; list-style: none; counter-reset: pstep; }
+    .post-body ol > li {
+      position: relative; counter-increment: pstep;
+      padding-left: 52px; min-height: 32px;
     }
+    .post-body ol > li::before {
+      content: counter(pstep);
+      position: absolute; left: 0; top: 0;
+      display: grid; place-items: center;
+      width: 32px; height: 32px; border-radius: 9999px;
+      background: #1e1e1e; color: #fff;
+      font-size: 13px; font-weight: 700; line-height: 1;
+    }
+    .post-body ol > li + li { margin-top: 1.05em; }
+    /* A nested list is sub-detail, not another step — back to plain markers. */
+    .post-body ol ol { counter-reset: pstep; }
+    .post-body li > ul { margin-top: 0.5em; }
+    /* On a phone the 52px gutter costs measure the column can't spare. */
+    @media (max-width: 480px) {
+      .post-body ol > li { padding-left: 42px; min-height: 28px; }
+      .post-body ol > li::before { width: 28px; height: 28px; font-size: 12px; top: 1px; }
+      .post-body blockquote { padding: 16px 18px; }
+    }
+
+    /* ----- Pull-out callout -----
+       Any markdown blockquote becomes a tinted box on a brand rule. Reserve it
+       for one or two real takeaways per post — a box on every section stops
+       reading as emphasis. Vary the bold lead-in ("Worth remembering:",
+       "Before you sign anything:"); repeating one phrase reads templated. */
+    .post-body blockquote {
+      padding: 20px 24px; border-left: 3px solid #f54b25;
+      background: #f0ebe5; color: #4e4e4e;
+      font-size: 16px; line-height: 1.75;
+    }
+    .post-body blockquote > * + * { margin-top: 0.85em; }
+    .post-body blockquote strong { color: #1e1e1e; font-weight: 700; }
+    .post-body blockquote > :first-child { margin-top: 0; }
     .post-body hr { margin-top: 2.4em; border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); }
     /* A comparison table is wider than a phone — it scrolls in its own box
        rather than pushing the page sideways (html/body use overflow-x: clip,
@@ -199,7 +236,7 @@ const schema = [
           <div class="min-w-0">
             {p.heroImage && (
               <div class="overflow-hidden aspect-[16/10] mb-10 lg:mb-12">
-                <img src={p.heroImage} alt="" class="w-full h-full object-cover" />
+                <img src={p.heroImage} alt={p.heroImageAlt ?? p.title} class="w-full h-full object-cover" />
               </div>
             )}
 

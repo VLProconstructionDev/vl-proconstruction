@@ -210,6 +210,8 @@ const blog = defineCollection({
     // Author avatar. Falls back to the brand mark on a dark disc (PostMeta).
     authorImage: z.string().optional(),
     heroImage: z.string().optional(),
+    // Alt text for the hero image. Falls back to the post title (BlogPostLayout).
+    heroImageAlt: z.string().optional(),
     tags: z.array(z.string()).default([]),
     // If both are set the article page can cross-link back.
     relatedService: z.string().optional(),
