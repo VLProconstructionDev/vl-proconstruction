@@ -330,6 +330,41 @@ html::-webkit-scrollbar {
   }
 }
 
+/* "Open 24/7" status chip in the navbar — inherits the nav's light/dark color. */
+.nav-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-family: var(--font-poppins), system-ui, sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.72;
+}
+.nav-open-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nav-open-dot {
+    animation: navOpenPulse 2.4s ease-in-out infinite;
+  }
+}
+@keyframes navOpenPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+/* Crowded between ~1024 and 1180px — the phone + CTA take priority. */
+@media (max-width: 1180px) {
+  .nav-open { display: none; }
+}
+
 /* Floating "Get a Free Estimate" CTA — reveals after the hero. */
 #navCta.nav-cta {
   display: inline-flex;
@@ -561,6 +596,10 @@ button:focus-visible {
 .mm-sub a.mm-sub-item {
   padding-left: 14px;
 }
+/* The hub link sits above the city headings, so it keeps their flush alignment. */
+.mm-sub a.mm-sub-all {
+  padding-left: 0;
+}
 .mm-foot {
   position: relative;
   display: flex;
@@ -751,12 +790,36 @@ button:focus-visible {
 }
 
 /* ============================================================
-   Post cards (.bl-*) — shared by the home page's "Advice & insights"
+   Post cards (.bl-*) — shared by the home page's "Remodeling advice & insights"
    teaser and the /blog index, so both lists read identically.
    ============================================================ */
 .bl-img {
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
+/* Phone-only swipe rail for post-card lists (home #advice). Stacked full-width
+   cards make the section metres long on a phone, so below `sm` the list becomes
+   a scroll-snap rail that bleeds to the page edges — the peeking next card is
+   the swipe affordance. From `sm` up the Tailwind grid classes take over. */
+@media (max-width: 639px) {
+  .bl-rail {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    /* Full-bleed past the section's 20px gutter so a card can peek in. */
+    margin-inline: -20px;
+    padding-inline: 20px;
+    scroll-padding-left: 20px;
+    scrollbar-width: none;
+  }
+  .bl-rail::-webkit-scrollbar { display: none; }
+  .bl-rail > * {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+}
+
 .bl-card:hover .bl-img,
 .bl-card:focus-within .bl-img {
   transform: scale(1.04);

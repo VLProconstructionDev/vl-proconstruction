@@ -17,7 +17,7 @@ const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: `${site.name} — Advice & Insights`,
+    name: `${site.name} — Remodeling Advice & Insights`,
     url: `${site.url}/blog`,
     blogPost: posts.map((p) => ({
       '@type': 'BlogPosting',
@@ -32,7 +32,7 @@ const schema = [
 
 <BaseLayout
   title="Tile, Flooring & Shower Guides"
-  description="Field notes from our crew on tile, natural stone, hard-surface flooring, and custom showers for homes across Bradenton and Sarasota."
+  description="Field notes from our crew on tile, natural stone, flooring & custom showers in Bradenton, FL. Call for a free quote: (503) 781-4657"
   schema={schema}
   navTheme="light"
 >
@@ -44,7 +44,7 @@ const schema = [
   <section class="bg-white" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-[140px] lg:pt-[180px] pb-10 lg:pb-14">
       <h1 class="font-bold capitalize text-ink leading-[1.02] tracking-[-0.03em] text-[clamp(2.4rem,5.5vw,4.5rem)]">
-        Advice &amp; insights
+        Remodeling advice &amp; insights
       </h1>
       <p class="mt-5 text-[15px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[620px]">
         Straight from the job site — what we install, why we install it that way, and what
@@ -63,7 +63,7 @@ const schema = [
           and we'll answer your question directly.
         </p>
       ) : (
-        <div class="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-x-10 gap-y-12 min-[860px]:grid-cols-2 xl:grid-cols-3">
           {posts.map((post) => <PostCard post={post} showNew={false} />)}
         </div>
       )}

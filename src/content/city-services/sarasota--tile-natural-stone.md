@@ -6,10 +6,7 @@ city: sarasota
 service: tile-natural-stone
 
 seoTitle: Tile & Natural Stone Sarasota, FL
-seoDescription: >-
-  Tile & natural-stone installers in Sarasota, FL. Porcelain, marble,
-  travertine — crack isolation, sound ratings, sealed stone. $10–$30/sq
-  ft. Free estimate.
+seoDescription: 'Tile & natural-stone installers in Sarasota, FL. Porcelain, marble, travertine. $10–$30/sq ft. Call for a free quote: (503) 781-4657'
 
 heroCity: Sarasota
 heroService: Tile & Natural Stone
@@ -153,29 +150,25 @@ reviews:
     image: /assets/images/review-4.webp
 
 process:
-  - title: Walkthrough & quote
+  - title: Consult
     body: >-
       We measure the rooms, check the slab or subfloor for flatness and
       moisture, talk through format, layout, and grout, and leave you with a
       written line-item price.
     image: /assets/images/process-1.webp
-  - title: Layout, materials & approvals
+  - title: Design
     body: >-
       We dry-lay the pattern, set the starting line off the longest sightline,
       confirm transitions and trim, then — in a condo — file the association
-      packet with the sound rating and book the elevator before tile is ordered.
+      packet with the sound rating and book the elevator before tile is
+      ordered.
     image: /assets/images/process-2.webp
-  - title: Prep, membrane & setting
+  - title: Build
     body: >-
-      Take up the old floor, grind and self-level the substrate, install the
-      membrane, then set every tile by hand with full mortar coverage and
-      leveling clips.
-    image: /assets/images/process-3.webp
-  - title: Grout, seal & walkthrough
-    body: >-
-      Grout tooled and cleaned, natural stone sealed, thresholds fitted, then we
-      walk the floor with you, detail-clean the space, and hand over care and
-      warranty paperwork.
+      Old floor up, substrate ground and self-levelled, membrane installed,
+      then every tile set by hand with full mortar coverage. Grout tooled,
+      natural stone sealed, thresholds fitted, and we walk the floor with you
+      before handing over care and warranty paperwork.
     image: /assets/images/process-4.webp
 
 pricingTitle: What does tile installation cost in Sarasota, FL?
@@ -289,8 +282,8 @@ related:
   - label: Custom Showers in Sarasota
     href: /services/custom-showers/sarasota-fl
     blurb: Curbless entries, Schluter waterproofing, and frameless glass.
-  - label: Hard-Surface Flooring
-    href: /services/hard-surface-flooring
+  - label: Flooring
+    href: /services/flooring
     blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
   - label: All tile & natural stone work
     href: /services/tile-natural-stone

@@ -2,9 +2,11 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
 import ServiceAreaMap from '@components/ServiceAreaMap.astro';
+import TrustPill from '@components/TrustPill.astro';
+import ReviewsSection from '@components/ReviewsSection.astro';
 
 const description =
-  'Custom shower builders in Bradenton & Sarasota, FL. Curbless, waterproof, and built to spa standards — showers engineered to stay leak-free for decades.';
+  'Custom shower builders in Bradenton & Sarasota, FL. Curbless, waterproof, built to stay leak-free. Call for a free quote: (503) 781-4657';
 
 const schema = [
   serviceSchema({
@@ -56,15 +58,6 @@ const schema = [
     .js-faq .faq-a { transition: height .32s cubic-bezier(.4,0,.2,1); }
     @media (prefers-reduced-motion: reduce) { .js-faq .faq-a { transition: none; } }
 
-    /* ----- Reviews quote slide ----- */
-    .rev-fade { transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1); will-change: transform, opacity; }
-    @media (prefers-reduced-motion: reduce) { .rev-fade { transition: none !important; transform: none !important; } }
-    /* ----- Reviews pagination dots ----- */
-    .rev-dot { flex: none; height: 6px; width: 6px; border-radius: 9999px; background: rgba(30,30,30,.2); transition: transform .3s cubic-bezier(.2,.8,.2,1), background-color .25s ease; }
-    .rev-dot:hover { background: rgba(30,30,30,.38); }
-    .rev-dot:focus-visible { outline: 2px solid #f54b25; outline-offset: 3px; }
-    .rev-dot.is-active { background: #f54b25; transform: scale(1.35); }
-    @media (prefers-reduced-motion: reduce) { .rev-dot { transition: none; } }
     /* ----- Process steps stick & overlap; parallax photos ----- */
     .px-frame { position: relative; overflow: hidden; }
     /* let grid tracks shrink so a fixed-width process image can't push past the viewport (tablet) */
@@ -209,45 +202,54 @@ const schema = [
     </video>
     <div class="absolute inset-0 bg-black/65"></div>
 
-    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-9 sm:pb-12 lg:pb-[62px] pt-[150px] gap-8 lg:gap-10">
-      <div class="flex items-center gap-3.5 flex-wrap -mb-3 lg:-mb-4">
-        <a href="https://maps.app.goo.gl/7Yi5JeKD4vwVWFXo9" target="_blank" rel="noopener noreferrer" aria-label="View our Google reviews" class="inline-block rounded-md transition-transform duration-200 ease-out hover:scale-[1.14] active:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
-          <img src="/assets/images/google.webp" alt="Google" class="h-9 w-auto object-contain" />
-        </a>
-        <img src="/assets/images/bbb.webp" alt="BBB A+ rating" class="h-7 w-auto object-contain" />
-        <span class="h-6 w-px bg-white/40"></span>
-        <div class="flex items-center gap-1.5">
-          <span class="text-[#fbbf24] text-xl tracking-tight">★★★★★</span>
-          <span class="text-[15px] font-semibold uppercase">5.0</span>
-        </div>
-      </div>
-      <div class="font-semibold capitalize leading-[1.03] tracking-[-0.03em] text-[clamp(2.75rem,6.2vw,5.5rem)]">
+    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-24 lg:pb-[90px] pt-[130px] gap-5 lg:gap-6">
+      <TrustPill />
+      <div class="font-semibold capitalize leading-[1.03] tracking-[-0.03em] text-[clamp(3rem,6.8vw,6.05rem)] text-center">
         <h1>
-          <span>Sarasota, Bradenton</span><br />
+          <span>Sarasota & Bradenton Area</span><br />
           <span class="text-brand block">Custom Showers</span>
         </h1>
-        <div class="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-8">
-          <span>Experts</span>
-          <p class="sm:mb-3 text-[14px] font-medium normal-case leading-[1.25] tracking-[-0.02em] text-[#f0f0f0] max-w-[480px]">We build custom showers and full wet rooms for homeowners and businesses across Sarasota and the surrounding areas — from waterproofing to frameless glass, a complete start to finish job backed by skilled craftsmanship and trusted local service.</p>
+        <div class="flex flex-col items-center gap-3 sm:gap-5">
+          <span>Installation Experts</span>
+          <p class="text-[15px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">We build custom showers and full wet rooms for homeowners and businesses across Sarasota and the surrounding areas — from waterproofing to frameless glass, a complete start to finish job backed by skilled craftsmanship and trusted local service.</p>
         </div>
       </div>
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Get a Free estimate</a>
-          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">call now</a>
+      <div class="flex flex-col items-center gap-8">
+        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
+          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(503) 781-4657</a>
         </div>
-        <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-end">
-          <div class="flex flex-col items-start lg:items-end">
-            <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
-            <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of <br class="sm:hidden" />excellence</span>
+        <!-- Bottom row: stats on the left, the marks we build to on the right.
+             Capped narrower than the hero's 1920 grid and centred, so on a wide
+             screen the two ends pull in off the edges. -->
+        <div class="w-full flex flex-col gap-8 lg:mt-[120px] lg:mx-auto lg:max-w-[1180px] lg:flex-row lg:items-end lg:justify-between">
+          <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
+            <div class="flex flex-col items-start">
+              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
+              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of <br class="sm:hidden" />excellence</span>
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
+              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Full Warranty <br class="sm:hidden" />Coverage</span>
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
+              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects <br class="sm:hidden" />Completed</span>
+            </div>
           </div>
-          <div class="flex flex-col items-start lg:items-end">
-            <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
-            <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Full Warranty <br class="sm:hidden" />Coverage</span>
-          </div>
-          <div class="flex flex-col items-start lg:items-end">
-            <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
-            <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects <br class="sm:hidden" />Completed</span>
+          <!-- Credential marks: each logo carries its own claim, so the row states
+               what the badges mean. Reversed (white-on-transparent) marks, so they
+               read on the dark hero; images are decorative — the label names them. -->
+          <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
+            </div>
           </div>
         </div>
       </div>
@@ -452,9 +454,9 @@ const schema = [
           <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
             <img loading="lazy" decoding="async" src="/assets/images/process-1.webp" alt="Consultation with the homeowner" class="absolute inset-0 w-full h-full object-cover object-top" />
           </div>
-          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">01</span>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">1</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
-            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Walkthrough &amp; Quote</h3>
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Consult</h3>
             <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We look at your bathroom, talk through layout, drainage, and glass, and walk you through waterproofing options, pricing, and timeline.</p>
           </div>
         </div>
@@ -462,30 +464,20 @@ const schema = [
           <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
             <img loading="lazy" decoding="async" src="/assets/images/process-2.webp" alt="Design and material planning" class="px-img" />
           </div>
-          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">02</span>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">2</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
-            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Layout &amp; Materials</h3>
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Design</h3>
             <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We finalize the tile layout, niche and bench placement, slope, and drain type, then confirm every material selection before demo begins.</p>
-          </div>
-        </div>
-        <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
-          <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
-            <img loading="lazy" decoding="async" src="/assets/images/process-3.webp" alt="Build and installation in progress" class="absolute inset-0 w-full h-full object-cover object-center scale-[1.12]" />
-          </div>
-          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">03</span>
-          <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
-            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Waterproofing &amp; Tile</h3>
-            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We frame, set the pan, install and flood-test the waterproofing, then set each tile by hand and seal the grout to spec.</p>
           </div>
         </div>
         <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
           <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
             <img loading="lazy" decoding="async" src="/assets/images/process-4.webp" alt="Finished, completed project" class="px-img" />
           </div>
-          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">04</span>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">3</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
-            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Glass &amp; Final Walkthrough</h3>
-            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We coordinate the frameless glass, walk the finished shower with you, detail-clean everything, and explain care and warranty.</p>
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Build</h3>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We frame, set the pan, install and flood-test the waterproofing, then set each tile by hand and seal the grout. Frameless glass goes in last, and we walk the finished shower with you before we call it done.</p>
           </div>
         </div>
         </div>
@@ -573,51 +565,9 @@ const schema = [
   </section>
 
   <!-- ===================== REVIEWS ===================== -->
-  <section id="reviews" class="bg-white" data-nav-theme="light">
-    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px] overflow-hidden">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div class="lg:order-1 order-2">
-          <figure class="rev-fade">
-            <blockquote class="font-bold text-ink text-[clamp(0.98rem,1.8vw,1.7rem)] leading-[1.35] tracking-[-0.02em]">
-              <span class="text-brand inline-block align-text-top text-[1.7em] leading-[0.7] mr-1" aria-hidden="true">&#8220;</span><span id="revQuote">Abel and his brothers are top notch installers. I have been in the industry for 20 years and know great installers when I see them. I hired them to do a marble backsplash for me and they were extremely clean, calculated, presentable, and meticulous. They do things right the first time and take pride in their knowledge and work. Definitely will be using them again soon on other properties!</span>
-            </blockquote>
-          </figure>
-          <div id="revMeta" class="mt-10 rev-fade flex items-center gap-4">
-            <a href="https://www.google.com/maps/place/VL+Proconstruction+LLC/@27.725119,-82.6960629,11z/data=!4m8!3m7!1s0x88c331a0eef5c563:0x52b0ceed643943f2!8m2!3d27.4479297!4d-82.3633912!9m1!1b1!16s%2Fg%2F11lcbfsvwr?entry=ttu" target="_blank" rel="noopener noreferrer" aria-label="Read our reviews on Google" class="btn relative block h-14 w-14 shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60">
-              <img loading="lazy" decoding="async" id="revAvatar" src="/assets/images/review-1-avatar.webp" alt="" class="h-14 w-14 rounded-full object-cover border border-black/10" />
-              <span class="absolute -bottom-0.5 -right-0.5 grid place-items-center h-6 w-6 rounded-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.18)] ring-1 ring-black/5">
-                <svg class="h-3.5 w-3.5" viewBox="0 0 48 48" aria-hidden="true">
-                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-                </svg>
-              </span>
-            </a>
-            <div>
-              <div class="flex items-center gap-1.5">
-                <p id="revName" class="font-semibold text-[18px] tracking-[-0.01em] text-ink">Paul Lipowicz</p>
-              </div>
-              <p id="revRole" class="mt-1 text-[15px] text-graydesc hidden"></p>
-            </div>
-          </div>
-        </div>
-        <div class="lg:order-2 order-1 w-full overflow-hidden aspect-[4/3] rev-fade">
-          <img loading="lazy" decoding="async" id="revImg" src="/assets/images/review-1.webp" alt="VL Proconstruction completed project" class="w-full h-full object-cover" />
-        </div>
-      </div>
-      <!-- Controls — desktop only; on mobile the carousel auto-advances and swipes -->
-      <div class="mt-8 lg:mt-10 flex items-center justify-center gap-3">
-        <button id="revPrev" aria-label="Previous review" class="btn hidden lg:grid place-items-center h-12 w-12 rounded-full border border-black/10 text-ink hover:border-brand hover:text-brand">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        </button>
-        <div id="revDots" class="flex lg:hidden items-center gap-2" role="tablist" aria-label="Choose a review"></div>
-        <button id="revNext" aria-label="Next review" class="btn hidden lg:grid place-items-center h-12 w-12 rounded-full border border-black/10 text-ink hover:border-brand hover:text-brand">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
+  <!-- ===================== REVIEWS ===================== -->
+  <!-- Shared component — Google review cards + the trust panel. -->
+  <ReviewsSection tone="white" pad="py-20 lg:py-[110px]" />
 
   <!-- ===================== FAQ ===================== -->
   <section id="faqs" class="bg-[#faf9f8]" data-nav-theme="light">
@@ -659,7 +609,7 @@ const schema = [
 
   <!-- ===================== SERVICE AREA ===================== -->
   <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
-    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[260px] lg:min-h-[1040px] flex items-center">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
       <div class="lg:max-w-[44%]">
         <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
           Custom Showers<br />Across the Gulf Coast
@@ -686,7 +636,7 @@ const schema = [
           <div class="mt-5 space-y-4" id="step1Options">
             <label class="fopt"><input type="checkbox" name="s1project" value="Custom Showers" /><span class="pill-label">Custom Showers</span><span class="fradio" aria-hidden="true"></span></label>
             <label class="fopt"><input type="checkbox" name="s1project" value="Tile & Natural Stone" /><span class="pill-label">Tile &amp; Natural Stone</span><span class="fradio" aria-hidden="true"></span></label>
-            <label class="fopt"><input type="checkbox" name="s1project" value="Hard Surface Flooring" /><span class="pill-label">Hard Surface Flooring</span><span class="fradio" aria-hidden="true"></span></label>
+            <label class="fopt"><input type="checkbox" name="s1project" value="Flooring" /><span class="pill-label">Flooring</span><span class="fradio" aria-hidden="true"></span></label>
             <label class="fopt" id="s1OtherPill"><input type="checkbox" name="s1project" value="Other" id="s1OtherRadio" /><span class="pill-label">Other</span><input type="text" id="s1OtherInput" class="other-inline-input" placeholder="Please describe your project…" autocomplete="off" aria-label="Describe your project" /><span class="fradio" aria-hidden="true"></span></label>
           </div>
 
@@ -723,112 +673,6 @@ const schema = [
         const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { runCount(e.target); io.unobserve(e.target); } }); }, { threshold: 0.6 });
         nums.forEach((el) => io.observe(el));
       }
-    })();
-
-    // Reviews quote carousel
-    (function () {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const revQuote = document.getElementById('revQuote');
-      if (!revQuote) return;
-      const reviews = [
-        { name: 'Paul Lipowicz', role: '', quote: "Abel and his brothers are top notch installers. I have been in the industry for 20 years and know great installers when I see them. I hired them to do a marble backsplash for me and they were extremely clean, calculated, presentable, and meticulous. They do things right the first time and take pride in their knowledge and work. Definitely will be using them again soon on other properties!", img: '/assets/images/review-1.webp', avatar: '/assets/images/review-1-avatar.webp' },
-        { name: 'Valeriy Tsinovkin', role: '', quote: "I recently had my kitchen remodeled and couldn't be happier with the results. The entire process was smooth and professional, and the team kept everything clean and organized throughout the project. The craftsmanship and attention to detail were excellent, and my kitchen looks stunning. Highly recommend to anyone looking for a high-quality, hassle-free remodel.", img: '/assets/images/review-2.webp', avatar: '/assets/images/review-2-avatar.webp' },
-        { name: 'Avetal Mor', role: '', quote: "Absolutely amazing work fixed our floors after hurricane!", img: '/assets/images/review-3.webp', avatar: '/assets/images/review-3-avatar.webp' },
-        { name: 'Stacy Ramirez', role: '', quote: "Vlad and his team are phenomenal! We couldn't be happier with our new master bath. Their attention to detail is unmatched. They showed up, communicated well, and offered quality suggestions. We highly recommend and will use them for our next home project.", img: '/assets/images/review-4.webp', avatar: '/assets/images/review-4-avatar.webp' },
-      ];
-      const revName = document.getElementById('revName');
-      const revRole = document.getElementById('revRole');
-      const revImg = document.getElementById('revImg');
-      const revAvatar = document.getElementById('revAvatar');
-      const fades = [document.getElementById('revMeta'), revQuote.closest('.rev-fade'), revImg.closest('.rev-fade')];
-      let i = 0;
-      const paint = () => {
-        const r = reviews[i];
-        revName.textContent = r.name;
-        revRole.textContent = r.role;
-        revRole.classList.toggle('hidden', !r.role);
-        revQuote.textContent = r.quote;
-        revImg.src = r.img;
-        revAvatar.src = r.avatar;
-        syncDots();
-      };
-      const quoteCol = revQuote.closest('.rev-fade').parentElement;
-      const lockHeight = () => {
-        const current = reviews[i].quote;
-        quoteCol.style.minHeight = '';
-        let max = 0;
-        reviews.forEach((r) => { revQuote.textContent = r.quote; max = Math.max(max, quoteCol.offsetHeight); });
-        revQuote.textContent = current;
-        quoteCol.style.minHeight = max + 'px';
-      };
-      // Pagination dots — one per review; click jumps straight to it
-      const dotsWrap = document.getElementById('revDots');
-      let dots = [];
-      const syncDots = () => dots.forEach((d, n) => {
-        d.classList.toggle('is-active', n === i);
-        d.setAttribute('aria-current', n === i ? 'true' : 'false');
-      });
-      let animating = false;
-      const go = (dir) => {
-        if (animating) return;
-        i = (i + dir + reviews.length) % reviews.length;
-        if (reduceMotion) { paint(); return; }
-        animating = true;
-        const outX = dir > 0 ? -36 : 36;
-        const inX = dir > 0 ? 36 : -36;
-        fades.forEach((el) => { el.style.opacity = '0'; el.style.transform = `translateX(${outX}px)`; });
-        setTimeout(() => {
-          paint();
-          fades.forEach((el) => { el.style.transition = 'none'; el.style.transform = `translateX(${inX}px)`; });
-          void document.body.offsetWidth;
-          requestAnimationFrame(() => {
-            fades.forEach((el) => { el.style.transition = ''; el.style.opacity = '1'; el.style.transform = 'translateX(0)'; });
-            setTimeout(() => { animating = false; }, 450);
-          });
-        }, 350);
-      };
-      let timer = null;
-      const start = () => { timer = setInterval(() => go(1), 5000); };
-      const reset = () => { clearInterval(timer); start(); };
-      document.getElementById('revPrev').addEventListener('click', () => { go(-1); reset(); });
-      document.getElementById('revNext').addEventListener('click', () => { go(1); reset(); });
-      const reviewsSection = document.getElementById('reviews');
-      reviewsSection.addEventListener('mouseenter', () => clearInterval(timer));
-      reviewsSection.addEventListener('mouseleave', start);
-      // Finger swipe (mobile): a horizontal drag advances the carousel. Vertical drags
-      // fall through to normal page scroll (we only act on mostly-horizontal gestures).
-      let touchX = null, touchY = null;
-      reviewsSection.addEventListener('touchstart', (e) => {
-        touchX = e.changedTouches[0].clientX;
-        touchY = e.changedTouches[0].clientY;
-      }, { passive: true });
-      reviewsSection.addEventListener('touchend', (e) => {
-        if (touchX === null) return;
-        const dx = e.changedTouches[0].clientX - touchX;
-        const dy = e.changedTouches[0].clientY - touchY;
-        touchX = touchY = null;
-        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return; // ignore taps/vertical
-        go(dx < 0 ? 1 : -1); // swipe left → next, swipe right → prev
-        reset();
-      }, { passive: true });
-      lockHeight();
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockHeight);
-      let revResizeT = null;
-      window.addEventListener('resize', () => { clearTimeout(revResizeT); revResizeT = setTimeout(lockHeight, 150); }, { passive: true });
-      if (dotsWrap) {
-        dots = reviews.map((r, n) => {
-          const d = document.createElement('button');
-          d.type = 'button';
-          d.className = 'rev-dot';
-          d.setAttribute('role', 'tab');
-          d.setAttribute('aria-label', 'Show review ' + (n + 1) + ' of ' + reviews.length);
-          d.addEventListener('click', () => { if (n !== i) { go(n - i); reset(); } });
-          dotsWrap.appendChild(d);
-          return d;
-        });
-        syncDots();
-      }
-      start();
     })();
 
     // FAQ accordion — single-open; content stays visible if JS is unavailable

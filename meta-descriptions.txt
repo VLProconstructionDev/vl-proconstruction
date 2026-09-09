@@ -1,0 +1,63 @@
+VL PROCONSTRUCTION — META DESCRIPTIONS (v3)
+Updated 2026-09-09 — all 130–140 chars; every entry ends with "Call for a free quote: (503) 781-4657"
+/404 is noindex and left unchanged.
+
+=== LIVE PAGES ===
+
+/  [135]
+Tile, flooring, custom showers, bath upgrades & subfloor prep for Bradenton homes and businesses. Call for a free quote: (503) 781-4657
+
+/services  [130]
+Custom showers, tile & natural stone, and hard surface flooring in Bradenton & Sarasota, FL. Call for a free quote: (503) 781-4657
+
+/services/custom-showers  [136]
+Custom shower builders in Bradenton & Sarasota, FL. Curbless, waterproof, built to stay leak-free. Call for a free quote: (503) 781-4657
+
+/services/tile-natural-stone  [136]
+Tile & natural stone install in Bradenton & Sarasota, FL. Large-format porcelain to marble mosaic. Call for a free quote: (503) 781-4657
+
+/services/hard-surface-flooring  [132]
+Hardwood, vinyl plank & laminate flooring in Bradenton & Sarasota, FL. Subfloor prep included. Call for a free quote: (503) 781-4657
+
+/services/custom-showers/sarasota-fl  [136]
+Custom shower builders in Sarasota, FL. Curbless entries, Schluter waterproofing, frameless glass. Call for a free quote: (503) 781-4657
+
+/services/tile-natural-stone/sarasota-fl  [132]
+Tile & natural-stone installers in Sarasota, FL. Porcelain, marble, travertine. $10–$30/sq ft. Call for a free quote: (503) 781-4657
+
+/locations  [136]
+Custom showers, tile & flooring in Bradenton, Sarasota, Lakewood Ranch, Venice and 12 more cities. Call for a free quote: (503) 781-4657
+
+/blog  [131]
+Field notes from our crew on tile, natural stone, flooring & custom showers in Bradenton, FL. Call for a free quote: (503) 781-4657
+
+/blog/tub-to-shower-conversion-bradenton  [134]
+Tub to shower conversion in Bradenton: 2026 costs, curbless vs. curbed, ADA sizes, permit rules. Call for a free quote: (503) 781-4657
+
+/blog/hard-surface-flooring-companies-sarasota  [131]
+The 5 best hard surface flooring companies in Sarasota, FL — hardwood, LVP & tile installers. Call for a free quote: (503) 781-4657
+
+=== WRITTEN BUT NOT LIVE (published: false, src/content/city-services/) ===
+
+Bradenton x custom showers  [135]
+Custom shower builders in Bradenton, FL. Schluter waterproofing, frameless glass. $9,500–$22,000. Call for a free quote: (503) 781-4657
+
+Bradenton x tile & natural stone  [132]
+Tile & natural-stone installers in Bradenton, FL. Porcelain, marble, travertine. $9–$26/sq ft. Call for a free quote: (503) 781-4657
+
+Bradenton x hard-surface flooring  [136]
+Hardwood, engineered & LVP flooring installers in Bradenton, FL. NWFA-spec installs. $6–$18/sq ft. Call for a free quote: (503) 781-4657
+
+Sarasota x hard-surface flooring  [135]
+Hardwood, engineered & LVP flooring installers in Sarasota, FL. NWFA-spec installs. $7–$20/sq ft. Call for a free quote: (503) 781-4657
+
+=== UNUSED BY LIVE PAGES (seoDescription, src/content/services/) ===
+
+custom-showers.md  [131]
+Design-and-build custom showers with proper waterproofing, curbless entries and premium tile. Call for a free quote: (503) 781-4657
+
+tile-natural-stone.md  [136]
+Porcelain, ceramic, marble, travertine & slate — substrate prep, lippage control, correct sealing. Call for a free quote: (503) 781-4657
+
+hard-surface-flooring.md  [133]
+Solid hardwood, engineered wood & LVP. Correct subfloor prep, acclimation and finish schedules. Call for a free quote: (503) 781-4657

@@ -1,0 +1,124 @@
+---
+// Hero trust badge — Google + BBB marks, gold stars, and the rating line,
+// all inside one dark glass pill. Shared by the home hero, the services
+// index, the three static service pages and LocationServiceLayout, so the
+// six heroes cannot drift apart.
+import { site } from '@/lib/site';
+
+---
+
+<div class="trust-fix" id="trustFix">
+<a
+  href={site.social.googleMaps}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="trust-pill"
+  aria-label="Rated 5 out of 5 by 100+ customers — read our Google reviews"
+>
+  <img src="/assets/images/google.webp" alt="" class="trust-g" />
+  <img src="/assets/images/bbb.webp" alt="" class="trust-bbb" />
+  <span class="trust-div" aria-hidden="true"></span>
+  <span class="trust-stars" aria-hidden="true">★★★★★</span>
+  <span class="trust-txt">Rated <strong>5/5</strong><span class="trust-more"> by <strong>100+ Customers</strong></span></span>
+</a>
+</div>
+
+<style is:global>
+  /* Pinned just under the navbar, centred over the hero; fades out once the
+     next section scrolls up to the navbar (toggled by Header's updateNav). */
+  /* Spans the viewport and centres the pill with flex — NOT left:50% +
+     translateX(-50%). With only `left` set, a fixed box shrink-to-fits into
+     the space left of it (half the screen), which on phones capped the pill
+     at ~195px and spilled its content past the border. */
+  .trust-fix {
+    position: fixed;
+    top: 104px;
+    left: 16px;
+    right: 16px;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .trust-fix.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+  }
+  @media (min-width: 640px) {
+    .trust-fix { top: 116px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .trust-fix { transition: opacity 0.2s ease; }
+    .trust-fix.is-hidden { transform: none; }
+  }
+
+  /* Dark glass pill — sits over hero photography, so it carries its own ground. */
+  .trust-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 16px 7px 12px;
+    max-width: 100%;
+    border-radius: 999px;
+    /* Same glass as #navbar over the hero: no fill, md blur, hairline border. */
+    background-color: transparent;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+    white-space: nowrap;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.25s ease;
+  }
+  .trust-pill:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+  .trust-pill:active {
+    transform: translateY(0) scale(0.99);
+  }
+  .trust-pill:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.75);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .trust-pill { transition: background-color 0.25s ease; }
+    .trust-pill:hover, .trust-pill:active { transform: none; }
+  }
+
+  .trust-g { height: 22px; width: auto; object-fit: contain; }
+  .trust-bbb { height: 26px; width: auto; object-fit: contain; }
+  .trust-div {
+    width: 1px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.28);
+  }
+  .trust-stars {
+    color: #fbbf24;
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .trust-txt {
+    font-family: var(--font-poppins), system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .trust-txt strong { font-weight: 700; color: #fff; }
+
+  /* Phones: the full sentence pushes the pill past the viewport, so the
+     count drops off and only "Rated 5/5" stays. */
+  @media (max-width: 640px) {
+    .trust-more { display: none; }
+  }
+  @media (max-width: 420px) {
+    .trust-pill { gap: 8px; padding: 6px 12px 6px 10px; }
+    .trust-g { height: 19px; }
+    .trust-bbb { height: 22px; }
+    .trust-stars { font-size: 13px; }
+    .trust-txt { font-size: 12px; }
+  }
+</style>

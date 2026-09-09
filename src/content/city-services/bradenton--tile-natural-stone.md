@@ -9,10 +9,7 @@ service: tile-natural-stone
 published: false
 
 seoTitle: Tile & Natural Stone Bradenton, FL
-seoDescription: >-
-  Tile & natural-stone installers in Bradenton, FL. Porcelain, marble,
-  travertine — crack isolation, lippage control, sealed stone. $9–$26/sq ft.
-  Free estimate.
+seoDescription: 'Tile & natural-stone installers in Bradenton, FL. Porcelain, marble, travertine. $9–$26/sq ft. Call for a free quote: (503) 781-4657'
 
 heroCity: Bradenton
 heroService: Tile & Natural Stone
@@ -150,29 +147,24 @@ reviews:
     image: /assets/images/review-4.webp
 
 process:
-  - title: Walkthrough & quote
+  - title: Consult
     body: >-
       We measure the rooms, check the slab or subfloor for flatness and
       moisture, talk through format, layout, and grout, and leave you with a
       written line-item price.
     image: /assets/images/process-1.webp
-  - title: Layout, materials & order
+  - title: Design
     body: >-
       We dry-lay the pattern, set the starting line off the longest sightline,
       confirm transitions and trim, then order tile with the right overage
       before demo starts.
     image: /assets/images/process-2.webp
-  - title: Prep, membrane & setting
+  - title: Build
     body: >-
-      Take up the old floor, grind and self-level the substrate, install the
-      membrane, then set every tile by hand with full mortar coverage and
-      leveling clips.
-    image: /assets/images/process-3.webp
-  - title: Grout, seal & walkthrough
-    body: >-
-      Grout tooled and cleaned, natural stone sealed, thresholds fitted, then we
-      walk the floor with you, detail-clean the space, and hand over care and
-      warranty paperwork.
+      Old floor up, substrate ground and self-levelled, membrane installed,
+      then every tile set by hand with full mortar coverage. Grout tooled,
+      natural stone sealed, thresholds fitted, and we walk the floor with you
+      before handing over care and warranty paperwork.
     image: /assets/images/process-4.webp
 
 pricingTitle: What does tile installation cost in Bradenton, FL?
@@ -274,8 +266,8 @@ related:
   - label: Custom Showers in Bradenton
     href: /services/custom-showers/bradenton-fl
     blurb: Curbless entries, Schluter waterproofing, and frameless glass.
-  - label: Hard-Surface Flooring in Bradenton
-    href: /services/hard-surface-flooring
+  - label: Flooring in Bradenton
+    href: /services/flooring
     blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
   - label: All tile & natural stone work
     href: /services/tile-natural-stone

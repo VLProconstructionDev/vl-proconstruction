@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 import { breadcrumbSchema, itemListSchema } from '@/lib/schema';
+import TrustPill from '@components/TrustPill.astro';
 
 // The three cards below, as structured data — order matches the page.
 const schema = [
@@ -14,7 +15,7 @@ const schema = [
     items: [
       { name: 'Custom Shower Installation', url: '/services/custom-showers' },
       { name: 'Tile & Natural Stone Installation', url: '/services/tile-natural-stone' },
-      { name: 'Hard-Surface Flooring Installation', url: '/services/hard-surface-flooring' },
+      { name: 'Hard-Surface Flooring Installation', url: '/services/flooring' },
     ],
   }),
 ];
@@ -22,7 +23,7 @@ const schema = [
 
 <BaseLayout
   title="Services — VL Proconstruction | Showers, Tile & Flooring"
-  description="Custom showers, tile & natural stone, and hard surface flooring — designed, waterproofed, and installed by a family crew serving Bradenton & Sarasota."
+  description="Custom showers, tile & natural stone, and hard surface flooring in Bradenton & Sarasota, FL. Call for a free quote: (503) 781-4657"
   schema={schema}
   navTheme="dark"
 >
@@ -113,6 +114,25 @@ const schema = [
 
     /* Who-we-serve cards accent (kept for parity, though currently hidden) */
     .client-card .card-accent { display: none; }
+
+    /* ----- Parallax process photos (same as the home page) ----- */
+    .px-frame { position: relative; overflow: hidden; }
+    /* let grid tracks shrink so a fixed-width process image can't push past the viewport (tablet) */
+    .process-step > * { min-width: 0; }
+    .px-frame .px-img { position: absolute; left: 0; top: -20%; width: 100%; height: 140%; object-fit: cover; will-change: transform; }
+    @media (prefers-reduced-motion: reduce) {
+      .px-frame .px-img { position: static; top: 0; height: 100%; transform: none; }
+    }
+
+    /* ----- Process steps stick & overlap one another as you scroll ----- */
+    .process-step { position: sticky; background: #faf9f8; }
+    .process-step:nth-child(1) { top: 92px; }
+    .process-step:nth-child(2) { top: 124px; }
+    .process-step:nth-child(3) { top: 156px; }
+    @media (prefers-reduced-motion: reduce) {
+      .process-step { position: static; box-shadow: none; }
+    }
+
   </style>
 
   <!-- ===================== HERO HEADER ===================== -->
@@ -123,47 +143,56 @@ const schema = [
     <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/45"></div>
 
     <!-- Hero content -->
-    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-9 sm:pb-12 lg:pb-[62px] pt-[150px] gap-8 lg:gap-10">
+    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-24 lg:pb-[90px] pt-[130px] gap-5 lg:gap-6">
       <!-- Trust row -->
-      <div class="flex items-center gap-3.5 flex-wrap -mb-3 lg:-mb-4">
-        <a href="https://maps.app.goo.gl/7Yi5JeKD4vwVWFXo9" target="_blank" rel="noopener noreferrer" aria-label="View our Google reviews" class="inline-block rounded-md transition-transform duration-200 ease-out hover:scale-[1.14] active:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent">
-          <img src="/assets/images/google.webp" alt="Google" class="h-9 w-auto object-contain" />
-        </a>
-        <img src="/assets/images/bbb.webp" alt="BBB A+ rating" class="h-7 w-auto object-contain" />
-        <span class="h-6 w-px bg-white/40"></span>
-        <div class="flex items-center gap-1.5">
-          <span class="text-[#fbbf24] text-xl tracking-tight">★★★★★</span>
-          <span class="text-[15px] font-semibold uppercase">5.0</span>
-        </div>
-      </div>
+      <TrustPill />
 
-      <div class="max-w-[1050px]">
-        <h1 class="font-semibold capitalize leading-[1.02] tracking-[-0.035em] text-[clamp(2.75rem,6.4vw,5.75rem)]">
+      <div class="mx-auto max-w-[1050px] text-center">
+        <h1 class="font-semibold capitalize leading-[1.03] tracking-[-0.03em] text-[clamp(3rem,6.8vw,6.05rem)] text-center">
           Explore Our Custom Home Additions
         </h1>
-        <p class="mt-6 text-[clamp(0.95rem,1.2vw,1.15rem)] font-medium leading-[1.55] tracking-[-0.02em] text-[#eaeaea] max-w-[620px]">
+        <p class="mt-6 text-[clamp(0.95rem,1.2vw,1.15rem)] font-medium leading-[1.55] tracking-[-0.02em] text-[#eaeaea] max-w-[620px] mx-auto">
           Custom showers, tile and natural stone, and hard-surface flooring — designed, waterproofed, and installed by a detail-obsessed family crew with 22 years on Florida's Gulf Coast.
         </p>
       </div>
 
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Get a Free estimate</a>
-          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">call now</a>
+      <div class="flex flex-col items-center gap-8">
+        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
+          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(503) 781-4657</a>
         </div>
 
-        <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-end">
-          <div class="flex flex-col items-start lg:items-end">
-            <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
-            <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of <br class="sm:hidden" />excellence</span>
+        <!-- Bottom row: stats on the left, the marks we build to on the right.
+             Capped narrower than the hero's 1920 grid and centred, so on a wide
+             screen the two ends pull in off the edges. -->
+        <div class="w-full flex flex-col gap-8 lg:mt-[120px] lg:mx-auto lg:max-w-[1180px] lg:flex-row lg:items-end lg:justify-between">
+          <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
+            <div class="flex flex-col items-start">
+              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
+              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of <br class="sm:hidden" />excellence</span>
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
+              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Full Warranty <br class="sm:hidden" />Coverage</span>
+            </div>
+            <div class="flex flex-col items-start">
+              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
+              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects <br class="sm:hidden" />Completed</span>
+            </div>
           </div>
-          <div class="flex flex-col items-start lg:items-end">
-            <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
-            <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Full Warranty <br class="sm:hidden" />Coverage</span>
-          </div>
-          <div class="flex flex-col items-start lg:items-end">
-            <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
-            <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects <br class="sm:hidden" />Completed</span>
+          <!-- Credential marks: each logo carries its own claim, so the row states
+               what the badges mean. Reversed (white-on-transparent) marks, so they
+               read on the dark hero; images are decorative — the label names them. -->
+          <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
+            </div>
           </div>
         </div>
       </div>
@@ -247,7 +276,7 @@ const schema = [
         </div>
         <!-- Content -->
         <div class="lg:order-2">
-          <h2 class="font-semibold capitalize leading-[1.03] tracking-[-0.04em] text-[clamp(2.75rem,5vw,4.5rem)]">Hard Surface Flooring</h2>
+          <h2 class="font-semibold capitalize leading-[1.03] tracking-[-0.04em] text-[clamp(2.75rem,5vw,4.5rem)]">Flooring</h2>
           <p class="mt-5 text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[560px]">
             Premium hardwood, luxury vinyl plank, and laminate installed flat, tight, and level — including the subfloor prep and transitions most crews skip. The result is a floor that looks seamless and stays that way.
           </p>
@@ -259,8 +288,8 @@ const schema = [
             <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Stair treads &amp; transitions</li>
             <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Moisture &amp; underlayment</li>
           </ul>
-          <!-- TODO: build the dedicated /services/hard-surface-flooring page -->
-          <a href="/services/hard-surface-flooring/" class="btn group mt-9 inline-flex items-center gap-2 rounded-full bg-brand hover:bg-[#c23c18] px-8 py-3.5 text-[15px] font-semibold capitalize text-white hover:gap-3">
+          <!-- TODO: build the dedicated /services/flooring page -->
+          <a href="/services/flooring/" class="btn group mt-9 inline-flex items-center gap-2 rounded-full bg-brand hover:bg-[#c23c18] px-8 py-3.5 text-[15px] font-semibold capitalize text-white hover:gap-3">
             Explore Flooring
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
@@ -270,6 +299,61 @@ const schema = [
   </section>
 
   <!-- ===================== TRUSTED BY / WHO WE SERVE ===================== -->
+  <!-- ===================== PROCESS ===================== -->
+  <!-- Same section as the home page's #process: sticky overlapping steps,
+       oversized numeral, parallax photo in a fixed-ratio frame. -->
+  <section id="process" class="bg-white" data-nav-theme="light">
+    <!-- Heading (on white) -->
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-8 lg:pt-10">
+      <h2 class="font-semibold text-ink leading-[1.1] tracking-[-0.035em] text-[clamp(1.95rem,3.9vw,3.9rem)] max-w-[1250px] text-balance">
+        Quality work and clear communication from start to finish.
+      </h2>
+    </div>
+
+    <!-- Steps band (full-width off-white) -->
+    <div class="bg-[#faf9f8] mt-10 lg:mt-14 pb-20 lg:pb-[100px]">
+      <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px]">
+      <div class="border-b border-black/10">
+        <!-- Step 1 -->
+        <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8">
+          <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
+            <img loading="lazy" decoding="async" src="/assets/images/process-2.webp" alt="Walls tiled and floating vanity carcass set during the build" class="px-img" />
+          </div>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">1</span>
+          <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Consult</h3>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We walk the space with you, measure, and talk through what the job actually needs — shower, tile, or flooring — then leave you with written line-item pricing.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
+          <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
+            <img loading="lazy" decoding="async" src="/assets/images/process-3.webp" alt="VL Proconstruction crew setting wall and floor tile during the build" class="absolute inset-0 w-full h-full object-cover object-center scale-[1.12]" />
+          </div>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">2</span>
+          <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Design</h3>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We settle layout, material, and finish choices together, confirm how each surface meets the next, and order everything before demo starts.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
+          <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
+            <img loading="lazy" decoding="async" src="/assets/images/process-4.webp" alt="Finished, styled bathroom on project completion" class="px-img" />
+          </div>
+          <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">3</span>
+          <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
+            <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Build</h3>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">One crew runs the job start to finish — prep, waterproofing, setting, and trim — then we walk the finished work with you and hand over care and warranty paperwork.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
   <section id="clients" class="bg-white text-ink" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
       <div class="max-w-[820px]">
@@ -331,7 +415,7 @@ const schema = [
 
   <!-- ===================== SERVICE AREA ===================== -->
   <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
-    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[260px] lg:min-h-[1040px] flex items-center">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
       <div class="lg:max-w-[44%]">
         <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
           Proudly Serving Florida's<br />Gulf Coast
@@ -357,7 +441,7 @@ const schema = [
           <div class="mt-5 space-y-4" id="step1Options">
             <label class="fopt"><input type="checkbox" name="s1project" value="Custom Showers" /><span class="pill-label">Custom Showers</span><span class="fradio" aria-hidden="true"></span></label>
             <label class="fopt"><input type="checkbox" name="s1project" value="Tile & Natural Stone" /><span class="pill-label">Tile &amp; Natural Stone</span><span class="fradio" aria-hidden="true"></span></label>
-            <label class="fopt"><input type="checkbox" name="s1project" value="Hard Surface Flooring" /><span class="pill-label">Hard Surface Flooring</span><span class="fradio" aria-hidden="true"></span></label>
+            <label class="fopt"><input type="checkbox" name="s1project" value="Flooring" /><span class="pill-label">Flooring</span><span class="fradio" aria-hidden="true"></span></label>
             <label class="fopt" id="s1OtherPill"><input type="checkbox" name="s1project" value="Other" id="s1OtherRadio" /><span class="pill-label">Other</span><input type="text" id="s1OtherInput" class="other-inline-input" placeholder="Please describe your project…" autocomplete="off" aria-label="Describe your project" /><span class="fradio" aria-hidden="true"></span></label>
           </div>
 
@@ -417,5 +501,30 @@ const schema = [
       }, { rootMargin: '-30% 0px -30% 0px' });
       cards.forEach((c) => io.observe(c));
     })();
+
+    // ===== Parallax process photos — each image drifts within its frame as the section scrolls =====
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const pxImgs = [...document.querySelectorAll('.px-img')];
+      if (!pxImgs.length || reduceMotion) return;
+      let ticking = false;
+      const renderParallax = () => {
+        const vh = window.innerHeight;
+        pxImgs.forEach((img) => {
+          const frame = img.parentElement;
+          const r = frame.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > vh) return;
+          const progress = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);
+          const shift = frame.offsetHeight * 0.20;
+          img.style.transform = `translateY(${(progress * shift).toFixed(1)}px)`;
+        });
+        ticking = false;
+      };
+      const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(renderParallax); } };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      renderParallax();
+    })();
+
   </script>
 </BaseLayout>

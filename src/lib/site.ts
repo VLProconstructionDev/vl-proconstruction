@@ -37,6 +37,9 @@ export const site = {
   social: {
     instagram: 'https://www.instagram.com/vlproconstruction/',
     googleMaps: 'https://maps.app.goo.gl/7Yi5JeKD4vwVWFXo9',
+    // Canonical business URL — the share-popup link carries utm_* params that
+    // would attribute our own site's clicks to a copy-link share.
+    yelp: 'https://www.yelp.com/biz/vl-pro-construction-bradenton',
   },
   // 1200×630 branded link-preview card (logo, tagline, 5.0-star proof).
   // JPG on purpose: FB/WhatsApp previews don't reliably render webp.

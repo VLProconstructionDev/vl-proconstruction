@@ -4,6 +4,7 @@ import SEO from '@/components/SEO.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import EstimateWizard from '@/components/EstimateWizard.astro';
+import ExitOffer from '@components/ExitOffer.astro';
 import { localBusinessSchema } from '@/lib/schema';
 
 interface Props {
@@ -141,6 +142,10 @@ const allSchema = [localBusinessSchema(), ...pageSchema];
     </main>
     <Footer />
     <EstimateWizard />
+
+    <!-- Site-wide "Save $500" tab. The automatic exit-intent/dwell popup
+         arms on the home page only — `auto` is false everywhere else. -->
+    <ExitOffer auto={Astro.url.pathname === '/'} />
 
     <!-- Hero video: the HTML ships NO <source> elements. Desktop injects and
          plays immediately. Phones show the poster during page load (the ~2 MB

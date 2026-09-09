@@ -1,7 +1,7 @@
 ---
 title: 'Top 5 Flooring Companies in Sarasota, FL — 2026 Guide'
 seoTitle: 'Top 5 Flooring Companies Sarasota, FL'
-description: 'The 5 best hard surface flooring companies in Sarasota, FL — hardwood, LVP & tile installers compared on crews, warranty, subfloor prep & pricing.'
+description: 'The 5 best hard surface flooring companies in Sarasota, FL — hardwood, LVP & tile installers. Call for a free quote: (503) 781-4657'
 lede: 'We went through the flooring companies serving Sarasota and looked at the things that decide whether a floor lasts — who actually does the install, whether subfloor prep and moisture testing are written into the estimate, and what each one warranties on their own workmanship. Here''s the honest breakdown of the top 5, who each one is best for, and what a hard surface floor really costs here.'
 publishedAt: 2026-09-08
 author: Vlad Leytner
@@ -9,7 +9,7 @@ authorImage: /assets/images/blog/authors/vlad-leytner.webp
 heroImage: /assets/images/blog/sarasota-flooring-companies-hero.webp
 heroImageAlt: 'Wide-plank light oak flooring running through an open entry and hallway'
 tags: ['flooring', 'sarasota']
-relatedService: hard-surface-flooring
+relatedService: flooring
 relatedLocation: sarasota
 draft: false
 ---
@@ -99,7 +99,7 @@ areas in the same remodel.
 
 **VL Proconstruction** is a Bradenton-based finish contractor working across Sarasota,
 Lakewood Ranch, Venice, Longboat Key, and Siesta Key.
-[Hard surface flooring](/services/hard-surface-flooring) — solid hardwood, engineered
+[Hard surface flooring](/services/flooring) — solid hardwood, engineered
 wood, and LVP/LVT — is one of three things they do, alongside
 [tile and natural stone](/services/tile-natural-stone/sarasota-fl/) and
 [custom showers](/services/custom-showers/sarasota-fl/).

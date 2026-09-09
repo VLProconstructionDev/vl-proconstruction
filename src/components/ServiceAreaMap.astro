@@ -21,25 +21,50 @@ interface Props {
    * every label whose city has a PUBLISHED `cityServices` pair for that service
    * becomes a link to it — so the Sarasota label on /services/custom-showers
    * goes to /services/custom-showers/sarasota-fl. Omit it (home page, services
-   * index) and the labels stay non-navigating controls.
+   * index) and every label instead links to the /locations hub, jumping to that
+   * city's block. Only on /locations itself do the labels stay inert.
    */
   service?: string;
 }
 const { service } = Astro.props;
 
+const here = Astro.url.pathname.replace(/\/$/, '');
+
 // Keyed by the label text in PLACES below, which is the location's `name`.
 const LINKS: Record<string, string> = {};
+
+const locations = await getCollection('locations', ({ data }) => data.published);
+
 if (service) {
-  const [pairs, locations] = await Promise.all([
-    getCollection('cityServices', ({ data }) => data.published && data.service === service),
-    getCollection('locations'),
-  ]);
+  const pairs = await getCollection(
+    'cityServices',
+    ({ data }) => data.published && data.service === service,
+  );
   for (const pair of pairs) {
     const location = locations.find((l) => l.id === pair.data.city);
     if (!location) continue;
     const href = cityServicePath(location, service);
     // No self-link: on the city × service page itself the label stays inert.
-    if (href !== Astro.url.pathname.replace(/\/$/, '')) LINKS[location.data.name] = href;
+    if (href !== here) LINKS[location.data.name] = href;
+  }
+}
+
+// Fallback for every label without a city × service page of its own (which on
+// the home page and the services index is all 16): the /locations hub, jumping
+// to that city's block when it has one. Skipped on /locations itself, where the
+// blocks are already on the page — the labels stay inert there.
+const LOCATIONS_HUB = '/locations';
+// Cities with a block of their own get the anchor; everything else lands at the
+// top of the hub. `HUB` null = we're on /locations already, so no fallback.
+const HUB = here === LOCATIONS_HUB ? null : `${LOCATIONS_HUB}/`;
+const HUB_LINKS: Record<string, string> = {};
+if (HUB) {
+  // Only a city with a published pair has a block (and therefore an anchor) on
+  // the hub — the same rule /locations itself uses. The rest land at the top.
+  const allPairs = await getCollection('cityServices', ({ data }) => data.published);
+  for (const location of locations) {
+    if (!allPairs.some((p) => p.data.city === location.id)) continue;
+    HUB_LINKS[location.data.name] = `${LOCATIONS_HUB}/#${location.id}`;
   }
 }
 
@@ -299,7 +324,7 @@ const ALT =
   }
 </style>
 
-<script is:inline define:vars={{ LINKS }}>
+<script is:inline define:vars={{ LINKS, HUB_LINKS, HUB }}>
   (function () {
     var wrap = document.querySelector('.area-map-wrap');
     var host = document.getElementById('areaMap');
@@ -443,8 +468,10 @@ const ALT =
             // have open water to run their tails into instead of the edge.
             // Top and bottom keep every label clear of the two things that
             // float over a phone's map — the unlock pill and the sticky CTA.
+            // The wide values are sized for the ~720px desktop panel; give
+            // them the old 141/241 and the region shrinks into the middle.
             padding: wide
-              ? { top: 141, bottom: 241, left: 84, right: 60 }
+              ? { top: 48, bottom: 72, left: 84, right: 60 }
               : { top: 62, bottom: 76, left: 104, right: 12 },
             animate: false,
           }
@@ -462,16 +489,25 @@ const ALT =
           // A city with a page for this service navigates; the rest stay
           // buttons, so nothing ever links to a route that isn't built.
           var href = LINKS[p.name] || null;
-          var inner = document.createElement(href ? 'a' : 'button');
+          // No page for this service in that city: fall back to the /locations
+          // hub (that city's block when it has one). Null only on /locations
+          // itself, where the label stays a plain button.
+          var hubHref = href ? null : HUB_LINKS[p.name] || HUB;
+          var target = href || hubHref;
+          var inner = document.createElement(target ? 'a' : 'button');
           inner.className = 'svc-lbl-in';
-          if (href) {
-            inner.href = href;
+          if (target) {
+            inner.href = target;
           } else {
             inner.type = 'button';
           }
           inner.setAttribute(
             'aria-label',
-            href ? p.name + ' service area — see this service in ' + p.name : p.name + ' service area',
+            href
+              ? p.name + ' service area — see this service in ' + p.name
+              : hubHref
+                ? p.name + ' service area — see what we build in ' + p.name
+                : p.name + ' service area',
           );
           var text = document.createElement('span');
           text.textContent = p.name;

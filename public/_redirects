@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects. Static-asset matches win, so these only fire on
+# paths the build no longer emits.
+
+# 2026-09-09: /services/hard-surface-flooring renamed to /services/flooring.
+# Keeps the old indexed URL (and any city x service child) alive as a 301.
+/services/hard-surface-flooring    /services/flooring          301
+/services/hard-surface-flooring/*  /services/flooring/:splat   301
