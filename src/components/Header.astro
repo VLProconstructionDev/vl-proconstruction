@@ -79,7 +79,7 @@ const H = isHome ? '' : '/';
             <div class="nav-dd-panel">
               <a href="/services/custom-showers/" class="nav-dd-item">Custom Showers</a>
               <a href="/services/tile-natural-stone/" class="nav-dd-item">Tile &amp; Natural Stone</a>
-              <a href="/services/hard-surface-flooring/" class="nav-dd-item">Hard Surface Flooring</a>
+              <a href="/services/flooring/" class="nav-dd-item">Flooring</a>
             </div>
           </div>
         </div>
@@ -92,6 +92,7 @@ const H = isHome ? '' : '/';
           <div class="nav-dd">
             <!-- Two levels: cities here, that city's services in a flyout to the right. -->
             <div class="nav-dd-panel">
+              <a href="/locations/" class="nav-dd-item">All Locations</a>
               {locationGroups.map((group) => (
                 <div class="nav-city-row">
                   <button type="button" class="nav-city" aria-haspopup="true">
@@ -118,18 +119,23 @@ const H = isHome ? '' : '/';
     </div>
 
     <div class="hidden lg:flex items-center gap-2 shrink-0">
-      <a href={site.phoneHref} class="flex items-center gap-2 hover:text-brand transition-colors">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
-        </svg>
-        <span class="font-poppins font-bold uppercase text-[16px] tracking-tight">{site.phone}</span>
-      </a>
+      <div class="flex flex-col items-end">
+        <a href={site.phoneHref} class="flex items-center gap-2 hover:text-brand transition-colors">
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <span class="font-poppins font-bold uppercase text-[16px] tracking-tight">{site.phone}</span>
+        </a>
+        <span class="nav-open" title="Available 24 hours a day, 7 days a week">
+          <span class="nav-open-dot" aria-hidden="true"></span><span>It's <span id="navClock">—</span> — we're always open</span>
+        </span>
+      </div>
       <a
         href="#estimate"
         id="navCta"
         class="btn nav-cta js-open-estimate items-center h-11 rounded-full bg-brand hover:bg-[#e03f1c] text-white font-semibold text-[14px] capitalize"
       >
-        Get a Free Estimate
+        Free Estimate
       </a>
     </div>
 
@@ -181,7 +187,7 @@ const H = isHome ? '' : '/';
             <a href="/services/">All Services</a>
             <a href="/services/custom-showers/">Custom Showers</a>
             <a href="/services/tile-natural-stone/">Tile &amp; Natural Stone</a>
-            <a href="/services/hard-surface-flooring/">Hard Surface Flooring</a>
+            <a href="/services/flooring/">Flooring</a>
           </div>
         </div>
       </div>
@@ -192,6 +198,7 @@ const H = isHome ? '' : '/';
         </button>
         <div class="js-mobile-sub mm-sub">
           <div>
+            <a href="/locations/" class="mm-sub-item mm-sub-all">All Locations</a>
             {locationGroups.map((group) => (
               <>
                 <p class="mm-sub-label">{group.label}</p>
@@ -235,6 +242,29 @@ const H = isHome ? '' : '/';
 
 <script>
   // ============================================================
+  // Navbar "always open" chip: the local Florida time, not the visitor's.
+  // Eastern zone (the Suncoast service area), re-rendered each minute so a
+  // long-lived tab never shows a stale clock.
+  // ============================================================
+  const navClock = document.getElementById('navClock');
+  if (navClock) {
+    const fmt = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      hour: 'numeric',
+      minute: '2-digit',
+    });
+    const tick = () => {
+      navClock.textContent = fmt.format(new Date());
+      // Re-sync on the next minute boundary rather than drifting on a fixed interval.
+      setTimeout(tick, 60000 - (Date.now() % 60000) + 250);
+    };
+    tick();
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) navClock.textContent = fmt.format(new Date());
+    });
+  }
+
+  // ============================================================
   // Navbar: theme-switch when scrolling past `[data-nav-theme]` sections,
   // + reveal the "Get a Free Estimate" CTA once past the hero.
   // On non-home pages there is no `#hero`; the navbar is always solid and the
@@ -244,6 +274,8 @@ const H = isHome ? '' : '/';
   const hero = document.getElementById('hero');
   const navCta = document.getElementById('navCta');
   const mobileCta = document.getElementById('mobileCta');
+  // Trust pill: pinned under the navbar over the hero, gone past it.
+  const trustFix = document.getElementById('trustFix');
   // The sticky bar reveals past the hero; on pages without one, after about
   // a screen of scrolling (so it doesn't eat viewport from the first paint).
   const setMobileCta = (show: boolean) => {
@@ -260,10 +292,12 @@ const H = isHome ? '' : '/';
       if (hero && hero.getBoundingClientRect().bottom > probeY + 4) {
         navbar.classList.remove('nav-light', 'nav-dark');
         navCta?.classList.remove('is-visible');
+        trustFix?.classList.remove('is-hidden');
         setMobileCta(false);
         return;
       }
       navCta?.classList.add('is-visible');
+      trustFix?.classList.add('is-hidden');
       setMobileCta(hero ? true : window.scrollY > window.innerHeight * 0.6);
       let theme = 'light';
       for (const s of themed) {

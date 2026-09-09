@@ -2,20 +2,17 @@
 # TODO(client): every number, date and name below is a plausible placeholder
 # written to make the page reviewable. Replace with real job facts before launch.
 city: bradenton
-service: hard-surface-flooring
+service: flooring
 
 # Unpublished on purpose — no page is built for this pair and it drops out
 # of the Locations nav and the sitemap. Flip to `true` to ship it.
 published: false
 
 seoTitle: Hard-Surface Flooring Bradenton, FL
-seoDescription: >-
-  Hardwood, engineered & LVP flooring installers in Bradenton, FL. Slab
-  moisture testing, vapor barriers, NWFA-spec installs. $6–$18/sq ft. Free
-  estimate.
+seoDescription: 'Hardwood, engineered & LVP flooring installers in Bradenton, FL. NWFA-spec installs. $6–$18/sq ft. Call for a free quote: (503) 781-4657'
 
 heroCity: Bradenton
-heroService: Hard Surface Flooring
+heroService: Flooring
 heroSubhead: >-
   We install hardwood, engineered wood, and LVP for Bradenton homeowners — Palma
   Sola bungalows, West Bradenton ranches, and the newer builds out past I-75.
@@ -77,7 +74,7 @@ includedIntro: >-
   One crew, one quote, from the first swing of the hammer to the final
   walkthrough. Nothing gets handed off mid-job.
 included:
-  # Same three cards as /services/hard-surface-flooring, copy rewritten for Bradenton.
+  # Same three cards as /services/flooring, copy rewritten for Bradenton.
   - title: Hardwood Flooring
     body: >-
       Solid and engineered hardwood to NWFA spec, acclimation logged. On most
@@ -143,29 +140,24 @@ reviews:
     image: /assets/images/review-2.webp
 
 process:
-  - title: Walkthrough & quote
+  - title: Consult
     body: >-
-      We measure the rooms, test the slab or subfloor for moisture and flatness,
-      talk through product, plank width, and direction, and leave you with a
-      written line-item price.
+      We measure the rooms, test the slab or subfloor for moisture and
+      flatness, talk through product, plank width, and direction, and leave
+      you with a written line-item price.
     image: /assets/images/process-1.webp
-  - title: Product, acclimation & order
+  - title: Design
     body: >-
       We confirm the floor the moisture reading supports, order it with the
-      right overage, and let it acclimate on site for the manufacturer's window
-      with humidity logged.
+      right overage, and let it acclimate on site for the manufacturer's
+      window with humidity logged.
     image: /assets/images/process-2.webp
-  - title: Demo, prep & installation
+  - title: Build
     body: >-
       Old floor and baseboards out, subfloor ground and self-levelled, vapor
-      barrier down, then planks racked and installed with expansion gaps held at
-      every wall.
-    image: /assets/images/process-3.webp
-  - title: Trim & final walkthrough
-    body: >-
-      Baseboards and thresholds fitted, quarter-round scribed, then we walk the
-      floor with you, detail-clean the space, and hand over care and warranty
-      paperwork.
+      barrier down, then planks racked and installed with expansion gaps held
+      at every wall. Trim and thresholds fitted, and we walk the floor with
+      you before handing over care and warranty paperwork.
     image: /assets/images/process-4.webp
 
 pricingTitle: What does new flooring cost in Bradenton, FL?
@@ -269,8 +261,8 @@ related:
   - label: Custom Showers in Bradenton
     href: /services/custom-showers/bradenton-fl
     blurb: Curbless entries, Schluter waterproofing, and frameless glass.
-  - label: All hard-surface flooring work
-    href: /services/hard-surface-flooring
+  - label: All flooring work
+    href: /services/flooring
     blurb: How we install floors everywhere on the Suncoast, not just Bradenton.
 ---
 

@@ -1,0 +1,602 @@
+---
+import { site } from '@/lib/site';
+
+interface Props {
+  /**
+   * Arm the automatic triggers (exit intent + dwell). Only the home page
+   * passes true — everywhere else the offer opens solely from the tab.
+   */
+  auto?: boolean;
+}
+
+const { auto = false } = Astro.props;
+
+/**
+ * Exit-intent offer popup.
+ *
+ * Rendered site-wide from BaseLayout so the "Save $500" tab is on every
+ * page. The automatic triggers are opt-in per page via `auto`, which only
+ * the home page sets — elsewhere the dialog exists but waits for the tab.
+ *
+ * With `auto`, two triggers, whichever comes first:
+ *   1. the cursor moves off the page (any edge, any direction) — mouse only,
+ *      since a touch device has no cursor to move outside the site;
+ *   2. 10 seconds on the page, which is the only trigger a phone can reach.
+ *
+ * Shows once per session (sessionStorage), so reaching for a bookmark twice in
+ * one visit doesn't reopen it. A fresh visit shows it again.
+ *
+ * A fixed "Save $500" tab (bottom-right, desktop only — #mobileCta owns the
+ * bottom of a phone screen) reopens it at any time, including after the
+ * once-per-session flag has been set.
+ *
+ * `?offer=1` on the URL forces it open for previewing.
+ *
+ * Body-lock mirrors EstimateWizard's `top: -scrollY` approach so the two
+ * behave identically with Lenis running.
+ */
+---
+
+<div
+  id="exitOffer"
+  class="xo"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="xoHeadline"
+  data-auto={auto ? '1' : '0'}
+>
+  <div class="xo-backdrop" data-xo-close></div>
+
+  <div class="xo-card" role="document" tabindex="-1">
+    <div class="xo-photo">
+      <img
+        src="/assets/images/offer-handshake.webp"
+        alt="A VL Proconstruction estimator shaking hands with homeowners in their finished kitchen"
+        width="1448"
+        height="1086"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="xo-panel">
+      <div class="xo-panel-top">
+        <img class="xo-logo" src="/assets/images/logo.svg" alt={site.name} width="176" height="38" />
+        <button type="button" class="xo-x" data-xo-close aria-label="Close offer">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+
+      <p class="xo-eyebrow">Save up to</p>
+      <p class="xo-amount" id="xoHeadline">$500</p>
+      <p class="xo-sub">on your remodel when you call today</p>
+
+      <a class="xo-cta" href={site.phoneHref}>
+        Call now &mdash; {site.phone}
+      </a>
+
+      <button type="button" class="xo-decline" data-xo-close>
+        No thanks, I&rsquo;ll pay full price
+      </button>
+
+      <p class="xo-fine">
+        <span class="xo-fine-clause">Terms &amp; restrictions apply</span>
+        <span class="xo-fine-sep" aria-hidden="true">|</span>
+        <span class="xo-fine-clause">Offer valid for projects over $10,000</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Persistent offer tab — the way back to the popup once it's been dismissed.
+     Desktop only: on phones #mobileCta already owns the bottom of the screen. -->
+<button
+  type="button"
+  id="exitOfferTab"
+  class="xo-tab"
+  aria-haspopup="dialog"
+  aria-controls="exitOffer"
+>
+  Save $500
+</button>
+
+<style is:global>
+  /* ---------------------------------------------------------------------
+     Exit-intent offer popup
+     Sits BELOW the estimate wizard's z-index 2000 on purpose: the two are
+     mutually exclusive, and if the wizard ever wins the race it must be on top.
+     --------------------------------------------------------------------- */
+  .xo {
+    position: fixed;
+    inset: 0;
+    z-index: 1900;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    justify-items: center;
+    padding: 20px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+  }
+  .xo.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .xo-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.74);
+    cursor: pointer;
+  }
+
+  .xo-card {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: #f7f5f1;
+    border-radius: 2px;
+    overflow: hidden;
+    /* Layered, warm-tinted shadow — the card reads as lifted off the page
+       rather than pasted onto it. */
+    box-shadow:
+      0 40px 90px -24px rgba(20, 14, 10, 0.7),
+      0 4px 14px rgba(20, 14, 10, 0.35);
+    transform: translateY(14px) scale(0.985);
+    transition:
+      transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.28s ease;
+  }
+  .xo.open .xo-card {
+    transform: translateY(0) scale(1);
+  }
+  /* Programmatically focused on open so Escape and Tab land inside the dialog
+     — it's a container, not a control, so it carries no focus ring. */
+  .xo-card:focus {
+    outline: none;
+  }
+
+  .xo-photo {
+    position: relative;
+    overflow: hidden;
+    /* Shallower crop stacked above the panel so the whole card fits a phone
+       screen without scrolling. */
+    aspect-ratio: 16 / 10;
+  }
+  .xo-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* The handshake sits just left of centre in the frame. */
+    object-position: 46% 50%;
+    display: block;
+  }
+  /* Warm treatment layer so the photo belongs to the cream panel beside it. */
+  .xo-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(30, 20, 12, 0.28), rgba(30, 20, 12, 0) 55%);
+    pointer-events: none;
+  }
+
+  .xo-panel {
+    padding: 22px 26px 26px;
+    text-align: center;
+  }
+  .xo-panel-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  /* logo.svg is white line art — invert it for the cream panel. */
+  .xo-logo {
+    height: 50px;
+    width: auto;
+    filter: invert(1);
+  }
+
+  .xo-x {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    margin: -4px -6px 0 0;
+    border-radius: 9999px;
+    color: var(--color-graycard);
+    background: transparent;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+  .xo-x svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+  .xo-x:hover {
+    opacity: 0.6;
+  }
+  .xo-x:active {
+    transform: scale(0.9);
+  }
+
+  .xo-eyebrow {
+    font-family: var(--font-poppins);
+    font-weight: 500;
+    font-size: 15px;
+    text-transform: capitalize;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    color: #6b6b6b;
+  }
+
+  .xo-amount {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(3.4rem, 12vw, 5.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    color: var(--color-ink);
+    margin-top: 4px;
+  }
+
+  .xo-sub {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.15vw, 1.0625rem);
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+    color: var(--color-graydesc);
+    margin-top: 10px;
+  }
+
+  .xo-cta {
+    display: block;
+    margin-top: 24px;
+    padding: 14px 32px;
+    border-radius: 9999px;
+    background: var(--color-brand);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(1rem, 3.2vw, 18px);
+    text-transform: capitalize;
+    letter-spacing: -0.02em;
+    text-align: center;
+    text-decoration: none;
+    /* Same easing as the site-wide .btn class. */
+    transition:
+      transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+      background-color 0.18s;
+  }
+  .xo-cta:hover {
+    background: var(--color-brand-hover);
+  }
+  .xo-cta:active {
+    transform: translateY(1px) scale(0.99);
+  }
+
+  .xo-decline {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    color: var(--color-graydesc);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    background: transparent;
+    transition: opacity 0.2s ease;
+  }
+  .xo-decline:hover {
+    opacity: 0.62;
+  }
+  .xo-decline:active {
+    opacity: 0.85;
+  }
+  .xo-fine {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--color-graycard);
+    margin-top: 18px;
+  }
+  /* Each clause stays whole, so a narrow card breaks at the divider rather
+     than mid-sentence. */
+  .xo-fine-clause {
+    display: inline-block;
+  }
+  .xo-fine-sep {
+    margin: 0 4px;
+    color: #cfcfcf;
+  }
+
+  /* Two-column card once there's room for the photo beside the panel. */
+  @media (min-width: 740px) {
+    .xo-card {
+      grid-template-columns: 1fr 1fr;
+    }
+    .xo-photo {
+      aspect-ratio: auto;
+      height: 100%;
+      min-height: 460px;
+    }
+    .xo-panel {
+      padding: 26px 40px 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .xo-panel-top {
+      margin-bottom: 22px;
+    }
+    .xo-logo {
+      height: 64px;
+    }
+  }
+
+  /* Short viewports (landscape laptops at 100% zoom): drop the photo so the
+     card never needs to scroll. */
+  @media (max-height: 560px) {
+    .xo-photo {
+      display: none;
+    }
+    .xo-card {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Persistent offer tab (bottom-right)
+     --------------------------------------------------------------------- */
+  .xo-tab {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    /* Above page content, below the overlay (1900) and the navbar (60). */
+    z-index: 45;
+    display: none;
+    padding: 11px 20px;
+    border-radius: 9999px;
+    background: var(--color-brand);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: capitalize;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    cursor: pointer;
+    /* Layered brand-tinted glow: a tight bloom, a wider halo, and a grounding
+       shadow so the pill still sits on the page rather than floating free. */
+    box-shadow:
+      0 0 0 1px rgba(245, 75, 37, 0.45),
+      0 4px 14px -4px rgba(245, 75, 37, 0.6),
+      0 0 30px -4px rgba(245, 75, 37, 0.55),
+      0 10px 24px -10px rgba(20, 14, 10, 0.55);
+    /* Same easing as the site-wide .btn class. */
+    transition:
+      transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1),
+      background-color 0.18s,
+      box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.18s;
+  }
+  @media (min-width: 768px) {
+    .xo-tab {
+      display: block;
+    }
+  }
+  .xo-tab:hover {
+    background: var(--color-brand-hover);
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 0 1px rgba(245, 75, 37, 0.6),
+      0 6px 18px -4px rgba(245, 75, 37, 0.7),
+      0 0 44px -2px rgba(245, 75, 37, 0.7),
+      0 14px 30px -12px rgba(20, 14, 10, 0.6);
+  }
+  .xo-tab:active {
+    transform: translateY(1px) scale(0.99);
+  }
+  /* Hidden while the popup it opens is on screen. */
+  .xo-tab.is-off {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(6px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .xo-tab,
+    .xo,
+    .xo-card,
+    .xo-cta,
+    .xo-x {
+      transition: none;
+    }
+    .xo-card,
+    .xo.open .xo-card {
+      transform: none;
+    }
+    .xo-cta:hover,
+    .xo-tab:hover {
+      transform: none;
+    }
+    .xo-tab.is-off {
+      transform: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('exitOffer');
+    if (!el) return;
+
+    var SESSION_KEY = 'vlExitOfferShown';
+    var DWELL_MS = 10000; // show after this long on the page
+
+    function stored(store, key) {
+      try {
+        return window[store].getItem(key);
+      } catch (e) {
+        return null;
+      }
+    }
+    function store(kind, key, val) {
+      try {
+        window[kind].setItem(key, val);
+      } catch (e) {
+        /* private mode — the popup just isn't remembered */
+      }
+    }
+
+    // ?offer=1 forces the popup open on load — a preview link for reviewing
+    // the design without having to trigger exit intent.
+    var preview = /[?&]offer=1(&|$)/.test(window.location.search);
+
+    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    // The automatic triggers arm only where the page opted in (home). The tab
+    // works everywhere regardless. Already shown this session? The automatic
+    // triggers stand down too — clicking the tab is a deliberate request.
+    var auto = el.getAttribute('data-auto') === '1';
+    var autoArmed = preview || (auto && !stored('sessionStorage', SESSION_KEY));
+
+    var tab = document.getElementById('exitOfferTab');
+    var lastFocus = null;
+    var scrollY = 0;
+    var open = false;
+    var dwellTimer = null;
+
+    function lock() {
+      scrollY = window.scrollY || window.pageYOffset;
+      document.body.style.position = 'fixed';
+      document.body.style.top = '-' + scrollY + 'px';
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    }
+    function unlock() {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, scrollY);
+    }
+
+    function show() {
+      if (open) return;
+      // Never stack on top of the estimate wizard or the mobile menu.
+      var wiz = document.getElementById('estimateOverlay');
+      if (wiz && wiz.classList.contains('open')) return;
+      var menu = document.getElementById('mobileMenu');
+      if (menu && menu.classList.contains('open')) return;
+
+      open = true;
+      if (!preview) store('sessionStorage', SESSION_KEY, '1');
+      if (tab) tab.classList.add('is-off');
+      lastFocus = document.activeElement;
+      lock();
+      el.classList.add('open');
+      el.setAttribute('aria-hidden', 'false');
+      var card = el.querySelector('.xo-card');
+      if (card) card.focus({ preventScroll: true });
+      detach();
+    }
+
+    function hide() {
+      if (!open) return;
+      open = false;
+      el.classList.remove('open');
+      el.setAttribute('aria-hidden', 'true');
+      if (tab) tab.classList.remove('is-off');
+      unlock();
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    el.addEventListener('click', function (e) {
+      // The call link closes too — the phone app takes over from here.
+      if (e.target.closest('.xo-cta')) {
+        hide();
+        return;
+      }
+      if (e.target.closest('[data-xo-close]')) hide();
+    });
+
+    if (tab) {
+      tab.addEventListener('click', function () {
+        show();
+      });
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (open && e.key === 'Escape') {
+        e.stopPropagation();
+        hide();
+      }
+    });
+
+    // Keep focus inside the card while it's open.
+    el.addEventListener('keydown', function (e) {
+      if (!open || e.key !== 'Tab') return;
+      var f = el.querySelectorAll('a[href], button');
+      if (!f.length) return;
+      var first = f[0];
+      var last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    // Trigger 1 — the cursor moves off the page, through any edge, in any
+    // direction. `mouseleave` on <html> is the direct signal; the `mouseout`
+    // fallback covers a pointer that jumps straight out of the window (a null
+    // relatedTarget means it landed outside the document).
+    function onLeave(e) {
+      if (e && e.relatedTarget) return;
+      show();
+    }
+    function detach() {
+      document.documentElement.removeEventListener('mouseleave', onLeave);
+      document.removeEventListener('mouseout', onLeave);
+      if (dwellTimer) {
+        window.clearTimeout(dwellTimer);
+        dwellTimer = null;
+      }
+    }
+
+    if (preview) {
+      show();
+    } else if (autoArmed) {
+      if (canHover) {
+        document.documentElement.addEventListener('mouseleave', onLeave);
+        document.addEventListener('mouseout', onLeave);
+      }
+      // Trigger 2 — 10 seconds on the page. Whichever trigger lands first
+      // wins; show() tears the other one down.
+      dwellTimer = window.setTimeout(show, DWELL_MS);
+    }
+  })();
+</script>

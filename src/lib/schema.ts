@@ -59,7 +59,7 @@ export function localBusinessSchema() {
 const SERVICE_CATALOG = [
   { slug: 'custom-showers', name: 'Custom Shower Installation' },
   { slug: 'tile-natural-stone', name: 'Tile & Natural Stone Installation' },
-  { slug: 'hard-surface-flooring', name: 'Hard-Surface Flooring Installation' },
+  { slug: 'flooring', name: 'Hard-Surface Flooring Installation' },
 ];
 
 /** WebSite node — names the site for Google and links it back to the business. */

@@ -3,20 +3,15 @@
 # written to make the page reviewable. Replace with real job facts before launch.
 # Review names are real; the neighborhoods attached to them are placeholders.
 city: sarasota
-service: hard-surface-flooring
+service: flooring
 
-# Unpublished on purpose — no page is built for this pair and it drops out
-# of the Locations nav and the sitemap. Flip to `true` to ship it.
-published: false
+published: true
 
 seoTitle: Hard-Surface Flooring Sarasota, FL
-seoDescription: >-
-  Hardwood, engineered & LVP flooring installers in Sarasota, FL. Slab
-  moisture testing, condo sound ratings, NWFA-spec installs. $7–$20/sq ft. Free
-  estimate.
+seoDescription: 'Hardwood, engineered & LVP flooring installers in Sarasota, FL. NWFA-spec installs. $7–$20/sq ft. Call for a free quote: (503) 781-4657'
 
 heroCity: Sarasota
-heroService: Hard Surface Flooring
+heroService: Flooring
 heroSubhead: >-
   We install hardwood, engineered wood, and LVP for Sarasota homeowners — Gulf
   Gate and Arlington Park ranches, Palmer Ranch villas, and the condo towers
@@ -82,7 +77,7 @@ includedIntro: >-
   One crew, one quote, from the first swing of the hammer to the final
   walkthrough. Nothing gets handed off mid-job.
 included:
-  # Same three cards as /services/hard-surface-flooring, copy rewritten for Sarasota.
+  # Same three cards as /services/flooring, copy rewritten for Sarasota.
   - title: Hardwood Flooring
     body: >-
       Solid and engineered hardwood to NWFA spec, acclimation logged. On most
@@ -152,29 +147,24 @@ reviews:
     image: /assets/images/review-2.webp
 
 process:
-  - title: Walkthrough & quote
+  - title: Consult
     body: >-
-      We measure the rooms, test the slab or subfloor for moisture and flatness,
-      talk through product, plank width, and direction, and leave you with a
-      written line-item price.
+      We measure the rooms, test the slab or subfloor for moisture and
+      flatness, talk through product, plank width, and direction, and leave
+      you with a written line-item price.
     image: /assets/images/process-1.webp
-  - title: Product, acclimation & approvals
+  - title: Design
     body: >-
       We confirm the floor the moisture reading supports, file the association
-      packet with its sound rating where there is one, then order with the right
-      overage and acclimate on site for the manufacturer's window.
+      packet with its sound rating where there is one, then order with the
+      right overage and acclimate on site.
     image: /assets/images/process-2.webp
-  - title: Demo, prep & installation
+  - title: Build
     body: >-
       Old floor and baseboards out, subfloor ground and self-levelled, vapor
-      barrier down, then planks racked and installed with expansion gaps held at
-      every wall.
-    image: /assets/images/process-3.webp
-  - title: Trim & final walkthrough
-    body: >-
-      Baseboards and thresholds fitted, quarter-round scribed, then we walk the
-      floor with you, detail-clean the space, and hand over care and warranty
-      paperwork.
+      barrier down, then planks racked and installed with expansion gaps held
+      at every wall. Trim and thresholds fitted, and we walk the floor with
+      you before handing over care and warranty paperwork.
     image: /assets/images/process-4.webp
 
 pricingTitle: What does new flooring cost in Sarasota, FL?
@@ -290,8 +280,8 @@ related:
   - label: Custom Showers in Sarasota
     href: /services/custom-showers/sarasota-fl
     blurb: Curbless entries, Schluter waterproofing, and frameless glass.
-  - label: All hard-surface flooring work
-    href: /services/hard-surface-flooring
+  - label: All flooring work
+    href: /services/flooring
     blurb: How we install floors everywhere on the Suncoast, not just Sarasota.
 ---
 

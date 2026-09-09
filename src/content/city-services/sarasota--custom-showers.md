@@ -6,10 +6,7 @@ city: sarasota
 service: custom-showers
 
 seoTitle: Custom Showers Sarasota, FL
-seoDescription: >-
-  Custom shower builders in Sarasota, FL. Curbless entries, Schluter
-  waterproofing, frameless glass. Most Sarasota showers run $11,000–$26,000.
-  Free estimate.
+seoDescription: 'Custom shower builders in Sarasota, FL. Curbless entries, Schluter waterproofing, frameless glass. Call for a free quote: (503) 781-4657'
 
 heroCity: Sarasota
 heroService: Custom Showers
@@ -161,26 +158,23 @@ reviews:
     image: /assets/images/review-2.webp
 
 process:
-  - title: Walkthrough & quote
+  - title: Consult
     body: >-
       We measure the bathroom, check the subfloor and drain, talk through curb
       height, glass, and tile, and leave you with a written line-item price.
     image: /assets/images/process-1.webp
-  - title: Layout, materials & approvals
+  - title: Design
     body: >-
-      We finalize tile layout, niche and bench placement, slope, and drain type,
-      then pull the permit — and, in a condo, file the association packet and
-      book the elevator — before demo starts.
+      We finalize tile layout, niche and bench placement, slope, and drain
+      type, then pull the permit — and, in a condo, file the association
+      packet and book the elevator — before demo starts.
     image: /assets/images/process-2.webp
-  - title: Demo, waterproofing & tile
+  - title: Build
     body: >-
-      Strip to studs, reframe what needs it, set the pan, install and flood-test
-      the membrane, then set every tile by hand and seal the grout.
-    image: /assets/images/process-3.webp
-  - title: Glass & final walkthrough
-    body: >-
-      Glass is measured off the finished tile, installed, and we walk the shower
-      with you, detail-clean the room, and hand over care and warranty paperwork.
+      Strip to studs, set the pan, flood-test the membrane, and set every tile
+      by hand. Glass is measured off the finished tile, then we walk the
+      shower with you, detail-clean the room, and hand over care and warranty
+      paperwork.
     image: /assets/images/process-4.webp
 
 pricingTitle: What does a custom shower cost in Sarasota, FL?
@@ -287,8 +281,8 @@ related:
   - label: Tile & Natural Stone in Sarasota
     href: /services/tile-natural-stone/sarasota-fl
     blurb: Floors, walls, backsplashes, and slab work across Sarasota County.
-  - label: Hard-Surface Flooring
-    href: /services/hard-surface-flooring
+  - label: Flooring
+    href: /services/flooring
     blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
   - label: All custom shower work
     href: /services/custom-showers

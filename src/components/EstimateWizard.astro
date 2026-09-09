@@ -19,14 +19,6 @@ import { site } from '@/lib/site';
   aria-modal="true"
   aria-label="Request your free estimate"
 >
-  <div class="est-overlay-top">
-    <button type="button" class="est-close" id="estClose" aria-label="Close estimate form">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M6 6l12 12M18 6L6 18"/>
-      </svg>
-    </button>
-  </div>
-
   <div class="est-overlay-body">
     <form id="estimateForm" class="w-full max-w-[440px]" novalidate>
 
@@ -35,7 +27,7 @@ import { site } from '@/lib/site';
         <div class="mt-10 space-y-4" id="ovStep1Options">
           <label class="fopt"><input type="checkbox" name="ovProject" value="Custom Showers" /><span class="pill-label">Custom Showers</span><span class="fradio" aria-hidden="true"></span></label>
           <label class="fopt"><input type="checkbox" name="ovProject" value="Tile & Natural Stone" /><span class="pill-label">Tile &amp; Natural Stone</span><span class="fradio" aria-hidden="true"></span></label>
-          <label class="fopt"><input type="checkbox" name="ovProject" value="Hard Surface Flooring" /><span class="pill-label">Hard Surface Flooring</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="checkbox" name="ovProject" value="Flooring" /><span class="pill-label">Flooring</span><span class="fradio" aria-hidden="true"></span></label>
           <label class="fopt" id="ovOtherPill"><input type="checkbox" name="ovProject" value="Other" id="ovOtherRadio" /><span class="pill-label">Other</span><input type="text" id="ovOtherInput" class="other-inline-input" placeholder="Please describe your project…" autocomplete="off" aria-label="Describe your project" /><span class="fradio" aria-hidden="true"></span></label>
         </div>
         <p class="wiz-error" id="ovStep1Error">Please select at least one project to continue.</p>
@@ -45,11 +37,11 @@ import { site } from '@/lib/site';
       </fieldset>
 
       <fieldset class="wiz-step" data-step="2">
-        <legend class="wiz-q w-full" style="font-size:clamp(1.8rem,8vw,2.5rem)">What is your estimated<br />project budget?</legend>
+        <legend class="wiz-q w-full" style="font-size:clamp(1.8rem,8vw,2.5rem)">What&rsquo;s your budget?</legend>
         <div class="mt-10 space-y-4">
-          <label class="fopt"><input type="radio" name="budget" value="Under $15,000" /><span class="pill-label">Under $15,000</span><span class="fradio" aria-hidden="true"></span></label>
-          <label class="fopt"><input type="radio" name="budget" value="$15,000 – $30,000" /><span class="pill-label">$15,000 &ndash; $30,000</span><span class="fradio" aria-hidden="true"></span></label>
-          <label class="fopt"><input type="radio" name="budget" value="$30,000+" /><span class="pill-label">$30,000+</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="radio" name="budget" value="Under $15k" /><span class="pill-label">Under $15k</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="radio" name="budget" value="$15k – $30k" /><span class="pill-label">$15k &ndash; $30k</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="radio" name="budget" value="$30k+" /><span class="pill-label">$30k+</span><span class="fradio" aria-hidden="true"></span></label>
           <label class="fopt"><input type="radio" name="budget" value="I'm not sure yet" /><span class="pill-label">I&rsquo;m not sure yet</span><span class="fradio" aria-hidden="true"></span></label>
         </div>
         <p class="wiz-error" id="step2Error">Please select an option to continue.</p>
@@ -191,7 +183,7 @@ import { site } from '@/lib/site';
   @media (prefers-reduced-motion: reduce) { .wiz-step.is-active { animation: none; } }
   .wiz-q {
     font-weight: 700; line-height: 1.1; letter-spacing: -0.025em;
-    text-transform: capitalize; text-align: center;
+    text-align: center;
     font-size: clamp(2rem, 3.2vw, 2.7rem);
   }
   .wiz-input {
@@ -294,22 +286,6 @@ import { site } from '@/lib/site';
     overflow-y: auto;
   }
   .est-overlay.open { opacity: 1; pointer-events: auto; }
-  .est-overlay-top {
-    position: sticky; top: 0; z-index: 1;
-    display: flex; align-items: center; justify-content: flex-end;
-    padding: 22px 24px; background: #0a0a0a;
-  }
-  @media (min-width: 640px) { .est-overlay-top { padding: 26px 40px; } }
-  .est-close {
-    flex: none; width: 44px; height: 44px;
-    display: grid; place-items: center; border-radius: 9999px;
-    border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.85);
-    cursor: pointer;
-    transition: color .2s, border-color .2s, background-color .2s;
-  }
-  .est-close svg { width: 18px; height: 18px; }
-  .est-close:hover { color: #fff; border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.06); }
-  .est-close:focus-visible { outline: 2px solid #f54b25; outline-offset: 3px; }
   .est-overlay-body {
     flex: 1; display: flex; align-items: center; justify-content: center;
     padding: 24px 20px 88px;
@@ -437,7 +413,6 @@ import { site } from '@/lib/site';
         closeOverlayDom();
       }
     });
-    $('estClose')?.addEventListener('click', closeOverlay);
     $('estCloseDone')?.addEventListener('click', closeOverlay);
     // Capture phase: must read the Places dropdown's visibility BEFORE the
     // widget's own Escape handler hides it — Escape closes the suggestions

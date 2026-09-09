@@ -1,0 +1,498 @@
+---
+/**
+ * `#reviews` — Google review cards in a horizontal carousel beside the
+ * "Trusted Choice for Homeowners" trust panel.
+ *
+ * Rendered by the home page, the three static service pages and
+ * LocationServiceLayout, so all of them stay identical. The card track is a
+ * native horizontal scroller (scroll-snap): swipe works for free on touch, the
+ * arrows scroll it by one card on pointer devices, and the region is focusable
+ * so keyboard users can arrow-scroll it too. Deliberately no autoplay — it
+ * would fight the native scroller and hijack a swipe mid-gesture.
+ *
+ * The trailing <slot /> is for anything a page wants below the cards (the home
+ * page puts its "Our Partners" logo strip there).
+ */
+import { site } from '@/lib/site';
+import { googleReviews, rating, type Review } from '@/lib/reviews';
+
+interface Props {
+  /** Defaults to the shared Google set; city × service pages pass their own. */
+  reviews?: Review[];
+  /** Section ground: the home page's warm stone, or white on service pages. */
+  tone?: 'stone' | 'white';
+  /** Vertical padding for the section's inner container. */
+  pad?: string;
+}
+
+const {
+  reviews = googleReviews,
+  tone = 'stone',
+  pad = 'py-20 lg:py-[110px]',
+} = Astro.props;
+
+const STARS = [0, 1, 2, 3, 4];
+---
+
+<section
+  id="reviews"
+  class:list={['rv', tone === 'stone' ? 'rv-stone' : 'rv-white']}
+  data-nav-theme="light"
+>
+  <div class:list={['mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px]', pad]}>
+    <div class="grid gap-12 xl:gap-14 xl:grid-cols-[minmax(0,1fr)_42%]">
+
+      <!-- ---------- Card carousel ---------- -->
+      <div class="rv-carousel">
+        <ul
+          class="rv-track"
+          id="rvTrack"
+          tabindex="0"
+          role="region"
+          aria-label="Customer reviews — scroll for more"
+        >
+          {reviews.map((r) => (
+            <li class="rv-card">
+              <div class="rv-card-head">
+                <p class="rv-name">{r.name}</p>
+                <!-- Google's own mark; the wordmark is never redrawn in another face. -->
+                <svg class="rv-g" viewBox="0 0 48 48" role="img" aria-label="Review posted on Google">
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                </svg>
+              </div>
+
+              <div class="rv-stars" role="img" aria-label="Rated 5 out of 5">
+                {STARS.map(() => (
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                ))}
+              </div>
+
+              <blockquote class="rv-quote">{r.quote}</blockquote>
+
+              {r.meta && <p class="rv-meta">{r.meta}</p>}
+            </li>
+          ))}
+        </ul>
+
+        <!-- Static row below the track on phones; flanks it in the page gutter on lg. -->
+        <div class="rv-nav" id="rvNav">
+          <button type="button" class="rv-arrow" id="rvPrev" aria-controls="rvTrack" aria-label="Previous reviews">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="rv-arrow" id="rvNext" aria-controls="rvTrack" aria-label="More reviews">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ---------- Trust panel ---------- -->
+      <div class="rv-panel">
+        <h2 class="rv-h2">The Trusted Choice for Homeowners:</h2>
+
+        <div class="rv-panel-body">
+          <div class="rv-rating">
+            <p class="rv-score">{rating.score}<span>/{rating.best}</span></p>
+
+            <div class="rv-stars rv-stars-lg" role="img" aria-label={`Rated ${rating.score} out of ${rating.best}`}>
+              {STARS.map(() => (
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              ))}
+            </div>
+
+            <p class="rv-count">Based on {rating.count} reviews</p>
+
+            <a
+              class="rv-more"
+              href={site.social.googleMaps}
+              target="_blank"
+              rel="noopener noreferrer"
+            >Read more reviews</a>
+          </div>
+
+          <!-- Both review marks live here now: the score speaks for itself, so
+               the logos sit beside the BBB badge instead of labelling it. Each
+               one opens that profile; BBB stays a plain badge. -->
+          <div class="rv-badges">
+            <a
+              class="rv-badge-link"
+              href={site.social.googleMaps}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Read our reviews on Google"
+            >
+              <img
+                class="rv-badge-g"
+                loading="lazy"
+                decoding="async"
+                src="/assets/images/google.webp"
+                width="1203"
+                height="802"
+                alt="Google"
+              />
+            </a>
+            <a
+              class="rv-badge-link"
+              href={site.social.yelp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Read our reviews on Yelp"
+            >
+              <img
+                class="rv-badge-y"
+                loading="lazy"
+                decoding="async"
+                src="/assets/images/yelp.webp"
+                width="205"
+                height="256"
+                alt="Yelp"
+              />
+            </a>
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/assets/images/bbb.webp"
+              width="122"
+              height="72"
+              alt="Better Business Bureau A+ rating"
+            />
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <slot />
+  </div>
+</section>
+
+<style>
+  /* Two grounds, one component: the warm stone band on the home page and white
+     on the service pages. Surfaces are the site's own — white cards on the
+     stone band, #faf9f8 cards on white — and every rule is border-black/10. */
+  .rv-stone { background-color: #f6f5f3; --rv-surface: #ffffff; --rv-edge: transparent; }
+  .rv-white { background-color: #ffffff; --rv-surface: #faf9f8; --rv-edge: rgba(0, 0, 0, 0.07); }
+  .rv { --rv-rule: rgba(0, 0, 0, 0.1); }
+
+  /* ---------------- Carousel ---------------- */
+  .rv-carousel { position: relative; min-width: 0; }
+
+  .rv-track {
+    display: flex;
+    align-items: stretch;
+    /* Fills the grid row so the card bottoms line up with the panel's. */
+    height: 100%;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    /* Native scrollbar hidden; the arrows and the peeking next card carry the
+       affordance. Scrolling itself stays untouched. */
+    scrollbar-width: none;
+  }
+  .rv-track::-webkit-scrollbar { display: none; }
+  .rv-track:focus-visible { outline: 2px solid #f54b25; outline-offset: 4px; }
+
+  .rv-card {
+    flex: 0 0 min(84vw, 384px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--rv-surface);
+    border: 1px solid var(--rv-edge);
+    padding: 26px 28px 24px;
+  }
+
+  .rv-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .rv-name {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #1e1e1e;
+  }
+  .rv-g { height: 19px; width: auto; flex: none; }
+
+  .rv-stars { display: flex; gap: 2px; margin-top: 8px; }
+  .rv-stars svg { height: 15px; width: 15px; fill: #fbbf24; }
+
+  .rv-quote {
+    margin-top: 18px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rv-rule);
+    font-size: 15px;
+    line-height: 1.7;
+    color: #4e4e4e;
+    max-width: 62ch;
+    /* Clamped so a long review can't set the height of the whole row. */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 11;
+    overflow: hidden;
+  }
+
+  /* `margin-top: auto` pins the meta line to the card's floor, so a short
+     review and a long one still line their footers up across the row. */
+  .rv-meta {
+    margin-top: auto;
+    padding-top: 18px;
+    text-align: right;
+    font-size: 13px;
+    color: #959595;
+  }
+
+  /* ---------------- Arrows ---------------- */
+  .rv-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .rv-nav[hidden] { display: none; }
+
+  .rv-arrow {
+    display: grid;
+    place-items: center;
+    height: 44px;
+    width: 44px;
+    border-radius: 9999px;
+    border: 1px solid rgba(30, 30, 30, 0.1);
+    background-color: #ffffff;
+    color: #1e1e1e;
+    cursor: pointer;
+    /* Layered, ink-tinted — not a flat grey drop shadow. */
+    box-shadow:
+      0 1px 2px rgba(30, 30, 30, 0.06),
+      0 10px 22px -8px rgba(30, 30, 30, 0.22);
+    transition:
+      transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 0.25s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .rv-arrow svg { height: 18px; width: 18px; }
+  .rv-arrow:hover { border-color: #f54b25; color: #f54b25; transform: scale(1.07); }
+  .rv-arrow:active { transform: scale(0.94); }
+  .rv-arrow:focus-visible { outline: 2px solid #f54b25; outline-offset: 3px; }
+
+  /* ---------------- Trust panel ---------------- */
+  .rv-panel {
+    background-color: var(--rv-surface);
+    padding: 34px 32px 38px;
+    align-self: start;
+  }
+
+  .rv-h2 {
+    font-size: clamp(1.3rem, 1.85vw, 1.6rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    color: #1e1e1e;
+  }
+
+  .rv-panel-body {
+    margin-top: 24px;
+    padding-top: 26px;
+    border-top: 1px solid var(--rv-rule);
+  }
+
+  .rv-rating { text-align: center; }
+
+  /* The one loud element in the section. */
+  .rv-score {
+    margin-top: 0;
+    font-size: clamp(3.1rem, 4.6vw, 3.9rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #1e1e1e;
+  }
+  .rv-score span {
+    font-size: 0.32em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    vertical-align: super;
+    color: #4e4e4e;
+  }
+
+  .rv-stars-lg { justify-content: center; gap: 3px; margin-top: 12px; }
+  .rv-stars-lg svg { height: 21px; width: 21px; }
+
+  .rv-count { margin-top: 12px; font-size: 14px; color: #4e4e4e; }
+
+  .rv-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 22px;
+    height: 46px;
+    padding: 0 24px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #1e1e1e;
+    transition:
+      border-color 0.18s ease,
+      color 0.18s ease,
+      transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .rv-more:hover { border-color: #f54b25; color: #f54b25; }
+  .rv-more:active { transform: scale(0.98); }
+  .rv-more:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
+
+  .rv-badges {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 26px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rv-rule);
+  }
+  .rv-badges img { height: 38px; width: auto; display: block; }
+  /* The Google file carries white padding around the G, so it's set taller than
+     the others to land the glyph itself at their optical size. */
+  .rv-badges .rv-badge-g { height: 44px; }
+  .rv-badges .rv-badge-y { height: 36px; }
+
+  /* Both marks are links, so both carry the full set of states. */
+  .rv-badge-link {
+    display: inline-flex;
+    border-radius: 6px;
+    transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .rv-badge-link:hover { opacity: 0.78; transform: translateY(-2px); }
+  .rv-badge-link:active { transform: translateY(0) scale(0.98); }
+  .rv-badge-link:focus-visible {
+    outline: 2px solid rgba(245, 75, 37, 0.6);
+    outline-offset: 4px;
+  }
+
+  /* ---------------- lg: arrows move into the page gutter ---------------- */
+  @media (min-width: 1024px) {
+    .rv-nav {
+      position: absolute;
+      inset: 0 -52px;
+      margin: 0;
+      justify-content: space-between;
+      align-items: center;
+      /* Only the buttons take clicks — the row must not shadow the cards. */
+      pointer-events: none;
+    }
+    .rv-arrow { pointer-events: auto; }
+    .rv-panel { padding: 36px 34px 38px; }
+  }
+
+  /* From tablet up the card is sized to the track, two at a time, so the row
+     always ends on a whole card — never a sliver clipped against the panel or
+     the page edge. Phones keep a fixed width, where the peeking next card is
+     the affordance for the swipe. */
+  @media (min-width: 768px) {
+    .rv-card { flex-basis: calc((100% - 18px) / 2); }
+  }
+
+  /* Rating beside the badge column — the panel is wide enough for it once
+     it either spans the page (below xl) or takes its 42% column (xl up). */
+  @media (min-width: 640px) {
+    .rv-panel-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 28px;
+    }
+    .rv-badges {
+      flex-direction: column;
+      align-self: stretch;
+      justify-content: center;
+      margin: 0;
+      padding: 0 0 0 28px;
+      border-top: 0;
+      border-left: 1px solid var(--rv-rule);
+    }
+  }
+
+  /* Phones: the 11-line clamp that keeps desktop rows even makes a card
+     taller than the viewport at ~84vw, so the quote clamps shorter and the
+     padding tightens — the card stays a swipeable tile, not a page. */
+  @media (max-width: 767px) {
+    .rv-card { padding: 22px 22px 20px; }
+    .rv-quote {
+      margin-top: 14px;
+      padding-top: 16px;
+      font-size: 14.5px;
+      line-height: 1.65;
+      -webkit-line-clamp: 6;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rv-track { scroll-behavior: auto; }
+    .rv-arrow,
+    .rv-more { transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease; }
+    .rv-badge-link { transition: opacity 0.2s ease; }
+    .rv-arrow:hover,
+    .rv-arrow:active,
+    .rv-more:active,
+    .rv-badge-link:hover,
+    .rv-badge-link:active { transform: none; }
+  }
+</style>
+
+<script is:inline>
+  // Card carousel: the arrows scroll the native track by one card and wrap —
+  // past the last review Next returns to the first, and Prev from the first
+  // jumps to the last — so the row never dead-ends. The whole nav row hides
+  // when there is nothing to scroll.
+  (function () {
+    var track = document.getElementById('rvTrack');
+    if (!track) return;
+    var nav = document.getElementById('rvNav');
+    var prev = document.getElementById('rvPrev');
+    var next = document.getElementById('rvNext');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // A couple of pixels of slop: scrollLeft is fractional at most zoom levels
+    // and DPRs, so an exact === comparison never reports "at the end".
+    var EDGE = 2;
+
+    var step = function () {
+      var card = track.querySelector('.rv-card');
+      if (!card) return track.clientWidth;
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    var maxScroll = function () {
+      return track.scrollWidth - track.clientWidth;
+    };
+
+    var sync = function () {
+      nav.hidden = maxScroll() < EDGE;
+    };
+
+    var go = function (dir) {
+      var max = maxScroll();
+      var behavior = reduce ? 'auto' : 'smooth';
+      var atEnd = track.scrollLeft >= max - EDGE;
+      var atStart = track.scrollLeft <= EDGE;
+      if (dir > 0 && atEnd) track.scrollTo({ left: 0, behavior: behavior });
+      else if (dir < 0 && atStart) track.scrollTo({ left: max, behavior: behavior });
+      else track.scrollBy({ left: dir * step(), behavior: behavior });
+    };
+
+    prev.addEventListener('click', function () { go(-1); });
+    next.addEventListener('click', function () { go(1); });
+    window.addEventListener('resize', sync, { passive: true });
+    sync();
+  })();
+</script>

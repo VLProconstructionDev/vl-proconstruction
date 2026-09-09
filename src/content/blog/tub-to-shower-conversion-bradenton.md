@@ -1,7 +1,8 @@
 ---
 title: 'Tub to Shower Conversion in Bradenton: What It Costs, What It Takes, and How to Do It Right'
 seoTitle: 'Tub to Shower Conversion Bradenton, FL'
-description: 'Tub to shower conversion in Bradenton and Lakewood Ranch: 2026 costs, curbless vs. curbed, ADA shower sizes, and Manatee County permit rules.'
+description: 'Tub to shower conversion in Bradenton: 2026 costs, curbless vs. curbed, ADA sizes, permit rules. Call for a free quote: (503) 781-4657'
+lede: 'Tub to shower conversion in Bradenton and Lakewood Ranch: 2026 costs, curbless vs. curbed, ADA shower sizes, and Manatee County permit rules.'
 publishedAt: 2026-09-04
 author: Vlad Leytner
 authorImage: /assets/images/blog/authors/vlad-leytner.webp
@@ -219,7 +220,7 @@ require an electrical permit. Your contractor should pull it.
 ### What's the difference between a curbless shower and a wet room?
 
 A curbless shower is a defined shower area with a flush entry, usually with glass. A wet room
-waterproofs [the entire bathroom floor](/services/hard-surface-flooring) and treats the whole
+waterproofs [the entire bathroom floor](/services/flooring) and treats the whole
 space as a shower zone. Wet rooms feel dramatic and are excellent for accessibility, but they
 demand more waterproofing and more careful drainage planning.
 

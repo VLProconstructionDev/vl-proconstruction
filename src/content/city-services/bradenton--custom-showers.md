@@ -4,15 +4,10 @@
 city: bradenton
 service: custom-showers
 
-# Unpublished on purpose — no page is built for this pair and it drops out
-# of the Locations nav and the sitemap. Flip to `true` to ship it.
-published: false
+published: true
 
 seoTitle: Custom Showers Bradenton, FL
-seoDescription: >-
-  Custom shower builders in Bradenton, FL. Curbless entries, Schluter
-  waterproofing, frameless glass. Most Bradenton showers run $9,500–$22,000.
-  Free estimate.
+seoDescription: 'Custom shower builders in Bradenton, FL. Schluter waterproofing, frameless glass. $9,500–$22,000. Call for a free quote: (503) 781-4657'
 
 heroCity: Bradenton
 heroService: Custom Showers
@@ -155,25 +150,23 @@ reviews:
     image: /assets/images/review-2.webp
 
 process:
-  - title: Walkthrough & quote
+  - title: Consult
     body: >-
       We measure the bathroom, check the subfloor and drain, talk through curb
       height, glass, and tile, and leave you with a written line-item price.
     image: /assets/images/process-1.webp
-  - title: Layout, materials & permit
+  - title: Design
     body: >-
-      We finalize tile layout, niche and bench placement, slope, and drain type,
-      then pull the permit and order everything before demo starts.
+      We finalize tile layout, niche and bench placement, slope, and drain
+      type, then pull the Manatee County permit and order everything before
+      demo starts.
     image: /assets/images/process-2.webp
-  - title: Demo, waterproofing & tile
+  - title: Build
     body: >-
-      Strip to studs, reframe what needs it, set the pan, install and flood-test
-      the membrane, then set every tile by hand and seal the grout.
-    image: /assets/images/process-3.webp
-  - title: Glass & final walkthrough
-    body: >-
-      Glass is measured off the finished tile, installed, and we walk the shower
-      with you, detail-clean the room, and hand over care and warranty paperwork.
+      Strip to studs, set the pan, flood-test the membrane, and set every tile
+      by hand. Glass is measured off the finished tile, then we walk the
+      shower with you, detail-clean the room, and hand over care and warranty
+      paperwork.
     image: /assets/images/process-4.webp
 
 pricingTitle: What does a custom shower cost in Bradenton, FL?
@@ -273,8 +266,8 @@ related:
   - label: Tile & Natural Stone in Bradenton
     href: /services/tile-natural-stone/bradenton-fl
     blurb: Floors, walls, backsplashes, and slab work across Manatee County.
-  - label: Hard-Surface Flooring in Bradenton
-    href: /services/hard-surface-flooring/bradenton-fl
+  - label: Flooring in Bradenton
+    href: /services/flooring/bradenton-fl
     blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
   - label: All custom shower work
     href: /services/custom-showers

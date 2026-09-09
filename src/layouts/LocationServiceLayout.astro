@@ -14,6 +14,8 @@ import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 import { site } from '@/lib/site';
 import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
 import { cityServicePath } from '@/lib/urls';
+import TrustPill from '@components/TrustPill.astro';
+import ReviewsSection from '@components/ReviewsSection.astro';
 
 interface Props {
   entry: CollectionEntry<'cityServices'>;
@@ -24,6 +26,10 @@ interface Props {
 const { entry, location, service } = Astro.props;
 const d = entry.data;
 const { Content } = await render(entry);
+
+// The card carousel wants { quote, name, meta } — the neighborhood is this
+// city's version of the small line in a card's bottom-right corner.
+const cityReviews = d.reviews.map((r) => ({ quote: r.quote, name: r.name, meta: r.neighborhood }));
 
 const cityState = `${location.data.name}, ${location.data.state}`;
 const path = cityServicePath(location, service.id);
@@ -106,15 +112,6 @@ const SHOW_RELATED = false;
     .js-faq .faq-a { transition: height .32s cubic-bezier(.4,0,.2,1); }
     @media (prefers-reduced-motion: reduce) { .js-faq .faq-a { transition: none; } }
 
-    /* ----- Reviews ----- */
-    .rev-fade { transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1); will-change: transform, opacity; }
-    @media (prefers-reduced-motion: reduce) { .rev-fade { transition: none !important; transform: none !important; } }
-    .rev-dot { flex: none; height: 6px; width: 6px; border-radius: 9999px; background: rgba(30,30,30,.2); transition: transform .3s cubic-bezier(.2,.8,.2,1), background-color .25s ease; }
-    .rev-dot:hover { background: rgba(30,30,30,.38); }
-    .rev-dot:focus-visible { outline: 2px solid #f54b25; outline-offset: 3px; }
-    .rev-dot.is-active { background: #f54b25; transform: scale(1.35); }
-    @media (prefers-reduced-motion: reduce) { .rev-dot { transition: none; } }
-
     /* ----- Process steps stick & overlap; parallax photos ----- */
     .px-frame { position: relative; overflow: hidden; }
     .process-step > * { min-width: 0; }
@@ -124,7 +121,6 @@ const SHOW_RELATED = false;
     .process-step:nth-child(1) { top: 92px; }
     .process-step:nth-child(2) { top: 124px; }
     .process-step:nth-child(3) { top: 156px; }
-    .process-step:nth-child(4) { top: 188px; }
     @media (prefers-reduced-motion: reduce) { .process-step { position: static; } }
 
     /* ----- Project photo — same full-bleed frame the comparison slider used ----- */
@@ -201,47 +197,56 @@ const SHOW_RELATED = false;
     <video class="absolute inset-0 w-full h-full object-cover" muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1"></video>
     <div class="absolute inset-0 bg-black/65"></div>
 
-    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-9 sm:pb-12 lg:pb-[62px] pt-[150px] gap-8 lg:gap-10">
-      <div class="flex items-center gap-3.5 flex-wrap -mb-3 lg:-mb-4">
-        <a href={site.social.googleMaps} target="_blank" rel="noopener noreferrer" aria-label="View our Google reviews" class="inline-block rounded-md transition-transform duration-200 ease-out hover:scale-[1.14] active:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
-          <img src="/assets/images/google.webp" alt="Google" class="h-9 w-auto object-contain" />
-        </a>
-        <img src="/assets/images/bbb.webp" alt="BBB A+ rating" class="h-7 w-auto object-contain" />
-        <span class="h-6 w-px bg-white/40"></span>
-        <div class="flex items-center gap-1.5">
-          <span class="text-[#fbbf24] text-xl tracking-tight">★★★★★</span>
-          <span class="text-[15px] font-semibold uppercase">5.0</span>
-        </div>
-      </div>
+    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-24 lg:pb-[90px] pt-[130px] gap-5 lg:gap-6">
+      <TrustPill />
 
-      <div class="font-semibold capitalize leading-[1.03] tracking-[-0.03em] text-[clamp(2.75rem,6.2vw,5.5rem)]">
+      <div class="font-semibold capitalize leading-[1.03] tracking-[-0.03em] text-[clamp(3rem,6.8vw,6.05rem)] text-center">
         <h1>
           <span>{d.heroCity}</span><br />
           <span class="text-brand block">{d.heroService}</span>
         </h1>
-        <div class="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-8">
-          <span>Experts</span>
-          <p class="sm:mb-3 text-[14px] font-medium normal-case leading-[1.25] tracking-[-0.02em] text-[#f0f0f0] max-w-[480px]">{d.heroSubhead}</p>
+        <div class="flex flex-col items-center gap-3 sm:gap-5">
+          <span>Installation Experts</span>
+          <p class="text-[15px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">{d.heroSubhead}</p>
         </div>
       </div>
 
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
-          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Get a Free estimate</a>
-          <a href={site.phoneHref} class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">call now</a>
+      <div class="flex flex-col items-center gap-8">
+        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
+          <a href={site.phoneHref} class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">{site.phone}</a>
         </div>
-        <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-end">
-          {d.stats.map((s) => (
-            <div class="flex flex-col items-start lg:items-end">
-              <span class="font-normal text-[1.9rem] sm:text-[clamp(2.55rem,4.2vw,3.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count={s.count}>{s.count}</span>{s.suffix}</span>
-              <span class="font-poppins text-[11px] sm:text-[16.5px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">
-                {/* " | " marks the phone-only line break, same as the service pages. */}
-                {s.label.split('|').map((part, i) => (
-                  <>{i > 0 && <br class="sm:hidden" />}{i > 0 ? ' ' : ''}{part.trim()}</>
-                ))}
-              </span>
+        <!-- Bottom row: stats on the left, the marks we build to on the right.
+             Capped narrower than the hero's 1920 grid and centred, so on a wide
+             screen the two ends pull in off the edges. -->
+        <div class="w-full flex flex-col gap-8 lg:mt-[120px] lg:mx-auto lg:max-w-[1180px] lg:flex-row lg:items-end lg:justify-between">
+          <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
+            {d.stats.map((s) => (
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count={s.count}>{s.count}</span>{s.suffix}</span>
+                <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">
+                  {/* " | " marks the phone-only line break, same as the service pages. */}
+                  {s.label.split('|').map((part, i) => (
+                    <>{i > 0 && <br class="sm:hidden" />}{i > 0 ? ' ' : ''}{part.trim()}</>
+                  ))}
+                </span>
+              </div>
+            ))}
+          </div>
+          <!-- Credential marks: each logo carries its own claim, so the row states
+               what the badges mean. Reversed (white-on-transparent) marks, so they
+               read on the dark hero; images are decorative — the label names them. -->
+          <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
             </div>
-          ))}
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -369,49 +374,8 @@ const SHOW_RELATED = false;
   </section>
 
   <!-- ============ 7 · REVIEWS ============ -->
-  <!-- UI: service-page #reviews carousel, data swapped for this city + service. -->
-  <section id="reviews" class="bg-white" data-nav-theme="light">
-    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[110px] pb-8 lg:pb-12 overflow-hidden">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div class="lg:order-1 order-2">
-          <figure class="rev-fade">
-            <blockquote class="font-bold text-ink text-[clamp(0.98rem,1.8vw,1.7rem)] leading-[1.35] tracking-[-0.02em]">
-              <span class="text-brand inline-block align-text-top text-[1.7em] leading-[0.7] mr-1" aria-hidden="true">&#8220;</span><span id="revQuote">{d.reviews[0]?.quote}</span>
-            </blockquote>
-          </figure>
-          <div id="revMeta" class="mt-10 rev-fade flex items-center gap-4">
-            <a href={site.social.googleMaps} target="_blank" rel="noopener noreferrer" aria-label="Read our reviews on Google" class="btn relative block h-14 w-14 shrink-0 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60">
-              <img loading="lazy" decoding="async" id="revAvatar" src={d.reviews[0]?.avatar} alt="" class="h-14 w-14 rounded-full object-cover border border-black/10" />
-              <span class="absolute -bottom-0.5 -right-0.5 grid place-items-center h-6 w-6 rounded-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.18)] ring-1 ring-black/5">
-                <svg class="h-3.5 w-3.5" viewBox="0 0 48 48" aria-hidden="true">
-                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-                </svg>
-              </span>
-            </a>
-            <div>
-              <p id="revName" class="font-semibold text-[18px] tracking-[-0.01em] text-ink">{d.reviews[0]?.name}</p>
-              <p id="revRole" class="mt-1 text-[15px] text-graydesc">{d.reviews[0]?.neighborhood}</p>
-            </div>
-          </div>
-        </div>
-        <div class="lg:order-2 order-1 w-full overflow-hidden aspect-[4/3] rev-fade">
-          <img loading="lazy" decoding="async" id="revImg" src={d.reviews[0]?.image} alt="Completed VL Proconstruction shower" class="w-full h-full object-cover" />
-        </div>
-      </div>
-      <div class="mt-8 lg:mt-10 flex items-center justify-center gap-3">
-        <button id="revPrev" aria-label="Previous review" class="btn hidden lg:grid place-items-center h-12 w-12 rounded-full border border-black/10 text-ink hover:border-brand hover:text-brand">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        </button>
-        <div id="revDots" class="flex lg:hidden items-center gap-2" role="tablist" aria-label="Choose a review"></div>
-        <button id="revNext" aria-label="Next review" class="btn hidden lg:grid place-items-center h-12 w-12 rounded-full border border-black/10 text-ink hover:border-brand hover:text-brand">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
+  <!-- UI: shared ReviewsSection, with this city + service's own reviews. -->
+  <ReviewsSection reviews={cityReviews} tone="white" pad="pt-20 lg:pt-[110px] pb-8 lg:pb-12" />
 
   <!-- ============ 8 · PROCESS ============ -->
   <!-- UI: service-page #process sticky steps + parallax photos. -->
@@ -427,7 +391,7 @@ const SHOW_RELATED = false;
               <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
                 <img loading="lazy" decoding="async" src={s.image} alt={s.title} class="px-img" />
               </div>
-              <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">{String(i + 1).padStart(2, '0')}</span>
+              <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">{i + 1}</span>
               <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
                 <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">{s.title}</h3>
                 <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">{s.body}</p>
@@ -472,7 +436,7 @@ const SHOW_RELATED = false;
   <!-- ============ 10 · SERVICE AREA ============ -->
   <!-- UI: service-page #service-area + the shared ServiceAreaMap component. -->
   <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
-    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[260px] lg:min-h-[1040px] flex items-center">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
       <div class="lg:max-w-[44%]">
         <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">{d.areaTitle}</h2>
         <p class="mt-6 text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">{d.areaBody}</p>
@@ -531,7 +495,7 @@ const SHOW_RELATED = false;
         <div class="mt-5 space-y-4" id="step1Options">
           <label class="fopt"><input type="checkbox" name="s1project" value="Custom Showers" /><span class="pill-label">Custom Showers</span><span class="fradio" aria-hidden="true"></span></label>
           <label class="fopt"><input type="checkbox" name="s1project" value="Tile & Natural Stone" /><span class="pill-label">Tile &amp; Natural Stone</span><span class="fradio" aria-hidden="true"></span></label>
-          <label class="fopt"><input type="checkbox" name="s1project" value="Hard Surface Flooring" /><span class="pill-label">Hard Surface Flooring</span><span class="fradio" aria-hidden="true"></span></label>
+          <label class="fopt"><input type="checkbox" name="s1project" value="Flooring" /><span class="pill-label">Flooring</span><span class="fradio" aria-hidden="true"></span></label>
           <label class="fopt" id="s1OtherPill"><input type="checkbox" name="s1project" value="Other" id="s1OtherRadio" /><span class="pill-label">Other</span><input type="text" id="s1OtherInput" class="other-inline-input" placeholder="Please describe your project…" autocomplete="off" aria-label="Describe your project" /><span class="fradio" aria-hidden="true"></span></label>
         </div>
 
@@ -545,7 +509,7 @@ const SHOW_RELATED = false;
     </div>
   </section>
 
-  <script is:inline define:vars={{ reviews: d.reviews }}>
+  <script is:inline>
     // Count-up animation for hero stats
     (function () {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -566,103 +530,6 @@ const SHOW_RELATED = false;
         const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { runCount(e.target); io.unobserve(e.target); } }); }, { threshold: 0.6 });
         nums.forEach((el) => io.observe(el));
       }
-    })();
-
-    // Reviews carousel — same controller as the service pages, city data injected.
-    (function () {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const revQuote = document.getElementById('revQuote');
-      if (!revQuote || !reviews || reviews.length < 2) return;
-      const revName = document.getElementById('revName');
-      const revRole = document.getElementById('revRole');
-      const revImg = document.getElementById('revImg');
-      const revAvatar = document.getElementById('revAvatar');
-      const fades = [document.getElementById('revMeta'), revQuote.closest('.rev-fade'), revImg.closest('.rev-fade')];
-      let i = 0;
-      const dotsWrap = document.getElementById('revDots');
-      let dots = [];
-      const syncDots = () => dots.forEach((el, n) => {
-        el.classList.toggle('is-active', n === i);
-        el.setAttribute('aria-current', n === i ? 'true' : 'false');
-      });
-      const paint = () => {
-        const r = reviews[i];
-        revName.textContent = r.name;
-        revRole.textContent = r.neighborhood;
-        revRole.classList.toggle('hidden', !r.neighborhood);
-        revQuote.textContent = r.quote;
-        revImg.src = r.image;
-        revAvatar.src = r.avatar;
-        syncDots();
-      };
-      const quoteCol = revQuote.closest('.rev-fade').parentElement;
-      const lockHeight = () => {
-        const current = reviews[i].quote;
-        quoteCol.style.minHeight = '';
-        let max = 0;
-        reviews.forEach((r) => { revQuote.textContent = r.quote; max = Math.max(max, quoteCol.offsetHeight); });
-        revQuote.textContent = current;
-        quoteCol.style.minHeight = max + 'px';
-      };
-      let animating = false;
-      const go = (dir) => {
-        if (animating) return;
-        i = (i + dir + reviews.length) % reviews.length;
-        if (reduceMotion) { paint(); return; }
-        animating = true;
-        const outX = dir > 0 ? -36 : 36;
-        const inX = dir > 0 ? 36 : -36;
-        fades.forEach((el) => { el.style.opacity = '0'; el.style.transform = `translateX(${outX}px)`; });
-        setTimeout(() => {
-          paint();
-          fades.forEach((el) => { el.style.transition = 'none'; el.style.transform = `translateX(${inX}px)`; });
-          void document.body.offsetWidth;
-          requestAnimationFrame(() => {
-            fades.forEach((el) => { el.style.transition = ''; el.style.opacity = '1'; el.style.transform = 'translateX(0)'; });
-            setTimeout(() => { animating = false; }, 450);
-          });
-        }, 350);
-      };
-      let timer = null;
-      const start = () => { timer = setInterval(() => go(1), 5000); };
-      const reset = () => { clearInterval(timer); start(); };
-      document.getElementById('revPrev').addEventListener('click', () => { go(-1); reset(); });
-      document.getElementById('revNext').addEventListener('click', () => { go(1); reset(); });
-      const reviewsSection = document.getElementById('reviews');
-      reviewsSection.addEventListener('mouseenter', () => clearInterval(timer));
-      reviewsSection.addEventListener('mouseleave', start);
-      let touchX = null, touchY = null;
-      reviewsSection.addEventListener('touchstart', (e) => {
-        touchX = e.changedTouches[0].clientX;
-        touchY = e.changedTouches[0].clientY;
-      }, { passive: true });
-      reviewsSection.addEventListener('touchend', (e) => {
-        if (touchX === null) return;
-        const dx = e.changedTouches[0].clientX - touchX;
-        const dy = e.changedTouches[0].clientY - touchY;
-        touchX = touchY = null;
-        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
-        go(dx < 0 ? 1 : -1);
-        reset();
-      }, { passive: true });
-      lockHeight();
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockHeight);
-      let revResizeT = null;
-      window.addEventListener('resize', () => { clearTimeout(revResizeT); revResizeT = setTimeout(lockHeight, 150); }, { passive: true });
-      if (dotsWrap) {
-        dots = reviews.map((r, n) => {
-          const el = document.createElement('button');
-          el.type = 'button';
-          el.className = 'rev-dot';
-          el.setAttribute('role', 'tab');
-          el.setAttribute('aria-label', 'Show review ' + (n + 1) + ' of ' + reviews.length);
-          el.addEventListener('click', () => { if (n !== i) { go(n - i); reset(); } });
-          dotsWrap.appendChild(el);
-          return el;
-        });
-        syncDots();
-      }
-      start();
     })();
 
     // FAQ accordion — single-open; content stays visible if JS is unavailable

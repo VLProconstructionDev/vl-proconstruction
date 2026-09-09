@@ -1,0 +1,202 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import EstimateInline from '@components/EstimateInline.astro';
+import ServiceAreaMap from '@components/ServiceAreaMap.astro';
+import { site } from '@/lib/site';
+import { cityServicePath } from '@/lib/urls';
+import { breadcrumbSchema, itemListSchema } from '@/lib/schema';
+
+/**
+ * /locations — the service-locations hub.
+ *
+ * One block per city that has at least one published `cityServices` pair — the
+ * city name, a status badge, the location's own `intro` copy, then one dark card
+ * per service that HAS a pair page — so a card never points at a page that
+ * hasn't been written. Publishing a pair file adds the card (and the city's
+ * block, if it's the first one) automatically.
+ */
+const [locations, pairs, services] = await Promise.all([
+  getCollection('locations', ({ data }) => data.published),
+  getCollection('cityServices', ({ data }) => data.published),
+  getCollection('services', ({ data }) => data.published),
+]);
+
+const orderedServices = [...services].sort((a, b) => a.data.order - b.data.order);
+
+const cities = [...locations]
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((location) => ({
+    location,
+    label: `${location.data.name}, ${location.data.state}`,
+    // Home base gets its own badge — Bradenton is where the business is registered.
+    badge: location.data.name === site.address.addressLocality ? 'Home base' : 'Now serving',
+    // Only services with a published pair page — the card IS the link, so a
+    // service without one simply isn't listed here.
+    cards: orderedServices
+      .filter((service) =>
+        pairs.some((p) => p.data.city === location.id && p.data.service === service.id),
+      )
+      .map((service) => ({
+        name: service.data.shortName,
+        href: cityServicePath(location, service.id),
+      })),
+  }))
+  // A city earns a block once one of its services has a page. Publishing a
+  // `city-services` pair file adds the city here automatically.
+  .filter((city) => city.cards.length > 0);
+
+const schema = [
+  breadcrumbSchema([
+    { name: 'Home', url: `${site.url}/` },
+    { name: 'Service Locations', url: `${site.url}/locations/` },
+  ]),
+  itemListSchema({
+    name: `${site.name} service locations`,
+    items: cities.flatMap((city) =>
+      city.cards.map((card) => ({ name: `${card.name} — ${city.label}`, url: card.href })),
+    ),
+  }),
+];
+---
+
+<BaseLayout
+  title="Service Areas in Bradenton & Sarasota"
+  description="Custom showers, tile & flooring in Bradenton, Sarasota, Lakewood Ranch, Venice and 12 more cities. Call for a free quote: (503) 781-4657"
+  schema={schema}
+  navTheme="dark"
+>
+  <style is:global>
+    /* ---- City blocks ---- */
+    /* Status badge — solid brand block, as on the reference layout. */
+    .loc-badge {
+      display: inline-flex; align-items: center; height: 26px; padding: 0 10px;
+      background: #f54b25; color: #fff;
+      font-family: 'Poppins', sans-serif; font-size: 11.5px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em; white-space: nowrap;
+    }
+
+    /* A service that HAS a city page: dark card, whole card is the link. */
+    .loc-card {
+      display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 112px; padding: 16px 18px;
+      background: #131313; color: #fff;
+      border: 1px solid transparent;
+      transition: transform .25s cubic-bezier(.22,1,.36,1), background-color .25s ease, border-color .25s ease;
+    }
+    .loc-card:hover { background: #191919; border-color: rgba(245,75,37,.55); transform: translateY(-3px); }
+    .loc-card:focus-visible { outline: 2px solid #f54b25; outline-offset: 3px; }
+    .loc-card:active { transform: translateY(-1px); }
+    .loc-card-title { font-size: 19px; font-weight: 600; letter-spacing: -.025em; line-height: 1.2; }
+    .loc-card-meta {
+      display: inline-flex; align-items: center; gap: 7px; margin-top: 16px;
+      font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .11em; color: #9a9a9a;
+      transition: color .25s ease;
+    }
+    .loc-card:hover .loc-card-meta { color: #e6e6e6; }
+    .loc-card-arrow { transition: transform .25s ease; }
+    .loc-card:hover .loc-card-arrow { transform: translateX(4px); }
+    @media (prefers-reduced-motion: reduce) {
+      .loc-card, .loc-card-meta, .loc-card-arrow { transition: none; }
+      .loc-card:hover { transform: none; }
+      .loc-card:hover .loc-card-arrow { transform: none; }
+    }
+
+  </style>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero" class="relative overflow-hidden bg-black text-white" data-nav-theme="dark">
+    <img
+      src="/assets/images/gallery/work-14.webp"
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 h-full w-full object-cover opacity-30"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/45"></div>
+
+    <div class="relative mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-[150px] pb-16 lg:pt-[190px] lg:pb-24">
+      <h1 class="font-semibold capitalize leading-[1.02] tracking-[-0.035em] text-[clamp(2.6rem,6vw,5.25rem)] max-w-[1000px]">
+        Where we build
+      </h1>
+      <p class="mt-6 max-w-[620px] text-[clamp(0.95rem,1.2vw,1.15rem)] font-medium leading-[1.6] tracking-[-0.02em] text-[#eaeaea]">
+        VL Proconstruction works across {site.areaServed.length} cities and communities on Florida's
+        Gulf Coast, from Anna Maria Island to Venice. Below is how we build in each one.
+      </p>
+      <div class="mt-9 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+        <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[17px] font-semibold capitalize text-white">Free Estimate</a>
+        <a href={site.phoneHref} class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[17px] font-semibold capitalize text-[#f2f2f2]">{site.phone}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CITY BLOCKS ===================== -->
+  <!-- UI: dark cards echo the service-page link cards (.svc-other); the chips
+       reuse the services-index chip weight. -->
+  <section id="cities" class="bg-[#faf9f8]" data-nav-theme="light">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
+      {cities.map((city, i) => (
+        <div id={city.location.id} class:list={['max-w-[1400px]', i > 0 && 'mt-16 lg:mt-24 pt-16 lg:pt-24 border-t border-black/10']}>
+          <div class="flex flex-wrap items-center gap-x-5 gap-y-3">
+            <h2 class="font-semibold leading-[1.05] tracking-[-0.04em] text-[clamp(2.1rem,4vw,3.5rem)] text-ink">
+              {city.label}
+            </h2>
+            <span class="loc-badge">{city.badge}</span>
+          </div>
+
+          <p class="mt-5 max-w-[620px] text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc">
+            {city.location.data.intro}
+          </p>
+
+          <div class="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {city.cards.map((card) => (
+              <a href={card.href} class="loc-card btn">
+                <span class="loc-card-title">{card.name}</span>
+                <span class="loc-card-meta">
+                  {city.label}
+                  <svg class="loc-card-arrow w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <p class="mt-7 text-[15px] leading-[1.6] text-graydesc">
+            Planning a project in {city.location.data.name}?{' '}
+            <a href="#estimate" class="js-open-estimate font-semibold text-brand underline-offset-4 hover:underline focus-visible:underline focus-visible:outline-none">
+              Get a free estimate
+            </a>{' '}
+            or call{' '}
+            <a href={site.phoneHref} class="font-semibold text-ink underline-offset-4 hover:text-brand hover:underline focus-visible:underline focus-visible:outline-none">
+              {site.phone}
+            </a>.
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===================== SERVICE AREA ===================== -->
+  <!-- UI: the black #service-area band, identical to the home + service pages. -->
+  <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
+
+    <!-- Heading + copy -->
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
+      <div class="lg:max-w-[44%]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
+          Proudly Serving Florida's<br />Gulf Coast
+        </h2>
+        <p class="mt-6 text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
+          VL Proconstruction proudly serves homeowners across the greater Bradenton–Sarasota metro area — delivering quality craftsmanship and honest service right in your neighborhood.
+        </p>
+      </div>
+    </div>
+
+    <!-- Labels stay inert here: this IS the hub they'd link to. -->
+    <ServiceAreaMap />
+
+  </section>
+
+  <!-- ===================== ESTIMATE ===================== -->
+  <EstimateInline headingTop="Request your" headingBottom="free estimate" />
+
+</BaseLayout>
