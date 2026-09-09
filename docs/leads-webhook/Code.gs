@@ -13,7 +13,7 @@
 
 // Bump on every script update — echoed in webhook responses (`v`) so the
 // live deployment's version can be checked without opening the editor.
-var VERSION = 6;
+var VERSION = 7;
 // Where new-lead notifications go — add as many addresses as needed.
 // Every recipient counts against the daily Gmail send quota (~100/day on a
 // consumer account), so 3 recipients = 3 quota units per lead.
@@ -66,8 +66,16 @@ function handleLead(e) {
     return respond({ ok: false, error: 'bad payload' });
   }
 
-  // Honeypot: real users never fill "company". Pretend success so bots move on.
-  if (data.company) return respond({ ok: true });
+  // Honeypot: real users never fill this hidden field. Pretend success so bots
+  // move on — but LOG it, so a lead dropped by a false positive (e.g. browser
+  // autofill) is visible on the Log tab instead of vanishing silently.
+  // (Field renamed off "company" precisely because autofill kept filling it.)
+  var honeypot = data.contact_pref || data.company; // accept old key during deploy window
+  if (honeypot) {
+    logIssue('honeypot dropped a submission', 'value=' + String(honeypot).slice(0, 80) +
+      ' name=' + (data.name || '') + ' email=' + (data.email || ''));
+    return respond({ ok: true });
+  }
 
   // reCAPTCHA policy: only token-less/invalid-token requests are rejected —
   // those are bots POSTing at the webhook directly, never the website form.

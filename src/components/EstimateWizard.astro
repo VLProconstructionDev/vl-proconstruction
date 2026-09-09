@@ -98,10 +98,14 @@ import { site } from '@/lib/site';
             <input id="msEmail" class="wiz-input" type="email" name="email" placeholder="Email" autocomplete="email" enterkeyhint="done" />
             <p class="wiz-error" id="msEmailError">Please enter a valid email address.</p>
           </div>
-          <!-- Honeypot: invisible to humans; bots that fill it are dropped server-side. -->
+          <!-- Honeypot: invisible to humans; bots that fill it are dropped server-side.
+               Deliberately NOT named "company"/"organization" etc. — those get
+               autofilled by Chrome/password managers even off-screen with
+               autocomplete off, which silently dropped real leads. A neutral
+               name + autocomplete="new-password" keeps autofill away from it. -->
           <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
-            <label for="msCompany">Company</label>
-            <input id="msCompany" type="text" name="company" tabindex="-1" autocomplete="off" />
+            <label for="msHpField">Leave this field empty</label>
+            <input id="msHpField" type="text" name="contact_pref" tabindex="-1" autocomplete="new-password" />
           </div>
           <p class="wiz-note">Your information is secure and will never be shared.</p>
         </div>
@@ -729,7 +733,7 @@ import { site } from '@/lib/site';
           ...formData,
           test: isLocalDev,
           // Honeypot — humans never see the field; the Apps Script drops filled ones.
-          company: $<HTMLInputElement>('msCompany')?.value ?? '',
+          contact_pref: $<HTMLInputElement>('msHpField')?.value ?? '',
           page: location.pathname,
           recaptchaToken: captchaToken,
           utm_source: utm.utm_source || '',
