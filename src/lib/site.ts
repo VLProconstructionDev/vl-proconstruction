@@ -3,9 +3,9 @@
  * Consumed by SEO/JSON-LD, footer, header CTAs, and location pages.
  */
 export const site = {
-  name: 'VL Proconstruction',
+  name: 'VL Pro Construction',
   // Legal name as it appears on the business's Google Maps listing.
-  legalName: 'VL Proconstruction LLC',
+  legalName: 'VL Pro Construction LLC',
   tagline: 'Custom Showers, Tile & Natural Stone, Hard-Surface Flooring',
   url: 'https://vlproco.com',
   logo: '/assets/images/favicon.png',
@@ -18,6 +18,14 @@ export const site = {
     addressRegion: 'FL',
     postalCode: '34211',
     addressCountry: 'US',
+  },
+  // Hours as the client stated them. Days are deliberately not spelled out —
+  // confirm the weekly schedule before adding them here or to the
+  // LocalBusiness JSON-LD (openingHoursSpecification), which must match the
+  // Google Business Profile exactly.
+  hours: {
+    office: '7am \u2013 6pm',
+    emergency: '7am \u2013 10pm',
   },
   geo: {
     // TODO: exact coordinates for 17416 Harvest Moon Way. These are the

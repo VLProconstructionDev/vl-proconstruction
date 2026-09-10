@@ -46,13 +46,13 @@ not a quote.
 
 | Company | Best for | Price range | Standout credential |
 | --- | --- | --- | --- |
-| **VL Proconstruction** <span class="row-us">⭐</span> | Best price; one crew for floors, tile, and showers | $ – $$$ | Moisture readings logged; itemized $6–$18+/sq ft |
+| **VL Pro Construction** <span class="row-us">⭐</span> | Best price; one crew for floors, tile, and showers | $ – $$$ | Moisture readings logged; itemized $6–$18+/sq ft |
 | **Sarasota Flooring Company** | A paper trail on the install | $$ – $$$ | 2-year warranty; 63-point standard |
 | **Flooring 941** | Simple residential and commercial jobs | $$ – $$$ | BBB-accredited; satisfaction guarantee |
 | **Footprints Floors of SW Florida** | Supplying your own material | $$ – $$$$ | Franchise, showroom-free; NWFA member |
 | **6051 Design Source** | Browsing samples before deciding | $$$ | Showroom selection; Best of SRQ 2021 |
 
-## 1. VL Proconstruction (Best Overall)
+## 1. VL Pro Construction (Best Overall)
 
 <div class="factbox">
   <div><span class="fb-k">Best for</span><span class="fb-v">One crew for floors, tile, and wet areas</span></div>
@@ -65,7 +65,7 @@ not a quote.
 **Best for:** homeowners who want one accountable crew handling floors, tile, and wet
 areas in the same remodel.
 
-**VL Proconstruction** is a Bradenton-based finish contractor working across Sarasota,
+**VL Pro Construction** is a Bradenton-based finish contractor working across Sarasota,
 Lakewood Ranch, Venice, Longboat Key, and Siesta Key.
 [Hard surface flooring](/services/flooring) — solid hardwood, engineered
 wood, and LVP/LVT — is one of three things they do, alongside

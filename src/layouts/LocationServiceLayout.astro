@@ -31,6 +31,16 @@ const { Content } = await render(entry);
 // city's version of the small line in a card's bottom-right corner.
 const cityReviews = d.reviews.map((r) => ({ quote: r.quote, name: r.name, meta: r.neighborhood }));
 
+// Phones get a still job photo where desktop plays the hero clip — the same
+// shot each service wears on the home-page card.
+const HERO_PHOTO: Record<string, string> = {
+  'custom-showers': '/assets/images/card-bath.webp',
+  'tile-natural-stone': '/assets/images/card-kitchen.webp',
+  'hard-surface-flooring': '/assets/images/card-home.webp',
+  flooring: '/assets/images/card-home.webp',
+};
+const heroPhoto = HERO_PHOTO[service.id] ?? '/assets/images/hero-poster-0715.webp';
+
 const cityState = `${location.data.name}, ${location.data.state}`;
 const path = cityServicePath(location, service.id);
 
@@ -115,6 +125,8 @@ const SHOW_RELATED = false;
     /* ----- Process steps stick & overlap; parallax photos ----- */
     .px-frame { position: relative; overflow: hidden; }
     .process-step > * { min-width: 0; }
+    /* Step 1 is a flat plan drawing — fills the frame still, no parallax crop */
+    .px-frame .px-img.px-fit { position: absolute; inset: 0; top: 0; width: 100%; height: 100%; transform: none; }
     .px-frame .px-img { position: absolute; left: 0; top: -20%; width: 100%; height: 140%; object-fit: cover; will-change: transform; }
     @media (prefers-reduced-motion: reduce) { .px-frame .px-img { position: static; top: 0; height: 100%; transform: none; } }
     .process-step { position: sticky; background: #faf9f8; }
@@ -194,20 +206,21 @@ const SHOW_RELATED = false;
        still ships as BreadcrumbList JSON-LD above. -->
   <!-- UI: service-page #hero, verbatim (video, proof badges, stat count-up). -->
   <section id="hero" class="relative min-h-screen lg:h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
-    <video class="absolute inset-0 w-full h-full object-cover" muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1"></video>
+    <img src={heroPhoto} alt="" aria-hidden="true" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover md:hidden" />
+    <video class="absolute inset-0 w-full h-full object-cover hidden md:block" data-desktop-only muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1"></video>
     <div class="absolute inset-0 bg-black/65"></div>
 
-    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-24 lg:pb-[90px] pt-[130px] gap-5 lg:gap-6">
+    <div class="relative z-20 h-full min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:py-0 sm:pb-24 lg:pb-[90px] sm:pt-[130px] gap-5 lg:gap-6">
       <TrustPill />
 
-      <div class="font-semibold capitalize leading-[1.03] tracking-[-0.03em] text-[clamp(3rem,6.8vw,6.05rem)] text-center">
+      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,3rem)] sm:text-[clamp(3rem,6.8vw,6.05rem)] text-center">
         <h1>
           <span>{d.heroCity}</span><br />
           <span class="text-brand block">{d.heroService}</span>
         </h1>
         <div class="flex flex-col items-center gap-3 sm:gap-5">
           <span>Installation Experts</span>
-          <p class="text-[15px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">{d.heroSubhead}</p>
+          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">{d.heroSubhead}</p>
         </div>
       </div>
 
@@ -223,12 +236,10 @@ const SHOW_RELATED = false;
           <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
             {d.stats.map((s) => (
               <div class="flex flex-col items-start">
-                <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count={s.count}>{s.count}</span>{s.suffix}</span>
-                <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">
-                  {/* " | " marks the phone-only line break, same as the service pages. */}
-                  {s.label.split('|').map((part, i) => (
-                    <>{i > 0 && <br class="sm:hidden" />}{i > 0 ? ' ' : ''}{part.trim()}</>
-                  ))}
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count={s.count}>{s.count}</span>{s.suffix}</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">
+                  {/* Labels wrap on their own now — "|" in the data is just a word break. */}
+                  {s.label.split('|').map((part) => part.trim()).join(' ')}
                 </span>
               </div>
             ))}
@@ -245,6 +256,11 @@ const SHOW_RELATED = false;
             <div class="flex items-center gap-2.5 sm:gap-3.5">
               <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Featured<br />On</p>
+              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-white.webp" width="480" height="134" alt="Yahoo" class="block h-[22px] sm:h-7 w-auto opacity-90" />
             </div>
           </div>
         </div>
@@ -281,7 +297,7 @@ const SHOW_RELATED = false;
   <section id="included" class="bg-white" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-16 lg:pt-20 pb-28 lg:pb-[150px]">
       <h2 class="font-semibold capitalize leading-[1.05] tracking-[-0.04em] text-[clamp(2.5rem,4vw,3.75rem)]">{d.includedTitle}</h2>
-      <p class="mt-5 text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[620px]">{d.includedIntro}</p>
+      <p class="mt-5 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[620px]">{d.includedIntro}</p>
 
       {/* Card count follows the matching service page: tile/flooring run 3-up,
           showers 4-up. */}
@@ -343,7 +359,7 @@ const SHOW_RELATED = false;
       <h2 class="font-bold text-ink leading-[1.05] tracking-[-0.03em] text-[clamp(2.4rem,5vw,4rem)]">
         A recent project in {d.project.neighborhood}
       </h2>
-      <p class="mt-5 text-[15.5px] leading-[1.75] text-graydesc max-w-[680px]">{d.project.story}</p>
+      <p class="mt-5 text-[13.5px] sm:text-[15.5px] leading-[1.75] text-graydesc max-w-[680px]">{d.project.story}</p>
     </div>
 
     <figure class="proj-photo">
@@ -389,7 +405,7 @@ const SHOW_RELATED = false;
           {d.process.map((s, i) => (
             <div class:list={['process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8', i > 0 && 'border-t border-black/10']}>
               <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
-                <img loading="lazy" decoding="async" src={s.image} alt={s.title} class="px-img" />
+                <img loading="lazy" decoding="async" src={s.image} alt={s.title} class:list={['px-img', i === 0 && 'px-fit']} />
               </div>
               <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">{i + 1}</span>
               <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
@@ -409,7 +425,7 @@ const SHOW_RELATED = false;
     <div class="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
       <div class="mx-auto max-w-[760px] text-center">
         <h2 class="font-semibold leading-[1.1] tracking-[-0.035em] text-[clamp(2rem,3.2vw,3rem)]">{d.pricingTitle}</h2>
-        <p class="mt-5 text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc">{d.pricingIntro}</p>
+        <p class="mt-5 text-[13.5px] sm:text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc">{d.pricingIntro}</p>
       </div>
 
       <div class="mt-12 lg:mt-16 grid gap-3 lg:grid-cols-3 items-stretch">
@@ -439,7 +455,7 @@ const SHOW_RELATED = false;
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
       <div class="lg:max-w-[44%]">
         <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">{d.areaTitle}</h2>
-        <p class="mt-6 text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">{d.areaBody}</p>
+        <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">{d.areaBody}</p>
       </div>
     </div>
     <ServiceAreaMap service={service.id} />
@@ -450,7 +466,7 @@ const SHOW_RELATED = false;
   <section id="faqs" class="bg-[#faf9f8]" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[100px]">
       <h2 class="font-bold capitalize leading-[1.02] tracking-[-0.03em] text-[clamp(2.1rem,5vw,4rem)]">{d.heroCity} {service.data.shortName.toLowerCase()} questions</h2>
-      <p class="mt-5 text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[600px]">Permits, associations, cost, living in the house, and how long it takes. Still have a question? Give us a call.</p>
+      <p class="mt-5 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[600px]">Permits, associations, cost, living in the house, and how long it takes. Still have a question? Give us a call.</p>
       <div id="faqList" class="mt-12 lg:mt-16">
         {d.faqs.map((f) => (
           <div class="faq-item">
@@ -458,7 +474,7 @@ const SHOW_RELATED = false;
               <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">{f.q}</span>
               <span class="faq-ico" aria-hidden="true"></span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner"><p class="text-[15px] leading-[1.7] text-graydesc max-w-[860px]">{f.a}</p></div></div>
+            <div class="faq-a"><div class="faq-a-inner"><p class="text-[13.5px] sm:text-[15px] leading-[1.7] text-graydesc max-w-[860px]">{f.a}</p></div></div>
           </div>
         ))}
       </div>
@@ -490,7 +506,7 @@ const SHOW_RELATED = false;
     <div class="px-5 sm:px-10 lg:px-[60px] py-16 lg:py-24 flex items-center justify-center">
       <div class="w-full max-w-[440px]">
         <h3 class="text-center font-bold capitalize leading-[1.1] tracking-[-0.025em] text-[clamp(2.4rem,4vw,3.75rem)]">Request your<br />free estimate</h3>
-        <p class="mt-6 text-center text-[15px] font-semibold text-white/85">What project are you interested in?</p>
+        <p class="mt-6 text-center text-[13.5px] sm:text-[15px] font-semibold text-white/85">What project are you interested in?</p>
 
         <div class="mt-5 space-y-4" id="step1Options">
           <label class="fopt"><input type="checkbox" name="s1project" value="Custom Showers" /><span class="pill-label">Custom Showers</span><span class="fradio" aria-hidden="true"></span></label>
@@ -547,7 +563,7 @@ const SHOW_RELATED = false;
     // Parallax process photos
     (function () {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const pxImgs = [...document.querySelectorAll('.px-img')];
+      const pxImgs = [...document.querySelectorAll('.px-img:not(.px-fit)')];
       if (!pxImgs.length || reduceMotion) return;
       let pxTicking = false;
       const renderParallax = () => {

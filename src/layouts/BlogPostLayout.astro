@@ -286,7 +286,7 @@ const schema = [
             </div>
 
             {relatedService && (
-              <p class="mt-12 pt-8 border-t border-black/10 text-[15px] leading-[1.7] text-graydesc">
+              <p class="mt-12 pt-8 border-t border-black/10 text-[13.5px] sm:text-[15px] leading-[1.7] text-graydesc">
                 More on this work:
                 <a href={`/services/${relatedService.id}`} class="text-brand font-semibold hover:underline underline-offset-4">
                   {relatedService.data.shortName}
@@ -343,15 +343,15 @@ const schema = [
     <!-- ===== Keep reading — the same .bl-* cards as /blog ===== -->
     {related.length > 0 && (
       <div class="bg-white" data-nav-theme="light">
-        <div class="post-wrap px-5 sm:px-10 lg:px-[60px] py-16 lg:py-20">
-          <div class="flex flex-wrap items-center justify-between gap-6">
+        <div class="bl-sec post-wrap px-5 sm:px-10 lg:px-[60px] py-16 lg:py-20">
+          <div class="bl-head flex flex-wrap items-center justify-between gap-6">
             <h2 class="font-bold capitalize text-ink leading-[1.05] tracking-[-0.03em] text-[clamp(1.6rem,3vw,2.4rem)]">
               Keep reading
             </h2>
             <a href="/blog" class="btn bl-more">See more blogs</a>
           </div>
 
-          <div class="mt-10 grid gap-x-8 gap-y-12 min-[860px]:grid-cols-2 xl:grid-cols-3">
+          <div class="bl-list mt-10 grid gap-x-8 gap-y-12 min-[860px]:grid-cols-2 xl:grid-cols-3">
             {related.map((other) => <PostCard post={other} headingLevel="h3" />)}
           </div>
         </div>

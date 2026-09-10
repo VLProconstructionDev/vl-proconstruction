@@ -12,17 +12,111 @@ const serviceAreas = [
   'Venice', 'Anna Maria', 'Holmes Beach', 'Bradenton Beach', 'Longboat Key',
   'Siesta Key',
 ];
+
+/* Supplier partners. Dedicated white variants rather than a CSS invert: the
+   marks carry knocked-out shapes (the "&" inside Floor & Decor's plate, the
+   quadrants of the Tile Outlets diamond) and `brightness(0) invert(1)` flattens
+   those into solid white blocks. The -white files keep each logo's alpha and
+   paint the visible pixels white. ProSource has no logo file anywhere in the
+   project, so this repeats the two-line type lockup the home page uses instead
+   of inventing a mark. Heights are per-brand — these aspect ratios differ
+   enough that one shared height makes the wide marks look twice the size. */
+const partners = [
+  { src: '/assets/images/brand/floordecor-white.svg', alt: 'Floor & Decor', h: 'h-[22px]' },
+  { src: '/assets/images/brand/tileoutlets-white.webp', alt: 'Tile Outlets of America', h: 'h-[26px]' },
+  { type: 'prosource', alt: 'ProSource Wholesale' },
+  { src: '/assets/images/brand/yourflooring-white.webp', alt: 'Your Flooring Warehouse', h: 'h-[38px]' },
+];
 ---
 
 <footer class="bg-black text-white" data-nav-theme="dark">
-  <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[100px] pb-12">
+  <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-14 lg:pt-16 pb-32 lg:pb-[190px]">
     <div class="grid gap-12 lg:gap-10 md:grid-cols-2 lg:grid-cols-3">
 
       <div>
         <p class="text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">
-          Serving the Suncoast
+          Serving Florida since 2004
         </p>
         <img src="/assets/images/logo.svg" alt={site.name} class="mt-7 h-[68px] w-auto" />
+
+        {/* Non-breaking space before each separator, so a wrapped line never
+            starts with a stray "·"; non-breaking hyphen (&#8209;) in
+            "Family-Owned" so it cannot break across lines as "Family-/Owned" */}
+        <p class="mt-5 max-w-[420px] text-[11px] font-semibold capitalize leading-[2] tracking-[0.12em] text-white/40">
+          Florida Licensed General Contractor<br />
+          Bonded &amp; Insured&nbsp;· Family&#8209;Owned &amp; Operated
+        </p>
+
+        <div class="mt-9 max-w-[420px]">
+          <div class="h-px bg-white/10"></div>
+
+          {/* Credential marks, laid out like the hero's: the logo carries the
+              claim, so the label beside it names what the badge means. The
+              white-on-transparent artwork needs no plate behind it. */}
+          <p class="mt-7 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">
+            Certifications &amp; Memberships
+          </p>
+          <div class="mt-5 flex items-center gap-6">
+            <div class="flex items-center gap-3">
+              <img
+                src="/assets/images/brand/schluter-white.webp"
+                width="408"
+                height="240"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="block h-9 w-auto opacity-90"
+              />
+              <p class="shrink-0 text-[13px] font-medium leading-[1.25] tracking-[-0.02em] text-white/70">
+                Schluter&reg;<br />Certified
+              </p>
+            </div>
+            <span class="h-9 w-px shrink-0 bg-white/15" aria-hidden="true"></span>
+            <div class="flex items-center gap-3">
+              <img
+                src="/assets/images/brand/ntca-white.webp"
+                width="240"
+                height="240"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="block h-[52px] w-auto opacity-90"
+              />
+              <p class="shrink-0 text-[13px] font-medium leading-[1.25] tracking-[-0.02em] text-white/70">
+                NTCA<br />Member
+              </p>
+            </div>
+          </div>
+
+          <p class="mt-8 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">
+            Our Partners
+          </p>
+          {/* 2×2 grid, not a flex row: four marks across a 420px column would
+              sit a few pixels from overflowing at every breakpoint. */}
+          <ul class="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 max-w-[320px]">
+            {partners.map((partner) => (
+              <li class="flex h-10 items-center">
+                {partner.type === 'prosource' ? (
+                  <span
+                    class="inline-flex flex-col items-center leading-none text-white/60"
+                    aria-label={partner.alt}
+                  >
+                    <span class="text-[17px] font-extrabold tracking-[-0.02em]">ProSource</span>
+                    <span class="mt-1 text-[7px] font-semibold tracking-[0.34em]">WHOLESALE</span>
+                  </span>
+                ) : (
+                  <img
+                    src={partner.src}
+                    alt={partner.alt}
+                    loading="lazy"
+                    decoding="async"
+                    class:list={['block w-auto opacity-60', partner.h]}
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div>
@@ -35,7 +129,7 @@ const serviceAreas = [
           <li><a href={`${H}#benefits`} class="hover:text-brand transition-colors">Why VL Pro</a></li>
           <li><a href="/locations/" class="hover:text-brand transition-colors">Service Locations</a></li>
           <li><a href={`${H}#faqs`} class="hover:text-brand transition-colors">FAQ</a></li>
-          <li><a href="#estimate" class="js-open-estimate hover:text-brand transition-colors">Get a Free Estimate</a></li>
+          <li><a href="#estimate" class="js-open-estimate hover:text-brand transition-colors">Free Estimate</a></li>
         </ul>
 
         <p class="mt-10 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Services</p>
@@ -43,6 +137,11 @@ const serviceAreas = [
           <li><a href="/services/custom-showers/" class="hover:text-brand transition-colors">Custom Showers</a></li>
           <li><a href="/services/tile-natural-stone/" class="hover:text-brand transition-colors">Tile &amp; Natural Stone</a></li>
           <li><a href="/services/flooring/" class="hover:text-brand transition-colors">Flooring</a></li>
+        </ul>
+
+        <p class="mt-10 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Resources</p>
+        <ul class="mt-6 space-y-4 text-[15px] text-white/70">
+          <li><a href="/blog/" class="hover:text-brand transition-colors">Blog</a></li>
         </ul>
       </div>
 
@@ -75,6 +174,12 @@ const serviceAreas = [
           </li>
         </ul>
 
+        <p class="mt-9 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Office hours</p>
+        <p class="mt-3 text-[16px] leading-[1.6] text-white">{site.hours.office}</p>
+
+        <p class="mt-6 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Emergency services</p>
+        <p class="mt-3 text-[16px] leading-[1.6] text-white">{site.hours.emergency}</p>
+
         <div class="mt-7 h-px bg-white/10"></div>
 
         <div class="mt-7 flex items-center gap-3">
@@ -105,7 +210,7 @@ const serviceAreas = [
   </div>
 
   <div class="border-t border-white/10">
-    <div class="mcta-clear mx-auto max-w-[1920px] px-4 sm:px-10 lg:px-[60px] py-3 flex flex-row items-center justify-between gap-2 sm:gap-3">
+    <div class="mcta-clear mx-auto max-w-[1920px] px-4 sm:px-10 lg:px-[60px] py-5 flex flex-row items-center justify-between gap-2 sm:gap-3">
       {/* Phone type scales with the viewport so the full line + pill never wrap */}
       <p class="text-[clamp(0.5rem,2.45vw,0.8125rem)] tracking-[-0.01em] text-white/50 whitespace-nowrap">
         All Rights Reserved © {site.name} {currentYear}

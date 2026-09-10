@@ -203,13 +203,13 @@ html::-webkit-scrollbar {
   display: none;
 }
 .nav-dd-panel {
-  background: rgba(16, 16, 16, 0.68);
+  background: rgba(14, 14, 14, 0.88);
   border-radius: 16px;
   padding: 10px;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.22);
-  -webkit-backdrop-filter: blur(22px) saturate(140%);
-  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(56px) saturate(140%);
+  backdrop-filter: blur(56px) saturate(140%);
   box-shadow: 0 28px 70px -22px rgba(0, 0, 0, 0.6);
 }
 .nav-dd-item {
@@ -814,6 +814,13 @@ button:focus-visible {
     scrollbar-width: none;
   }
   .bl-rail::-webkit-scrollbar { display: none; }
+  /* The "See more blogs" pill drops below the cards on a phone, where it reads
+     as the next step rather than a control stranded beside the heading. */
+  .bl-sec { display: flex; flex-direction: column; }
+  .bl-head { display: contents; }
+  .bl-head > h2 { order: 1; }
+  .bl-list { order: 2; }
+  .bl-head > .bl-more { order: 3; align-self: flex-start; margin-top: 28px; }
   .bl-rail > * {
     flex: 0 0 82%;
     scroll-snap-align: start;

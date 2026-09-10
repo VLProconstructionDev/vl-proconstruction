@@ -160,7 +160,11 @@ const allSchema = [localBusinessSchema(), ...pageSchema];
         var start = function () {
           if (started) return;
           started = true;
+          var phone = matchMedia('(max-width: 767px)').matches;
           document.querySelectorAll('video[data-webm]').forEach(function (v) {
+            // Service-page heroes swap to a still photo on phones — don't pull
+            // the clip for a video that's display:none there.
+            if (phone && v.hasAttribute('data-desktop-only')) return;
             [['data-webm', 'video/webm'], ['data-mp4', 'video/mp4']].forEach(function (p) {
               var s = document.createElement('source');
               s.src = v.getAttribute(p[0]);

@@ -152,7 +152,7 @@ process:
       We measure the rooms, check the slab or subfloor for flatness and
       moisture, talk through format, layout, and grout, and leave you with a
       written line-item price.
-    image: /assets/images/process-1.webp
+    image: /assets/images/process-plan.webp
   - title: Design
     body: >-
       We dry-lay the pattern, set the starting line off the longest sightline,
