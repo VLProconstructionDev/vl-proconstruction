@@ -3,9 +3,9 @@
  * Consumed by SEO/JSON-LD, footer, header CTAs, and location pages.
  */
 export const site = {
-  name: 'VL Proconstruction',
+  name: 'VL Pro Construction',
   // Legal name as it appears on the business's Google Maps listing.
-  legalName: 'VL Proconstruction LLC',
+  legalName: 'VL Pro Construction LLC',
   tagline: 'Custom Showers, Tile & Natural Stone, Hard-Surface Flooring',
   url: 'https://vlproco.com',
   logo: '/assets/images/favicon.png',

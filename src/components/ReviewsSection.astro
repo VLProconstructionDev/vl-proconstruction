@@ -379,6 +379,13 @@ const STARS = [0, 1, 2, 3, 4];
     outline-offset: 4px;
   }
 
+  /* Single-column widths: the track must not claim the whole grid row, or the
+     arrow row below it spills over the trust panel underneath. */
+  @media (max-width: 1279px) {
+    .rv-track { height: auto; }
+    .rv-badges { justify-content: center; }
+  }
+
   /* ---------------- lg: arrows move into the page gutter ---------------- */
   @media (min-width: 1024px) {
     .rv-nav {

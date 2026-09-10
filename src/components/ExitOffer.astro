@@ -52,7 +52,7 @@ const { auto = false } = Astro.props;
     <div class="xo-photo">
       <img
         src="/assets/images/offer-handshake.webp"
-        alt="A VL Proconstruction estimator shaking hands with homeowners in their finished kitchen"
+        alt="A VL Pro Construction estimator shaking hands with homeowners in their finished kitchen"
         width="1448"
         height="1086"
         loading="lazy"
@@ -235,6 +235,24 @@ const { auto = false } = Astro.props;
   .xo-x:active {
     transform: scale(0.9);
   }
+  .xo-x:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+  /* Phones: full 44px tap target, and enough contrast to find it on the card */
+  @media (max-width: 739px) {
+    .xo-x {
+      width: 44px;
+      height: 44px;
+      margin: -6px -10px 0 0;
+      color: var(--color-ink);
+    }
+    .xo-x svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2;
+    }
+  }
 
   .xo-eyebrow {
     font-family: var(--font-poppins);
@@ -327,6 +345,19 @@ const { auto = false } = Astro.props;
   .xo-fine-sep {
     margin: 0 4px;
     color: #cfcfcf;
+  }
+
+  /* Phones: no divider — each clause gets its own line, a step larger. */
+  @media (max-width: 739px) {
+    .xo-fine {
+      font-size: 13.5px;
+    }
+    .xo-fine-sep {
+      display: none;
+    }
+    .xo-fine-clause {
+      display: block;
+    }
   }
 
   /* Two-column card once there's room for the photo beside the panel. */

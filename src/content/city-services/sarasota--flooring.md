@@ -152,7 +152,7 @@ process:
       We measure the rooms, test the slab or subfloor for moisture and
       flatness, talk through product, plank width, and direction, and leave
       you with a written line-item price.
-    image: /assets/images/process-1.webp
+    image: /assets/images/process-plan.webp
   - title: Design
     body: >-
       We confirm the floor the moisture reading supports, file the association

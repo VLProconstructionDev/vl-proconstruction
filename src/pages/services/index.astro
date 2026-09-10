@@ -11,7 +11,7 @@ const schema = [
     { name: 'Services', url: '/services' },
   ]),
   itemListSchema({
-    name: 'VL Proconstruction services',
+    name: 'VL Pro Construction services',
     items: [
       { name: 'Custom Shower Installation', url: '/services/custom-showers' },
       { name: 'Tile & Natural Stone Installation', url: '/services/tile-natural-stone' },
@@ -22,7 +22,7 @@ const schema = [
 ---
 
 <BaseLayout
-  title="Services — VL Proconstruction | Showers, Tile & Flooring"
+  title="Services — VL Pro Construction | Showers, Tile & Flooring"
   description="Custom showers, tile & natural stone, and hard surface flooring in Bradenton & Sarasota, FL. Call for a free quote: (503) 781-4657"
   schema={schema}
   navTheme="dark"
@@ -117,6 +117,8 @@ const schema = [
 
     /* ----- Parallax process photos (same as the home page) ----- */
     .px-frame { position: relative; overflow: hidden; }
+    /* Step 1 shows a flat plan drawing — it sits still, filling the frame, with no parallax crop */
+    .px-frame .px-img.px-fit { position: absolute; inset: 0; top: 0; width: 100%; height: 100%; transform: none; }
     /* let grid tracks shrink so a fixed-width process image can't push past the viewport (tablet) */
     .process-step > * { min-width: 0; }
     .px-frame .px-img { position: absolute; left: 0; top: -20%; width: 100%; height: 140%; object-fit: cover; will-change: transform; }
@@ -137,21 +139,23 @@ const schema = [
 
   <!-- ===================== HERO HEADER ===================== -->
   <section id="hero" class="relative min-h-screen lg:h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
-    <video class="absolute inset-0 w-full h-full object-cover" muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1">
-    </video>
+    <!-- Phone: a still job photo instead of the hero video — same shot as the
+         service card on the home page, and it spares cellular the ~2 MB clip. -->
+    <img src="/assets/images/card-bath.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover md:hidden" />
+    <video class="absolute inset-0 w-full h-full object-cover hidden md:block" data-desktop-only muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1"></video>
     <div class="absolute inset-0 bg-black/70"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/45"></div>
 
     <!-- Hero content -->
-    <div class="relative z-20 h-full w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-24 lg:pb-[90px] pt-[130px] gap-5 lg:gap-6">
+    <div class="relative z-20 h-full min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:py-0 sm:pb-24 lg:pb-[90px] sm:pt-[130px] gap-5 lg:gap-6">
       <!-- Trust row -->
       <TrustPill />
 
       <div class="mx-auto max-w-[1050px] text-center">
-        <h1 class="font-semibold capitalize leading-[1.03] tracking-[-0.03em] text-[clamp(3rem,6.8vw,6.05rem)] text-center">
+        <h1 class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,3rem)] sm:text-[clamp(3rem,6.8vw,6.05rem)] text-center">
           Explore Our Custom Home Additions
         </h1>
-        <p class="mt-6 text-[clamp(0.95rem,1.2vw,1.15rem)] font-medium leading-[1.55] tracking-[-0.02em] text-[#eaeaea] max-w-[620px] mx-auto">
+        <p class="mt-6 text-[13.5px] sm:text-[clamp(0.95rem,1.2vw,1.15rem)] font-medium leading-[1.55] tracking-[-0.02em] text-[#eaeaea] max-w-[620px] mx-auto">
           Custom showers, tile and natural stone, and hard-surface flooring — designed, waterproofed, and installed by a detail-obsessed family crew with 22 years on Florida's Gulf Coast.
         </p>
       </div>
@@ -168,16 +172,16 @@ const schema = [
         <div class="w-full flex flex-col gap-8 lg:mt-[120px] lg:mx-auto lg:max-w-[1180px] lg:flex-row lg:items-end lg:justify-between">
           <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
             <div class="flex flex-col items-start">
-              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
-              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of <br class="sm:hidden" />excellence</span>
+              <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
+              <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of excellence</span>
             </div>
             <div class="flex flex-col items-start">
-              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
-              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Full Warranty <br class="sm:hidden" />Coverage</span>
+              <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
+              <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Warranty Coverage</span>
             </div>
             <div class="flex flex-col items-start">
-              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
-              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects <br class="sm:hidden" />Completed</span>
+              <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
+              <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects Completed</span>
             </div>
           </div>
           <!-- Credential marks: each logo carries its own claim, so the row states
@@ -211,16 +215,16 @@ const schema = [
         <!-- Content -->
         <div class="lg:order-2">
           <h2 class="font-semibold capitalize leading-[1.03] tracking-[-0.04em] text-[clamp(2.75rem,5vw,4.5rem)]">Custom Showers</h2>
-          <p class="mt-5 text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[560px]">
+          <p class="mt-5 text-[13.5px] sm:text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[560px]">
             Curbless entries, built-in niches, and bench seats over a waterproofing system engineered to stay leak-free for decades. We build showers to spa standards — every slope, seam, and grout line set by hand.
           </p>
           <ul class="mt-8 grid gap-x-8 gap-y-3.5 sm:grid-cols-2 max-w-[560px]">
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Schluter® waterproofing</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Curbless &amp; barrier-free entries</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Built-in niches &amp; benches</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Linear &amp; point drains</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Frameless glass coordination</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Steam-shower ready</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Schluter® waterproofing</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Curbless &amp; barrier-free entries</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Built-in niches &amp; benches</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Linear &amp; point drains</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Frameless glass coordination</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Steam-shower ready</li>
           </ul>
           <!-- TODO: build the dedicated /services/custom-showers page -->
           <a href="/services/custom-showers/" class="btn group mt-9 inline-flex items-center gap-2 rounded-full bg-brand hover:bg-[#c23c18] px-8 py-3.5 text-[15px] font-semibold capitalize text-white hover:gap-3">
@@ -244,16 +248,16 @@ const schema = [
         <!-- Content -->
         <div class="lg:order-1">
           <h2 class="font-semibold capitalize leading-[1.03] tracking-[-0.04em] text-[clamp(2.75rem,5vw,4.5rem)]">Tile &amp; Natural Stone</h2>
-          <p class="mt-5 text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[560px]">
+          <p class="mt-5 text-[13.5px] sm:text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[560px]">
             From large-format porcelain to marble mosaics and statement feature walls — precise layouts, tight grout lines, and finishes that read as one continuous surface. We plan every cut before the first tile is set.
           </p>
           <ul class="mt-8 grid gap-x-8 gap-y-3.5 sm:grid-cols-2 max-w-[560px]">
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Large-format &amp; porcelain slab</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Marble &amp; quartzite stone</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Herringbone &amp; custom patterns</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Backsplashes &amp; feature walls</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Heated floor systems</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Sealing &amp; care guidance</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Large-format &amp; porcelain slab</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Marble &amp; quartzite stone</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Herringbone &amp; custom patterns</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Backsplashes &amp; feature walls</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Heated floor systems</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Sealing &amp; care guidance</li>
           </ul>
           <!-- TODO: build the dedicated /services/tile-natural-stone page -->
           <a href="/services/tile-natural-stone/" class="btn group mt-9 inline-flex items-center gap-2 rounded-full bg-brand hover:bg-[#c23c18] px-8 py-3.5 text-[15px] font-semibold capitalize text-white hover:gap-3">
@@ -277,16 +281,16 @@ const schema = [
         <!-- Content -->
         <div class="lg:order-2">
           <h2 class="font-semibold capitalize leading-[1.03] tracking-[-0.04em] text-[clamp(2.75rem,5vw,4.5rem)]">Flooring</h2>
-          <p class="mt-5 text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[560px]">
+          <p class="mt-5 text-[13.5px] sm:text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[560px]">
             Premium hardwood, luxury vinyl plank, and laminate installed flat, tight, and level — including the subfloor prep and transitions most crews skip. The result is a floor that looks seamless and stays that way.
           </p>
           <ul class="mt-8 grid gap-x-8 gap-y-3.5 sm:grid-cols-2 max-w-[560px]">
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Engineered &amp; solid hardwood</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Luxury vinyl plank (LVP)</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Laminate &amp; floating floors</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Subfloor prep &amp; leveling</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Stair treads &amp; transitions</li>
-            <li class="flex items-center gap-3 text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Moisture &amp; underlayment</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Engineered &amp; solid hardwood</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Luxury vinyl plank (LVP)</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Laminate &amp; floating floors</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Subfloor prep &amp; leveling</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Stair treads &amp; transitions</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Moisture &amp; underlayment</li>
           </ul>
           <!-- TODO: build the dedicated /services/flooring page -->
           <a href="/services/flooring/" class="btn group mt-9 inline-flex items-center gap-2 rounded-full bg-brand hover:bg-[#c23c18] px-8 py-3.5 text-[15px] font-semibold capitalize text-white hover:gap-3">
@@ -317,7 +321,7 @@ const schema = [
         <!-- Step 1 -->
         <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8">
           <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
-            <img loading="lazy" decoding="async" src="/assets/images/process-2.webp" alt="Walls tiled and floating vanity carcass set during the build" class="px-img" />
+            <img loading="lazy" decoding="async" src="/assets/images/process-plan.webp" alt="VL Pro Construction specialist reviewing the floor plan and material samples with homeowners at the in-home consultation" class="px-img px-fit" />
           </div>
           <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">1</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
@@ -329,7 +333,7 @@ const schema = [
         <!-- Step 2 -->
         <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
           <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
-            <img loading="lazy" decoding="async" src="/assets/images/process-3.webp" alt="VL Proconstruction crew setting wall and floor tile during the build" class="absolute inset-0 w-full h-full object-cover object-center scale-[1.12]" />
+            <img loading="lazy" decoding="async" src="/assets/images/process-3.webp" alt="VL Pro Construction crew setting wall and floor tile during the build" class="absolute inset-0 w-full h-full object-cover object-center scale-[1.12]" />
           </div>
           <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">2</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
@@ -360,8 +364,8 @@ const schema = [
         <h2 class="text-[clamp(1.9rem,3.4vw,2.9rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-ink">
           The same craftsmanship for every client we serve.
         </h2>
-        <p class="mt-5 max-w-[620px] text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc">
-          From single-family homes to commercial buildouts, VL Proconstruction brings the same reliability and finish quality to every project — no matter who's on the other side of the table.
+        <p class="mt-5 max-w-[620px] text-[13.5px] sm:text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc">
+          From single-family homes to commercial buildouts, VL Pro Construction brings the same reliability and finish quality to every project — no matter who's on the other side of the table.
         </p>
       </div>
 
@@ -374,7 +378,7 @@ const schema = [
           </span>
           <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Homeowners</h3>
           <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
-          <p class="mt-4 text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Turning your vision into a space you'll love, with honest guidance every step of the way.</p>
+          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Turning your vision into a space you'll love, with honest guidance every step of the way.</p>
         </article>
 
         <!-- Builders -->
@@ -385,7 +389,7 @@ const schema = [
           </span>
           <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Builders</h3>
           <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
-          <p class="mt-4 text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">A dependable partner who hits deadlines and delivers clean, quality work on every job.</p>
+          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">A dependable partner who hits deadlines and delivers clean, quality work on every job.</p>
         </article>
 
         <!-- Remodeling Contractors -->
@@ -396,7 +400,7 @@ const schema = [
           </span>
           <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Remodeling Contractors</h3>
           <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
-          <p class="mt-4 text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Skilled hands for tile, flooring, and finish work when you need it done right.</p>
+          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Skilled hands for tile, flooring, and finish work when you need it done right.</p>
         </article>
 
         <!-- Commercial Clients -->
@@ -407,7 +411,7 @@ const schema = [
           </span>
           <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Commercial Clients</h3>
           <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
-          <p class="mt-4 text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Professional, on-schedule renovations that keep your business moving.</p>
+          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Professional, on-schedule renovations that keep your business moving.</p>
         </article>
       </div>
     </div>
@@ -420,8 +424,8 @@ const schema = [
         <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
           Proudly Serving Florida's<br />Gulf Coast
         </h2>
-        <p class="mt-6 text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
-          VL Proconstruction proudly serves homeowners across the greater Bradenton–Sarasota metro area — delivering quality craftsmanship and honest service right in your neighborhood.
+        <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
+          VL Pro Construction proudly serves homeowners across the greater Bradenton–Sarasota metro area — delivering quality craftsmanship and honest service right in your neighborhood.
         </p>
       </div>
     </div>
@@ -436,7 +440,7 @@ const schema = [
       <div class="px-5 sm:px-10 lg:px-[60px] py-16 lg:py-24 flex items-center justify-center">
         <div class="w-full max-w-[440px]">
           <h3 class="text-center font-bold capitalize leading-[1.1] tracking-[-0.025em] text-[clamp(2.4rem,4vw,3.75rem)]">Request your<br />free estimate</h3>
-          <p class="mt-6 text-center text-[15px] font-semibold text-white/85">What project are you interested in?</p>
+          <p class="mt-6 text-center text-[13.5px] sm:text-[15px] font-semibold text-white/85">What project are you interested in?</p>
 
           <div class="mt-5 space-y-4" id="step1Options">
             <label class="fopt"><input type="checkbox" name="s1project" value="Custom Showers" /><span class="pill-label">Custom Showers</span><span class="fradio" aria-hidden="true"></span></label>
@@ -505,7 +509,7 @@ const schema = [
     // ===== Parallax process photos — each image drifts within its frame as the section scrolls =====
     (function () {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const pxImgs = [...document.querySelectorAll('.px-img')];
+      const pxImgs = [...document.querySelectorAll('.px-img:not(.px-fit)')];
       if (!pxImgs.length || reduceMotion) return;
       let ticking = false;
       const renderParallax = () => {

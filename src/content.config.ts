@@ -206,7 +206,7 @@ const blog = defineCollection({
     description: z.string(),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
-    author: z.string().default('VL Proconstruction'),
+    author: z.string().default('VL Pro Construction'),
     // Author avatar. Falls back to the brand mark on a dark disc (PostMeta).
     authorImage: z.string().optional(),
     heroImage: z.string().optional(),

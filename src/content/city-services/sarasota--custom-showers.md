@@ -162,7 +162,7 @@ process:
     body: >-
       We measure the bathroom, check the subfloor and drain, talk through curb
       height, glass, and tile, and leave you with a written line-item price.
-    image: /assets/images/process-1.webp
+    image: /assets/images/process-plan.webp
   - title: Design
     body: >-
       We finalize tile layout, niche and bench placement, slope, and drain

@@ -32,7 +32,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: 'Are you licensed and insured?',
-    a: 'Yes. VL Proconstruction LLC is licensed and insured in Florida.',
+    a: 'Yes. VL Pro Construction LLC is licensed and insured in Florida.',
   },
   {
     q: 'Can I stay in my home during the remodel?',
@@ -44,7 +44,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
 ---
 
 <BaseLayout
-  title="VL Proconstruction — Bradenton Sarasota Construction Experts"
+  title="VL Pro Construction — Bradenton Sarasota Construction Experts"
   description="Tile, flooring, custom showers, bath upgrades & subfloor prep for Bradenton homes and businesses. Call for a free quote: (503) 781-4657"
   schema={schema}
   navTheme="dark"
@@ -68,6 +68,8 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     /* phones: tighter rows so the card doesn't dominate the scroll */
     @media (max-width: 639px) {
       .consult-chip { padding: 2px 0; gap: 10px; }
+      /* Card reads as its own surface on a phone, where it fills the width */
+      .consult-card { background: #f1efec; }
       .consult-photo { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 10%, #000 22%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 10%, #000 22%); } }
     @media (prefers-reduced-motion: reduce) { .consult-chip { transition: none; } }
     .card-img-hover { opacity: 0; transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
@@ -79,6 +81,10 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     @media (prefers-reduced-motion: reduce) { .card-img-hover { transition: opacity .3s ease; } }
     .card:hover .card-arrow { transform: translate(3px,-3px); }
     .card-arrow { transition: transform .25s ease; }
+    /* Single-column widths: a hairline separates the stacked service cards */
+    @media (max-width: 767px) {
+      .svc-grid > .card + .card { padding-top: 28px; border-top: 1px solid rgba(30,30,30,.1); }
+    }
     .rev { transition: transform .25s cubic-bezier(.2,.8,.2,1), border-color .25s, background-color .25s; }
     .rev:hover { transform: translateY(-4px); border-color: rgba(245,75,37,.4); }
     .trust-pill { transition: border-color .2s, background-color .2s; }
@@ -128,6 +134,8 @@ const schema = [websiteSchema(), faqSchema(faqs)];
 
     /* ----- Parallax process photos ----- */
     .px-frame { position: relative; overflow: hidden; }
+    /* Step 1 shows a flat plan drawing — it sits still, filling the frame, with no parallax crop */
+    .px-frame .px-img.px-fit { position: absolute; inset: 0; top: 0; width: 100%; height: 100%; transform: none; }
     /* let grid tracks shrink so a fixed-width process image can't push past the viewport (tablet) */
     .process-step > * { min-width: 0; }
     .px-frame .px-img { position: absolute; left: 0; top: -20%; width: 100%; height: 140%; object-fit: cover; will-change: transform; }
@@ -240,8 +248,8 @@ const schema = [websiteSchema(), faqSchema(faqs)];
 
     /* ----- Before / After comparison slider ----- */
     .ba { position: relative; overflow: hidden; background: #111;
-      aspect-ratio: 4 / 3; touch-action: pan-y; cursor: ew-resize; user-select: none; }
-    @media (min-width: 1024px) { .ba { aspect-ratio: 5 / 3; } }
+      aspect-ratio: 16 / 10; touch-action: pan-y; cursor: ew-resize; user-select: none; }
+    @media (min-width: 1024px) { .ba { aspect-ratio: 21 / 9; } }
     .ba:focus { outline: none; }
     .ba:focus-visible .ba-handle { outline: 3px solid #f54b25; outline-offset: 3px; }
     /* both photos are the exact same full-size box in the exact same position;
@@ -266,15 +274,15 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     <div class="absolute inset-0 bg-black/65"></div>
 
     <!-- Hero content -->
-    <div class="relative z-20 min-h-screen mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-end pb-16 sm:pb-24 lg:pb-[90px] pt-[156px] sm:pt-[182px] gap-5 lg:gap-6">
+    <div class="relative z-20 min-h-screen mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:py-0 sm:pb-24 lg:pb-[90px] sm:pt-[182px] gap-5 lg:gap-6">
       <!-- Trust row -->
       <TrustPill />
 
       <!-- Heading + description -->
-      <div class="font-semibold capitalize leading-[1.03] tracking-[-0.03em] text-[clamp(2.6rem,6.8vw,6.05rem)] text-center">
+      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,2.6rem)] sm:text-[clamp(2.6rem,6.8vw,6.05rem)] text-center">
         <h1>
-          <span>Sarasota & Bradenton Area</span><br />
-          <span class="text-brand flex items-center justify-center min-h-[2.06em] sm:min-h-0 sm:block"><span id="heroRotator" class="rotator-word">Custom <br class="sm:hidden" />Showers</span></span>
+          <span>Sarasota <br class="sm:hidden" />& Bradenton Area</span><br />
+          <span class="text-brand flex items-center justify-center min-h-[1.06em] sm:min-h-0 sm:block"><span id="heroRotator" class="rotator-word">Custom Showers</span></span>
         </h1>
         <div class="flex flex-col items-center gap-3 sm:gap-5">
           <span>Installation Experts</span>
@@ -297,16 +305,16 @@ const schema = [websiteSchema(), faqSchema(faqs)];
         <div class="w-full flex flex-col gap-8 lg:mt-[120px] lg:mx-auto lg:max-w-[1180px] lg:flex-row lg:items-end lg:justify-between">
           <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
             <div class="flex flex-col items-start">
-              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
-              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of <br class="sm:hidden" />excellence</span>
+              <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
+              <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of excellence</span>
             </div>
             <div class="flex flex-col items-start">
-              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
-              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Full Warranty <br class="sm:hidden" />Coverage</span>
+              <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
+              <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Warranty Coverage</span>
             </div>
             <div class="flex flex-col items-start">
-              <span class="font-normal text-[1.7rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
-              <span class="font-poppins text-[10.5px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects <br class="sm:hidden" />Completed</span>
+              <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
+              <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects Completed</span>
             </div>
           </div>
           <!-- Credential marks: each logo carries its own claim, so the row states
@@ -333,12 +341,12 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[90px] pb-10 lg:pb-12">
       <div class="mx-auto max-w-[1000px] flex flex-col items-center text-center gap-5">
         <h2 class="font-semibold capitalize text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.9rem,7.5vw,5.75rem)]">Custom Home Additions</h2>
-        <p class="text-[clamp(0.95rem,1.15vw,1.05rem)] tracking-[-0.03em] text-graydesc max-w-[900px]">
+        <p class="text-[13.5px] sm:text-[clamp(0.95rem,1.15vw,1.05rem)] tracking-[-0.03em] text-graydesc max-w-[900px]">
           Explore our custom showers, tile, natural stone, and flooring solutions for residential and commercial spaces, built to last.
         </p>
       </div>
 
-      <div class="mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <div class="svc-grid mt-8 sm:mt-16 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         <!-- Card 1 -->
         <a href="/services/custom-showers/" class="card block rounded-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 focus-visible:ring-offset-2">
           <div class="relative overflow-hidden aspect-[569/704]">
@@ -467,13 +475,13 @@ const schema = [websiteSchema(), faqSchema(faqs)];
   <!-- ===================== FREE DESIGN CONSULTATION ===================== -->
   <section id="consultation" class="bg-white" data-nav-theme="light">
     <div class="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-[60px] pt-6 sm:pt-8 lg:pt-14 pb-12 sm:pb-20 lg:pb-[90px]">
-      <div class="flex flex-col lg:flex-row lg:items-stretch overflow-hidden bg-[#faf9f8] shadow-[0_30px_60px_-32px_rgba(20,20,20,0.22)]">
+      <div class="consult-card flex flex-col lg:flex-row lg:items-stretch overflow-hidden bg-[#faf9f8] shadow-[0_30px_60px_-32px_rgba(20,20,20,0.22)]">
         <div class="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 p-6 sm:p-12 lg:p-14 lg:flex-1 lg:justify-center">
         <div class="max-w-[680px]">
           <h2 class="font-semibold tracking-[-0.035em] leading-[1.1] text-ink text-[clamp(1.7rem,2.8vw,2.6rem)]">
             <span class="text-brand">Free</span> Design Consultation
           </h2>
-          <p class="mt-3 sm:mt-4 text-[clamp(0.95rem,1.15vw,1.0625rem)] tracking-[-0.02em] text-graydesc">
+          <p class="mt-3 sm:mt-4 text-[13.5px] sm:text-[clamp(0.95rem,1.15vw,1.0625rem)] tracking-[-0.02em] text-graydesc">
             Meet with an experienced installation specialist to discuss:
           </p>
           <ul class="consult-list mt-4 sm:mt-7 grid gap-1.5 sm:gap-3 sm:grid-cols-2">
@@ -517,7 +525,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
 
         <!-- Photo -->
         <div class="overflow-hidden aspect-[4/5] lg:aspect-auto lg:h-[clamp(560px,42vw,700px)] lg:order-2">
-          <img loading="lazy" decoding="async" src="/assets/images/about.webp" alt="VL Proconstruction specialist reviewing plans and material samples with homeowners" class="w-full h-full object-cover" />
+          <img loading="lazy" decoding="async" src="/assets/images/about.webp" alt="VL Pro Construction specialist shaking hands with homeowners in their finished kitchen" class="w-full h-full object-cover" />
         </div>
 
         <!-- Heading + intro + stats -->
@@ -525,23 +533,27 @@ const schema = [websiteSchema(), faqSchema(faqs)];
           <h2 class="font-semibold leading-[1.12] tracking-[-0.03em] text-[clamp(2.25rem,3.6vw,3.6rem)] text-balance">
             Family-built craftsmanship that elevates how you live at home.
           </h2>
-          <p class="mt-6 text-[15px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[520px]">
+          <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[520px]">
             We're a family-owned remodeling team helping homeowners and builders bring custom tile, waterproof showers, and hardwood floors to life — detail-obsessed, deadline-driven, and reachable 24/7.
           </p>
 
-          <!-- Stats -->
-          <div class="mt-12 grid grid-cols-3 gap-x-10 sm:gap-x-16">
-            <div>
+          <!-- Stats: 2 x 2 with hairline rules between the cells -->
+          <div class="mt-12 grid grid-cols-2 max-w-[560px]">
+            <div class="pr-8 sm:pr-12 pb-8">
               <p class="font-normal leading-[1.085] tracking-[-0.04em] text-[clamp(2rem,3.2vw,3rem)]"><span class="stat-num" data-count="22">22</span><span>+</span></p>
               <p class="mt-3 font-poppins text-[13px] sm:text-[14px] font-medium capitalize tracking-[-0.03em] leading-[1.25] text-[#6b6b6b]">Years of Experience</p>
             </div>
-            <div>
+            <div class="pl-8 sm:pl-12 pb-8 border-l border-black/10">
               <p class="font-normal leading-[1.085] tracking-[-0.04em] text-[clamp(2rem,3.2vw,3rem)]"><span class="stat-num" data-count="1300">1300</span><span>+</span></p>
               <p class="mt-3 font-poppins text-[13px] sm:text-[14px] font-medium capitalize tracking-[-0.03em] leading-[1.25] text-[#6b6b6b]">Projects Completed</p>
             </div>
-            <div>
-              <p class="flex items-end font-normal leading-[1.085] tracking-[-0.04em] text-[clamp(2rem,3.2vw,3rem)]"><span class="stat-num" data-count="5.0">5.0</span><svg viewBox="0 0 24 24" fill="currentColor" class="w-[0.42em] h-[0.42em] ml-2 mb-[0.12em] shrink-0"><path d="M12 1l3.09 6.26L22 8.27l-5 4.87 1.18 6.88L12 16.77l-6.18 3.25L7 13.14 2 8.27l6.91-1.01z"/></svg></p>
-              <p class="mt-3 font-poppins text-[13px] sm:text-[14px] font-medium capitalize tracking-[-0.03em] leading-[1.25] text-[#6b6b6b]">Rated by 100+ Clients</p>
+            <div class="pr-8 sm:pr-12 pt-8 border-t border-black/10">
+              <p class="font-normal leading-[1.085] tracking-[-0.04em] text-[clamp(2rem,3.2vw,3rem)]"><span class="stat-num" data-count="100">100</span><span>%</span></p>
+              <p class="mt-3 font-poppins text-[13px] sm:text-[14px] font-medium capitalize tracking-[-0.03em] leading-[1.25] text-[#6b6b6b]">Warranty Coverage</p>
+            </div>
+            <div class="pl-8 sm:pl-12 pt-8 border-l border-t border-black/10">
+              <p class="font-normal leading-[1.085] tracking-[-0.04em] text-[clamp(2rem,3.2vw,3rem)]"><span class="stat-num" data-count="99">99</span><span>%</span></p>
+              <p class="mt-3 font-poppins text-[13px] sm:text-[14px] font-medium capitalize tracking-[-0.03em] leading-[1.25] text-[#6b6b6b]">Client Satisfaction</p>
             </div>
           </div>
 
@@ -566,7 +578,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
         <!-- Step 1 -->
         <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8">
           <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
-            <img loading="lazy" decoding="async" src="/assets/images/process-2.webp" alt="Walls tiled and floating vanity carcass set during the build" class="px-img" />
+            <img loading="lazy" decoding="async" src="/assets/images/process-plan.webp" alt="VL Pro Construction specialist reviewing the floor plan and material samples with homeowners at the in-home consultation" class="px-img px-fit" />
           </div>
           <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">1</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
@@ -578,7 +590,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
         <!-- Step 2 -->
         <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
           <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
-            <img loading="lazy" decoding="async" src="/assets/images/process-3.webp" alt="VL Proconstruction crew setting wall and floor tile during the build" class="absolute inset-0 w-full h-full object-cover object-center scale-[1.12]" />
+            <img loading="lazy" decoding="async" src="/assets/images/process-3.webp" alt="VL Pro Construction crew setting wall and floor tile during the build" class="absolute inset-0 w-full h-full object-cover object-center scale-[1.12]" />
           </div>
           <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">2</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
@@ -611,7 +623,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
           <h2 class="font-bold capitalize leading-[1.05] tracking-[-0.03em] text-[clamp(2.4rem,5vw,4rem)]">
             22 Years Of Projects!
           </h2>
-          <p class="mt-4 text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[560px]">
+          <p class="mt-4 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[560px]">
             A look at the kitchens, baths, custom tile, and flooring we've completed for homeowners and builders across Bradenton &amp; Sarasota.
           </p>
         </div>
@@ -683,8 +695,8 @@ const schema = [websiteSchema(), faqSchema(faqs)];
         <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
           Proudly Serving Florida's<br />Gulf Coast
         </h2>
-        <p class="mt-6 text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
-          VL Proconstruction proudly serves homeowners across the greater Bradenton–Sarasota metro area — delivering quality craftsmanship and honest service right in your neighborhood.
+        <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
+          VL Pro Construction proudly serves homeowners across the greater Bradenton–Sarasota metro area — delivering quality craftsmanship and honest service right in your neighborhood.
         </p>
       </div>
     </div>
@@ -704,7 +716,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       <h2 class="font-bold capitalize leading-[1.02] tracking-[-0.03em] text-[clamp(2.2rem,4.4vw,3.6rem)]">
         Frequently asked questions
       </h2>
-      <p class="mt-4 text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[560px]">
+      <p class="mt-4 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[560px]">
         Answers to the questions we hear most about cost, timeline, materials, and what to expect during your project. Still have a question? Give us a call and we'll walk you through the details.
       </p>
 
@@ -716,7 +728,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
               <span class="faq-ico" aria-hidden="true"></span>
             </button>
             <div class="faq-a"><div class="faq-a-inner">
-              <p class="text-[14.5px] leading-[1.65] text-graydesc max-w-[860px]">{faq.a}</p>
+              <p class="text-[13.5px] sm:text-[14.5px] leading-[1.65] text-graydesc max-w-[860px]">{faq.a}</p>
             </div></div>
           </div>
         ))}
@@ -728,16 +740,16 @@ const schema = [websiteSchema(), faqSchema(faqs)];
        The three newest posts. Cards use the shared .bl-* styles in
        global.css so this list and /blog stay identical. -->
   <section id="advice" class="bg-white" data-nav-theme="light">
-    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pb-20 lg:pb-[110px]">
+    <div class="bl-sec mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pb-20 lg:pb-[110px]">
 
-      <div class="flex flex-wrap items-center justify-between gap-6">
+      <div class="bl-head flex flex-wrap items-center justify-between gap-6">
         <h2 class="font-bold capitalize text-ink leading-[1.02] tracking-[-0.03em] text-[clamp(2.1rem,5vw,4rem)]">
           Remodeling advice &amp; insights
         </h2>
         <a href="/blog" class="btn bl-more">See more blogs</a>
       </div>
 
-      <div class="bl-rail mt-12 lg:mt-16 sm:grid sm:gap-x-10 sm:gap-y-12 min-[860px]:grid-cols-2 xl:grid-cols-3">
+      <div class="bl-rail bl-list mt-12 lg:mt-16 sm:grid sm:gap-x-10 sm:gap-y-12 min-[860px]:grid-cols-2 xl:grid-cols-3">
         {latestPosts.map((post) => <PostCard post={post} headingLevel="h3" />)}
       </div>
     </div>
@@ -756,8 +768,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     // timer still starts the show for completely motionless visitors.
     const rotator = document.getElementById('heroRotator');
     if (rotator) {
-      const br = '<br class="sm:hidden" />';
-      const services = ['Custom ' + br + 'Showers', 'Tile &amp; Natural ' + br + 'Stone', 'Flooring'];
+      const services = ['Custom Showers', 'Tile &amp; Natural Stone', 'Flooring'];
       let si = 0;
       let started = false;
       const startRotator = () => {
@@ -852,7 +863,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       const colsFor = (w) => (w >= 1024 ? 5 : w >= 640 ? 3 : 2);
       let built = 0;
       const cell = (p) =>
-        `<div class="vcell relative overflow-hidden aspect-[4/5]"><img src="${p.src}" alt="VL Proconstruction project in ${p.city}, FL" loading="lazy" class="gallery-img w-full h-full object-cover"/><span class="vloc">${p.city}, FL</span></div>`;
+        `<div class="vcell relative overflow-hidden aspect-[4/5]"><img src="${p.src}" alt="VL Pro Construction project in ${p.city}, FL" loading="lazy" class="gallery-img w-full h-full object-cover"/><span class="vloc">${p.city}, FL</span></div>`;
       const build = () => {
         const n = colsFor(window.innerWidth);
         if (n === built && wall.childElementCount) return;
@@ -901,7 +912,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     }
 
     // Parallax process photos — each image drifts within its frame as the section scrolls
-    const pxImgs = [...document.querySelectorAll('.px-img')];
+    const pxImgs = [...document.querySelectorAll('.px-img:not(.px-fit)')];
     if (pxImgs.length && !reduceMotion) {
       let ticking = false;
       const renderParallax = () => {
@@ -1000,8 +1011,18 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       if (!window.matchMedia('(hover: none)').matches) return;
       const cards = document.querySelectorAll('.card');
       if (!cards.length || !('IntersectionObserver' in window)) return;
+      // Hold the swap for a beat after the card lands, so the photo doesn't
+      // flip while the card is still sliding up into the middle band.
+      const timers = new WeakMap();
       const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => e.target.classList.toggle('is-inview', e.isIntersecting));
+        entries.forEach((e) => {
+          clearTimeout(timers.get(e.target));
+          if (e.isIntersecting) {
+            timers.set(e.target, setTimeout(() => e.target.classList.add('is-inview'), 550));
+          } else {
+            e.target.classList.remove('is-inview');
+          }
+        });
       }, { rootMargin: '-30% 0px -30% 0px' });
       cards.forEach((c) => io.observe(c));
     })();

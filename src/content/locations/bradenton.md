@@ -17,4 +17,4 @@ heroImage: /assets/images/gallery/work-1.webp
 order: 1
 ---
 
-Bradenton is where VL Proconstruction is rooted. We've tiled, floored, and rebuilt showers across Manatee County for years — and we build for the Gulf Coast climate: proper moisture barriers over slab, waterproofing that handles year-round humidity, and materials that stand up to salt air.
+Bradenton is where VL Pro Construction is rooted. We've tiled, floored, and rebuilt showers across Manatee County for years — and we build for the Gulf Coast climate: proper moisture barriers over slab, waterproofing that handles year-round humidity, and materials that stand up to salt air.

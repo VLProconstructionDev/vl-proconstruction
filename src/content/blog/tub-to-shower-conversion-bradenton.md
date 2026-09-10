@@ -181,7 +181,7 @@ Ask any contractor these five questions. The answers tell you almost everything.
    Schluter-certified installation and NTCA membership are real credentials, not badges.
 5. **What's the warranty, and on what?** Materials and workmanship should both be covered.
 
-For our part: VL Proconstruction is a family-owned, licensed and insured Florida contractor.
+For our part: VL Pro Construction is a family-owned, licensed and insured Florida contractor.
 Our installers are Schluter-certified and we're an NTCA member and XL porcelain slab
 certified installer. We do the waterproofing in-house, we flood-test every shower before
 tile, and every project carries 100% full warranty coverage.
@@ -237,7 +237,7 @@ If you've been circling the idea of pulling that tub, the next step is simple: h
 look at the actual space. Framing, drain location, slab vs. raised floor, and door swing
 decide what's possible long before tile selection does.
 
-VL Proconstruction serves Bradenton, Lakewood Ranch, Longboat Key, Sarasota, Palmetto,
+VL Pro Construction serves Bradenton, Lakewood Ranch, Longboat Key, Sarasota, Palmetto,
 Parrish, Ellenton, Anna Maria, Holmes Beach, Siesta Key, Venice, and the surrounding Manatee
 and Sarasota County communities — you can [see everything we do here](/services).
 
