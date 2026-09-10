@@ -39,6 +39,14 @@ const partners = [
         </p>
         <img src="/assets/images/logo.svg" alt={site.name} class="mt-7 h-[68px] w-auto" />
 
+        {/* Non-breaking space before each separator, so a wrapped line never
+            starts with a stray "·"; non-breaking hyphen (&#8209;) in
+            "Family-Owned" so it cannot break across lines as "Family-/Owned" */}
+        <p class="mt-5 max-w-[420px] text-[11px] font-semibold capitalize leading-[2] tracking-[0.12em] text-white/40">
+          Florida Licensed General Contractor<br />
+          Bonded &amp; Insured&nbsp;· Family&#8209;Owned &amp; Operated
+        </p>
+
         <div class="mt-9 max-w-[420px]">
           <div class="h-px bg-white/10"></div>
 
@@ -108,14 +116,6 @@ const partners = [
               </li>
             ))}
           </ul>
-
-          {/* Non-breaking space before each separator, so a wrapped line never
-              starts with a stray "·"; non-breaking hyphen (&#8209;) in
-              "Family-Owned" so it cannot break across lines as "Family-/Owned" */}
-          <p class="mt-8 text-[11px] font-semibold capitalize leading-[2] tracking-[0.12em] text-white/40">
-            Florida Licensed General Contractor<br />
-            Bonded &amp; Insured&nbsp;· Family&#8209;Owned &amp; Operated
-          </p>
         </div>
       </div>
 
@@ -129,7 +129,7 @@ const partners = [
           <li><a href={`${H}#benefits`} class="hover:text-brand transition-colors">Why VL Pro</a></li>
           <li><a href="/locations/" class="hover:text-brand transition-colors">Service Locations</a></li>
           <li><a href={`${H}#faqs`} class="hover:text-brand transition-colors">FAQ</a></li>
-          <li><a href="#estimate" class="js-open-estimate hover:text-brand transition-colors">Get a Free Estimate</a></li>
+          <li><a href="#estimate" class="js-open-estimate hover:text-brand transition-colors">Free Estimate</a></li>
         </ul>
 
         <p class="mt-10 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Services</p>
@@ -137,6 +137,11 @@ const partners = [
           <li><a href="/services/custom-showers/" class="hover:text-brand transition-colors">Custom Showers</a></li>
           <li><a href="/services/tile-natural-stone/" class="hover:text-brand transition-colors">Tile &amp; Natural Stone</a></li>
           <li><a href="/services/flooring/" class="hover:text-brand transition-colors">Flooring</a></li>
+        </ul>
+
+        <p class="mt-10 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Resources</p>
+        <ul class="mt-6 space-y-4 text-[15px] text-white/70">
+          <li><a href="/blog/" class="hover:text-brand transition-colors">Blog</a></li>
         </ul>
       </div>
 
@@ -168,6 +173,12 @@ const partners = [
             </a>
           </li>
         </ul>
+
+        <p class="mt-9 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Office hours</p>
+        <p class="mt-3 text-[16px] leading-[1.6] text-white">{site.hours.office}</p>
+
+        <p class="mt-6 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Emergency services</p>
+        <p class="mt-3 text-[16px] leading-[1.6] text-white">{site.hours.emergency}</p>
 
         <div class="mt-7 h-px bg-white/10"></div>
 

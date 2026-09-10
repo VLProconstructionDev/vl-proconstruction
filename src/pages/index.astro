@@ -330,6 +330,11 @@ const schema = [websiteSchema(), faqSchema(faqs)];
               <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
             </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Featured<br />On</p>
+              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-white.webp" width="480" height="134" alt="Yahoo" class="block h-[22px] sm:h-7 w-auto opacity-90" />
+            </div>
           </div>
         </div>
       </div>
@@ -397,12 +402,22 @@ const schema = [websiteSchema(), faqSchema(faqs)];
 
   <!-- ===================== BENEFITS ===================== -->
   <section id="benefits" class="bg-white" data-nav-theme="light">
-    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-16 lg:pt-20 pb-14 lg:pb-16">
+    <div class="mx-auto max-w-[1700px] px-5 sm:px-10 lg:px-[60px] pt-16 lg:pt-20 pb-14 lg:pb-16">
       <h2 class="font-semibold capitalize leading-[1.04] tracking-[-0.035em] text-[clamp(2.3rem,4.6vw,4.1rem)]">
         Customers choose VL Pro for their:
       </h2>
 
       <div class="mt-8 lg:mt-12 grid grid-cols-2 md:grid-cols-3 gap-px border border-black/10 bg-black/10">
+        <!-- Local & Family Owned -->
+        <div class="flex flex-col sm:flex-row sm:items-start sm:gap-5 md:gap-6 p-5 sm:p-6 md:p-7 bg-[#faf9f8]">
+          <span class="grid shrink-0 place-items-center h-11 w-11 md:h-12 md:w-12 rounded-full border border-brand/40 text-brand">
+            <svg class="w-[18px] h-[18px] md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9.8V20h13V9.8"/><path d="M9.75 20v-5.5h4.5V20"/></svg>
+          </span>
+          <div class="mt-5 sm:mt-0">
+            <h3 class="text-[1.05rem] md:text-[clamp(1.2rem,1.35vw,1.45rem)] font-semibold tracking-[-0.03em]">Local &amp;<span class="block">Family Owned</span></h3>
+            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">Family-owned and based here, working Sarasota, Bradenton, and Lakewood Ranch. The person who quotes your project is on site while it is being built.</p>
+          </div>
+        </div>
         <!-- 22+ Years of Experience -->
         <div class="flex flex-col sm:flex-row sm:items-start sm:gap-5 md:gap-6 p-5 sm:p-6 md:p-7 bg-[#faf9f8]">
           <span class="grid shrink-0 place-items-center h-11 w-11 md:h-12 md:w-12 rounded-full border border-brand/40 text-brand">
@@ -410,7 +425,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
           </span>
           <div class="mt-5 sm:mt-0">
             <h3 class="text-[1.05rem] md:text-[clamp(1.2rem,1.35vw,1.45rem)] font-semibold tracking-[-0.03em]">22+ Years<span class="block">of Experience</span></h3>
-            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">Proven expertise in tile, showers, and hard surface flooring.</p>
+            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">More than 1,300 finished projects in tile, custom showers, and hard-surface flooring — so the details that cause callbacks get handled the first time.</p>
           </div>
         </div>
 
@@ -421,7 +436,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
           </span>
           <div class="mt-5 sm:mt-0">
             <h3 class="text-[1.05rem] md:text-[clamp(1.2rem,1.35vw,1.45rem)] font-semibold tracking-[-0.03em]">Design +<span class="block">Installation</span></h3>
-            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">Help with materials, layouts, finishes, and professional installation.</p>
+            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">One team from the first material board to the last piece of trim. We help you choose tile, plan the layout and finishes, then install it ourselves.</p>
           </div>
         </div>
 
@@ -432,7 +447,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
           </span>
           <div class="mt-5 sm:mt-0">
             <h3 class="text-[1.05rem] md:text-[clamp(1.2rem,1.35vw,1.45rem)] font-semibold tracking-[-0.03em]">Certified<span class="block">Installation</span></h3>
-            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">Schluter®-certified installers and NTCA members.</p>
+            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">Schluter®-certified installers and NTCA members. Waterproofing, slopes, and movement joints are built to manufacturer spec — the part that keeps a warranty valid.</p>
           </div>
         </div>
 
@@ -443,7 +458,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
           </span>
           <div class="mt-5 sm:mt-0">
             <h3 class="text-[1.05rem] md:text-[clamp(1.2rem,1.35vw,1.45rem)] font-semibold tracking-[-0.03em]">Transparent<span class="block">Pricing</span></h3>
-            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">Clear estimates with no surprises and financing options available.</p>
+            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">You get a written line-item estimate before anyone starts — labor, materials, and prep spelled out — plus financing if you would rather spread the cost.</p>
           </div>
         </div>
 
@@ -454,20 +469,10 @@ const schema = [websiteSchema(), faqSchema(faqs)];
           </span>
           <div class="mt-5 sm:mt-0">
             <h3 class="text-[1.05rem] md:text-[clamp(1.2rem,1.35vw,1.45rem)] font-semibold tracking-[-0.03em]">Warranty<span class="block">Protection</span></h3>
-            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">Reliable coverage on qualifying materials and installation.</p>
+            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">Qualifying materials and our own workmanship are both covered, and we come back if something needs attention after the crew has packed up.</p>
           </div>
         </div>
 
-        <!-- Local Family-Owned Team -->
-        <div class="flex flex-col sm:flex-row sm:items-start sm:gap-5 md:gap-6 p-5 sm:p-6 md:p-7 bg-[#faf9f8]">
-          <span class="grid shrink-0 place-items-center h-11 w-11 md:h-12 md:w-12 rounded-full border border-brand/40 text-brand">
-            <svg class="w-[18px] h-[18px] md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9.8V20h13V9.8"/><path d="M9.75 20v-5.5h4.5V20"/></svg>
-          </span>
-          <div class="mt-5 sm:mt-0">
-            <h3 class="text-[1.05rem] md:text-[clamp(1.2rem,1.35vw,1.45rem)] font-semibold tracking-[-0.03em]">Local Family-<span class="block">Owned Team</span></h3>
-            <p class="hidden md:block mt-2.5 text-[15px] leading-[1.6] text-graycard max-w-[440px]">Serving Sarasota and Bradenton with personal, hands-on service.</p>
-          </div>
-        </div>
       </div>
     </div>
   </section>

@@ -19,6 +19,12 @@ import { site } from '@/lib/site';
   aria-modal="true"
   aria-label="Request your free estimate"
 >
+  <button type="button" class="est-close" id="estClose" aria-label="Close the estimate form">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  </button>
+
   <div class="est-overlay-body">
     <form id="estimateForm" class="w-full max-w-[440px]" novalidate>
 
@@ -287,6 +293,39 @@ import { site } from '@/lib/site';
     padding: 24px 20px 88px;
   }
   @media (min-width: 640px) { .est-overlay-body { padding: 32px 40px 96px; } }
+
+  /* Close control — fixed to the overlay's top-right so it stays reachable
+     while a long step (address, contact) scrolls underneath it. */
+  .est-close {
+    position: fixed;
+    top: 18px; right: 18px;
+    z-index: 10;
+    display: flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.22);
+    background: rgba(255,255,255,.04);
+    color: rgba(255,255,255,.82);
+    cursor: pointer;
+    transition: transform .25s cubic-bezier(.22,1,.36,1), background-color .25s ease,
+      border-color .25s ease, color .25s ease;
+  }
+  @media (min-width: 640px) { .est-close { top: 26px; right: 28px; width: 46px; height: 46px; } }
+  .est-close:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.45);
+    color: #fff;
+  }
+  .est-close:active { transform: scale(.94); }
+  .est-close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(245,75,37,.85);
+    color: #fff;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .est-close { transition: background-color .25s ease, border-color .25s ease, color .25s ease; }
+    .est-close:active { transform: none; }
+  }
 </style>
 
 <script>
@@ -409,6 +448,7 @@ import { site } from '@/lib/site';
         closeOverlayDom();
       }
     });
+    $('estClose')?.addEventListener('click', closeOverlay);
     $('estCloseDone')?.addEventListener('click', closeOverlay);
     // Capture phase: must read the Places dropdown's visibility BEFORE the
     // widget's own Escape handler hides it — Escape closes the suggestions

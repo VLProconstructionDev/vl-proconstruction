@@ -19,6 +19,14 @@ export const site = {
     postalCode: '34211',
     addressCountry: 'US',
   },
+  // Hours as the client stated them. Days are deliberately not spelled out —
+  // confirm the weekly schedule before adding them here or to the
+  // LocalBusiness JSON-LD (openingHoursSpecification), which must match the
+  // Google Business Profile exactly.
+  hours: {
+    office: '7am \u2013 6pm',
+    emergency: '7am \u2013 10pm',
+  },
   geo: {
     // TODO: exact coordinates for 17416 Harvest Moon Way. These are the
     // approximate centre of ZIP 34211 (Lakewood Ranch, east of I-75) — close
