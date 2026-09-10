@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import GuideSignupForm from '@/components/GuideSignupForm.astro';
+import { site } from '@/lib/site';
+import { breadcrumbSchema } from '@/lib/schema';
+
+/**
+ * Gated landing page for the "22 Remodeling Lessons" PDF.
+ *
+ * Deliberately one screen and almost no copy: the form is the page. The full
+ * text lives in the PDF (public/guides/22-remodeling-lessons.pdf), which
+ * MailerLite delivers on signup.
+ *
+ * Layout mirrors EstimateInline.astro — the site's existing centred dark form
+ * band — so it needs no new visual language of its own.
+ */
+
+const title = 'Free Guide: 22 Things to Know Before You Renovate';
+const description =
+  'Free 6-page PDF from a Bradenton remodeler of 22 years: the 22 costliest mistakes homeowners make before anyone picks up a hammer.';
+
+const schema = breadcrumbSchema([
+  { name: 'Home', url: site.url },
+  { name: '22 Remodeling Lessons', url: `${site.url}/guides/22-remodeling-lessons` },
+]);
+
+const stats = [
+  { value: '22+', label: 'Years of excellence' },
+  { value: '1300+', label: 'Projects completed' },
+  { value: '5.0', label: 'Rated by 100+ clients' },
+];
+---
+
+<BaseLayout title={title} description={description} schema={schema} navTheme="dark">
+  <section class="bg-black text-white" data-nav-theme="dark">
+    <div class="px-5 sm:px-10 lg:px-[60px] pt-[128px] lg:pt-[150px] pb-16 lg:pb-24">
+      <div class="mx-auto w-full max-w-[520px]">
+        <h1 class="text-center font-semibold leading-[1.08] tracking-[-0.03em] text-[clamp(1.95rem,5.2vw,2.75rem)]">
+          22 things we wish every homeowner knew before renovating
+        </h1>
+        <p class="mt-5 text-center text-[15px] sm:text-[16px] leading-[1.6] text-white/70">
+          A free six-page PDF from a Bradenton remodeler of 22 years.
+        </p>
+
+        <!-- Form: src/components/GuideSignupForm.astro (MailerLite) -->
+        <div class="mt-9">
+          <GuideSignupForm />
+        </div>
+
+        <!-- Proof, compact: same stat treatment as the home hero's bottom row. -->
+        <div class="mt-11 border-t border-white/10 pt-8 grid grid-cols-3 gap-x-3 text-center">
+          {stats.map((stat) => (
+            <div>
+              <span class="block font-normal text-[1.55rem] sm:text-[1.8rem] leading-[1.1] tracking-[-0.04em]">
+                {stat.value}
+              </span>
+              <span class="mt-1 block font-poppins text-[11.5px] sm:text-[12.5px] font-medium text-[#e9e9e9]/70 tracking-[-0.02em] leading-[1.3]">
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
