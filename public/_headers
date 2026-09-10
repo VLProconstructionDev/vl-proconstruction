@@ -14,3 +14,8 @@
 # under a NEW filename if the logo ever changes.
 /email/*
   Cache-Control: public, max-age=2592000
+
+# Lead-magnet PDF linked from the guide email. Shorter TTL than /assets/*
+# because the guide may be revised under the same filename.
+/guides/*
+  Cache-Control: public, max-age=86400
