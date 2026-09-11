@@ -143,9 +143,10 @@ const allSchema = [localBusinessSchema(), ...pageSchema];
     <Footer />
     <EstimateWizard />
 
-    <!-- Site-wide "Save $500" tab. The automatic exit-intent/dwell popup
-         arms on the home page only — `auto` is false everywhere else. -->
-    <ExitOffer auto={Astro.url.pathname === '/'} />
+    <!-- Site-wide "Save $1000" tab plus the automatic exit-intent/dwell
+         popup, armed on EVERY page: 10 seconds on the page (or the cursor
+         leaving it) opens the offer, once per session across the whole site. -->
+    <ExitOffer auto />
 
     <!-- Hero video: the HTML ships NO <source> elements. Desktop injects and
          plays immediately. Phones show the poster during page load (the ~2 MB

@@ -4,9 +4,7 @@
 city: bradenton
 service: flooring
 
-# Unpublished on purpose — no page is built for this pair and it drops out
-# of the Locations nav and the sitemap. Flip to `true` to ship it.
-published: false
+published: true
 
 seoTitle: Hard-Surface Flooring Bradenton, FL
 seoDescription: 'Hardwood, engineered & LVP flooring installers in Bradenton, FL. NWFA-spec installs. $6–$18/sq ft. Call for a free quote: (503) 781-4657'

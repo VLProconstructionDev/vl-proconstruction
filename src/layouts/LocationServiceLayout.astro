@@ -205,22 +205,22 @@ const SHOW_RELATED = false;
   <!-- Section 1 (visible breadcrumbs) is deliberately not rendered — the trail
        still ships as BreadcrumbList JSON-LD above. -->
   <!-- UI: service-page #hero, verbatim (video, proof badges, stat count-up). -->
-  <section id="hero" class="relative min-h-screen lg:h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
+  <section id="hero" class="relative min-h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
     <img src={heroPhoto} alt="" aria-hidden="true" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover md:hidden" />
     <video class="absolute inset-0 w-full h-full object-cover hidden md:block" data-desktop-only muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1"></video>
     <div class="absolute inset-0 bg-black/65"></div>
 
-    <div class="relative z-20 h-full min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:py-0 sm:pb-24 lg:pb-[90px] sm:pt-[130px] gap-5 lg:gap-6">
+    <div class="relative z-20 min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:py-0 sm:pb-24 lg:pb-[90px] sm:pt-[182px] gap-5 lg:gap-6">
       <TrustPill />
 
-      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,3rem)] sm:text-[clamp(3rem,6.8vw,6.05rem)] text-center">
+      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,2.6rem)] sm:text-[clamp(2.6rem,6.8vw,6.05rem)] text-center">
         <h1>
           <span>{d.heroCity}</span><br />
           <span class="text-brand block">{d.heroService}</span>
         </h1>
         <div class="flex flex-col items-center gap-3 sm:gap-5">
           <span>Installation Experts</span>
-          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">{d.heroSubhead}</p>
+          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.45] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">{d.heroSubhead}</p>
         </div>
       </div>
 
@@ -232,7 +232,7 @@ const SHOW_RELATED = false;
         <!-- Bottom row: stats on the left, the marks we build to on the right.
              Capped narrower than the hero's 1920 grid and centred, so on a wide
              screen the two ends pull in off the edges. -->
-        <div class="w-full flex flex-col gap-8 lg:mt-[120px] lg:mx-auto lg:max-w-[1180px] lg:flex-row lg:items-end lg:justify-between">
+        <div class="w-full flex flex-col gap-8 lg:mt-[120px] lg:mx-auto lg:max-w-[1320px] lg:flex-row lg:items-end lg:justify-between">
           <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
             {d.stats.map((s) => (
               <div class="flex flex-col items-start">

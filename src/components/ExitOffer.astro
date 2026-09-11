@@ -3,8 +3,8 @@ import { site } from '@/lib/site';
 
 interface Props {
   /**
-   * Arm the automatic triggers (exit intent + dwell). Only the home page
-   * passes true — everywhere else the offer opens solely from the tab.
+   * Arm the automatic triggers (exit intent + dwell). BaseLayout passes true
+   * on every page; false leaves the offer openable only from the tab.
    */
   auto?: boolean;
 }
@@ -14,9 +14,9 @@ const { auto = false } = Astro.props;
 /**
  * Exit-intent offer popup.
  *
- * Rendered site-wide from BaseLayout so the "Save $500" tab is on every
- * page. The automatic triggers are opt-in per page via `auto`, which only
- * the home page sets — elsewhere the dialog exists but waits for the tab.
+ * Rendered site-wide from BaseLayout so the "Save $1000" tab is on every
+ * page. The automatic triggers are opt-in per page via `auto`, which
+ * BaseLayout sets site-wide; without it the dialog waits for the tab.
  *
  * With `auto`, two triggers, whichever comes first:
  *   1. the cursor moves off the page (any edge, any direction) — mouse only,
@@ -26,7 +26,7 @@ const { auto = false } = Astro.props;
  * Shows once per session (sessionStorage), so reaching for a bookmark twice in
  * one visit doesn't reopen it. A fresh visit shows it again.
  *
- * A fixed "Save $500" tab (bottom-right, desktop only — #mobileCta owns the
+ * A fixed "Save $1000" tab (bottom-right, desktop only — #mobileCta owns the
  * bottom of a phone screen) reopens it at any time, including after the
  * once-per-session flag has been set.
  *
@@ -71,7 +71,7 @@ const { auto = false } = Astro.props;
       </div>
 
       <p class="xo-eyebrow">Save up to</p>
-      <p class="xo-amount" id="xoHeadline">$500</p>
+      <p class="xo-amount" id="xoHeadline">$1000</p>
       <p class="xo-sub">on your remodel when you call today</p>
 
       <a class="xo-cta" href={site.phoneHref}>
@@ -100,7 +100,7 @@ const { auto = false } = Astro.props;
   aria-haspopup="dialog"
   aria-controls="exitOffer"
 >
-  Save $500
+  Save $1000
 </button>
 
 <style is:global>
@@ -506,7 +506,7 @@ const { auto = false } = Astro.props;
 
     var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-    // The automatic triggers arm only where the page opted in (home). The tab
+    // The automatic triggers arm only where the page opted in. The tab
     // works everywhere regardless. Already shown this session? The automatic
     // triggers stand down too — clicking the tab is a deliberate request.
     var auto = el.getAttribute('data-auto') === '1';

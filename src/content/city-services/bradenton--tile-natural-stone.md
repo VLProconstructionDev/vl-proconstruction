@@ -4,9 +4,7 @@
 city: bradenton
 service: tile-natural-stone
 
-# Unpublished on purpose — no page is built for this pair and it drops out
-# of the Locations nav and the sitemap. Flip to `true` to ship it.
-published: false
+published: true
 
 seoTitle: Tile & Natural Stone Bradenton, FL
 seoDescription: 'Tile & natural-stone installers in Bradenton, FL. Porcelain, marble, travertine. $9–$26/sq ft. Call for a free quote: (503) 781-4657'
