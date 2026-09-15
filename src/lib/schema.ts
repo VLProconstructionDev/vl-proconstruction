@@ -55,8 +55,9 @@ export function localBusinessSchema() {
   };
 }
 
-/** The three live service pages — the catalog the business actually offers. */
+/** The live service pages — the catalog the business actually offers. */
 const SERVICE_CATALOG = [
+  { slug: 'bathroom-remodeling', name: 'Bathroom Remodeling' },
   { slug: 'custom-showers', name: 'Custom Shower Installation' },
   { slug: 'tile-natural-stone', name: 'Tile & Natural Stone Installation' },
   { slug: 'flooring', name: 'Hard-Surface Flooring Installation' },
@@ -113,6 +114,8 @@ export function serviceSchema(input: {
   areaServed?: string;
   /** Override when the Service lives at its own URL (e.g. a city × service page). */
   url?: string;
+  /** Named job types the page sells — mirrors the visible "types we build" section. */
+  offers?: string[];
 }) {
   return {
     '@context': 'https://schema.org',
@@ -123,6 +126,16 @@ export function serviceSchema(input: {
     url: new URL(input.url ?? `/services/${input.slug}`, site.url).toString(),
     ...(input.areaServed && {
       areaServed: { '@type': 'Place', name: input.areaServed },
+    }),
+    ...(input.offers?.length && {
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: `${input.name} types`,
+        itemListElement: input.offers.map((name) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name },
+        })),
+      },
     }),
   };
 }

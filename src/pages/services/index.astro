@@ -4,7 +4,7 @@ import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 import { breadcrumbSchema, itemListSchema } from '@/lib/schema';
 import TrustPill from '@components/TrustPill.astro';
 
-// The three cards below, as structured data — order matches the page.
+// The four cards below, as structured data — order matches the page.
 const schema = [
   breadcrumbSchema([
     { name: 'Home', url: '/' },
@@ -13,6 +13,7 @@ const schema = [
   itemListSchema({
     name: 'VL Pro Construction services',
     items: [
+      { name: 'Bathroom Remodeling', url: '/services/bathroom-remodeling' },
       { name: 'Custom Shower Installation', url: '/services/custom-showers' },
       { name: 'Tile & Natural Stone Installation', url: '/services/tile-natural-stone' },
       { name: 'Hard-Surface Flooring Installation', url: '/services/flooring' },
@@ -169,19 +170,22 @@ const schema = [
         <!-- Bottom row: stats on the left, the marks we build to on the right.
              Capped narrower than the hero's 1920 grid and centred, so on a wide
              screen the two ends pull in off the edges. -->
-        <div class="w-full flex flex-col gap-8 lg:mt-[120px] lg:mx-auto lg:max-w-[1320px] lg:flex-row lg:items-end lg:justify-between">
-          <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
-            <div class="flex flex-col items-start">
-              <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
-              <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Years of excellence</span>
-            </div>
-            <div class="flex flex-col items-start">
-              <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
-              <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Warranty Coverage</span>
-            </div>
-            <div class="flex flex-col items-start">
-              <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
-              <span class="font-poppins text-[13px] sm:text-[14px] font-medium capitalize text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Projects Completed</span>
+        <div class="w-full flex flex-col gap-8 lg:mt-[96px] lg:mx-auto lg:max-w-[1320px] lg:flex-row lg:items-end lg:justify-between">
+          <div class="flex flex-col items-start gap-3 sm:gap-4">
+            <h2 class="font-normal capitalize text-[14.5px] sm:text-[16px] lg:text-[17px] leading-[1.2] tracking-[-0.03em] text-white/80">Why Gulf Coast Homeowners Trust VL Pro:</h2>
+            <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">Years of excellence</span>
+              </div>
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">Warranty Coverage</span>
+              </div>
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">Projects Completed</span>
+              </div>
             </div>
           </div>
           <!-- Credential marks: each logo carries its own claim, so the row states
@@ -208,8 +212,44 @@ const schema = [
     </div>
   </section>
 
-  <!-- ===================== SERVICE 1 — CUSTOM SHOWERS ===================== -->
-  <section id="custom-showers" class="bg-white" data-nav-theme="light">
+  <!-- ===================== SERVICE 1 — BATHROOM REMODELING ===================== -->
+  <!-- The whole-room service; the three that follow are the parts it contains. -->
+  <section id="bathroom-remodeling" class="bg-white" data-nav-theme="light">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Image (right on desktop) -->
+        <div class="card relative overflow-hidden aspect-[4/5] lg:order-2">
+          <!-- A different project from the Custom Showers card below — the two sat
+               side by side showing the same blue-tile bathroom.
+               TODO: swap in a dedicated bathroom-remodel pair when the client sends photos -->
+          <img loading="lazy" decoding="async" src="/assets/images/process-4.webp" alt="Remodeled bathroom with a walk-in shower, floating vanity, and recessed niches" class="card-img w-full h-full object-cover" />
+          <img loading="lazy" decoding="async" src="/assets/images/gallery-showers-2026/showers-12.webp" alt="" aria-hidden="true" class="card-img-hover absolute inset-0 w-full h-full object-cover" />
+        </div>
+        <!-- Content -->
+        <div class="lg:order-1">
+          <h2 class="font-semibold capitalize leading-[1.03] tracking-[-0.04em] text-[clamp(2.75rem,5vw,4.5rem)]">Bathroom Remodeling</h2>
+          <p class="mt-5 text-[13.5px] sm:text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[560px]">
+            The whole room, handled by one crew — demolition, layout and plumbing changes, waterproofing, tile, vanity, and fixtures. One scope, one price, and no waiting on a subcontractor's calendar between phases.
+          </p>
+          <ul class="mt-8 grid gap-x-8 gap-y-3.5 sm:grid-cols-2 max-w-[560px]">
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Full demo &amp; subfloor repair</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Layout &amp; plumbing changes</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Walk-in showers &amp; wet rooms</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Vanity, counter &amp; fixtures</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Floor, wall &amp; feature tile</li>
+            <li class="flex items-center gap-3 text-[13.5px] sm:text-[15px] font-medium tracking-[-0.02em] text-ink"><span class="feat-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Permits &amp; inspections</li>
+          </ul>
+          <a href="/services/bathroom-remodeling/" class="btn group mt-9 inline-flex items-center gap-2 rounded-full bg-brand hover:bg-[#c23c18] px-8 py-3.5 text-[15px] font-semibold capitalize text-white hover:gap-3">
+            Explore Bathroom Remodeling
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SERVICE 2 — CUSTOM SHOWERS ===================== -->
+  <section id="custom-showers" class="bg-[#faf9f8]" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <!-- Image -->
@@ -241,8 +281,8 @@ const schema = [
     </div>
   </section>
 
-  <!-- ===================== SERVICE 2 — TILE & NATURAL STONE ===================== -->
-  <section id="tile-stone" class="bg-[#faf9f8]" data-nav-theme="light">
+  <!-- ===================== SERVICE 3 — TILE & NATURAL STONE ===================== -->
+  <section id="tile-stone" class="bg-white" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <!-- Image (right on desktop) -->
@@ -274,8 +314,8 @@ const schema = [
     </div>
   </section>
 
-  <!-- ===================== SERVICE 3 — HARD SURFACE FLOORING ===================== -->
-  <section id="flooring" class="bg-white" data-nav-theme="light">
+  <!-- ===================== SERVICE 4 — HARD SURFACE FLOORING ===================== -->
+  <section id="flooring" class="bg-[#faf9f8]" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <!-- Image -->
@@ -427,7 +467,7 @@ const schema = [
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
       <div class="lg:max-w-[44%]">
         <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
-          Proudly Serving Florida's<br />Gulf Coast
+          Serving Bradenton, Sarasota<br />& the Gulf Coast
         </h2>
         <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
           VL Pro Construction proudly serves homeowners across the greater Bradenton–Sarasota metro area — delivering quality craftsmanship and honest service right in your neighborhood.

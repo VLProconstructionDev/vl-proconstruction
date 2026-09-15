@@ -1,7 +1,7 @@
 ---
 title: '7 Bathroom Remodel Mistakes That Can Cost You Thousands'
 seoTitle: '7 Bathroom Remodel Mistakes to Avoid'
-description: '7 bathroom remodel mistakes that cost Florida homeowners thousands — waterproofing, permits, layout & tile. Free estimate: (503) 781-4657'
+description: '7 bathroom remodel mistakes that cost Florida homeowners thousands: waterproofing, permits, layout & tile. Free estimate: (503) 781-4657'
 lede: 'Almost every expensive bathroom remodel goes wrong in the same seven places — and six of them happen before a single tile is set. Here''s what each mistake costs on the Gulf Coast, and the question that catches it in time.'
 publishedAt: 2026-09-10
 author: Abel Leytner

@@ -1,0 +1,824 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
+import { site } from '@/lib/site';
+import TrustPill from '@components/TrustPill.astro';
+import EstimateInline from '@components/EstimateInline.astro';
+
+const description =
+  'Full bathroom remodeling in Bradenton & Sarasota, FL. Demo to final grout by one in-house crew, Manatee or Sarasota permits pulled. Free design consultation.';
+
+/**
+ * Two parts, deliberately:
+ *   1. the standard service-page hero (video, H1, CTAs) — identical to
+ *      /services/custom-showers and the rest, so the site doesn't fork;
+ *   2. a long-form text body laid out like a blog post (.post-wrap +
+ *      .post-body + the sticky rail), because this page's job is to answer
+ *      questions in prose rather than to show off UI.
+ *
+ * The prose styles are copied from BlogPostLayout — they live in that layout
+ * rather than global.css, so a page outside /blog carries its own copy.
+ *
+ * Bathroom remodeling is the whole-room service — the shower, tile, and
+ * flooring pages are the components it contains, so this page links out to
+ * all three rather than repeating their copy.
+ */
+
+/** Sidebar table of contents — kept in sync with the H2 ids in the body. */
+const toc = [
+  { slug: 'family-owned', text: 'Family-owned on the Suncoast' },
+  { slug: 'projects', text: 'Bathroom projects we take on' },
+  { slug: 'why-vl-pro', text: 'Why homeowners choose VL Pro' },
+  { slug: 'process', text: 'How your bathroom comes together' },
+  { slug: 'cost', text: 'What a bathroom remodel costs' },
+  { slug: 'finishes', text: 'Finishes and the details that last' },
+  { slug: 'offer', text: 'Save on your project' },
+  { slug: 'faqs', text: 'Bathroom remodeling FAQs' },
+  { slug: 'company', text: 'About VL Proconstruction' },
+];
+
+/**
+ * Before / after pairs for the carousel under the hero.
+ * TODO(client): only one real pair exists so far (ba-bath-*). Add more as
+ * Vladimir sends them — the arrows, dots and counter appear automatically
+ * from the second entry on.
+ */
+const baPairs = [
+  {
+    before: '/assets/images/ba-bath-before.webp',
+    after: '/assets/images/ba-bath-after.webp',
+    beforeAlt: 'Primary bath before the remodel — beige drop-in corner tub, arched shower alcoves behind gold-framed doors and oak vanities',
+    afterAlt: 'The same bath after the remodel — freestanding tub on an iridescent blue hex feature wall, twin arched walk-in showers and dark shaker vanities',
+  },
+];
+
+/** Mirrors the visible "Bathroom projects we take on" section. */
+const projectTypes = [
+  'Tub-to-shower conversion',
+  'Walk-in and custom showers',
+  'Primary bath suites',
+  'Guest and powder rooms',
+  'Accessible and aging-in-place bathrooms',
+  'Full bathroom remodels',
+];
+
+/**
+ * Eight questions. The same array renders the visible Q&As and the FAQPage
+ * JSON-LD, so schema and page copy cannot drift.
+ */
+const faqs = [
+  {
+    q: 'How long does a bathroom remodel take?',
+    a: 'A focused refresh — vanity, tile, fixtures, nothing moving — runs about 3 to 5 weeks. A full remodel with a shower rebuild or a tub-to-shower conversion runs 4 to 6 weeks, and a primary suite with layout changes runs 6 to 8 weeks. Tile and vanity lead times are the usual variable, so we confirm every material before demo starts and give you a dated schedule before the first day.',
+  },
+  {
+    q: 'How much does a bathroom remodel cost in Bradenton or Sarasota?',
+    a: 'Most remodels in this market land between $18,000 and $45,000. A focused refresh runs $18K–$26K, a full remodel with a walk-in shower runs $26K–$38K, and a primary suite with a custom shower and a freestanding tub runs $38K and up. Room size, tile selection and whether the plumbing moves are the biggest variables.',
+  },
+  {
+    q: 'Can I save money by keeping the existing plumbing layout?',
+    a: 'Yes, often by thousands. Nearly every home here is slab-on-grade, so moving a toilet or a shower drain means cutting and re-pouring concrete, plus extra permitting. Keeping the fixtures where they are and spending the difference on tile and glass buys a noticeably better-looking room for the same money. We price both options at the walkthrough so you can choose.',
+  },
+  {
+    q: 'Do you handle permits and inspections?',
+    a: 'Yes. We pull the permit as the licensed contractor of record with Manatee County, Sarasota County, or whichever city your address falls in — Bradenton, Palmetto, Sarasota or Venice — and we meet every required inspection. You do not manage paperwork or talk to inspectors. A cosmetic swap that leaves every fixture in place usually needs no permit at all, and we will tell you which one you have before you commit.',
+  },
+  {
+    q: 'Do I need HOA or condo association approval?',
+    a: 'Rarely for the bathroom itself — architectural review covers what is visible from outside your home. Condo and deed-restricted communities usually do have rules about work hours, elevator use, dumpster placement and crew parking, and many want a certificate of insurance on file before anyone starts. We collect those rules at the walkthrough and build them into the schedule.',
+  },
+  {
+    q: 'How do you make sure a shower will not leak down the road?',
+    a: 'A shower that lasts has a continuous waterproof system behind the tile, not sealed grout and caulk. We build every pan on a Schluter®-certified membrane, tie it in at the corners and transitions, and fill it for a 24-hour flood test before a single tile is set. The tile on top is the wear layer, not the waterproofing. Get that right and the shower lasts decades; skip it and you see water damage within a few years.',
+  },
+  {
+    q: 'Can you design a bathroom for aging in place?',
+    a: 'Yes, and we do a lot of it here. Zero-threshold showers, real blocking set in the walls for grab bars now or later, comfort-height fixtures, slip-resistant tile and lever handles — specified so the finished room reads as a well-designed bathroom rather than a medical one. It is worth doing during a remodel you were already planning, because the framing is open exactly once.',
+  },
+  {
+    q: 'What kind of warranty do you offer?',
+    a: 'We back our workmanship — the waterproofing assembly, the tile setting, and everything our crew installed. Manufacturer warranties on the fixtures, tile and glass stay with the manufacturer, and we hand you that paperwork at the final walkthrough. We are a local, family-owned company, so if you ever need us we are twenty minutes away.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    name: 'Bathroom Remodeling',
+    description,
+    slug: 'bathroom-remodeling',
+    areaServed: 'Bradenton–Sarasota, FL',
+    offers: projectTypes,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Services', url: '/services' },
+    { name: 'Bathroom Remodeling', url: '/services/bathroom-remodeling' },
+  ]),
+  faqSchema(faqs),
+];
+---
+
+<BaseLayout
+  title="Bathroom Remodeling Bradenton, FL"
+  description={description}
+  schema={schema}
+  navTheme="dark"
+>
+  <style is:global>
+    /* ===== Before / after carousel (second section) =====
+       Copy column on the left, the pair on the right; the arrows sit half off
+       the photos so they read as controls on top of the images, not chrome
+       beside them. Controls only render from the second pair onwards. */
+    .bax-shot { position: relative; overflow: hidden; border-radius: 16px; aspect-ratio: 3 / 2; background: #141414; }
+    .bax-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .bax-tag {
+      position: absolute; bottom: 0; padding: 11px 22px;
+      /* Translucent so the photo reads through the tag; the blur keeps the
+         label legible over a busy or light-toned corner. */
+      background: rgba(20,20,20,.55); color: #fff;
+      -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px);
+      font-size: 13.5px; font-weight: 700; letter-spacing: .01em;
+    }
+    .bax-tag-before { left: 0; border-top-right-radius: 14px; }
+    .bax-tag-after { right: 0; border-top-left-radius: 14px; }
+
+    .bax-arrow {
+      position: absolute; top: 50%; z-index: 3;
+      display: grid; place-items: center; width: 56px; height: 56px;
+      border-radius: 9999px; background: #fff; color: #1e1e1e;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.1);
+      transform: translateY(-50%);
+      transition: transform .2s cubic-bezier(.22,1,.36,1), color .2s;
+    }
+    .bax-arrow svg { width: 20px; height: 20px; }
+    .bax-arrow:hover, .bax-arrow:focus-visible { color: #f54b25; transform: translateY(-50%) scale(1.06); }
+    .bax-arrow:active { transform: translateY(-50%) scale(0.97); }
+    .bax-prev { left: -28px; }
+    .bax-next { right: -28px; }
+    @media (max-width: 767px) { .bax-arrow { width: 44px; height: 44px; } .bax-prev { left: -14px; } .bax-next { right: -14px; } }
+    @media (prefers-reduced-motion: reduce) {
+      .bax-arrow { transition: color .2s; }
+      .bax-arrow:hover, .bax-arrow:focus-visible, .bax-arrow:active { transform: translateY(-50%); }
+    }
+
+    .bax-count { font-size: 15px; letter-spacing: -.01em; color: #959595; }
+    .bax-count strong { color: #1e1e1e; font-weight: 600; }
+    .bax-dot {
+      width: 9px; height: 9px; border-radius: 9999px; background: rgba(0,0,0,.18);
+      transition: background-color .2s;
+    }
+    .bax-dot.is-active { background: #f54b25; }
+    .bax-dot:hover, .bax-dot:focus-visible { background: rgba(245,75,37,.55); }
+
+
+    /* ===== Article body — the same treatment as a blog post =====
+       Copied from BlogPostLayout: those styles are scoped to that layout, so a
+       page outside /blog carries its own copy rather than importing it. */
+    .post-wrap { max-width: 1400px; margin-inline: auto; }
+
+    /* Body copy matches the hero's body pair — 13.5px on phones, 16.5px from sm up.
+       Every nested paragraph inherits it rather than setting its own size. */
+    .post-body { max-width: 820px; color: #2b2b2b; font-size: 13.5px; line-height: 1.72; }
+    @media (min-width: 640px) { .post-body { font-size: 16.5px; } }
+    .post-body > * + * { margin-top: 1.35em; }
+    /* Section headings use the home page's section-H2 recipe — bold, tight
+       leading and tracking — sized down only so a long heading doesn't take
+       four lines in this column. No capitalize transform: the copy is
+       sentence case on purpose. */
+    .post-body h2 {
+      margin-top: 2.2em; color: #1e1e1e; font-weight: 700;
+      font-size: clamp(1.75rem, 3vw, 2.6rem); line-height: 1.05; letter-spacing: -0.03em;
+    }
+    .post-body > h2:first-child { margin-top: 0; }
+    .post-body h3 {
+      margin-top: 2em; color: #1e1e1e; font-weight: 600;
+      font-size: clamp(1.02rem, 1.35vw, 1.15rem); line-height: 1.3; letter-spacing: -0.02em;
+    }
+    .post-body strong { color: #1e1e1e; font-weight: 600; }
+    .post-body a { color: #f54b25; text-decoration: underline; text-underline-offset: 3px; }
+    .post-body a:hover { color: #c23c18; }
+    .post-body a:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
+    .post-body ul { padding-left: 1.35em; list-style: disc; }
+    .post-body li + li { margin-top: 0.5em; }
+    .post-body hr { margin-top: 2.4em; border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); }
+
+    /* A four-column table is wider than a phone — it scrolls in its own box
+       rather than pushing the page sideways (html/body use overflow-x: clip,
+       so an overflowing table would just be cut off). */
+    .post-body table {
+      display: block; width: 100%; max-width: 100%; overflow-x: auto;
+      border-collapse: collapse; font-size: 14px; line-height: 1.45;
+    }
+    .post-body thead, .post-body tbody { min-width: 560px; }
+    .post-body tr { display: table; width: 100%; table-layout: fixed; }
+    .post-body th, .post-body td { padding: 9px 12px; border-bottom: 1px solid rgba(0, 0, 0, 0.09); text-align: left; }
+    .post-body thead th {
+      background: #000; color: #fff; font-weight: 600;
+      padding-top: 15px; padding-bottom: 15px;
+      font-size: 13px; letter-spacing: 0.01em; border-bottom: 0;
+    }
+    /* The tier most people land on, marked the way a blog table marks our row. */
+    .post-body tbody tr:has(.row-us) { background: rgba(245, 75, 37, 0.055); }
+    .post-body tbody tr:has(.row-us) td:first-child { box-shadow: inset 3px 0 0 #f54b25; }
+    .post-body .row-us { font-style: normal; }
+
+    /* Pull-out callout — one real takeaway, not a box per section. */
+    .post-body blockquote {
+      padding: 20px 24px; border-left: 3px solid #f54b25;
+      background: #f0ebe5; color: #4e4e4e;
+      line-height: 1.75;
+    }
+    .post-body blockquote > * + * { margin-top: 0.85em; }
+    .post-body blockquote strong { color: #1e1e1e; font-weight: 700; }
+    .post-body blockquote > :first-child { margin-top: 0; }
+    @media (max-width: 480px) { .post-body blockquote { padding: 16px 18px; } }
+
+    /* ===== Intro card =====
+       The opening block sits in its own bordered card, closed by a row of
+       stat tiles — the page's one piece of chrome before the prose starts. */
+    .intro-card {
+      border: 1px solid rgba(0,0,0,.1); border-radius: 14px; background: #fff;
+      padding: 30px 32px 32px;
+    }
+    .intro-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 13px; font-weight: 700; letter-spacing: .01em; color: #c23c18;
+    }
+    .intro-eyebrow::before { content: ''; flex: none; width: 3px; height: 17px; border-radius: 2px; background: #f54b25; }
+    /* .post-body's flow spacing only reaches its own children, so the card sets its own. */
+    .intro-card > * + * { margin-top: 1.3em; }
+    .post-body .intro-card h2 { margin-top: 16px; font-size: clamp(1.4rem, 2.2vw, 1.9rem); line-height: 1.14; }
+    .post-body .intro-card .intro-lead { margin-top: 0.9em; color: #1e1e1e; }
+    @media (max-width: 560px) { .intro-card { padding: 22px 20px 24px; } }
+
+    .stat-tiles {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px; margin-top: 14px;
+    }
+    .stat-tile {
+      border: 1px solid rgba(0,0,0,.1); border-radius: 14px; background: #fff;
+      padding: 21px 16px; text-align: center;
+    }
+    .stat-tile b {
+      display: block; color: #1e1e1e; font-weight: 700;
+      font-size: clamp(1.25rem, 1.8vw, 1.6rem); line-height: 1.1; letter-spacing: -.035em;
+    }
+    .stat-tile span { display: block; margin-top: 6px; font-size: 12.5px; font-weight: 600; color: #4e4e4e; }
+
+    /* ===== "Projects we take on" cards =====
+       A brand rule across the top of each card is the only colour; everything
+       else stays on the page's hairline system. */
+    .pj-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); margin-top: 1.8em; }
+    .pj-c {
+      border: 1px solid rgba(0,0,0,.1); border-top: 3px solid #f54b25; border-radius: 12px;
+      background: #fff; padding: 20px 19px 22px;
+    }
+    .post-body .pj-c h3 { margin-top: 0; font-size: 15.5px; font-weight: 700; line-height: 1.3; }
+    /* The cards sit three-up in a narrow column, so their copy stays a step
+       below the page's body size — at 16.5px it wraps every three words. */
+    .post-body .pj-c p { margin-top: 9px; font-size: 14px; line-height: 1.6; color: #4e4e4e; }
+
+    /* ===== Process timeline =====
+       Numbered discs joined by a rule — this list really is a sequence, which
+       is why it gets numbers when nothing else on the page does. */
+    .steps { margin-top: 1.8em; }
+    .step { position: relative; padding-left: 54px; padding-bottom: 26px; }
+    .step:last-child { padding-bottom: 0; }
+    .step::before {
+      content: ''; position: absolute; left: 17px; top: 42px; bottom: 0;
+      width: 2px; background: rgba(245,75,37,.22);
+    }
+    .step:last-child::before { display: none; }
+    .step-n {
+      position: absolute; left: 0; top: 0; display: grid; place-items: center;
+      width: 36px; height: 36px; border-radius: 9999px;
+      background: #f54b25; color: #fff; font-size: 14px; font-weight: 700; line-height: 1;
+    }
+    .post-body .step h3 { margin-top: 5px; font-size: 15.5px; font-weight: 700; line-height: 1.3; }
+    .post-body .step p { margin-top: 9px; line-height: 1.7; color: #4e4e4e; }
+    @media (max-width: 480px) {
+      .step { padding-left: 50px; }
+      .step-n { width: 34px; height: 34px; font-size: 14px; }
+      .step::before { left: 16px; top: 40px; }
+    }
+
+    /* At-a-glance company facts. */
+    .factbox {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+      gap: 1px; margin-top: 1.6em; background: rgba(0, 0, 0, 0.11);
+      border: 1px solid rgba(0, 0, 0, 0.11); border-radius: 2px; overflow: hidden;
+    }
+    .factbox > div { padding: 11px 14px; background: #f6f5f3; }
+    .factbox .fb-k {
+      display: block; margin-bottom: 3px;
+      color: #959595; font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .factbox .fb-v { display: block; color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 1.45; }
+    @media (max-width: 520px) {
+      .factbox { grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); }
+      .factbox > div { padding: 9px 11px; }
+    }
+
+    /* ===== FAQ accordion =====
+       The home page's hairline rows, not cards: a rule between questions, a
+       24px +/- mark that turns brand orange when open. Answers ship in the
+       markup expanded and are only collapsed by JS, so they stay readable
+       (and crawlable) if the script never runs. */
+    .faq-list { margin-top: 1.6em; }
+    .faq-c { border-bottom: 1px solid rgba(0,0,0,.1); }
+    .faq-c:first-child { border-top: 1px solid rgba(0,0,0,.1); }
+    .post-body .faq-c h3 { margin-top: 0; }
+    .faq-cq {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 28px;
+      padding: 18px 0; text-align: left; cursor: pointer; color: #1e1e1e;
+      font-size: clamp(0.95rem, 1.1vw, 1.0625rem); font-weight: 600; line-height: 1.4; letter-spacing: -.01em;
+      transition: color .2s;
+    }
+    .faq-cq:hover, .faq-cq:focus-visible { color: #c23c18; }
+    .faq-ci { position: relative; flex: none; width: 20px; height: 20px; }
+    .faq-ci::before, .faq-ci::after {
+      content: ''; position: absolute; background: #1e1e1e;
+      transition: transform .3s ease, opacity .3s ease, background-color .2s;
+    }
+    .faq-ci::before { top: 50%; left: 0; right: 0; height: 1.8px; transform: translateY(-50%); }
+    .faq-ci::after { left: 50%; top: 0; bottom: 0; width: 1.8px; transform: translateX(-50%); }
+    .faq-cq[aria-expanded="true"] .faq-ci::after { transform: translateX(-50%) scaleY(0); opacity: 0; }
+    .faq-cq[aria-expanded="true"] .faq-ci::before { background: #f54b25; }
+    .faq-ca { overflow: hidden; }
+    .post-body .faq-ca p { margin-top: 0; padding-bottom: 20px; line-height: 1.7; color: #4e4e4e; }
+    .js-faq .faq-ca { transition: height .3s cubic-bezier(.4,0,.2,1); }
+    @media (prefers-reduced-motion: reduce) {
+      .js-faq .faq-ca { transition: none; }
+      .faq-ci::before, .faq-ci::after { transition: background-color .2s; }
+    }
+
+    /* ===== Sticky rail =====
+       Capped at the viewport and laid out as a column, so the bottom card is
+       always reachable: the CTA and phone cards keep their height and the TOC
+       scrolls inside its own card. */
+    .rail-sticky {
+      position: sticky; top: 112px;
+      display: flex; flex-direction: column; gap: 20px;
+      max-height: calc(100dvh - 112px - 28px);
+    }
+    .rail-sticky > .rail-cta,
+    .rail-sticky > .rail-card:last-child { flex: none; }
+    .rail-toc { display: flex; flex-direction: column; min-height: 0; }
+    .toc-scroll {
+      min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+      scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+    }
+    .toc-scroll::-webkit-scrollbar { width: 4px; }
+    .toc-scroll::-webkit-scrollbar-thumb { border-radius: 9999px; background: rgba(0, 0, 0, 0.18); }
+
+    .rail-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.01em; color: #959595; }
+    .rail-card { padding: 22px; border: 1px solid rgba(0, 0, 0, 0.1); background: #fff; }
+    .rail-cta { padding: 26px 24px; border: 1px solid rgba(0, 0, 0, 0.1); background: #fff; text-align: center; }
+
+    .toc-list { margin-top: 14px; }
+    .toc-item + .toc-item { border-top: 1px solid rgba(0, 0, 0, 0.08); }
+    .toc-link {
+      display: flex; gap: 10px; padding: 11px 0;
+      font-size: 14px; line-height: 1.45; letter-spacing: -0.01em; color: #4e4e4e;
+      transition: color 0.2s ease;
+    }
+    .toc-link::before {
+      content: ''; flex: none; width: 5px; height: 5px; margin-top: 7px;
+      border-radius: 9999px; background: rgba(0, 0, 0, 0.22);
+      transition: background-color 0.2s ease;
+    }
+    .toc-link:hover { color: #1e1e1e; }
+    .toc-link:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
+    .toc-link.is-active { color: #f54b25; font-weight: 600; }
+    .toc-link.is-active::before { background: #f54b25; }
+  </style>
+
+  <!-- ===================== HERO (identical to the other service pages) ===================== -->
+  <section id="hero" class="relative min-h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
+    <!-- Phone: a still job photo instead of the hero video — same shot as this
+         service's card on /services, and it spares cellular the ~2 MB clip. -->
+    <img src="/assets/images/process-4.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover md:hidden" />
+    <video class="absolute inset-0 w-full h-full object-cover hidden md:block" data-desktop-only muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1"></video>
+    <div class="absolute inset-0 bg-black/65"></div>
+    <div class="relative z-20 h-full min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:pt-[172px] sm:pb-24 lg:pb-[90px] gap-5 lg:gap-6">
+      <TrustPill />
+      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,3rem)] sm:text-[clamp(3rem,6.8vw,6.05rem)] text-center">
+        <h1>
+          <span>Sarasota <br class="sm:hidden" />&amp; Bradenton Area</span><br />
+          <span class="text-brand block">Bathroom Remodeling</span>
+        </h1>
+        <div class="flex flex-col items-center gap-3 sm:gap-5">
+          <span>Contractors</span>
+          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[560px]">Your new bathroom, delivered on time and on budget. One in-house crew from demolition to the last grout line — family-owned, 22 years on the Suncoast.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center gap-8">
+        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
+          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(503) 781-4657</a>
+        </div>
+        <!-- Bottom row: stats on the left, the marks we build to on the right.
+             Both are trust signals, not sections — the label is a <p>, never a
+             heading, so the page outline starts at the H1 and stays clean. -->
+        <div class="w-full flex flex-col gap-8 lg:mt-[96px] lg:mx-auto lg:max-w-[1320px] lg:flex-row lg:items-end lg:justify-between">
+          <div class="flex flex-col items-start gap-3 sm:gap-4">
+            <p class="font-normal capitalize text-[14.5px] sm:text-[16px] lg:text-[17px] leading-[1.2] tracking-[-0.03em] text-white/80">Why Gulf Coast Homeowners Trust VL Pro:</p>
+            <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">Years of excellence</span>
+              </div>
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">Warranty Coverage</span>
+              </div>
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">Projects Completed</span>
+              </div>
+            </div>
+          </div>
+          <!-- Credential marks: each logo carries its own claim, so the row states
+               what the badges mean. Images are decorative — the label names them. -->
+          <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Featured<br />On</p>
+              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-white.webp" width="480" height="134" alt="Yahoo" class="block h-[22px] sm:h-7 w-auto opacity-90" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BEFORE & AFTER ===================== -->
+  <section id="before-after" class="bg-white" data-nav-theme="light">
+    <div class="mx-auto max-w-[1600px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[100px]">
+      <div class="grid gap-12 lg:gap-16 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:items-center">
+
+        <div>
+          <h2 class="font-bold text-ink leading-[1.1] tracking-[-0.03em] text-[clamp(1.9rem,3.2vw,2.8rem)]">
+            See how we transform bathrooms
+          </h2>
+          <p class="mt-6 text-[13.5px] sm:text-[16.5px] leading-[1.65] tracking-[-0.01em] text-graydesc max-w-[42ch]">
+            The rooms we rebuild are built to last — a shower that will not leak in ten years, a layout that stops fighting you every morning, and finishes that still look right long after the job is paid for.
+          </p>
+
+          {baPairs.length > 1 && (
+            <div class="mt-9 flex items-center gap-5">
+              <p class="bax-count"><strong id="baxNum">1</strong> / {baPairs.length}</p>
+              <div class="flex items-center gap-2.5">
+                {baPairs.map((_, i) => (
+                  <button type="button" class:list={['bax-dot', i === 0 && 'is-active']} data-bax-dot={i} aria-label={`Show project ${i + 1}`}></button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div class="relative">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+            <figure class="bax-shot">
+              <img id="baxBefore" src={baPairs[0].before} alt={baPairs[0].beforeAlt} loading="lazy" decoding="async" />
+              <figcaption class="bax-tag bax-tag-before">Before</figcaption>
+            </figure>
+            <figure class="bax-shot">
+              <img id="baxAfter" src={baPairs[0].after} alt={baPairs[0].afterAlt} loading="lazy" decoding="async" />
+              <figcaption class="bax-tag bax-tag-after">After</figcaption>
+            </figure>
+          </div>
+
+          {baPairs.length > 1 && (
+            <>
+              <button type="button" class="btn bax-arrow bax-prev" id="baxPrev" aria-label="Previous project">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+              </button>
+              <button type="button" class="btn bax-arrow bax-next" id="baxNext" aria-label="Next project">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ARTICLE BODY + RAIL ===================== -->
+  <div class="bg-[#f6f5f3]" data-nav-theme="light">
+    <div class="post-wrap px-5 sm:px-10 lg:px-[60px] py-16 lg:py-20">
+      <div class="grid gap-x-[60px] xl:gap-x-[80px] gap-y-12 lg:grid-cols-[minmax(0,1fr)_340px]">
+
+        <div class="min-w-0">
+          <div class="post-body">
+
+            <div class="intro-card">
+              <p class="intro-eyebrow">Family-owned on the Suncoast since 2004</p>
+              <h2 id="family-owned">Bradenton &amp; Sarasota Bathroom Remodeling</h2>
+              <p class="intro-lead">A bathroom built around how you actually live — designed, permitted and built by one in-house crew.</p>
+              <p>Your bathroom is the first room you use every morning and the last one at night, so it should work as well as it looks. We design and build bathrooms across Bradenton, Sarasota and the rest of the Suncoast, and we handle the whole thing ourselves: demolition, subfloor repair, plumbing and electrical rough-in, waterproofing, tile, vanity, glass and the last bead of caulk. One company, one schedule, one crew that stands behind the result.</p>
+              <p>Most bathroom remodels go wrong in the handoffs. The demo crew leaves, the tile setter arrives and finds a rotted subfloor, and the schedule slips two weeks while everyone waits on somebody else's calendar. We do not have those handoffs, because there is nobody to hand off to — the people who quote your bathroom are the people in your house.</p>
+              <p>Twenty-two years and more than 1,300 projects in, we have opened up enough Florida bathrooms to know what is usually behind the tile before we start. When we find something we did not expect, you get a photo of it and a price for the difference before we carry on.</p>
+            </div>
+
+            <div class="stat-tiles">
+              <div class="stat-tile"><b>2004</b><span>Family-owned since</span></div>
+              <div class="stat-tile"><b>In-House</b><span>Design &amp; build crews</span></div>
+              <div class="stat-tile"><b>1300+</b><span>Projects completed</span></div>
+              <div class="stat-tile"><b>Full</b><span>Workmanship warranty</span></div>
+            </div>
+
+            <h2 id="projects">Bathroom projects we take on</h2>
+            <p>Whether you are refreshing a tired hall bath or building a spa-like primary suite, we scope the project to your house and to how your household actually uses the room:</p>
+
+            <div class="pj-grid">
+              <div class="pj-c">
+                <h3>Tub-to-shower conversion</h3>
+                <p>Trade the alcove tub nobody has used in fifteen years for a roomy, easy-to-clean walk-in shower — same footprint, no structural work, and the most requested bathroom upgrade in Bradenton and Sarasota. <a href="/blog/tub-to-shower-conversion-bradenton/">What a conversion involves</a>.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Walk-in &amp; custom showers</h3>
+                <p>Curbless entries, linear drains, large-format tile, benches, lighted niches and frameless glass — plus the waterproofing details that decide whether a shower lasts five years or twenty-five. <a href="/services/custom-showers/">Custom shower installation</a>.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Primary bath suites</h3>
+                <p>Twin vanities, a freestanding soaking tub, a separate walk-in shower, and a layout that finally makes sense instead of a corner garden tub eating the middle of the room — designed and built as one room.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Guest &amp; powder rooms</h3>
+                <p>Smaller-scope refreshes and full remodels for hall baths, guest baths and half-baths that still deserve to be done right — the honest option when the layout already works and the waterproofing is what aged out.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Accessible &amp; aging-in-place</h3>
+                <p>Zero-threshold showers, real blocking set in the walls for grab bars, comfort-height fixtures and slip-resistant tile — accessibility that reads as a well-designed bathroom, not an institutional one.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Full bathroom remodels</h3>
+                <p>Down-to-the-studs remodels with a new layout, plumbing and electrical, <a href="/services/tile-natural-stone/">tile and stone</a>, vanity, lighting and <a href="/services/flooring/">flooring</a>, coordinated start to finish on one contract.</p>
+              </div>
+            </div>
+
+            <h2 id="why-vl-pro">Why homeowners choose VL Pro</h2>
+            <p>There are a lot of remodelers between Palmetto and Venice. Here is what actually differs about working with us:</p>
+            <ul>
+              <li><strong>One in-house crew.</strong> The same people demo the room and set the last piece of trim. No subcontractor handoffs, and nobody blaming the last trade.</li>
+              <li><strong>One point of contact.</strong> The person who quotes your bathroom is the person running it. You get their number, not a dispatch line.</li>
+              <li><strong>Fixed scope, priced before demo.</strong> The whole scope is priced up front — no allowances that balloon, and no change order that arrives without a photo of what we found attached to it.</li>
+              <li><strong>Schluter®-certified waterproofing.</strong> Every pan is built on a certified membrane and flood-tested for 24 hours before a single tile goes on.</li>
+              <li><strong>Permits pulled and inspected.</strong> We file as the licensed contractor of record with Manatee County, Sarasota County or your city building department, and we meet the inspector.</li>
+              <li><strong>Certified for the surfaces we install.</strong> Large-format tile, natural stone, XL porcelain slab, glass tile and art glass panel, and members of the National Tile Contractors Association.</li>
+            </ul>
+
+            <h2 id="process">How your bathroom comes together</h2>
+            <p>Every bathroom we build runs through the same four phases, so you always know where the project stands and what happens next.</p>
+
+            <div class="steps">
+              <div class="step">
+                <span class="step-n" aria-hidden="true">1</span>
+                <h3>Free consultation &amp; detailed estimate</h3>
+                <p>We come to the house, measure the room, check what the plumbing and framing will actually allow, and talk through budget and timeline honestly. You leave with an itemized scope, a price and a start date — not a range. No cost, no obligation.</p>
+              </div>
+              <div class="step">
+                <span class="step-n" aria-hidden="true">2</span>
+                <h3>Design, selections &amp; permit</h3>
+                <p>Tile, vanity, countertop, fixtures, lighting and paint are chosen and ordered before anything comes apart, so decisions happen on paper rather than mid-build when changes get expensive. If the layout moves plumbing, we pull the permit while the materials are in transit.</p>
+              </div>
+              <div class="step">
+                <span class="step-n" aria-hidden="true">3</span>
+                <h3>Demo, rough-in &amp; waterproofing</h3>
+                <p>The room comes down to the studs. We repair the subfloor, set the new plumbing and electrical rough-in, then build and flood-test the waterproofing assembly before the inspector signs it off. Floors and hallways are protected, dust is contained, and the debris leaves with us.</p>
+              </div>
+              <div class="step">
+                <span class="step-n" aria-hidden="true">4</span>
+                <h3>Finish &amp; walkthrough</h3>
+                <p>Tile goes in, grout is sealed, the vanity and fixtures are set, and the glass goes in last, measured off finished tile rather than off the framing. We clean the room, walk it with you, and fix everything on your list before we call it done.</p>
+              </div>
+            </div>
+
+            <h2 id="cost">What a bathroom remodel costs in Bradenton and Sarasota</h2>
+            <p>Bathroom cost comes down to three things: the size of the room, the materials you choose, and whether the plumbing or the layout has to move. Most remodels in this market run between <strong>$18,000 and $45,000</strong> and take three to eight weeks. These are typical ranges for our area — your estimate is built to your actual room.</p>
+
+            <table>
+              <thead>
+                <tr><th>Scope</th><th>Typical range</th><th>Timeline</th><th>Includes</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Focused refresh</td>
+                  <td>$18K – $26K</td>
+                  <td>3–5 weeks</td>
+                  <td>New vanity, countertop, floor and wall tile, fixtures and lighting, with the existing layout kept.</td>
+                </tr>
+                <tr>
+                  <td><span class="row-us">Full remodel</span></td>
+                  <td>$26K – $38K</td>
+                  <td>4–6 weeks</td>
+                  <td>The above plus a walk-in shower or tub-to-shower conversion, tile surround, linear drain and frameless glass.</td>
+                </tr>
+                <tr>
+                  <td>Primary suite</td>
+                  <td>$38K and up</td>
+                  <td>6–8 weeks</td>
+                  <td>Layout changes, twin vanities, custom shower, freestanding tub, heated floor and premium finishes.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <blockquote>
+              <p><strong>The one thing that moves the number most:</strong> whether you keep the existing plumbing locations. Nearly every home here is slab-on-grade, so relocating a toilet or a shower drain means cutting and re-pouring concrete plus extra permitting — often the difference between a $26K and a $40K bathroom of the same finish quality. We price both versions at the walkthrough so you can spend where it matters to you.</p>
+            </blockquote>
+
+            <h2 id="finishes">Finishes and the details that last</h2>
+            <p>A bathroom looks new on day one; the question is how it looks in fifteen years. On the Gulf Coast that comes down to what happens behind the tile as much as the tile itself. A bathroom in this climate never fully dries out between uses, so we build a continuous waterproof system in every wet zone — not sealed grout and caulk — tie it in at the corners and transitions, and flood-test it before tile. The exhaust fan gets sized and ducted to the outside rather than into the attic, and we will not set tile over a substrate that is not rated for it.</p>
+            <p>Above the waterline it is layout work: tile set to a planned grid so the cuts land where nobody looks, mitered edges instead of bullnose trim, niches lined up with the courses around them. For the finishes you see, we walk the showrooms with you so you can touch the material before anything is ordered. Near the water we specify fixtures and glass hardware that can take salt air without pitting inside two seasons.</p>
+
+            <h2 id="offer">Save on your project</h2>
+            <h3>$1000 off your remodel, plus a free in-home design consultation</h3>
+            <p>Ask about the current offer when you book. Terms and restrictions apply, and it is valid on projects over $10,000. The in-home design consultation is free either way — we sit down with you and plan layout and fixture placement, tile, vanity and finishes, permits and inspections, and the budget and timeline, before you commit to anything.</p>
+
+            <h2 id="faqs">Bradenton and Sarasota bathroom remodeling FAQs</h2>
+            <div class="faq-list" id="faqList">
+              {faqs.map((item) => (
+                <div class="faq-c">
+                  <h3>
+                    <button type="button" class="faq-cq" aria-expanded="true">
+                      <span class="pr-4">{item.q}</span>
+                      <span class="faq-ci" aria-hidden="true"></span>
+                    </button>
+                  </h3>
+                  <div class="faq-ca"><p>{item.a}</p></div>
+                </div>
+              ))}
+            </div>
+
+            <h2 id="company">About VL Proconstruction</h2>
+            <p><strong>{site.legalName}</strong> is a family-owned remodeling company based in Bradenton, Florida, serving the Bradenton–Sarasota metro and the wider Suncoast — Palmetto, Ellenton, Parrish, Lakewood Ranch, University Park, Nokomis, Venice, Anna Maria Island, Holmes Beach, Bradenton Beach, Longboat Key and Siesta Key. Licensed and insured, Schluter®-certified for waterproofing, NTCA members, with in-house design and trades and full workmanship warranty on every project. Reach us at <a href={site.phoneHref}>{site.phone}</a>, or see <a href="/locations/">everywhere we work</a>.</p>
+
+            <hr />
+            <p>Only need one part of the job? We also do <a href="/services/custom-showers/">custom showers</a>, <a href="/services/tile-natural-stone/">tile and natural stone</a>, and <a href="/services/flooring/">hard-surface flooring</a> as standalone work.</p>
+          </div>
+        </div>
+
+        <!-- Rail — desktop only: on a phone it would only push the article
+             down, and the sticky mobile CTA already covers the action. -->
+        <aside class="hidden lg:block">
+          <div class="rail-sticky">
+            <div class="rail-cta">
+              <p class="text-[22px] font-bold leading-[1.2] tracking-[-0.025em] text-ink">
+                Get a free<br />bathroom estimate
+              </p>
+              <p class="mt-3 text-[13.5px] leading-[1.55] text-graydesc">
+                We walk the room with you, then put the scope and the price in writing.
+              </p>
+              <a href="#estimate" class="btn js-open-estimate mt-6 inline-flex items-center justify-center w-full h-12 rounded-full bg-brand hover:bg-[#e03f1c] text-white font-semibold text-[14px] capitalize">
+                Request Estimate
+              </a>
+            </div>
+
+            <nav class="rail-card rail-toc" aria-labelledby="tocTitle">
+              <p id="tocTitle" class="rail-eyebrow">On this page</p>
+              <!-- data-lenis-prevent: without it Lenis eats the wheel event
+                   over this box and scrolls the page instead of the list. -->
+              <ol class="toc-list toc-scroll" data-lenis-prevent>
+                {toc.map((h) => (
+                  <li class="toc-item">
+                    <a href={`#${h.slug}`} class="toc-link">{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+
+            <div class="rail-card text-center">
+              <p class="text-[13.5px] leading-[1.55] text-graydesc">
+                Call us directly — we answer weekdays, 8am–6pm.
+              </p>
+              <a href={site.phoneHref} class="btn mt-3 inline-block font-poppins text-[20px] font-bold tracking-[-0.01em] text-ink hover:text-brand">
+                {site.phone}
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing form — inline step 1 of the estimate wizard. -->
+  <EstimateInline />
+
+  <script is:inline define:vars={{ baPairs }}>
+    // Before / after carousel — swaps both photos at once. No autoplay: the
+    // reader compares the pair at their own pace.
+    (function () {
+      const prev = document.getElementById('baxPrev');
+      const next = document.getElementById('baxNext');
+      const before = document.getElementById('baxBefore');
+      const after = document.getElementById('baxAfter');
+      const num = document.getElementById('baxNum');
+      const dots = [...document.querySelectorAll('[data-bax-dot]')];
+      if (!before || !after || baPairs.length < 2) return;
+
+      let at = 0;
+      const show = (i) => {
+        at = (i + baPairs.length) % baPairs.length;
+        const p = baPairs[at];
+        before.src = p.before; before.alt = p.beforeAlt;
+        after.src = p.after; after.alt = p.afterAlt;
+        if (num) num.textContent = String(at + 1);
+        dots.forEach((d, di) => d.classList.toggle('is-active', di === at));
+      };
+      prev?.addEventListener('click', () => show(at - 1));
+      next?.addEventListener('click', () => show(at + 1));
+      dots.forEach((d, di) => d.addEventListener('click', () => show(di)));
+    })();
+
+    // FAQ accordion — single-open. Answers ship expanded and are collapsed
+    // here, so they stay readable if this script never runs.
+    (function () {
+      const list = document.getElementById('faqList');
+      if (!list) return;
+      list.classList.add('js-faq');
+      const items = [...list.querySelectorAll('.faq-c')].map((c) => ({
+        q: c.querySelector('.faq-cq'),
+        a: c.querySelector('.faq-ca'),
+      }));
+      const collapse = (it) => { it.q.setAttribute('aria-expanded', 'false'); it.a.style.height = '0px'; };
+      const expand = (it) => { it.q.setAttribute('aria-expanded', 'true'); it.a.style.height = it.a.scrollHeight + 'px'; };
+      items.forEach((it) => {
+        collapse(it);
+        it.q.addEventListener('click', () => {
+          const open = it.q.getAttribute('aria-expanded') === 'true';
+          items.forEach(collapse);
+          if (!open) expand(it);
+        });
+      });
+      window.addEventListener('resize', () => {
+        const open = items.find((it) => it.q.getAttribute('aria-expanded') === 'true');
+        if (open) open.a.style.height = open.a.scrollHeight + 'px';
+      }, { passive: true });
+    })();
+
+    // Count-up animation for the hero stats
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const nums = document.querySelectorAll('.stat-num');
+      const fmt = (v, d) => d ? v.toFixed(d) : String(Math.round(v));
+      const runCount = (el) => {
+        const target = parseFloat(el.dataset.count);
+        const dec = (el.dataset.count.split('.')[1] || '').length;
+        const duration = 1500; let st = null;
+        const tick = (now) => { if (st === null) st = now; const p = Math.min((now - st) / duration, 1); const e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(target * e, dec); if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target, dec); };
+        requestAnimationFrame(tick);
+      };
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        nums.forEach((el) => { el.textContent = fmt(parseFloat(el.dataset.count), (el.dataset.count.split('.')[1] || '').length); });
+      } else {
+        nums.forEach((el) => { el.textContent = fmt(0, (el.dataset.count.split('.')[1] || '').length); });
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { runCount(e.target); io.unobserve(e.target); } }); }, { threshold: 0.6 });
+        nums.forEach((el) => io.observe(el));
+      }
+    })();
+
+    // Paints the section the reader is in. Nothing here moves the page — the
+    // links are plain anchors, so this only highlights the current one.
+    (() => {
+      const links = [...document.querySelectorAll('.toc-link')];
+      if (!links.length || !('IntersectionObserver' in window)) return;
+      const byId = new Map(
+        links.map((a) => [decodeURIComponent(a.hash.slice(1)), a]).filter(([id]) => id),
+      );
+      const targets = [...byId.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+      if (!targets.length) return;
+
+      let current = null;
+      const setActive = (id) => {
+        if (id === current) return;
+        current = id;
+        links.forEach((a) => a.classList.remove('is-active'));
+        byId.get(id)?.classList.add('is-active');
+      };
+      const io = new IntersectionObserver(
+        () => {
+          // The heading nearest the top of the viewport that is still above it.
+          const above = targets
+            .map((el) => ({ el, top: el.getBoundingClientRect().top }))
+            .filter((t) => t.top <= 160);
+          const pick = above.length ? above[above.length - 1].el : targets[0];
+          setActive(pick.id);
+        },
+        { rootMargin: '-140px 0px -70% 0px', threshold: [0, 1] },
+      );
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
+</BaseLayout>

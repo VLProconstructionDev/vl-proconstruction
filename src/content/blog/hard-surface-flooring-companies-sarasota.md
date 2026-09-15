@@ -1,7 +1,7 @@
 ---
-title: 'Top 5 Flooring Companies in Sarasota, FL — 2026 Guide'
+title: 'Top 5 Flooring Companies in Sarasota, FL: 2026 Guide'
 seoTitle: 'Top 5 Flooring Companies Sarasota, FL'
-description: 'The 5 best hard surface flooring companies in Sarasota, FL — hardwood, LVP & tile installers. Call for a free quote: (503) 781-4657'
+description: 'The 5 best hard surface flooring companies in Sarasota, FL: hardwood, LVP & tile installers. Call for a free quote: (503) 781-4657'
 lede: 'We went through the flooring companies serving Sarasota and looked at the things that decide whether a floor lasts — who actually does the install, whether subfloor prep and moisture testing are written into the estimate, and what each one warranties on their own workmanship. Here''s the honest breakdown of the top 5, who each one is best for, and what a hard surface floor really costs here.'
 publishedAt: 2026-09-08
 author: Vlad Leytner

@@ -827,6 +827,17 @@ button:focus-visible {
   outline-offset: 3px;
   border-radius: 2px;
 }
+/* Every card title occupies exactly two lines: a short one reserves the second
+   line so the excerpts below stay on one baseline, a long one is clamped. */
+.bl-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  min-height: 2.5em; /* 2 lines at the .bl-title line-height of 1.25 */
+}
+
 /* Fixed row height so a card without a badge keeps the same baseline */
 .bl-meta {
   min-height: 22px;
