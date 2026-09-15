@@ -1,7 +1,7 @@
 ---
 title: 'What Makes a Home Feel Outdated in 2026'
 seoTitle: 'What Makes a Home Feel Outdated in 2026'
-description: 'What makes a Florida home feel outdated in 2026 — and the 6 fixes that actually change how a room reads. Free estimate: (503) 781-4657'
+description: 'What makes a Florida home feel outdated in 2026, and the 6 fixes that actually change how a room reads. Free estimate: (503) 781-4657'
 lede: 'A dated house is rarely dated everywhere. It is usually four or five specific surfaces doing the work — and once you can name them, you stop spending money on the ones that were never the problem.'
 publishedAt: 2026-09-15
 author: Abel Leytner

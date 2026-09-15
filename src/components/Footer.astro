@@ -13,6 +13,24 @@ const serviceAreas = [
   'Siesta Key',
 ];
 
+/* The eight the column lists; the rest still ship in the "Serving" run above the
+   copyright bar, so no area drops out of the page. None of these are links —
+   there is no per-city landing page yet, only city x service pages, so the
+   column points at /locations/ instead of inventing routes. */
+const primaryAreas = serviceAreas.slice(0, 8);
+
+/* Claims the rest of the site already makes: the hero stats, the credential
+   marks, and the pricing sections. Nothing new is promised here. */
+const whyChooseUs = [
+  'Licensed &amp; Insured',
+  'Schluter&reg;-Certified Installers',
+  'NTCA Member',
+  'Family-Owned &amp; Operated',
+  '22+ Years of Experience',
+  '100% Warranty Coverage',
+  'Free Written Estimates',
+];
+
 /* Supplier partners. Dedicated white variants rather than a CSS invert: the
    marks carry knocked-out shapes (the "&" inside Floor & Decor's plate, the
    quadrants of the Tile Outlets diamond) and `brightness(0) invert(1)` flattens
@@ -22,41 +40,41 @@ const serviceAreas = [
    of inventing a mark. Heights are per-brand — these aspect ratios differ
    enough that one shared height makes the wide marks look twice the size. */
 const partners = [
-  { src: '/assets/images/brand/floordecor-white.svg', alt: 'Floor & Decor', h: 'h-[22px]' },
-  { src: '/assets/images/brand/tileoutlets-white.webp', alt: 'Tile Outlets of America', h: 'h-[26px]' },
+  { src: '/assets/images/brand/floordecor-white.svg', alt: 'Floor & Decor', h: 'h-[17px]' },
+  { src: '/assets/images/brand/tileoutlets-white.webp', alt: 'Tile Outlets of America', h: 'h-[20px]' },
   { type: 'prosource', alt: 'ProSource Wholesale' },
-  { src: '/assets/images/brand/yourflooring-white.webp', alt: 'Your Flooring Warehouse', h: 'h-[38px]' },
+  { src: '/assets/images/brand/yourflooring-white.webp', alt: 'Your Flooring Warehouse', h: 'h-[29px]' },
 ];
 ---
 
 <footer class="bg-black text-white" data-nav-theme="dark">
   <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-14 lg:pt-16 pb-32 lg:pb-[190px]">
-    <div class="grid gap-12 lg:gap-10 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-y-12 lg:gap-x-20">
 
       <div>
-        <p class="text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">
+        <p class="text-[15px] font-medium text-white">
           Serving Florida since 2004
         </p>
-        <img src="/assets/images/logo.svg" alt={site.name} class="mt-7 h-[68px] w-auto" />
+        <img src="/assets/images/logo.svg" alt={site.name} class="mt-6 h-[58px] w-auto" />
 
         {/* Non-breaking space before each separator, so a wrapped line never
             starts with a stray "·"; non-breaking hyphen (&#8209;) in
             "Family-Owned" so it cannot break across lines as "Family-/Owned" */}
-        <p class="mt-5 max-w-[420px] text-[11px] font-semibold capitalize leading-[2] tracking-[0.12em] text-white/40">
+        <p class="mt-5 max-w-[300px] text-[11px] font-semibold capitalize leading-[2] tracking-[0.12em] text-white/40">
           Florida Licensed General Contractor<br />
           Bonded &amp; Insured&nbsp;· Family&#8209;Owned &amp; Operated
         </p>
 
-        <div class="mt-9 max-w-[420px]">
+        <div class="mt-10 max-w-[300px]">
           <div class="h-px bg-white/10"></div>
 
           {/* Credential marks, laid out like the hero's: the logo carries the
               claim, so the label beside it names what the badge means. The
               white-on-transparent artwork needs no plate behind it. */}
-          <p class="mt-7 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">
+          <p class="mt-10 text-[15px] font-medium text-white">
             Certifications &amp; Memberships
           </p>
-          <div class="mt-5 flex items-center gap-6">
+          <div class="mt-6 flex items-center gap-6">
             <div class="flex items-center gap-3">
               <img
                 src="/assets/images/brand/schluter-white.webp"
@@ -65,13 +83,13 @@ const partners = [
                 alt=""
                 loading="lazy"
                 decoding="async"
-                class="block h-9 w-auto opacity-90"
+                class="block h-7 w-auto opacity-90"
               />
               <p class="shrink-0 text-[13px] font-medium leading-[1.25] tracking-[-0.02em] text-white/70">
                 Schluter&reg;<br />Certified
               </p>
             </div>
-            <span class="h-9 w-px shrink-0 bg-white/15" aria-hidden="true"></span>
+            <span class="h-7 w-px shrink-0 bg-white/15" aria-hidden="true"></span>
             <div class="flex items-center gap-3">
               <img
                 src="/assets/images/brand/ntca-white.webp"
@@ -80,7 +98,7 @@ const partners = [
                 alt=""
                 loading="lazy"
                 decoding="async"
-                class="block h-[52px] w-auto opacity-90"
+                class="block h-10 w-auto opacity-90"
               />
               <p class="shrink-0 text-[13px] font-medium leading-[1.25] tracking-[-0.02em] text-white/70">
                 NTCA<br />Member
@@ -88,21 +106,21 @@ const partners = [
             </div>
           </div>
 
-          <p class="mt-8 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">
+          <p class="mt-10 text-[15px] font-medium text-white">
             Our Partners
           </p>
           {/* 2×2 grid, not a flex row: four marks across a 420px column would
               sit a few pixels from overflowing at every breakpoint. */}
-          <ul class="mt-5 grid grid-cols-2 gap-x-5 gap-y-2 max-w-[320px]">
+          <ul class="mt-6 grid grid-cols-2 gap-x-5 gap-y-2 max-w-[280px]">
             {partners.map((partner) => (
-              <li class="flex h-10 items-center">
+              <li class="flex h-8 items-center">
                 {partner.type === 'prosource' ? (
                   <span
                     class="inline-flex flex-col items-center leading-none text-white/60"
                     aria-label={partner.alt}
                   >
-                    <span class="text-[17px] font-extrabold tracking-[-0.02em]">ProSource</span>
-                    <span class="mt-1 text-[7px] font-semibold tracking-[0.34em]">WHOLESALE</span>
+                    <span class="text-[13px] font-extrabold tracking-[-0.02em]">ProSource</span>
+                    <span class="mt-1 text-[6px] font-semibold tracking-[0.34em]">WHOLESALE</span>
                   </span>
                 ) : (
                   <img
@@ -116,11 +134,23 @@ const partners = [
               </li>
             ))}
           </ul>
+
+          <p class="mt-10 text-[15px] font-medium text-white">Why choose us</p>
+          {/* Checks, not bullets: each line is a credential the visitor can verify,
+              so the mark reads as a tick-off rather than decoration. */}
+          <ul class="mt-6 space-y-4 text-[15px] text-white/70">
+            {whyChooseUs.map((item) => (
+              <li class="flex items-start gap-2.5">
+                <svg class="mt-[5px] h-[13px] w-[13px] shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                <span set:html={item} />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
       <div>
-        <p class="text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Navigate</p>
+        <p class="text-[15px] font-medium text-white">Navigate</p>
         <ul class="mt-6 space-y-4 text-[15px] text-white/70">
           <li><a href={`${H}#services`} class="hover:text-brand transition-colors">Services</a></li>
           <li><a href={`${H}#gallery`} class="hover:text-brand transition-colors">Our Work</a></li>
@@ -132,25 +162,37 @@ const partners = [
           <li><a href="#estimate" class="js-open-estimate hover:text-brand transition-colors">Free Estimate</a></li>
         </ul>
 
-        <p class="mt-10 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Services</p>
+        <p class="mt-10 text-[15px] font-medium text-white">Services</p>
         <ul class="mt-6 space-y-4 text-[15px] text-white/70">
           <li><a href="/services/custom-showers/" class="hover:text-brand transition-colors">Custom Showers</a></li>
+          <li><a href="/services/bathroom-remodeling/" class="hover:text-brand transition-colors">Bathroom Remodeling</a></li>
           <li><a href="/services/tile-natural-stone/" class="hover:text-brand transition-colors">Tile &amp; Natural Stone</a></li>
           <li><a href="/services/flooring/" class="hover:text-brand transition-colors">Flooring</a></li>
         </ul>
 
-        <p class="mt-10 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Resources</p>
+        <p class="mt-10 text-[15px] font-medium text-white">Resources</p>
         <ul class="mt-6 space-y-4 text-[15px] text-white/70">
           <li><a href="/blog/" class="hover:text-brand transition-colors">Blog</a></li>
         </ul>
       </div>
 
       <div>
-        <p class="text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Get in touch</p>
+        <p class="text-[15px] font-medium text-white">Areas served</p>
+        <ul class="mt-6 space-y-4 text-[15px] text-white/70">
+          {primaryAreas.map((area) => <li>{area}</li>)}
+        </ul>
+        <a href="/locations/" class="btn mt-6 inline-flex items-center gap-2 text-[15px] text-brand hover:text-[#ff6a45]">
+          View all service areas
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div>
+        <p class="text-[15px] font-medium text-white">Get in touch</p>
 
         {/* No per-field eyebrows — a phone number, an email and a street
             address each read as what they are without a label. */}
-        <ul class="mt-6 space-y-4 text-[16px] text-white">
+        <ul class="mt-6 space-y-4 text-[15px] text-white/70">
           <li>
             <a href={site.phoneHref} class="inline-block hover:text-brand transition-colors">
               {site.phone}
@@ -174,11 +216,11 @@ const partners = [
           </li>
         </ul>
 
-        <p class="mt-9 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Office hours</p>
-        <p class="mt-3 text-[16px] leading-[1.6] text-white">{site.hours.office}</p>
+        <p class="mt-10 text-[15px] font-medium text-white">Office hours</p>
+        <p class="mt-6 text-[15px] leading-[1.6] text-white/70">{site.hours.office}</p>
 
-        <p class="mt-6 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Emergency services</p>
-        <p class="mt-3 text-[16px] leading-[1.6] text-white">{site.hours.emergency}</p>
+        <p class="mt-10 text-[15px] font-medium text-white">Emergency services</p>
+        <p class="mt-6 text-[15px] leading-[1.6] text-white/70">{site.hours.emergency}</p>
 
         <div class="mt-7 h-px bg-white/10"></div>
 
@@ -197,13 +239,6 @@ const partners = [
             </svg>
           </a>
         </div>
-
-        <p class="mt-9 text-[11px] font-semibold capitalize tracking-[0.12em] text-white/40">Service areas</p>
-        <p class="mt-3 text-[14px] leading-[1.8] text-white/55 max-w-[420px]">
-          {/* Non-breaking space glues each separator to the name before it, so a
-              wrapped line never starts with a stray "·" */}
-          <Fragment set:html={serviceAreas.join('&nbsp;· ')} />
-        </p>
       </div>
 
     </div>
