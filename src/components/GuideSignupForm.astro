@@ -1,0 +1,279 @@
+---
+/**
+ * MailerLite email-capture form, restyled into the site's design system.
+ *
+ * The MARKUP CONTRACT below is MailerLite's, not ours — webforms.min.js keys
+ * off these exact ids/classes/names, so none of them may be renamed:
+ *   - #mlb2-45798565 + .ml-subscribe-form-45798565  (script finds the instance)
+ *   - form.ml-block-form + its action URL            (JSONP subscribe endpoint)
+ *   - .ml-field-group.ml-validate-email.ml-validate-required (client validation;
+ *     failures get .ml-error added to the group)
+ *   - input[name="fields[email]"]                    (the subscriber field)
+ *   - .ml-form-embedSubmit > button.primary / button.loading (submit + spinner)
+ *   - .row-form / .row-success                       (swapped by the callback)
+ *   - hidden ml-submit + anticsrf inputs
+ *
+ * Only the CSS is ours. MailerLite's own stylesheet (Open Sans, #f6f6f6 card,
+ * generic inputs) is deliberately NOT loaded — it clashes with Inter/#f54b25 —
+ * so every rule the form needs is written below against the site's tokens.
+ */
+const FORM_ID = '45798565';
+const ACTION = 'https://assets.mailerlite.com/jsonp/2627446/forms/198245745435870433/subscribe';
+---
+
+<div
+  id={`mlb2-${FORM_ID}`}
+  class={`ml-form-embedContainer ml-subscribe-form ml-subscribe-form-${FORM_ID} gs-card`}
+>
+  <div class="ml-form-embedBody row-form">
+    <!-- No heading here on purpose: the page's h1 already states the offer, so
+         a card title would only repeat it. The card is just the input. -->
+    <form
+      class="ml-block-form gs-form"
+      action={ACTION}
+      data-code=""
+      method="post"
+      target="_blank"
+    >
+      <div class="ml-form-formContent">
+        <div class="ml-form-fieldRow ml-last-item">
+          <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+            <label class="gs-label" for="gs-email">Email address</label>
+            <input
+              id="gs-email"
+              aria-label="Email address"
+              aria-required="true"
+              type="email"
+              class="form-control gs-input"
+              data-inputmask=""
+              name="fields[email]"
+              placeholder="you@example.com"
+              autocomplete="email"
+            />
+            <!-- MailerLite flags a bad field by adding .ml-error to the group and
+                 aria-invalid to the input, but injects no message — so a user
+                 would see a red border and no reason. This is a real element
+                 (not pseudo-content, so assistive tech can read it) revealed by
+                 CSS off their class: no JS to fight with. -->
+            <p class="gs-err">Enter a valid email address.</p>
+          </div>
+        </div>
+      </div>
+
+      <input type="hidden" name="ml-submit" value="1" />
+      <input type="hidden" name="anticsrf" value="true" />
+
+      <div class="ml-form-embedSubmit gs-submit">
+        <button type="submit" class="primary btn gs-btn">Get the free guide</button>
+        <button disabled="disabled" style="display: none;" type="button" class="loading btn gs-btn">
+          <span class="ml-form-embedSubmitLoad"></span>
+          <span class="sr-only">Sending…</span>
+        </button>
+      </div>
+
+      <p class="gs-fine">No spam. Unsubscribe any time.</p>
+    </form>
+  </div>
+
+  <div class="ml-form-successBody row-success" style="display: none">
+    <div class="ml-form-successContent">
+      <span class="gs-tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+      </span>
+      <h2 class="gs-title">Check your inbox</h2>
+      <p class="gs-sub">The guide is on its way. If it isn't there, look in spam.</p>
+      <a class="btn gs-btn gs-btn-alt" href="/guides/22-remodeling-lessons.pdf">Read it now</a>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  /* ============================================================
+     Guide signup card — white surface on the dark hero, same
+     treatment as the blog rail's .rail-cta: the brand button
+     carries it, everything else stays quiet.
+     ============================================================ */
+  .gs-card {
+    box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* 16px matches the site's rounded-2xl cards; stays larger than the
+       input's 10px so the nested corners read as concentric. */
+    border-radius: 16px;
+    padding: 30px 26px;
+  }
+  @media (min-width: 1024px) {
+    .gs-card { padding: 34px 32px; }
+  }
+
+  .gs-title {
+    margin: 0;
+    font-size: clamp(1.45rem, 2.1vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    color: #1e1e1e;
+  }
+  .gs-sub {
+    margin: 10px 0 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    color: #4e4e4e;
+  }
+
+  /* No top margin: the card has no heading above the form (the page h1 does
+     that job), so any offset here would just read as dead space. */
+  .gs-form { margin: 0; width: 100%; }
+
+  .gs-label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #1e1e1e;
+  }
+
+  .gs-input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 13px 14px;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #1e1e1e;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+    /* Never transition-all — colour only, so nothing else animates. */
+    transition: border-color 0.18s, box-shadow 0.18s;
+  }
+  .gs-input::placeholder { color: #959595; }
+  .gs-input:hover { border-color: rgba(0, 0, 0, 0.34); }
+  .gs-input:focus {
+    outline: none;
+    border-color: #f54b25;
+    box-shadow: 0 0 0 3px rgba(245, 75, 37, 0.16);
+  }
+  .gs-input:focus-visible {
+    outline: 3px solid #f54b25;
+    outline-offset: 2px;
+  }
+
+  .gs-submit { margin: 16px 0 0; width: 100%; }
+
+  .gs-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 20px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #fff;
+    background: #f54b25;
+    border: 0;
+    border-radius: 9999px;
+    cursor: pointer;
+  }
+  .gs-btn:hover { background: #e03f1c; }
+  .gs-btn:active { background: #c23c18; }
+
+  .gs-btn-alt {
+    margin-top: 20px;
+    color: #1e1e1e;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.22);
+    text-decoration: none;
+  }
+  .gs-btn-alt:hover { background: #f6f5f3; border-color: rgba(0, 0, 0, 0.4); }
+  .gs-btn-alt:active { background: #efedea; }
+
+  .gs-fine {
+    margin: 14px 0 0;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: #959595;
+  }
+
+  /* --- validation: MailerLite adds .ml-error to the field group --- */
+  .gs-err { display: none; }
+  .gs-card .ml-error .gs-input {
+    border-color: #d33a1a;
+    background: #fff8f6;
+  }
+  .gs-card .ml-error .gs-label { color: #d33a1a; }
+  .gs-card .ml-error .gs-input:focus {
+    box-shadow: 0 0 0 3px rgba(211, 58, 26, 0.16);
+  }
+  .gs-card .ml-error .gs-err {
+    display: block;
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #d33a1a;
+  }
+
+  /* --- success panel --- */
+  .gs-card .ml-form-successContent { text-align: left; }
+  .gs-tick {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 16px;
+    color: #f54b25;
+    border: 1px solid rgba(245, 75, 37, 0.4);
+    border-radius: 9999px;
+  }
+  .gs-tick svg { width: 20px; height: 20px; }
+
+  /* --- spinner shown while the submit is in flight --- */
+  .ml-form-embedSubmitLoad {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 3px solid #fff;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: gs-spin 0.9s linear infinite;
+  }
+  @keyframes gs-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .ml-form-embedSubmitLoad { animation-duration: 2.4s; }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<!-- MailerLite's success hook: swaps the form out for the thank-you panel.
+     The name is fixed — webforms.min.js calls it by this exact identifier. -->
+<script is:inline>
+  function ml_webform_success_45798565() {
+    var $ = window.ml_jQuery || window.jQuery;
+    if (!$) return;
+    $('.ml-subscribe-form-45798565 .row-success').show();
+    $('.ml-subscribe-form-45798565 .row-form').hide();
+  }
+</script>
+<script is:inline defer src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519"></script>
+<script is:inline>
+  /* MailerLite's form-view ping. Fire-and-forget: a blocked request must not
+     surface as an unhandled rejection (Sentry is wired up site-wide). */
+  fetch('https://assets.mailerlite.com/jsonp/2627446/forms/198245745435870433/takel').catch(function () {});
+</script>

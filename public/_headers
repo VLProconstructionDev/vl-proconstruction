@@ -8,3 +8,14 @@
 # audit (uncached looping video can even be re-fetched mid-session).
 /assets/*
   Cache-Control: public, max-age=2592000
+
+# Email-client images (the lead-magnet guide email). Gmail/Outlook proxy these
+# through their own image cache, so a long TTL just saves origin hits. Replace
+# under a NEW filename if the logo ever changes.
+/email/*
+  Cache-Control: public, max-age=2592000
+
+# Lead-magnet PDF linked from the guide email. Shorter TTL than /assets/*
+# because the guide may be revised under the same filename.
+/guides/*
+  Cache-Control: public, max-age=86400
