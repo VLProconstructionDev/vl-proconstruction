@@ -5,3 +5,8 @@
 # Keeps the old indexed URL (and any city x service child) alive as a 301.
 /services/hard-surface-flooring    /services/flooring          301
 /services/hard-surface-flooring/*  /services/flooring/:splat   301
+
+# 2026-09-16: /services/waterproofing-subfloor-prep renamed to
+# /services/waterproofing-subfloor-preparation.
+/services/waterproofing-subfloor-prep    /services/waterproofing-subfloor-preparation          301
+/services/waterproofing-subfloor-prep/*  /services/waterproofing-subfloor-preparation/:splat   301
