@@ -14,14 +14,13 @@ const serviceById = new Map(services.map((sv) => [sv.id, sv]));
 // it. No second level: a city × service page is one hover and one click away
 // instead of sitting behind a flyout. Built from the `cityServices` pair files,
 // so a city appears the moment one of its pages exists and never before. The
-// city name is the column head and goes to /locations, the only page covering
-// the service area as a whole — there is no page per city, so nothing here
-// invents one.
+// city name is the column's heading, not a link — there is no page per city,
+// and pointing it at /locations only sent people somewhere they didn't ask to
+// go. /locations is what the "Locations" trigger itself opens.
 const locationColumns = [...locations]
   .sort((a, b) => a.data.order - b.data.order)
   .map((location) => ({
     label: location.data.name,
-    href: '/locations/',
     links: cityServices
       .filter((cs) => cs.data.city === location.id)
       .map((cs) => serviceById.get(cs.data.service))
@@ -87,16 +86,16 @@ const H = isHome ? '' : '/';
         </div>
 
         <div class="nav-item">
-          <button type="button" aria-haspopup="true" class="nav-trigger flex items-center gap-1.5">
+          <a href="/locations/" aria-haspopup="true" class="flex items-center gap-1.5">
             Locations
             <svg class="nav-dd-chev w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
+          </a>
           <div class="nav-dd nav-dd-wide">
             <div class="nav-dd-panel nav-area">
               <div class="nav-area-cols">
                 {locationColumns.map((col) => (
                   <div class="nav-area-col">
-                    <a href={col.href} class="nav-area-head">{col.label}</a>
+                    <p class="nav-area-head">{col.label}</p>
                     {col.links.map((link) => (
                       <a href={link.href} aria-label={`${link.name} in ${col.label}`} class="nav-dd-item nav-area-town">{link.name}</a>
                     ))}
@@ -194,9 +193,12 @@ const H = isHome ? '' : '/';
         </button>
         <div class="js-mobile-sub mm-sub">
           <div>
+            {/* The trigger is a toggle on touch, not a link, so the hub needs a
+                row of its own here — the Services accordion does the same. */}
+            <a href="/locations/" class="mm-sub-item mm-sub-all">All Locations</a>
             {locationColumns.map((col) => (
               <>
-                <a href={col.href} class="mm-sub-service">{col.label}</a>
+                <p class="mm-sub-service">{col.label}</p>
                 {col.links.map((link) => (
                   <a href={link.href} aria-label={`${link.name} in ${col.label}`} class="mm-sub-item">{link.name}</a>
                 ))}
