@@ -4,6 +4,7 @@ import { serviceSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
 import { site } from '@/lib/site';
 import TrustPill from '@components/TrustPill.astro';
 import EstimateInline from '@components/EstimateInline.astro';
+import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 
 const description =
   'Shower waterproofing & subfloor prep in Bradenton & Sarasota, FL. Schluter®-certified assemblies, 24-hour flood test, slab moisture testing. Free estimate.';
@@ -730,6 +731,22 @@ const schema = [
       </div>
     </div>
   </div>
+
+  <!-- ===================== SERVICE AREA ===================== -->
+  <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
+      <div class="lg:max-w-[44%]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
+          Waterproofing<br />Across the Gulf Coast
+        </h2>
+        <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
+          We waterproof showers and prep subfloors for homeowners and builders throughout the Bradenton–Sarasota metro — Palmetto and Parrish down to Siesta Key and Venice.
+        </p>
+      </div>
+    </div>
+    <!-- Florida service-area map — interactive (MapLibre); static image is the fallback -->
+    <ServiceAreaMap service="waterproofing-subfloor-preparation" />
+  </section>
 
   <!-- Closing form — inline step 1 of the estimate wizard. -->
   <EstimateInline />
