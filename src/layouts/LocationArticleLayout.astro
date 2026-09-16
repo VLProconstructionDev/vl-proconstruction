@@ -1,0 +1,372 @@
+---
+/**
+ * City × service page, ARTICLE shape — /services/[service]/[city]-[state].
+ *
+ * The editorial layout used by the hand-designed service pages
+ * (/services/bathroom-remodeling, /services/waterproofing-subfloor-preparation):
+ *
+ *   hero → before/after carousel → long-form .post-body article beside a
+ *   sticky TOC rail → FAQ accordion → EstimateInline
+ *
+ * The sibling `LocationServiceLayout.astro` is the other shape — 12 structured
+ * sections (trust cards, project strip, reviews carousel, pricing tiers, map).
+ * A pair file picks between them with `layout: article | sections`; the route
+ * (`src/pages/services/[service]/[location].astro`) dispatches on it.
+ *
+ * Where the content comes from:
+ *   - the markdown BODY is the article. Write `## Heading` for each section and
+ *     raw HTML for the rich blocks (.intro-card, .stat-tiles, .pj-grid, .ct-*).
+ *   - the TOC builds itself from that body's h2s via render()'s `headings`, so
+ *     there is no manual list to keep in sync — unlike the static pages, which
+ *     hand-maintain a `toc` array.
+ *   - `faqs` stays in frontmatter: it has to drive FAQPage JSON-LD, and parsing
+ *     that back out of rendered markdown would be worse than declaring it.
+ *
+ * Styles live in global.css under "SERVICE ARTICLE PAGES" — shared with the two
+ * static pages rather than copied a third time.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import EstimateInline from '@components/EstimateInline.astro';
+import TrustPill from '@components/TrustPill.astro';
+import { site } from '@/lib/site';
+import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
+import { cityServicePath } from '@/lib/urls';
+
+interface Props {
+  entry: CollectionEntry<'cityServices'>;
+  location: CollectionEntry<'locations'>;
+  service: CollectionEntry<'services'>;
+}
+
+const { entry, location, service } = Astro.props;
+const d = entry.data;
+const { Content, headings } = await render(entry);
+
+// The route only dispatches here when `article` is set, but the schema keeps it
+// optional so the four `sections` pair files don't have to carry an empty block.
+const a = d.article!;
+
+const cityState = `${location.data.name}, ${location.data.state}`;
+const path = cityServicePath(location, service.id);
+
+/**
+ * TOC — every h2 in the body, plus the two sections this layout renders itself
+ * (they sit after <Content /> so they can't appear in `headings`).
+ */
+const toc = [
+  ...headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text })),
+  ...(d.faqs.length ? [{ slug: 'faqs', text: `${location.data.name} ${service.data.shortName.toLowerCase()} FAQs` }] : []),
+];
+
+const baPairs = a.beforeAfter;
+
+const schema = [
+  serviceSchema({
+    name: `${service.data.title} in ${cityState}`,
+    description: d.seoDescription,
+    slug: service.id,
+    areaServed: cityState,
+    url: path,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Services', url: '/services' },
+    { name: service.data.shortName, url: `/services/${service.id}` },
+    { name: location.data.name, url: path },
+  ]),
+  ...(d.faqs.length
+    ? [{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: d.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }]
+    : []),
+];
+---
+
+<BaseLayout
+  title={d.seoTitle ?? `${service.data.shortName} ${cityState}`}
+  description={d.seoDescription}
+  canonical={path}
+  navTheme="dark"
+  schema={schema}
+>
+  <!-- ===================== HERO (identical to the service pages) ===================== -->
+  <section id="hero" class="relative min-h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
+    <!-- Phone: a still job photo instead of the hero video — spares cellular the ~2 MB clip. -->
+    <img src={a.heroPhoto} alt="" aria-hidden="true" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover md:hidden" />
+    <video class="absolute inset-0 w-full h-full object-cover hidden md:block" data-desktop-only muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1"></video>
+    <div class="absolute inset-0 bg-black/65"></div>
+
+    <div class="relative z-20 h-full min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:pt-[172px] sm:pb-24 lg:pb-[90px] gap-5 lg:gap-6">
+      <TrustPill />
+
+      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,3rem)] sm:text-[clamp(3rem,6.8vw,6.05rem)] text-center">
+        <h1>
+          <span>{d.heroCity}</span><br />
+          <span class="text-brand block">{d.heroService}</span>
+        </h1>
+        <div class="flex flex-col items-center gap-3 sm:gap-5">
+          <span>{a.heroTail}</span>
+          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[560px]">{d.heroSubhead}</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center gap-8">
+        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
+          <a href={site.phoneHref} class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">{site.phone}</a>
+        </div>
+
+        <!-- Stats left, the marks we build to right. Both are trust signals, not
+             sections — the label is a <p>, never a heading, so the page outline
+             starts at the H1 and stays clean. -->
+        <div class="w-full flex flex-col gap-8 lg:mt-[96px] lg:mx-auto lg:max-w-[1320px] lg:flex-row lg:items-end lg:justify-between">
+          <div class="flex flex-col items-start gap-3 sm:gap-4">
+            <p class="font-normal capitalize text-[14.5px] sm:text-[16px] lg:text-[17px] leading-[1.2] tracking-[-0.03em] text-white/80">Why {location.data.name} homeowners trust VL Pro:</p>
+            <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
+              {d.stats.map((s) => (
+                <div class="flex flex-col items-start">
+                  <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count={s.count}>{s.count}</span>{s.suffix}</span>
+                  <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]" set:html={s.label.replace(' | ', ' ')}></span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BEFORE & AFTER ===================== -->
+  {baPairs.length > 0 && (
+    <section id="before-after" class="bg-white" data-nav-theme="light">
+      <div class="mx-auto max-w-[1600px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[100px]">
+        <div class="grid gap-12 lg:gap-16 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:items-center">
+          <div>
+            <h2 class="font-bold text-ink leading-[1.1] tracking-[-0.03em] text-[clamp(1.9rem,3.2vw,2.8rem)]">{a.baTitle}</h2>
+            <p class="mt-6 text-[13.5px] sm:text-[16.5px] leading-[1.65] tracking-[-0.01em] text-graydesc max-w-[42ch]">{a.baBody}</p>
+
+            {baPairs.length > 1 && (
+              <div class="mt-9 flex items-center gap-5">
+                <p class="bax-count"><strong id="baxNum">1</strong> / {baPairs.length}</p>
+                <div class="flex items-center gap-2.5">
+                  {baPairs.map((_, i) => (
+                    <button type="button" class:list={['bax-dot', i === 0 && 'is-active']} data-bax-dot={i} aria-label={`Show project ${i + 1}`}></button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div class="relative">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+              <figure class="bax-shot">
+                <img id="baxBefore" src={baPairs[0].before} alt={baPairs[0].beforeAlt} loading="lazy" decoding="async" />
+                <figcaption class="bax-tag bax-tag-before">Before</figcaption>
+              </figure>
+              <figure class="bax-shot">
+                <img id="baxAfter" src={baPairs[0].after} alt={baPairs[0].afterAlt} loading="lazy" decoding="async" />
+                <figcaption class="bax-tag bax-tag-after">After</figcaption>
+              </figure>
+            </div>
+
+            {baPairs.length > 1 && (
+              <>
+                <button type="button" class="btn bax-arrow bax-prev" id="baxPrev" aria-label="Previous project">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+                </button>
+                <button type="button" class="btn bax-arrow bax-next" id="baxNext" aria-label="Next project">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ===================== ARTICLE BODY + RAIL ===================== -->
+  <div class="bg-[#f6f5f3]" data-nav-theme="light">
+    <div class="post-wrap px-5 sm:px-10 lg:px-[60px] py-16 lg:py-20">
+      <div class="grid gap-x-[60px] xl:gap-x-[80px] gap-y-12 lg:grid-cols-[minmax(0,1fr)_340px]">
+
+        <div class="min-w-0">
+          <div class="post-body">
+            <Content />
+
+            {d.faqs.length > 0 && (
+              <>
+                <h2 id="faqs">{location.data.name} {service.data.shortName.toLowerCase()} FAQs</h2>
+                <div id="faqList">
+                  {d.faqs.map((f) => (
+                    <div class="faq-c">
+                      <button type="button" class="faq-cq" aria-expanded="true">
+                        <span>{f.q}</span>
+                        <svg class="faq-ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                      </button>
+                      <div class="faq-ca"><p>{f.a}</p></div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        <aside class="hidden lg:block">
+          <div class="rail-sticky">
+            <div class="rail-cta">
+              <p class="text-[22px] font-bold leading-[1.2] tracking-[-0.025em] text-ink" set:html={a.railTitle}></p>
+              <p class="mt-3 text-[13.5px] leading-[1.55] text-graydesc">{a.railBody}</p>
+              <a href="#estimate" class="btn js-open-estimate mt-6 inline-flex items-center justify-center w-full h-12 rounded-full bg-brand hover:bg-[#e03f1c] text-white font-semibold text-[14px] capitalize">Request Estimate</a>
+            </div>
+
+            <nav class="rail-card rail-toc" aria-labelledby="tocTitle">
+              <p id="tocTitle" class="rail-eyebrow">On this page</p>
+              {/* data-lenis-prevent: without it Lenis eats the wheel event over
+                  this box and scrolls the page instead of the list. */}
+              <ol class="toc-list toc-scroll" data-lenis-prevent>
+                {toc.map((h) => (
+                  <li class="toc-item"><a href={`#${h.slug}`} class="toc-link">{h.text}</a></li>
+                ))}
+              </ol>
+            </nav>
+
+            <div class="rail-card text-center">
+              <p class="text-[13.5px] leading-[1.55] text-graydesc">Call us directly — we answer weekdays, 8am–6pm.</p>
+              <a href={site.phoneHref} class="btn mt-3 inline-block font-poppins text-[20px] font-bold tracking-[-0.01em] text-ink hover:text-brand">{site.phone}</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing form — inline step 1 of the estimate wizard. -->
+  <EstimateInline />
+
+  <script is:inline define:vars={{ baPairs }}>
+    // Before / after carousel — swaps both photos at once. No autoplay: the
+    // reader compares the pair at their own pace.
+    (function () {
+      const prev = document.getElementById('baxPrev');
+      const next = document.getElementById('baxNext');
+      const before = document.getElementById('baxBefore');
+      const after = document.getElementById('baxAfter');
+      const num = document.getElementById('baxNum');
+      const dots = [...document.querySelectorAll('[data-bax-dot]')];
+      if (!before || !after || baPairs.length < 2) return;
+
+      let at = 0;
+      const show = (i) => {
+        at = (i + baPairs.length) % baPairs.length;
+        const p = baPairs[at];
+        before.src = p.before; before.alt = p.beforeAlt;
+        after.src = p.after; after.alt = p.afterAlt;
+        if (num) num.textContent = String(at + 1);
+        dots.forEach((d, di) => d.classList.toggle('is-active', di === at));
+      };
+      prev?.addEventListener('click', () => show(at - 1));
+      next?.addEventListener('click', () => show(at + 1));
+      dots.forEach((d, di) => d.addEventListener('click', () => show(di)));
+    })();
+
+    // FAQ accordion — single-open. Answers ship expanded and are collapsed
+    // here, so they stay readable if this script never runs.
+    (function () {
+      const list = document.getElementById('faqList');
+      if (!list) return;
+      list.classList.add('js-faq');
+      const items = [...list.querySelectorAll('.faq-c')].map((c) => ({
+        q: c.querySelector('.faq-cq'),
+        a: c.querySelector('.faq-ca'),
+      }));
+      const collapse = (it) => { it.q.setAttribute('aria-expanded', 'false'); it.a.style.height = '0px'; };
+      const expand = (it) => { it.q.setAttribute('aria-expanded', 'true'); it.a.style.height = it.a.scrollHeight + 'px'; };
+      items.forEach((it) => {
+        collapse(it);
+        it.q.addEventListener('click', () => {
+          const open = it.q.getAttribute('aria-expanded') === 'true';
+          items.forEach(collapse);
+          if (!open) expand(it);
+        });
+      });
+      window.addEventListener('resize', () => {
+        const open = items.find((it) => it.q.getAttribute('aria-expanded') === 'true');
+        if (open) open.a.style.height = open.a.scrollHeight + 'px';
+      }, { passive: true });
+    })();
+
+    // Count-up animation for the hero stats
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const nums = document.querySelectorAll('.stat-num');
+      const dec = (el) => (el.dataset.count.split('.')[1] || '').length;
+      const fmt = (v, d) => (d ? v.toFixed(d) : String(Math.round(v)));
+      const runCount = (el) => {
+        const target = parseFloat(el.dataset.count);
+        const duration = 1500; let st = null;
+        const tick = (now) => { if (st === null) st = now; const p = Math.min((now - st) / duration, 1); const e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(target * e, dec(el)); if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target, dec(el)); };
+        requestAnimationFrame(tick);
+      };
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        nums.forEach((el) => { el.textContent = fmt(parseFloat(el.dataset.count), dec(el)); });
+      } else {
+        nums.forEach((el) => { el.textContent = fmt(0, dec(el)); });
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { runCount(e.target); io.unobserve(e.target); } }); }, { threshold: 0.6 });
+        nums.forEach((el) => io.observe(el));
+      }
+    })();
+
+    // Paints the section the reader is in. Nothing here moves the page — the
+    // links are plain anchors, so this only highlights the current one.
+    (() => {
+      const links = [...document.querySelectorAll('.toc-link')];
+      if (!links.length || !('IntersectionObserver' in window)) return;
+      const byId = new Map(
+        links.map((a) => [decodeURIComponent(a.hash.slice(1)), a]).filter(([id]) => id),
+      );
+      const targets = [...byId.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+      if (!targets.length) return;
+
+      let current = null;
+      const setActive = (id) => {
+        if (id === current) return;
+        current = id;
+        links.forEach((a) => a.classList.remove('is-active'));
+        byId.get(id)?.classList.add('is-active');
+      };
+      const io = new IntersectionObserver(
+        () => {
+          const above = targets
+            .map((el) => ({ el, top: el.getBoundingClientRect().top }))
+            .filter((t) => t.top <= 160);
+          const pick = above.length ? above[above.length - 1].el : targets[0];
+          setActive(pick.id);
+        },
+        { rootMargin: '-140px 0px -70% 0px', threshold: [0, 1] },
+      );
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
+</BaseLayout>

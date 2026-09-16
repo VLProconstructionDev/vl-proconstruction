@@ -7,12 +7,17 @@
  * only where someone has written its content file. Add
  * `src/content/city-services/<city>--<service>.md` to ship another one.
  *
+ * Each pair file picks its own shape with `layout:` — 'sections' (the default,
+ * 12 structured sections) or 'article' (the editorial hero → before/after →
+ * long-form body + TOC rail shape the hand-designed service pages use).
+ *
  * The `[service]` segment is dynamic, but the hand-designed service pages at
  * `src/pages/services/<service>/index.astro` still win for `/services/<service>`
  * — Astro gives static path segments priority over dynamic ones.
  */
 import { getCollection, getEntry } from 'astro:content';
 import LocationServiceLayout from '@/layouts/LocationServiceLayout.astro';
+import LocationArticleLayout from '@/layouts/LocationArticleLayout.astro';
 import { locationSlug } from '@/lib/urls';
 
 export async function getStaticPaths() {
@@ -38,6 +43,7 @@ export async function getStaticPaths() {
 }
 
 const { entry, location, service } = Astro.props;
+const Layout = entry.data.layout === 'article' ? LocationArticleLayout : LocationServiceLayout;
 ---
 
-<LocationServiceLayout entry={entry} location={location} service={service} />
+<Layout entry={entry} location={location} service={service} />

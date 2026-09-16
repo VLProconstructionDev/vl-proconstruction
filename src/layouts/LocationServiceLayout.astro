@@ -27,6 +27,16 @@ const { entry, location, service } = Astro.props;
 const d = entry.data;
 const { Content } = await render(entry);
 
+/**
+ * `project` and `localTitle` are optional on the collection because the article
+ * layout has no use for them. The `layout: 'sections'` branch of superRefine in
+ * content.config.ts makes them mandatory for every page that reaches THIS
+ * layout, so the non-null assertions restate a rule the build already enforces —
+ * a missing one fails content validation by name, long before it renders.
+ */
+const project = d.project!;
+const localTitle = d.localTitle!;
+
 // The card carousel wants { quote, name, meta } — the neighborhood is this
 // city's version of the small line in a card's bottom-right corner.
 const cityReviews = d.reviews.map((r) => ({ quote: r.quote, name: r.name, meta: r.neighborhood }));
@@ -38,6 +48,8 @@ const HERO_PHOTO: Record<string, string> = {
   'tile-natural-stone': '/assets/images/card-kitchen.webp',
   'hard-surface-flooring': '/assets/images/card-home.webp',
   flooring: '/assets/images/card-home.webp',
+  'bathroom-remodeling': '/assets/images/ba-bath-after.webp',
+  'waterproofing-subfloor-preparation': '/assets/images/gallery-showers/showers-waterproofing-kerdi.webp',
 };
 const heroPhoto = HERO_PHOTO[service.id] ?? '/assets/images/hero-poster-0715.webp';
 
@@ -199,6 +211,9 @@ const SHOW_RELATED = false;
     /* The photo bleeds off the right edge, floor to ceiling, and dissolves into
        the ink so there is no hard seam against the text column. */
     .lx-photo-fade { -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 12%, #000 34%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.55) 12%, #000 34%); }
+
+    /* Compliance / jurisdiction table (§5b) styles live in global.css under
+       "COMPLIANCE TABLE" — the article-layout pages use them from markdown. */
   </style>
 
   <!-- ============ 2 · HERO ============ -->
@@ -329,7 +344,7 @@ const SHOW_RELATED = false;
       <h2 class="font-semibold leading-[1.08] tracking-[-0.035em] text-[clamp(2rem,3vw,2.9rem)]">
         {/* A " | " in the title is an explicit line break — desktop only, so
             narrow screens still wrap on their own. */}
-        {d.localTitle.split('|').map((part, i) => (
+        {localTitle.split('|').map((part, i) => (
           <>{i > 0 && <br class="hidden lg:block" />}{i > 0 ? ' ' : ''}{part.trim()}</>
         ))}
       </h2>
@@ -352,18 +367,52 @@ const SHOW_RELATED = false;
     </div>
   </section>
 
+  <!-- ============ 5b · ★ COMPLIANCE TABLE (optional) ============ -->
+  <!-- Rendered only when the pair file carries a `compliance` block. UI: the
+       service pages' .cmp-row hairline grid, re-cut to three columns — the
+       middle one keeps the brand tint because the period IS the answer the
+       reader came for. Sits directly under Local expertise so the page's two
+       city-only sections read as one argument before the proof photo. -->
+  {d.compliance && (
+    <section id="compliance" class="bg-white" data-nav-theme="light">
+      <div class="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[110px] pb-20 lg:pb-[110px]">
+        <h2 class="font-semibold text-ink leading-[1.08] tracking-[-0.035em] text-[clamp(2rem,3.2vw,3rem)] max-w-[820px]">{d.compliance.title}</h2>
+        <p class="mt-5 text-[13.5px] sm:text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc max-w-[720px]">{d.compliance.intro}</p>
+
+        <div class="jur mt-12 lg:mt-14">
+          <div class="jur-row jur-head" role="presentation">
+            <div class="jur-cell jur-subject">{d.compliance.columns.subject}</div>
+            <div class="jur-cell jur-value">{d.compliance.columns.value}</div>
+            <div class="jur-cell jur-detail">{d.compliance.columns.detail}</div>
+          </div>
+          {d.compliance.rows.map((r) => (
+            <div class="jur-row">
+              <div class="jur-cell jur-subject">{r.subject}</div>
+              <div class="jur-cell jur-value">{r.value}</div>
+              <div class="jur-cell jur-detail">{r.detail}</div>
+            </div>
+          ))}
+        </div>
+
+        {d.compliance.note && (
+          <p class="jur-note mt-8 text-[13px] sm:text-[13.5px] leading-[1.65] tracking-[-0.01em] text-graydesc max-w-[720px]">{d.compliance.note}</p>
+        )}
+      </div>
+    </section>
+  )}
+
   <!-- ============ 6 · ★ A PROJECT HERE ============ -->
   <!-- UI: full-bleed project photo + the stat strip. -->
   <section id="project" class="bg-[#f6f5f3]" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-24 lg:pt-[140px] pb-10 lg:pb-14">
       <h2 class="font-bold text-ink leading-[1.05] tracking-[-0.03em] text-[clamp(2.4rem,5vw,4rem)]">
-        A recent project in {d.project.neighborhood}
+        A recent project in {project.neighborhood}
       </h2>
-      <p class="mt-5 text-[13.5px] sm:text-[15.5px] leading-[1.75] text-graydesc max-w-[680px]">{d.project.story}</p>
+      <p class="mt-5 text-[13.5px] sm:text-[15.5px] leading-[1.75] text-graydesc max-w-[680px]">{project.story}</p>
     </div>
 
     <figure class="proj-photo">
-      <img loading="lazy" decoding="async" src={d.project.image} alt={d.project.imageAlt} class="w-full h-full object-cover" />
+      <img loading="lazy" decoding="async" src={project.image} alt={project.imageAlt} class="w-full h-full object-cover" />
     </figure>
 
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pb-20 lg:pb-[100px]">
@@ -371,19 +420,19 @@ const SHOW_RELATED = false;
       <dl class="mt-12 lg:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-9">
         <div class="spec-stat">
           <dt class="spec-label">Neighborhood</dt>
-          <dd class="spec-value">{d.project.neighborhood}</dd>
+          <dd class="spec-value">{project.neighborhood}</dd>
         </div>
         <div class="spec-stat">
           <dt class="spec-label">Year</dt>
-          <dd class="spec-value">{d.project.year}</dd>
+          <dd class="spec-value">{project.year}</dd>
         </div>
         <div class="spec-stat">
           <dt class="spec-label">Timeline</dt>
-          <dd class="spec-value">{d.project.timeline}</dd>
+          <dd class="spec-value">{project.timeline}</dd>
         </div>
         <div class="spec-stat">
           <dt class="spec-label">Budget</dt>
-          <dd class="spec-value">{d.project.budget}</dd>
+          <dd class="spec-value">{project.budget}</dd>
         </div>
       </dl>
     </div>

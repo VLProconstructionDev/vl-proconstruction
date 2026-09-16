@@ -105,6 +105,35 @@ const cityServices = defineCollection({
       .array(z.object({ count: z.number(), suffix: z.string().default(''), label: z.string() }))
       .default([]),
 
+    // — Which shape this page takes —
+    //   'sections' → LocationServiceLayout: 12 structured sections (trust cards,
+    //                project strip, reviews carousel, pricing tiers, map).
+    //   'article'  → LocationArticleLayout: the editorial shape the hand-designed
+    //                service pages use — hero, before/after carousel, long-form
+    //                markdown body beside a sticky TOC rail.
+    // Default keeps every pre-existing pair file on the sections layout.
+    layout: z.enum(['sections', 'article']).default('sections'),
+
+    // — Article-layout fields. Required when layout is 'article', unused by the
+    //   sections layout — hence optional here and enforced in superRefine. —
+    article: z
+      .object({
+        // H1 renders as `{heroCity}` / `{heroService}` / `{heroTail}`.
+        heroTail: z.string(),
+        heroPhoto: z.string(),
+        baTitle: z.string(),
+        baBody: z.string(),
+        beforeAfter: z
+          .array(z.object({
+            before: z.string(), after: z.string(),
+            beforeAlt: z.string(), afterAlt: z.string(),
+          }))
+          .default([]),
+        railTitle: z.string(),
+        railBody: z.string(),
+      })
+      .optional(),
+
     // — 3. Trust, 3 cards (card 3 is city-specific) —
     trust: z
       .array(
@@ -119,30 +148,48 @@ const cityServices = defineCollection({
     // — 4. Local expertise. The markdown BODY is the intro; the forces that
     //   actually change how the job is built are structured, not prose, so the
     //   page can give each one its own row. —
-    localTitle: z.string(),
+    localTitle: z.string().optional(),
     localPoints: z
       .array(z.object({ title: z.string(), body: z.string() }))
       .default([]),
-    localImage: z.string(),
-    localImageAlt: z.string(),
+    localImage: z.string().optional(),
+    localImageAlt: z.string().optional(),
+
+    // — 4b. Compliance table (OPTIONAL, both layouts). Built for the FEMA
+    //   50%-rule jurisdiction breakdown: the one question a national franchise
+    //   page structurally cannot answer, because the answer changes by city
+    //   inside the same metro. `note` is the caveat line under the table. —
+    compliance: z
+      .object({
+        title: z.string(),
+        intro: z.string(),
+        columns: z.object({ subject: z.string(), value: z.string(), detail: z.string() }),
+        rows: z
+          .array(z.object({ subject: z.string(), value: z.string(), detail: z.string() }))
+          .default([]),
+        note: z.string().optional(),
+      })
+      .optional(),
 
     // — 5. What's included —
-    includedTitle: z.string(),
-    includedIntro: z.string(),
+    includedTitle: z.string().optional(),
+    includedIntro: z.string().optional(),
     included: z
       .array(z.object({ title: z.string(), body: z.string(), image: z.string(), alt: z.string() }))
       .default([]),
 
     // — 6. A project here —
-    project: z.object({
-      neighborhood: z.string(),
-      year: z.string(),
-      timeline: z.string(),
-      budget: z.string(),
-      story: z.string(),
-      image: z.string(),
-      imageAlt: z.string(),
-    }),
+    project: z
+      .object({
+        neighborhood: z.string(),
+        year: z.string(),
+        timeline: z.string(),
+        budget: z.string(),
+        story: z.string(),
+        image: z.string(),
+        imageAlt: z.string(),
+      })
+      .optional(),
 
     // — 7. Reviews (this service AND this city) —
     reviews: z
@@ -164,8 +211,8 @@ const cityServices = defineCollection({
 
     // — 9. Pricing (the same numbers must appear in the FAQ + meta description) —
     // Three tiers, rendered as cards; mark exactly one `featured` for the dark card.
-    pricingTitle: z.string(),
-    pricingIntro: z.string(),
+    pricingTitle: z.string().optional(),
+    pricingIntro: z.string().optional(),
     pricing: z
       .array(
         z.object({
@@ -179,8 +226,8 @@ const cityServices = defineCollection({
       .default([]),
 
     // — 10. Service area —
-    areaTitle: z.string(),
-    areaBody: z.string(),
+    areaTitle: z.string().optional(),
+    areaBody: z.string().optional(),
 
     // — 11. FAQ, 5 questions —
     faqs: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
@@ -191,6 +238,35 @@ const cityServices = defineCollection({
       .default([]),
 
     published: z.boolean().default(true),
+  })
+  /**
+   * The two layouts need different fields and zod can't express that in a plain
+   * object. Rather than mark everything optional and let a half-written page
+   * render with holes in it, each layout declares what it requires, so a missing
+   * field fails the build naming the file and the field.
+   */
+  .superRefine((v, ctx) => {
+    const need = (keys: string[]) => {
+      for (const k of keys) {
+        if ((v as Record<string, unknown>)[k] === undefined) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            path: [k],
+            message: `layout: "${v.layout}" requires "${k}".`,
+          });
+        }
+      }
+    };
+    if (v.layout === 'article') {
+      need(['article']);
+    } else {
+      need([
+        'localTitle', 'localImage', 'localImageAlt',
+        'includedTitle', 'includedIntro',
+        'project', 'pricingTitle', 'pricingIntro',
+        'areaTitle', 'areaBody',
+      ]);
+    }
   }),
 });
 
