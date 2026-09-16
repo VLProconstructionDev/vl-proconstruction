@@ -3,7 +3,7 @@ title: "Lowe's vs. Home Depot: Who Has the Better Tile Selection?"
 seoTitle: "Lowe's vs Home Depot Tile"
 description: "A tile installer's honest comparison of Lowe's and Home Depot tile selection — stock, special order, quality and returns. Free estimate: (503) 781-4657"
 lede: 'Homeowners ask us this almost every week, usually standing in an aisle with a sample in each hand. The honest answer is that the two stores are closer than their marketing suggests — and that the question you actually want answered is a different one.'
-publishedAt: 2026-09-16
+publishedAt: 2026-09-15
 author: Vlad Leytner
 authorImage: /assets/images/blog/authors/vlad-leytner.webp
 heroImage: /assets/images/blog/lowes-vs-home-depot-tile-hero.webp
