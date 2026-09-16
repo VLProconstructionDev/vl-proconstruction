@@ -250,7 +250,11 @@ const partners = [
   <div class="border-t border-white/10">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-4 text-[13px] leading-[1.75] text-white/50">
       <span class="text-white/70">Areas Served:</span>{' '}
-      {serviceAreas.join(' \u00b7 ')}{' \u00b7 '}
+      {serviceAreas.map((area) => (
+        <>
+          <a href="/locations/" class="btn text-white/50 hover:text-white/85">{area}</a>{' \u00b7 '}
+        </>
+      ))}
       <a href="/locations/" class="btn inline-flex items-baseline gap-1.5 text-brand hover:text-[#ff6a45]">
         View all service areas
         <svg class="h-3.5 w-3.5 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
