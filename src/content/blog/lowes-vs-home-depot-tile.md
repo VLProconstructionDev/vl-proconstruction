@@ -144,7 +144,7 @@ What was:
   anything gets laid on [hard surface flooring](/services/flooring).
 - **Waterproofing, in wet areas.** A shower fails at the waterproofing layer, never at the tile.
   We flood-test before tile goes on, every time — that's the whole point of
-  [waterproofing and subfloor prep](/services/waterproofing-subfloor-prep) being its own scope.
+  [waterproofing and subfloor prep](/services/waterproofing-subfloor-preparation) being its own scope.
 - **Mortar coverage.** Full coverage under the tile, back-buttered on large format. Hollow spots
   are where cracks start.
 - **Grout color and joint width.** A mid-tone grout matched to the tile ages far better than
