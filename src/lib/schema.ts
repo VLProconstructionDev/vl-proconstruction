@@ -61,6 +61,7 @@ const SERVICE_CATALOG = [
   { slug: 'custom-showers', name: 'Custom Shower Installation' },
   { slug: 'tile-natural-stone', name: 'Tile & Natural Stone Installation' },
   { slug: 'flooring', name: 'Hard-Surface Flooring Installation' },
+  { slug: 'waterproofing-subfloor-prep', name: 'Waterproofing & Subfloor Preparation' },
 ];
 
 /** WebSite node — names the site for Google and links it back to the business. */

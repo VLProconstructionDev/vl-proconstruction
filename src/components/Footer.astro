@@ -134,45 +134,34 @@ const partners = [
               </li>
             ))}
           </ul>
-
-          <p class="mt-10 text-[15px] font-medium text-white">Why choose us</p>
-          {/* Checks, not bullets: each line is a credential the visitor can verify,
-              so the mark reads as a tick-off rather than decoration. */}
-          <ul class="mt-6 space-y-4 text-[15px] text-white/70">
-            {whyChooseUs.map((item) => (
-              <li class="flex items-start gap-2.5">
-                <svg class="mt-[5px] h-[13px] w-[13px] shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                <span set:html={item} />
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
 
       <div>
-        <p class="text-[15px] font-medium text-white">Navigate</p>
-        <ul class="mt-6 space-y-4 text-[15px] text-white/70">
-          <li><a href={`${H}#services`} class="hover:text-brand transition-colors">Services</a></li>
-          <li><a href={`${H}#gallery`} class="hover:text-brand transition-colors">Our Work</a></li>
-          <li><a href={`${H}#reviews`} class="hover:text-brand transition-colors">Reviews</a></li>
-          <li><a href={`${H}#process`} class="hover:text-brand transition-colors">Our Process</a></li>
-          <li><a href={`${H}#benefits`} class="hover:text-brand transition-colors">Why VL Pro</a></li>
-          <li><a href="/locations/" class="hover:text-brand transition-colors">Service Locations</a></li>
-          <li><a href={`${H}#faqs`} class="hover:text-brand transition-colors">FAQ</a></li>
-          <li><a href="#estimate" class="js-open-estimate hover:text-brand transition-colors">Free Estimate</a></li>
-        </ul>
-
-        <p class="mt-10 text-[15px] font-medium text-white">Services</p>
+        <p class="text-[15px] font-medium text-white">Services</p>
         <ul class="mt-6 space-y-4 text-[15px] text-white/70">
           <li><a href="/services/custom-showers/" class="hover:text-brand transition-colors">Custom Showers</a></li>
           <li><a href="/services/bathroom-remodeling/" class="hover:text-brand transition-colors">Bathroom Remodeling</a></li>
           <li><a href="/services/tile-natural-stone/" class="hover:text-brand transition-colors">Tile &amp; Natural Stone</a></li>
           <li><a href="/services/flooring/" class="hover:text-brand transition-colors">Flooring</a></li>
+          <li><a href="/services/waterproofing-subfloor-prep/" class="hover:text-brand transition-colors">Waterproofing &amp; Subfloor Preparation</a></li>
         </ul>
 
         <p class="mt-10 text-[15px] font-medium text-white">Resources</p>
         <ul class="mt-6 space-y-4 text-[15px] text-white/70">
           <li><a href="/blog/" class="hover:text-brand transition-colors">Blog</a></li>
+        </ul>
+
+        <p class="mt-10 text-[15px] font-medium text-white">Why choose us</p>
+        {/* Checks, not bullets: each line is a credential the visitor can verify,
+            so the mark reads as a tick-off rather than decoration. */}
+        <ul class="mt-6 space-y-4 text-[15px] text-white/70">
+          {whyChooseUs.map((item) => (
+            <li class="flex items-start gap-2.5">
+              <svg class="mt-[5px] h-[13px] w-[13px] shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span set:html={item} />
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -236,6 +225,27 @@ const partners = [
               <rect x="3" y="3" width="18" height="18" rx="5"/>
               <circle cx="12" cy="12" r="4"/>
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a
+            href={site.social.googleMaps}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Find ${site.name} on Google Maps`}
+            class="btn grid place-items-center h-11 w-11 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+          >
+            <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </a>
+          <a
+            href={site.phoneHref}
+            aria-label={`Call ${site.name} at ${site.phone}`}
+            class="btn grid place-items-center h-11 w-11 rounded-lg bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+          >
+            <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.26-1.26a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/>
             </svg>
           </a>
         </div>
