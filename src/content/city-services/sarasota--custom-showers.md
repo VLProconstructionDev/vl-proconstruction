@@ -6,7 +6,7 @@ city: sarasota
 service: custom-showers
 
 seoTitle: Custom Showers Sarasota, FL
-seoDescription: 'Custom shower builders in Sarasota, FL. Curbless entries, Schluter waterproofing, frameless glass. Call for a free quote: (503) 781-4657'
+seoDescription: 'Custom shower builders in Sarasota, FL. Curbless entries, Schluter waterproofing, frameless glass. Call for a free quote: (941) 203-1020'
 
 heroCity: Sarasota
 heroService: Custom Showers

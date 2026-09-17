@@ -3,7 +3,7 @@ title: Bathroom Remodeling
 shortName: Bathroom Remodeling
 description: Whole-bathroom remodels from demolition to the final grout line — layout, waterproofing, tile, vanity, and fixtures handled by one crew.
 seoTitle: Bathroom Remodeling Bradenton, FL
-seoDescription: 'Full bathroom remodeling in Bradenton & Sarasota, FL. Demo to tile, vanity, and glass by one in-house crew. Free estimate: (503) 781-4657'
+seoDescription: 'Full bathroom remodeling in Bradenton & Sarasota, FL. Demo to tile, vanity, and glass by one in-house crew. Free estimate: (941) 203-1020'
 heroImage: /assets/images/ba-bath-after.webp
 order: 4
 features:

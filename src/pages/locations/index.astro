@@ -62,11 +62,24 @@ const schema = [
 
 <BaseLayout
   title="Service Areas in Bradenton & Sarasota"
-  description="Custom showers, tile & flooring in Bradenton, Sarasota, Lakewood Ranch, Venice and 12 more cities. Call for a free quote: (503) 781-4657"
+  description="Custom showers, tile & flooring in Bradenton, Sarasota, Lakewood Ranch, Venice and 12 more cities. Call for a free quote: (941) 203-1020"
   schema={schema}
   navTheme="dark"
 >
   <style is:global>
+    /* ----- Service-area map edge fade (same treatment as the home page) ----- */
+    .area-map-fade { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.8) 10%, #000 14%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.8) 10%, #000 14%); }
+    @media (min-width: 1024px) {
+      .area-map-fade { -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 7%, rgba(0,0,0,.8) 11%, #000 15%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 7%, rgba(0,0,0,.8) 11%, #000 15%); }
+    }
+    .area-map-fade::before { content: ''; position: absolute; inset: 0; z-index: 450; pointer-events: none;
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 8%, transparent 11%);
+      mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 8%, transparent 11%); }
+    @media (min-width: 1024px) {
+      .area-map-fade::before { -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 9%, transparent 12%);
+        mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 9%, transparent 12%); }
+    }
     /* ---- City blocks ---- */
     /* Status badge — solid brand block, as on the reference layout. */
     .loc-badge {
@@ -116,8 +129,8 @@ const schema = [
     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/45"></div>
 
     <div class="relative mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-[150px] pb-16 lg:pt-[190px] lg:pb-24">
-      <h1 class="font-semibold capitalize leading-[1.02] tracking-[-0.035em] text-[clamp(2.6rem,6vw,5.25rem)] max-w-[1000px]">
-        Where we build
+      <h1 class="font-semibold normal-case leading-[1.04] tracking-[-0.035em] text-[clamp(2.3rem,5.2vw,4.5rem)] max-w-[1000px] text-balance">
+        Remodeling Service Areas in Bradenton &amp; Sarasota
       </h1>
       <p class="mt-6 max-w-[620px] text-[13.5px] sm:text-[clamp(0.95rem,1.2vw,1.15rem)] font-medium leading-[1.6] tracking-[-0.02em] text-[#eaeaea]">
         VL Pro Construction works across {site.areaServed.length} cities and communities on Florida's
@@ -181,8 +194,8 @@ const schema = [
 
     <!-- Heading + copy -->
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
-      <div class="lg:max-w-[44%]">
-        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
+      <div class="lg:max-w-[min(calc(42vw-108px),calc(852px-8vw))]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,min(calc(3.95vw-10px),calc(81px-0.77vw)),4.75rem)]">
           Serving Bradenton, Sarasota<br />& the Gulf Coast
         </h2>
         <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">

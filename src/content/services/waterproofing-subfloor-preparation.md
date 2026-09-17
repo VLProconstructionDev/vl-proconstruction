@@ -3,7 +3,7 @@ title: Waterproofing & Subfloor Preparation
 shortName: Waterproofing & Subfloor Preparation
 description: The layer under the tile — shower waterproofing assemblies, subfloor repair, leveling and crack isolation, flood-tested before anything is set on top.
 seoTitle: Shower Waterproofing Bradenton, FL
-seoDescription: 'Shower waterproofing & subfloor prep in Bradenton & Sarasota, FL. Schluter®-certified assemblies, flood-tested before tile. Free estimate: (503) 781-4657'
+seoDescription: 'Shower waterproofing & subfloor prep in Bradenton & Sarasota, FL. Schluter®-certified assemblies, flood-tested before tile. Free estimate: (941) 203-1020'
 heroImage: /assets/images/gallery-showers/showers-waterproofing-kerdi.webp
 order: 5
 features:

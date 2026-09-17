@@ -1,7 +1,7 @@
 ---
 title: 'Tub to Shower Conversion in Bradenton: What It Costs, What It Takes, and How to Do It Right'
 seoTitle: 'Tub to Shower Conversion Bradenton, FL'
-description: 'Tub to shower conversion in Bradenton: 2026 costs, curbless vs. curbed, ADA sizes, permit rules. Call for a free quote: (503) 781-4657'
+description: 'Tub to shower conversion in Bradenton: 2026 costs, curbless vs. curbed, ADA sizes, permit rules. Call for a free quote: (941) 203-1020'
 lede: 'Tub to shower conversion in Bradenton and Lakewood Ranch: 2026 costs, curbless vs. curbed, ADA shower sizes, and Manatee County permit rules.'
 publishedAt: 2026-09-04
 author: Vlad Leytner

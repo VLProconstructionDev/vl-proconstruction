@@ -4,6 +4,7 @@ import { serviceSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
 import { site } from '@/lib/site';
 import TrustPill from '@components/TrustPill.astro';
 import EstimateInline from '@components/EstimateInline.astro';
+import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 import ArticleStyles from '@components/ArticleStyles.astro';
 
 const description =
@@ -132,6 +133,22 @@ const schema = [
 >
   <ArticleStyles />
 
+  <style is:global>
+    /* ----- Service-area map edge fade (same treatment as the home page) ----- */
+    .area-map-fade { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.8) 10%, #000 14%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.8) 10%, #000 14%); }
+    @media (min-width: 1024px) {
+      .area-map-fade { -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 7%, rgba(0,0,0,.8) 11%, #000 15%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 7%, rgba(0,0,0,.8) 11%, #000 15%); }
+    }
+    .area-map-fade::before { content: ''; position: absolute; inset: 0; z-index: 450; pointer-events: none;
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 8%, transparent 11%);
+      mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 8%, transparent 11%); }
+    @media (min-width: 1024px) {
+      .area-map-fade::before { -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 9%, transparent 12%);
+        mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 9%, transparent 12%); }
+    }
+  </style>
+
   <!-- ===================== HERO (identical to the other service pages) ===================== -->
   <section id="hero" class="relative min-h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
     <!-- Phone: a still job photo instead of the hero video — the Kerdi-Board
@@ -141,13 +158,13 @@ const schema = [
     <div class="absolute inset-0 bg-black/65"></div>
     <div class="relative z-20 h-full min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:pt-[172px] sm:pb-24 lg:pb-[90px] gap-5 lg:gap-6">
       <TrustPill />
-      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,3rem)] sm:text-[clamp(3rem,6.8vw,6.05rem)] text-center">
+      <div class="font-semibold normal-case leading-[1.06] sm:leading-[1.02] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(2.2rem,9.4vw,3.1rem)] sm:text-[clamp(3.4rem,6.6vw,5.9rem)] text-center text-balance">
         <h1>
-          <span>Sarasota <br class="sm:hidden" />&amp; Bradenton Area</span><br />
-          <span class="text-brand block">Waterproofing &amp; <br class="sm:hidden" />Subfloor Preparation</span>
+          Sarasota <br class="sm:hidden" />&amp; Bradenton<br />
+          Remodeling Experts<br />
+          Waterproofing &amp; Subfloor Prep
         </h1>
-        <div class="flex flex-col items-center gap-3 sm:gap-5">
-          <span>Contractors</span>
+        <div class="flex flex-col items-center gap-3 sm:gap-5 mt-5 sm:mt-6">
           <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[560px]">The layer nobody photographs and everything depends on. Schluter®-certified assemblies, subfloors brought flat and sound, and a 24-hour flood test before a single tile is set.</p>
         </div>
       </div>
@@ -155,7 +172,7 @@ const schema = [
       <div class="flex flex-col items-center gap-8">
         <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
           <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
-          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(503) 781-4657</a>
+          <a href="tel:+19412031020" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(941) 203-1020</a>
         </div>
         <!-- Bottom row: stats on the left, the marks we build to on the right.
              Both are trust signals, not sections — the label is a <p>, never a
@@ -463,6 +480,22 @@ const schema = [
       </div>
     </div>
   </div>
+
+  <!-- ===================== SERVICE AREA ===================== -->
+  <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
+    <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
+      <div class="lg:max-w-[min(calc(42vw-108px),calc(852px-8vw))]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,min(calc(3.95vw-10px),calc(81px-0.77vw)),4.75rem)]">
+          Waterproofing in<br />Bradenton &amp; Sarasota
+        </h2>
+        <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
+          We waterproof showers and prep subfloors for homeowners and builders throughout the Bradenton–Sarasota metro — Palmetto and Parrish down to Siesta Key and Venice.
+        </p>
+      </div>
+    </div>
+    <!-- Florida service-area map — interactive (MapLibre); static image is the fallback -->
+    <ServiceAreaMap service="waterproofing-subfloor-preparation" />
+  </section>
 
   <!-- Closing form — inline step 1 of the estimate wizard. -->
   <EstimateInline />

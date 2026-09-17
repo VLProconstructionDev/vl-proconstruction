@@ -8,7 +8,7 @@ service: flooring
 published: true
 
 seoTitle: Hard-Surface Flooring Sarasota, FL
-seoDescription: 'Hardwood, engineered & LVP flooring installers in Sarasota, FL. NWFA-spec installs. $7–$20/sq ft. Call for a free quote: (503) 781-4657'
+seoDescription: 'Hardwood, engineered & LVP flooring installers in Sarasota, FL. NWFA-spec installs. $7–$20/sq ft. Call for a free quote: (941) 203-1020'
 
 heroCity: Sarasota
 heroService: Flooring

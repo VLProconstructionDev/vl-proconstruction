@@ -186,18 +186,6 @@ html::-webkit-scrollbar {
   transform: translateY(0);
   pointer-events: auto;
 }
-/* Button-based dropdown trigger (a nav item with no page of its own) —
-   matches the sibling <a> triggers exactly. */
-.nav-trigger {
-  font: inherit;
-  color: inherit;
-  letter-spacing: inherit;
-  text-transform: inherit;
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-}
 /* An empty panel would hover as a stray blurred pill — hide it until it has links. */
 .nav-dd-panel:empty {
   display: none;
@@ -253,9 +241,11 @@ html::-webkit-scrollbar {
 .nav-area-col {
   min-width: 176px;
 }
-/* Column head — the city. It carries the column, so it outranks the service
-   rows under it: larger, white, and closed off by a hairline, which is what
-   makes the eye land on the place first and the service second. */
+/* Column head — the city. A heading, not a link: there is no page per city,
+   and /locations is what the "Locations" trigger itself opens. It carries the
+   column, so it outranks the service rows under it: larger, white, and closed
+   off by a hairline, which is what makes the eye land on the place first and
+   the service second. */
 .nav-area-head {
   display: block;
   margin-bottom: 8px;
@@ -267,12 +257,6 @@ html::-webkit-scrollbar {
   line-height: 1.2;
   color: #fff;
   white-space: nowrap;
-  transition: color 0.18s ease;
-}
-.nav-area-head:hover,
-.nav-area-head:focus-visible {
-  color: #f54b25;
-  outline: none;
 }
 /* The services under a city — quieter than the head by design. */
 .nav-area-town {
@@ -281,11 +265,6 @@ html::-webkit-scrollbar {
   font-size: 15px;
   color: rgba(255, 255, 255, 0.62);
   white-space: nowrap;
-}
-@media (prefers-reduced-motion: reduce) {
-  .nav-area-head {
-    transition: none;
-  }
 }
 .nav-dd-chev {
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -569,18 +548,16 @@ button:focus-visible {
   padding-left: 14px;
 }
 /* Column head inside the mobile Locations accordion — the city, carrying the
-   same weight it has on desktop, with its services indented under it. */
-.mm-sub a.mm-sub-service {
+   same weight it has on desktop, with its services indented under it. A <p>,
+   not a link, to match desktop, so it spells out its own metrics. */
+.mm-sub .mm-sub-service {
+  display: block;
   margin-top: 8px;
   padding: 12px 0;
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.03em;
   color: #fff;
-}
-.mm-sub a.mm-sub-service:hover,
-.mm-sub a.mm-sub-service:focus-visible {
-  color: #f54b25;
 }
 
 /* The hub link sits above the county headings, so it keeps their flush alignment. */

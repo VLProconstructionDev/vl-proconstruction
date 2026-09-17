@@ -1,7 +1,7 @@
 ---
 title: 'Why Your Flooring Choice Matters More Than You Think'
 seoTitle: 'Why Your Flooring Choice Matters'
-description: 'Your floor is the biggest surface in the house and the hardest to redo. What actually decides it in Florida. Free estimate: (503) 781-4657'
+description: 'Your floor is the biggest surface in the house and the hardest to redo. What actually decides it in Florida. Free estimate: (941) 203-1020'
 lede: 'Most people pick a floor the way they pick a paint color — by looking at a sample in a showroom. But the floor is the largest continuous surface in the house, the one every other finish has to agree with, and the only one you can''t change on a weekend. Here is what actually decides it on the Gulf Coast.'
 publishedAt: 2026-09-15
 author: Vlad Leytner
@@ -220,4 +220,4 @@ VL Pro Construction installs [hard surface flooring](/services/flooring),
 Longboat Key, Siesta Key, and Venice — see [everything we do](/services) or
 [where we work](/locations).
 
-[**Get a free in-home estimate**](/#estimate) or call [(503) 781-4657](tel:+15037814657).
+[**Get a free in-home estimate**](/#estimate) or call [(941) 203-1020](tel:+19412031020).

@@ -6,7 +6,7 @@ city: sarasota
 service: tile-natural-stone
 
 seoTitle: Tile & Natural Stone Sarasota, FL
-seoDescription: 'Tile & natural-stone installers in Sarasota, FL. Porcelain, marble, travertine. $10–$30/sq ft. Call for a free quote: (503) 781-4657'
+seoDescription: 'Tile & natural-stone installers in Sarasota, FL. Porcelain, marble, travertine. $10–$30/sq ft. Call for a free quote: (941) 203-1020'
 
 heroCity: Sarasota
 heroService: Tile & Natural Stone

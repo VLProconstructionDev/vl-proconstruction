@@ -19,24 +19,36 @@ const latestPosts = sortPosts(await getCollection('blog', visible)).slice(0, 3);
 // `a` is then the plain-text equivalent the schema needs.
 const faqs: { q: string; a: string }[] = [
   {
-    q: 'How much does a bathroom remodel cost?',
-    a: 'Every project is different depending on the size, materials, and scope of work. We provide a free on-site consultation and a written estimate before work begins.',
+    q: "What does this actually cost in Bradenton and Sarasota?",
+    a: "Here are the ranges we actually quote: a guest bath $18,000–$26,000, a full primary bath $26,000–$45,000, a custom shower $9,500–$22,000 installed, tile and natural stone $10–$30 per square foot, and hard-surface flooring $6–$18 per square foot in Bradenton, $7–$20 in Sarasota. Those include demo, waterproofing, materials, permit fees and haul-away. You get one written number before anything starts — not an hourly rate that moves.",
   },
   {
-    q: 'How long does a bathroom renovation take?',
-    a: 'Most bathroom remodels take 2–4 weeks depending on demolition, plumbing changes, tile installation, custom showers, and material availability.',
+    q: "What makes the price go up or down?",
+    a: "Four things, in roughly this order. Whether plumbing moves inside the slab — nearly every home here is slab-on-grade, so relocating a drain means cutting and re-pouring concrete. What we find once the old cast iron or subfloor is open. Whether your building adds condo logistics: board approval, elevator time, riser shut-offs. And whether the FEMA 50% rule applies to your address — cross that threshold and the whole structure has to meet current flood code, which is a different project entirely.",
   },
   {
-    q: 'Do you offer free estimates?',
-    a: 'Yes. We offer free in-home consultations where we discuss your ideas, take measurements, and provide a detailed estimate.',
+    q: "When would you repair instead of replace?",
+    a: "When the layout already works and it's the waterproofing that aged out. A failed shower pan, cracked tile over a sound substrate, worn grout — that's a targeted repair and we'll say so, even though it's the smaller invoice. We push toward a full rebuild when the drain line is failing, the subfloor is soft, or the layout itself is the complaint. New finishes over any of those buy you a few years, not twenty.",
   },
   {
-    q: 'Are you licensed and insured?',
-    a: 'Yes. VL Pro Construction LLC is licensed and insured in Florida.',
+    q: "How long does the work normally take?",
+    a: "A full primary bath is four to six weeks from signed quote to final walkthrough; a guest bath is closer to three. A custom shower on its own runs two to three weeks, most of it waterproofing cure, pan test and tile. Whole-house flooring is typically three to seven days depending on square footage and whether the slab needs leveling. Permit review is 3–5 business days at the county and longer in the city, and condo approval can add one to three weeks on the front end.",
   },
   {
-    q: 'Can I stay in my home during the remodel?',
-    a: 'In most cases, yes. We work to minimize dust and disruption and keep the job site clean throughout the project.',
+    q: "When would you tell someone not to start yet?",
+    a: "When the flood-zone math hasn't been run on the address. When a condo board has just levied a milestone-inspection or SIRS assessment and the cash picture is about to change. When a building restricts work through season and you want a February start. And when someone plans to phase a job in unincorporated Sarasota County to duck the 50% threshold — the county combines near-simultaneous permits, so that plan fails at review. Better to hear it from us in week one than from a plans examiner in week six.",
+  },
+  {
+    q: "Which material choices change the job most?",
+    a: "Large-format tile and natural stone need a flatter substrate than standard tile, so they usually add a leveling step before anyone sets a piece. A curbless shower entry changes structure rather than finish — the slope has to be built in, which on a slab means cutting and recessing. Frameless glass is measured off finished tile, so it lands 7–10 days after tile is done. And hard water is worth spending on here: it scales valves and etches glass, which is why the cartridges and coatings we specify aren't the cheapest ones.",
+  },
+  {
+    q: "What should a homeowner know before booking?",
+    a: "Three things. Your flood zone and jurisdiction, because they set a ceiling on spend before the rules change. Your building's rules if you're in a condo — board approval, work hours and a booked riser shut-off all come before the county permit. And a decision, made in advance, about what you want us to do if we open a wall and find something. A standing decision beats a phone call while a crew stands still.",
+  },
+  {
+    q: "What can go wrong, and what happens if it does?",
+    a: "The real risks are below the finish line: a cast-iron waste line scaled shut, galvanized supply that fails the moment it's disturbed, slab plumbing that isn't where the drawings say, or a slab out of flatness for large-format tile. If we hit one, you get a photo of what we found and a price for the difference before we carry on — that's the whole change-order process, and nothing proceeds until you say yes. A failed drain line gets priced to the stack rather than patched to the nearest joint, because a patch puts you back here in three years.",
   },
 ];
 
@@ -45,7 +57,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
 
 <BaseLayout
   title="Custom Showers, Tile & Flooring in Bradenton & Sarasota Area"
-  description="Tile, flooring, custom showers, bath upgrades & subfloor prep for Bradenton homes and businesses. Call for a free quote: (503) 781-4657"
+  description="Tile, flooring, custom showers, bath upgrades & subfloor prep for Bradenton homes and businesses. Call for a free quote: (941) 203-1020"
   schema={schema}
   navTheme="dark"
 >
@@ -91,10 +103,6 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     .trust-pill:hover { border-color: rgba(245,75,37,.5); background-color: rgba(0,0,0,.03); }
     @media (prefers-reduced-motion: reduce) { .btn, .card-img, .card-arrow, .rev { transition: none; transform: none; } }
 
-    /* Hero service rotator — words fade/lift in and out */
-    .rotator-word { display: inline-block; transition: opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1); }
-    .rotator-word.is-out { opacity: 0; transform: translateY(0.18em); }
-    @media (prefers-reduced-motion: reduce) { .rotator-word { transition: none; } .rotator-word.is-out { opacity: 1; transform: none; } }
 
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -279,13 +287,13 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       <TrustPill />
 
       <!-- Heading + description -->
-      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,2.6rem)] sm:text-[clamp(2.6rem,6.8vw,6.05rem)] text-center">
+      <div class="font-semibold normal-case leading-[1.06] sm:leading-[1.02] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(2.2rem,9.4vw,3.1rem)] sm:text-[clamp(3.2rem,6.1vw,5.4rem)] text-center text-balance">
         <h1>
-          <span>Sarasota <br class="sm:hidden" />& Bradenton Area</span><br />
-          <span class="text-brand flex items-center justify-center min-h-[1.06em] sm:min-h-0 sm:block"><span id="heroRotator" class="rotator-word">Custom Showers</span></span>
+          Sarasota <br class="sm:hidden" />&amp; Bradenton<br />
+          Remodeling Experts<br />
+          Bathroom, Tile, Flooring
         </h1>
-        <div class="flex flex-col items-center gap-3 sm:gap-5">
-          <span>Remodeling Experts</span>
+        <div class="flex flex-col items-center gap-3 sm:gap-5 mt-5 sm:mt-6">
           <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.45] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">
             We help homeowners and businesses with the design and installation of custom showers, tile, natural stone, and flooring across the Sarasota and Bradenton area.
           </p>
@@ -296,7 +304,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       <div class="flex flex-col items-center gap-8">
         <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
           <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
-          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(503) 781-4657</a>
+          <a href="tel:+19412031020" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(941) 203-1020</a>
         </div>
 
         <!-- Bottom row: stats on the left, the marks we build to on the right.
@@ -348,7 +356,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
   <section id="services" class="bg-white" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[90px] pb-10 lg:pb-12">
       <div class="mx-auto max-w-[1000px] flex flex-col items-center text-center gap-5">
-        <h2 class="font-semibold capitalize text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.9rem,7.5vw,5.75rem)]">Custom Home Additions</h2>
+        <h2 class="font-semibold normal-case text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.4rem,6vw,4.6rem)] text-balance">What We Do on the Gulf Coast</h2>
         <p class="text-[13.5px] sm:text-[clamp(0.95rem,1.15vw,1.05rem)] tracking-[-0.03em] text-graydesc max-w-[900px]">
           Explore our custom showers, tile, natural stone, and flooring solutions for residential and commercial spaces, built to last.
         </p>
@@ -396,7 +404,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       </div>
       <div class="mt-12 lg:mt-14 flex justify-center">
         <a href="/services/" class="btn inline-flex items-center gap-2 text-[14px] font-semibold capitalize tracking-[-0.01em] text-ink underline decoration-black/25 underline-offset-[6px] transition-colors hover:text-brand hover:decoration-brand">
-          Explore All Home Additions
+          Explore All Services
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -519,7 +527,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       </div>
       <!-- TODO: real phone number -->
       <div class="mt-4 sm:mt-6 flex justify-center">
-        <a href="tel:+15037814657" class="btn inline-flex items-center justify-center px-2 py-2 text-[16px] sm:text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
+        <a href="tel:+19412031020" class="btn inline-flex items-center justify-center px-2 py-2 text-[16px] sm:text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
           Get a Free Design Consultation
         </a>
       </div>
@@ -699,8 +707,8 @@ const schema = [websiteSchema(), faqSchema(faqs)];
 
     <!-- Heading + copy -->
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
-      <div class="lg:max-w-[44%]">
-        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
+      <div class="lg:max-w-[min(calc(42vw-108px),calc(852px-8vw))]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,min(calc(3.95vw-10px),calc(81px-0.77vw)),4.75rem)]">
           Serving Bradenton, Sarasota<br />& the Gulf Coast
         </h2>
         <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
@@ -751,8 +759,8 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     <div class="bl-sec mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pb-20 lg:pb-[110px]">
 
       <div class="bl-head flex flex-wrap items-center justify-between gap-6">
-        <h2 class="font-bold capitalize text-ink leading-[1.02] tracking-[-0.03em] text-[clamp(2.1rem,5vw,4rem)]">
-          Remodeling advice &amp; insights
+        <h2 class="font-bold normal-case text-ink leading-[1.04] tracking-[-0.03em] text-[clamp(1.9rem,4.2vw,3.35rem)] max-w-[900px] text-balance">
+          Remodeling Guides for Bradenton &amp; Sarasota Homeowners
         </h2>
         <a href="/blog" class="btn bl-more">See more blogs</a>
       </div>
@@ -764,39 +772,9 @@ const schema = [websiteSchema(), faqSchema(faqs)];
   </section>
 
   <script is:inline>
-    // Shared reduced-motion flag used by the hero rotator, count-up, parallax,
+    // Shared reduced-motion flag used by the count-up, parallax,
     // and reviews carousel below.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Hero service rotator — cycles the brand-colored line through our core services.
-    // Starts on the visitor's first interaction (not on load): every swap repaints
-    // the biggest text on screen, and swaps BEFORE any input keep pushing the
-    // page's LCP later — Lighthouse/CrUX read the last swap, not the real load.
-    // Interaction ends LCP observation, so rotating after it is free; a fallback
-    // timer still starts the show for completely motionless visitors.
-    const rotator = document.getElementById('heroRotator');
-    if (rotator) {
-      const services = ['Custom Showers', 'Tile &amp; Natural Stone', 'Flooring'];
-      let si = 0;
-      let started = false;
-      const startRotator = () => {
-        if (started) return;
-        started = true;
-        setInterval(() => {
-          si = (si + 1) % services.length;
-          if (reduceMotion) { rotator.innerHTML = services[si]; return; }
-          rotator.classList.add('is-out');
-          setTimeout(() => {
-            rotator.innerHTML = services[si];
-            rotator.classList.remove('is-out');
-          }, 350);
-        }, 3000);
-      };
-      ['pointerdown', 'pointermove', 'wheel', 'touchstart', 'keydown', 'scroll'].forEach((ev) =>
-        window.addEventListener(ev, startRotator, { once: true, passive: true })
-      );
-      setTimeout(startRotator, 12000);
-    }
 
     // Count-up animation for stats (runs when each number scrolls into view)
     const nums = document.querySelectorAll('.stat-num');

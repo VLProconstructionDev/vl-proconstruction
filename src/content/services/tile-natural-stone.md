@@ -3,7 +3,7 @@ title: "Tile & Natural Stone Installation"
 shortName: "Tile & Natural Stone"
 description: "Precision tile and natural-stone installation for floors, walls, and feature surfaces — set flat, grouted clean, sealed properly."
 seoTitle: "Tile & Natural Stone Installers"
-seoDescription: 'Porcelain, ceramic, marble, travertine & slate — substrate prep, lippage control, correct sealing. Call for a free quote: (503) 781-4657'
+seoDescription: 'Porcelain, ceramic, marble, travertine & slate — substrate prep, lippage control, correct sealing. Call for a free quote: (941) 203-1020'
 heroImage: /assets/images/gallery/gallery-1.webp
 order: 2
 features:

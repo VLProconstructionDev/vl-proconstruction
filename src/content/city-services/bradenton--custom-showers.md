@@ -7,7 +7,7 @@ service: custom-showers
 published: true
 
 seoTitle: Custom Showers Bradenton, FL
-seoDescription: 'Custom shower builders in Bradenton, FL. Schluter waterproofing, frameless glass. $9,500–$22,000. Call for a free quote: (503) 781-4657'
+seoDescription: 'Custom shower builders in Bradenton, FL. Schluter waterproofing, frameless glass. $9,500–$22,000. Call for a free quote: (941) 203-1020'
 
 heroCity: Bradenton
 heroService: Custom Showers

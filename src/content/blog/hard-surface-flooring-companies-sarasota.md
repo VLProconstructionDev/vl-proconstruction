@@ -1,7 +1,7 @@
 ---
 title: 'Top 5 Flooring Companies in Sarasota, FL: 2026 Guide'
 seoTitle: 'Top 5 Flooring Companies Sarasota, FL'
-description: 'The 5 best hard surface flooring companies in Sarasota, FL: hardwood, LVP & tile installers. Call for a free quote: (503) 781-4657'
+description: 'The 5 best hard surface flooring companies in Sarasota, FL: hardwood, LVP & tile installers. Call for a free quote: (941) 203-1020'
 lede: 'We went through the flooring companies serving Sarasota and looked at the things that decide whether a floor lasts — who actually does the install, whether subfloor prep and moisture testing are written into the estimate, and what each one warranties on their own workmanship. Here''s the honest breakdown of the top 5, who each one is best for, and what a hard surface floor really costs here.'
 publishedAt: 2026-09-08
 author: Vlad Leytner
@@ -58,7 +58,7 @@ not a quote.
   <div><span class="fb-k">Best for</span><span class="fb-v">One crew for floors, tile, and wet areas</span></div>
   <div><span class="fb-k">Based in</span><span class="fb-v">Bradenton, FL</span></div>
   <div><span class="fb-k">Serves</span><span class="fb-v">Bradenton, Sarasota, Lakewood Ranch, Venice, Longboat&nbsp;Key, Siesta&nbsp;Key</span></div>
-  <div><span class="fb-k">Phone</span><span class="fb-v"><a href="tel:+15037814657">(503) 781-4657</a></span></div>
+  <div><span class="fb-k">Phone</span><span class="fb-v"><a href="tel:+19412031020">(941) 203-1020</a></span></div>
   <div><span class="fb-k">Pricing</span><span class="fb-v">$6–$18+/sq ft installed, itemized</span></div>
 </div>
 
@@ -223,5 +223,5 @@ hardwood, longer if the slab needs levelling or the material is still acclimatin
 
 If you want a floor quoted by the people who'll install it, we'll come measure, test the
 slab, and put every line item on paper. Get a [free estimate](/#estimate) or call
-[(503) 781-4657](tel:+15037814657). And if you go with one of the other four — ask them
+[(941) 203-1020](tel:+19412031020). And if you go with one of the other four — ask them
 the five questions. That's the part that actually matters.

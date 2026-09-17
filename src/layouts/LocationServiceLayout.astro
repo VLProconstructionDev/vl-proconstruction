@@ -283,7 +283,7 @@ const SHOW_RELATED = false;
               <svg class="w-5 h-5 md:w-7 md:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={ICONS[c.icon]} />
             </span>
             <div class="mt-6 md:mt-14">
-              <h2 class="text-[1.25rem] md:text-[clamp(1.35rem,1.55vw,1.6rem)] font-semibold tracking-[-0.03em]">{c.title}</h2>
+              <p class="text-[1.25rem] md:text-[clamp(1.35rem,1.55vw,1.6rem)] font-semibold tracking-[-0.03em]"><strong class="font-semibold">{c.title}</strong></p>
               <p class="mt-2.5 text-[14px] leading-[1.6] text-graycard max-w-[340px]">{c.body}</p>
             </div>
           </div>
@@ -453,8 +453,8 @@ const SHOW_RELATED = false;
   <!-- UI: service-page #service-area + the shared ServiceAreaMap component. -->
   <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
-      <div class="lg:max-w-[44%]">
-        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">{d.areaTitle}</h2>
+      <div class="lg:max-w-[min(calc(42vw-108px),calc(852px-8vw))]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,min(calc(3.95vw-10px),calc(81px-0.77vw)),4.75rem)]">{d.areaTitle}</h2>
         <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">{d.areaBody}</p>
       </div>
     </div>

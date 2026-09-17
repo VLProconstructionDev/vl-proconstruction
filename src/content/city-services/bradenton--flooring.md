@@ -7,7 +7,7 @@ service: flooring
 published: true
 
 seoTitle: Hard-Surface Flooring Bradenton, FL
-seoDescription: 'Hardwood, engineered & LVP flooring installers in Bradenton, FL. NWFA-spec installs. $6–$18/sq ft. Call for a free quote: (503) 781-4657'
+seoDescription: 'Hardwood, engineered & LVP flooring installers in Bradenton, FL. NWFA-spec installs. $6–$18/sq ft. Call for a free quote: (941) 203-1020'
 
 heroCity: Bradenton
 heroService: Flooring

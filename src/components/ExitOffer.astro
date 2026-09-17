@@ -448,8 +448,10 @@ const { auto = false } = Astro.props;
   .xo-tab:active {
     transform: translateY(1px) scale(0.99);
   }
-  /* Hidden while the popup it opens is on screen. */
-  .xo-tab.is-off {
+  /* Hidden while the popup it opens is on screen, and while the footer is in
+     view — down there the tab would land on top of the footer's bottom row. */
+  .xo-tab.is-off,
+  .xo-tab.is-atfoot {
     opacity: 0;
     pointer-events: none;
     transform: translateY(6px);
@@ -471,7 +473,8 @@ const { auto = false } = Astro.props;
     .xo-tab:hover {
       transform: none;
     }
-    .xo-tab.is-off {
+    .xo-tab.is-off,
+    .xo-tab.is-atfoot {
       transform: none;
     }
   }
@@ -576,6 +579,19 @@ const { auto = false } = Astro.props;
       tab.addEventListener('click', function () {
         show();
       });
+
+      // Fade the tab out once the footer reaches the bottom of the viewport —
+      // its fixed bottom-right slot is exactly where the footer's "Built by"
+      // pill sits, and the two would otherwise overlap at the end of the page.
+      var foot = document.querySelector('footer');
+      if (foot && 'IntersectionObserver' in window) {
+        new IntersectionObserver(
+          function (entries) {
+            tab.classList.toggle('is-atfoot', entries[0].isIntersecting);
+          },
+          { rootMargin: '0px 0px -8px 0px' }
+        ).observe(foot);
+      }
     }
 
     document.addEventListener('keydown', function (e) {
