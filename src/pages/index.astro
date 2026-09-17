@@ -57,7 +57,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
 
 <BaseLayout
   title="Custom Showers, Tile & Flooring in Bradenton & Sarasota Area"
-  description="Tile, flooring, custom showers, bath upgrades & subfloor prep for Bradenton homes and businesses. Call for a free quote: (503) 781-4657"
+  description="Tile, flooring, custom showers, bath upgrades & subfloor prep for Bradenton homes and businesses. Call for a free quote: (941) 203-1020"
   schema={schema}
   navTheme="dark"
 >
@@ -103,10 +103,6 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     .trust-pill:hover { border-color: rgba(245,75,37,.5); background-color: rgba(0,0,0,.03); }
     @media (prefers-reduced-motion: reduce) { .btn, .card-img, .card-arrow, .rev { transition: none; transform: none; } }
 
-    /* Hero service rotator — words fade/lift in and out */
-    .rotator-word { display: inline-block; transition: opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1); }
-    .rotator-word.is-out { opacity: 0; transform: translateY(0.18em); }
-    @media (prefers-reduced-motion: reduce) { .rotator-word { transition: none; } .rotator-word.is-out { opacity: 1; transform: none; } }
 
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -291,13 +287,13 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       <TrustPill />
 
       <!-- Heading + description -->
-      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,2.6rem)] sm:text-[clamp(2.6rem,6.8vw,6.05rem)] text-center">
+      <div class="font-semibold normal-case leading-[1.06] sm:leading-[1.02] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(2.2rem,9.4vw,3.1rem)] sm:text-[clamp(3.2rem,6.1vw,5.4rem)] text-center text-balance">
         <h1>
-          <span>Sarasota <br class="sm:hidden" />& Bradenton Area</span><br />
-          <span class="text-brand flex items-center justify-center min-h-[1.06em] sm:min-h-0 sm:block"><span id="heroRotator" class="rotator-word">Custom Showers</span></span>
+          Sarasota <br class="sm:hidden" />&amp; Bradenton<br />
+          Remodeling Experts<br />
+          Bathroom / Tile / Flooring
         </h1>
-        <div class="flex flex-col items-center gap-3 sm:gap-5">
-          <span>Remodeling Experts</span>
+        <div class="flex flex-col items-center gap-3 sm:gap-5 mt-5 sm:mt-6">
           <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.45] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">
             We help homeowners and businesses with the design and installation of custom showers, tile, natural stone, and flooring across the Sarasota and Bradenton area.
           </p>
@@ -308,7 +304,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       <div class="flex flex-col items-center gap-8">
         <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
           <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
-          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(503) 781-4657</a>
+          <a href="tel:+19412031020" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(941) 203-1020</a>
         </div>
 
         <!-- Bottom row: stats on the left, the marks we build to on the right.
@@ -360,7 +356,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
   <section id="services" class="bg-white" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[90px] pb-10 lg:pb-12">
       <div class="mx-auto max-w-[1000px] flex flex-col items-center text-center gap-5">
-        <h2 class="font-semibold capitalize text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.9rem,7.5vw,5.75rem)]">Custom Home Additions</h2>
+        <h2 class="font-semibold normal-case text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.4rem,6vw,4.6rem)] text-balance">What We Do on the Gulf Coast</h2>
         <p class="text-[13.5px] sm:text-[clamp(0.95rem,1.15vw,1.05rem)] tracking-[-0.03em] text-graydesc max-w-[900px]">
           Explore our custom showers, tile, natural stone, and flooring solutions for residential and commercial spaces, built to last.
         </p>
@@ -408,7 +404,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       </div>
       <div class="mt-12 lg:mt-14 flex justify-center">
         <a href="/services/" class="btn inline-flex items-center gap-2 text-[14px] font-semibold capitalize tracking-[-0.01em] text-ink underline decoration-black/25 underline-offset-[6px] transition-colors hover:text-brand hover:decoration-brand">
-          Explore All Home Additions
+          Explore All Services
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -531,7 +527,7 @@ const schema = [websiteSchema(), faqSchema(faqs)];
       </div>
       <!-- TODO: real phone number -->
       <div class="mt-4 sm:mt-6 flex justify-center">
-        <a href="tel:+15037814657" class="btn inline-flex items-center justify-center px-2 py-2 text-[16px] sm:text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
+        <a href="tel:+19412031020" class="btn inline-flex items-center justify-center px-2 py-2 text-[16px] sm:text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
           Get a Free Design Consultation
         </a>
       </div>
@@ -711,8 +707,8 @@ const schema = [websiteSchema(), faqSchema(faqs)];
 
     <!-- Heading + copy -->
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
-      <div class="lg:max-w-[44%]">
-        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
+      <div class="lg:max-w-[min(calc(42vw-108px),calc(852px-8vw))]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,min(calc(3.95vw-10px),calc(81px-0.77vw)),4.75rem)]">
           Serving Bradenton, Sarasota<br />& the Gulf Coast
         </h2>
         <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
@@ -763,8 +759,8 @@ const schema = [websiteSchema(), faqSchema(faqs)];
     <div class="bl-sec mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pb-20 lg:pb-[110px]">
 
       <div class="bl-head flex flex-wrap items-center justify-between gap-6">
-        <h2 class="font-bold capitalize text-ink leading-[1.02] tracking-[-0.03em] text-[clamp(2.1rem,5vw,4rem)]">
-          Remodeling advice &amp; insights
+        <h2 class="font-bold normal-case text-ink leading-[1.04] tracking-[-0.03em] text-[clamp(1.9rem,4.2vw,3.35rem)] max-w-[900px] text-balance">
+          Remodeling Guides for Bradenton &amp; Sarasota Homeowners
         </h2>
         <a href="/blog" class="btn bl-more">See more blogs</a>
       </div>
@@ -776,39 +772,9 @@ const schema = [websiteSchema(), faqSchema(faqs)];
   </section>
 
   <script is:inline>
-    // Shared reduced-motion flag used by the hero rotator, count-up, parallax,
+    // Shared reduced-motion flag used by the count-up, parallax,
     // and reviews carousel below.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Hero service rotator — cycles the brand-colored line through our core services.
-    // Starts on the visitor's first interaction (not on load): every swap repaints
-    // the biggest text on screen, and swaps BEFORE any input keep pushing the
-    // page's LCP later — Lighthouse/CrUX read the last swap, not the real load.
-    // Interaction ends LCP observation, so rotating after it is free; a fallback
-    // timer still starts the show for completely motionless visitors.
-    const rotator = document.getElementById('heroRotator');
-    if (rotator) {
-      const services = ['Custom Showers', 'Tile &amp; Natural Stone', 'Flooring'];
-      let si = 0;
-      let started = false;
-      const startRotator = () => {
-        if (started) return;
-        started = true;
-        setInterval(() => {
-          si = (si + 1) % services.length;
-          if (reduceMotion) { rotator.innerHTML = services[si]; return; }
-          rotator.classList.add('is-out');
-          setTimeout(() => {
-            rotator.innerHTML = services[si];
-            rotator.classList.remove('is-out');
-          }, 350);
-        }, 3000);
-      };
-      ['pointerdown', 'pointermove', 'wheel', 'touchstart', 'keydown', 'scroll'].forEach((ev) =>
-        window.addEventListener(ev, startRotator, { once: true, passive: true })
-      );
-      setTimeout(startRotator, 12000);
-    }
 
     // Count-up animation for stats (runs when each number scrolls into view)
     const nums = document.querySelectorAll('.stat-num');
