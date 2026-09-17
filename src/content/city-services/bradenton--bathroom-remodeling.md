@@ -5,6 +5,7 @@ city: bradenton
 service: bathroom-remodeling
 
 published: true
+template: article
 
 seoTitle: Bathroom Remodeling Bradenton, FL
 seoDescription: 'Full bathroom remodels in Bradenton, FL. Demo to tile, vanity & glass by one in-house crew. $18,000–$45,000. Free estimate: (503) 781-4657'
