@@ -191,6 +191,12 @@ const cityServices = defineCollection({
       .default([]),
 
     published: z.boolean().default(true),
+
+    // Which shell renders the page. `sections` is the original run of
+    // full-bleed bands; `article` is the long-form treatment used by
+    // /services/bathroom-remodeling and the waterproofing page — one prose
+    // column beside a sticky rail. The same frontmatter feeds both.
+    template: z.enum(['sections', 'article']).default('sections'),
   }),
 });
 
