@@ -409,6 +409,22 @@ const STARS = [0, 1, 2, 3, 4];
     .rv-card { flex-basis: calc((100% - 18px) / 2); }
   }
 
+  /* xl: panel and card row share one grid row. The track already fills that
+     row, so the panel has to stretch with it — left to `align-self: start` it
+     hugs its own content and stops short of the card bottoms whenever a review
+     runs long. It centres its body in whatever height the cards set. */
+  @media (min-width: 1280px) {
+    .rv-panel {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+    }
+    .rv-panel-body {
+      flex: 1;
+      align-content: center;
+    }
+  }
+
   /* Rating beside the badge column — the panel is wide enough for it once
      it either spans the page (below xl) or takes its 42% column (xl up). */
   @media (min-width: 640px) {
