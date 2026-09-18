@@ -6,6 +6,7 @@ import TrustPill from '@components/TrustPill.astro';
 import EstimateInline from '@components/EstimateInline.astro';
 import ServiceAreaMap from '@components/ServiceAreaMap.astro';
 import ArticleStyles from '@components/ArticleStyles.astro';
+import ReviewsSection from '@components/ReviewsSection.astro';
 
 const description =
   'Full bathroom remodeling in Bradenton & Sarasota, FL. Demo to final grout by one in-house crew, Manatee or Sarasota permits pulled. Free design consultation.';
@@ -462,6 +463,12 @@ const schema = [
       </div>
     </div>
   </div>
+
+  <!-- ===================== REVIEWS ===================== -->
+  <!-- Shared component — the same Google cards and trust panel the other
+       service pages carry, so the set never drifts page to page. White ground
+       breaks the article's #f6f5f3 column off from the black service area. -->
+  <ReviewsSection tone="white" pad="py-20 lg:py-[110px]" />
 
   <!-- ===================== SERVICE AREA ===================== -->
   <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
