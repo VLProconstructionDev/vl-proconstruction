@@ -1,9 +1,9 @@
 ---
 title: "Tile & Natural Stone Installation"
 shortName: "Tile & Natural Stone"
-description: "Precision tile and natural-stone installation for floors, walls, and feature surfaces — set flat, grouted clean, sealed properly."
+description: "Precision tile and natural-stone installation for floors, walls, and feature surfaces – set flat, grouted clean, sealed properly."
 seoTitle: "Tile & Natural Stone Installers"
-seoDescription: 'Porcelain, ceramic, marble, travertine & slate — substrate prep, lippage control, correct sealing. Call for a free quote: (941) 203-1020'
+seoDescription: 'Porcelain, ceramic, marble, travertine & slate – substrate prep, lippage control, correct sealing. Call for a free quote: (941) 203-1020'
 heroImage: /assets/images/gallery/gallery-1.webp
 order: 2
 features:
@@ -17,14 +17,14 @@ included:
     body: Level, waterproof, and uncouple the substrate before setting a single tile. Skipping this is why tile fails.
     image: /assets/images/demolition-studs.webp
   - title: Lippage control
-    body: Leveling clips, back-buttering, and full mortar coverage — flat surfaces, tight grout lines.
+    body: Leveling clips, back-buttering, and full mortar coverage – flat surfaces, tight grout lines.
     image: /assets/images/gallery/gallery-3.webp
   - title: Stone sealing
     body: Natural stone gets impregnating sealer applied and re-applied per the tile's absorption rate.
     image: /assets/images/custom-showers-marble-suite.webp
 faqs:
   - q: Do you work with natural stone?
-    a: Yes — marble, travertine, slate, limestone, and quartzite. Each stone gets the sealing schedule it needs.
+    a: Yes – marble, travertine, slate, limestone, and quartzite. Each stone gets the sealing schedule it needs.
   - q: Can you match an existing floor?
     a: Often. Send us photos of what's in place; we'll advise on match feasibility and tile sourcing.
 ---

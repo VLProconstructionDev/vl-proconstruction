@@ -7,7 +7,7 @@ publishedAt: 2026-09-04
 author: Vlad Leytner
 authorImage: /assets/images/blog/authors/vlad-leytner.webp
 heroImage: /assets/images/blog/tub-to-shower-hero.webp
-heroImageAlt: 'Alcove bathtub with a tiled surround and shower riser — the starting point for a tub-to-shower conversion'
+heroImageAlt: 'Alcove bathtub with a tiled surround and shower riser – the starting point for a tub-to-shower conversion'
 tags: ['showers', 'bradenton']
 relatedService: custom-showers
 relatedLocation: bradenton
@@ -18,7 +18,7 @@ time a family member said "be careful getting out of there," the idea shows up: 
 the tub, put in a real walk-in shower.
 
 It is the single most requested bathroom change we see across Bradenton, Lakewood Ranch,
-and Longboat Key — and for good reason. In a market where a lot of homes were built with
+and Longboat Key – and for good reason. In a market where a lot of homes were built with
 one guest tub nobody bathes in and a primary bath that eats floor space, converting a tub
 to a shower buys you daily comfort now and lets you stay in the house comfortably for
 decades.
@@ -61,7 +61,7 @@ shower, and the work runs in this order:
 3. **Framing and floor prep.** If you want curbless, the joist bay under the shower usually
    has to be recessed so the shower floor sits flush with the bathroom floor.
 4. **Waterproofing.** This is the whole ballgame. We install
-   [Schluter waterproofing systems](/services/custom-showers) — Kerdi board and membrane —
+   [Schluter waterproofing systems](/services/custom-showers) – Kerdi board and membrane –
    and flood-test the assembly before a single tile goes on.
 5. **Tile.** Walls, floor, niches, bench, and any pattern work.
 6. **Glass, fixtures, and walkthrough.** Frameless panel or door, trim, grout, seal, and a
@@ -78,12 +78,12 @@ and tile complexity. A full bathroom remodel typically runs 2–4 weeks.
 | Accessibility | Limited; a trip point | Walker- and wheelchair-friendly |
 | Floor prep | Fits most existing framing | Usually requires recessing the subfloor or a sloped mud bed |
 | Drain | Center point drain typical | Linear drain at wall or entry, single-plane slope |
-| Waterproofing demands | High | Higher — the bathroom floor is part of the system |
+| Waterproofing demands | High | Higher – the bathroom floor is part of the system |
 | Look | Traditional | Open, larger-feeling, modern |
 | Cost | Lower | Adds labor and framing work |
 | Best for | Second and guest baths | Primary baths, aging-in-place, long-term homes |
 
-Curbless isn't just an aesthetic choice on the Gulf Coast — it's the one that keeps the
+Curbless isn't just an aesthetic choice on the Gulf Coast – it's the one that keeps the
 bathroom usable if mobility changes. If you plan to stay in the house, it's worth the extra
 framing. For a guest bath on a tight budget, a low curb with a beveled edge is a reasonable
 compromise.
@@ -104,7 +104,7 @@ What actually moves the number on a Bradenton-area project:
   option if you want a specific look or a non-standard size.
 - **Curbless.** Recessing the framing and running a linear drain is real carpentry and real
   plumbing.
-- **Drain relocation.** Moving the drain more than a few inches — especially on a slab —
+- **Drain relocation.** Moving the drain more than a few inches – especially on a slab –
   adds meaningful cost.
 - **Tile size and pattern.** Large-format porcelain needs flatter substrate and lippage
   control. Herringbone, mosaic floors, and stone all add labor.
@@ -118,7 +118,7 @@ systems. They are fast and they work for some homeowners. They are not the same 
 tiled, flood-tested, curbless shower, and they should not be priced against one.
 
 > **Worth remembering:** budget by what's behind the tile, not by the tile. Waterproofing,
-> slope, and drain work are where a conversion is won or lost — and the cheapest quote is
+> slope, and drain work are where a conversion is won or lost – and the cheapest quote is
 > usually the one that skipped them.
 
 ## ADA dimensions worth knowing (even if you're not building to code)
@@ -133,12 +133,12 @@ and a 60-inch tub footprint is remarkably close to several of them.
 - [ ] **Transfer shower:** 36" × 36" clear inside, with a 36" minimum entry
 - [ ] **Standard roll-in shower:** 30" wide × 60" deep minimum, with a 60" wide entry
 - [ ] **Alternate roll-in shower:** 36" wide × 60" deep minimum, 36" entry at one end
-- [ ] **Threshold:** ½ inch maximum height — beveled, rounded, or vertical
+- [ ] **Threshold:** ½ inch maximum height – beveled, rounded, or vertical
 - [ ] **Controls:** no higher than 48 inches above the shower floor; on the entry side, not
       under the spray
 - [ ] **Grab bars:** blocking installed in the walls now, even if you skip the bars for now
 - [ ] **Seat:** a built-in bench, not a stool that slides
-- [ ] **Floor:** small-format tile or textured porcelain — more grout lines means more grip
+- [ ] **Floor:** small-format tile or textured porcelain – more grout lines means more grip
       when wet
 
 That last point matters more than people expect: a polished 24×48 porcelain floor is a hazard
@@ -154,8 +154,8 @@ plumbing work, and
 [local guidance for Sarasota and Manatee](https://www.loftinplumbing.com/bathroom-remodel-permits-sarasota-manatee)
 is clear that any drain, water line, or fixture relocation triggers a plumbing permit. Adding
 an exhaust fan, new lighting, or a GFCI circuit brings an electrical permit with it. Purely
-cosmetic work — new tile over sound substrate, paint, a vanity swap with no plumbing movement
-— generally does not.
+cosmetic work – new tile over sound substrate, paint, a vanity swap with no plumbing movement
+– generally does not.
 
 One thing worth flagging in 2026: Florida is currently operating under the 8th Edition (2023)
 Florida Building Code, with the
@@ -164,7 +164,7 @@ If your project runs into next year, permitting timing is worth a conversation w
 contractor.
 
 The practical advice: let your general contractor pull the permit and run the licensed trades
-under it. Unpermitted bathroom work has a way of surfacing at closing — an expensive surprise
+under it. Unpermitted bathroom work has a way of surfacing at closing – an expensive surprise
 in a market where a lot of homes change hands.
 
 ## How to tell a shower built to last
@@ -177,7 +177,7 @@ Ask any contractor these five questions. The answers tell you almost everything.
    a few hours that prevents a five-figure repair.
 3. **How are you handling the slope and the drain?** Single-plane slope to a linear drain, or
    a properly sloped mud bed to a center drain. Both work. Neither happens by accident.
-4. **Who does the tile?** Subcontracted crews vary wildly. Certifications matter here —
+4. **Who does the tile?** Subcontracted crews vary wildly. Certifications matter here –
    Schluter-certified installation and NTCA membership are real credentials, not badges.
 5. **What's the warranty, and on what?** Materials and workmanship should both be covered.
 
@@ -203,12 +203,12 @@ relocation add time on the front end, before tile starts.
 Keeping at least one tub in the house is the conventional advice, especially if families with
 young children are part of your buyer pool. In a retirement-heavy market like Lakewood Ranch
 or Longboat Key, converting a rarely-used primary-bath tub to a no-step shower usually helps
-rather than hurts — as long as another tub exists somewhere.
+rather than hurts – as long as another tub exists somewhere.
 
 ### Can you build a curbless shower on a concrete slab?
 
 Yes, and it's common in this area. On slab construction the approach is different than on a
-raised floor — often a recessed slab pour or a carefully engineered sloped assembly with a
+raised floor – often a recessed slab pour or a carefully engineered sloped assembly with a
 linear drain at the entry. It's a design conversation before it's a construction one.
 
 ### Do I need a permit to replace a bathtub with a shower in Bradenton?
@@ -239,7 +239,7 @@ decide what's possible long before tile selection does.
 
 VL Pro Construction serves Bradenton, Lakewood Ranch, Longboat Key, Sarasota, Palmetto,
 Parrish, Ellenton, Anna Maria, Holmes Beach, Siesta Key, Venice, and the surrounding Manatee
-and Sarasota County communities — you can [see everything we do here](/services).
+and Sarasota County communities – you can [see everything we do here](/services).
 
-[**Get a free in-home design consultation**](#estimate) — we'll review the space, walk you
+[**Get a free in-home design consultation**](#estimate) – we'll review the space, walk you
 through curbed vs. curbless options, and give you a straight estimate with no pressure.

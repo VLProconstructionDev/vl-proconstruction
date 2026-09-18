@@ -11,7 +11,7 @@ seoDescription: 'Custom shower builders in Sarasota, FL. Curbless entries, Schlu
 heroCity: Sarasota
 heroService: Custom Showers
 heroSubhead: >-
-  We build custom showers and wet rooms for Sarasota homeowners — Gulf Gate and
+  We build custom showers and wet rooms for Sarasota homeowners – Gulf Gate and
   Arlington Park ranches, Southside Village bungalows, and the condo towers
   downtown and out on the keys. Waterproofed to Schluter spec, flood-tested
   before a single tile goes down.
@@ -31,7 +31,7 @@ trust:
     title: Certified Installation
     body: >-
       Schluter®-certified crews. Every membrane is installed and flood-tested
-      for 24 hours to the manufacturer's written spec — the condition your
+      for 24 hours to the manufacturer's written spec – the condition your
       warranty actually depends on.
   - icon: crew
     title: In-House Crews
@@ -77,7 +77,7 @@ included:
   - title: Demolition & haul-away
     body: >-
       Floor and stair protection, negative-air dust control, tub or shower
-      removal down to studs and slab, and every scrap hauled off — through the
+      removal down to studs and slab, and every scrap hauled off – through the
       service elevator if your building requires it. We inspect the subfloor and
       frame before we quote the rebuild.
     image: /assets/images/demolition-studs.webp
@@ -94,7 +94,7 @@ included:
       Schluter Kerdi board waterproofing with sealed seams and a shower pan drain
   - title: Tile & stone setting
     body: >-
-      Large-format porcelain, mosaic, and natural stone set by hand — mitered
+      Large-format porcelain, mosaic, and natural stone set by hand – mitered
       edges, lighted niches, benches, and heated floors. Grout sealed before we
       call it done.
     image: /assets/images/gallery-showers/showers-gray-curbless-glass.webp
@@ -102,7 +102,7 @@ included:
       Curbless walk-in shower with gray stone tile and frameless glass
   - title: Frameless glass
     body: >-
-      Measured after the tile is set, not before — so the panels sit flush. We
+      Measured after the tile is set, not before – so the panels sit flush. We
       coordinate the fabricator, schedule the install, and are on site when it
       lands.
     image: /assets/images/gallery-showers/showers-glass-frameless.webp
@@ -118,13 +118,13 @@ project:
     A 1965 Gulf Gate ranch. The owners wanted the tub kept but the walk-in
     opened up on both sides of it, and the original terrazzo ran under all of
     it. Rather than break up the whole floor we cut only the pan openings,
-    sleeved the cast-iron drain, and built the slope into the pans — so the
+    sleeved the cast-iron drain, and built the slope into the pans – so the
     entries sit flush and the terrazzo outside the bathroom never got touched.
   # TODO(client): shared placeholder photo, also used on the Bradenton page.
   # Swap for a real Sarasota job when we have one.
   image: /assets/images/project-bradenton-custom-showers.webp
   imageAlt: >-
-    Master bath in Gulf Gate, Sarasota — a freestanding tub against a blue
+    Master bath in Gulf Gate, Sarasota – a freestanding tub against a blue
     hexagon tile feature wall, flanked by two arched, marble-lined walk-in
     shower entries
 
@@ -166,8 +166,8 @@ process:
   - title: Design
     body: >-
       We finalize tile layout, niche and bench placement, slope, and drain
-      type, then pull the permit — and, in a condo, file the association
-      packet and book the elevator — before demo starts.
+      type, then pull the permit – and, in a condo, file the association
+      packet and book the elevator – before demo starts.
     image: /assets/images/process-2.webp
   - title: Build
     body: >-
@@ -179,7 +179,7 @@ process:
 
 pricingTitle: What does a custom shower cost in Sarasota, FL?
 pricingIntro: >-
-  Every bathroom is different — but here's an honest range based on real
+  Every bathroom is different – but here's an honest range based on real
   projects we've completed across Sarasota and Sarasota County.
 pricing:
   - eyebrow: Alcove Replacement
@@ -214,7 +214,7 @@ pricing:
       - Reframing and plumbing relocation
 areaTitle: Sarasota and the rest of Sarasota County
 areaBody: >-
-  We work the whole Suncoast — downtown Sarasota, St. Armands, and Southside
+  We work the whole Suncoast – downtown Sarasota, St. Armands, and Southside
   Village, out to Siesta Key and Longboat Key on the water, south through Gulf
   Gate, Palmer Ranch, Osprey, and Nokomis to Venice, and east to Lakewood Ranch
   and University Park.
@@ -222,7 +222,7 @@ areaBody: >-
 faqs:
   - q: Do I need a permit for a shower remodel in Sarasota?
     a: >-
-      Yes, for anything that touches plumbing, framing, or waterproofing — which
+      Yes, for anything that touches plumbing, framing, or waterproofing – which
       a custom shower always does. We pull it. Inside city limits that's City of
       Sarasota Development Services; in Gulf Gate, Siesta Key, Palmer Ranch and
       the rest of unincorporated Sarasota County it's the county's Building
@@ -232,7 +232,7 @@ faqs:
   - q: My condo association or HOA needs approval. Can you handle that?
     a: >-
       This is the part of a Sarasota job that catches people out, so we handle
-      it. You get the packet buildings here ask for — scope of work, our license
+      it. You get the packet buildings here ask for – scope of work, our license
       and liability certificate naming the association as additional insured,
       posted work hours, and the elevator and corridor protection plan. Downtown
       towers and most Siesta Key and Longboat buildings also cap renovation
@@ -252,7 +252,7 @@ faqs:
       with a zippered barrier, run negative-air dust control, protect the path
       in and out, and clean the work area every afternoon. Water is only shut
       off for a few hours on the plumbing day, and we tell you which day that is
-      at the start — in a condo we book that shutoff with the building.
+      at the start – in a condo we book that shutoff with the building.
   - q: How long does a Sarasota shower take start to finish?
     a: >-
       Budget three to four weeks from signed quote to finished glass. Permitting
@@ -270,7 +270,7 @@ faqs:
       final invoice.
   - q: Can you build a curbless shower in a mid-century Sarasota home?
     a: >-
-      Usually — but we scope the drain first. Gulf Gate and Arlington Park homes
+      Usually – but we scope the drain first. Gulf Gate and Arlington Park homes
       from the 1950s and 60s often have cast-iron waste lines and terrazzo
       floors, so we camera the line and read the slab before promising a flush
       entry. When the slab allows it we cut only the pan opening and build the
@@ -283,7 +283,7 @@ related:
     blurb: Floors, walls, backsplashes, and slab work across Sarasota County.
   - label: Flooring
     href: /services/flooring
-    blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
+    blurb: Hardwood, LVP, and porcelain over slab – moisture-tested first.
   - label: All custom shower work
     href: /services/custom-showers
     blurb: How we build showers everywhere on the Suncoast, not just Sarasota.

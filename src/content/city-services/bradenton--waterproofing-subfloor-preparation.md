@@ -13,7 +13,7 @@ seoDescription: 'Shower waterproofing & subfloor prep in Bradenton, FL. Schluter
 heroCity: Bradenton
 heroService: Waterproofing & Subfloor Prep
 heroSubhead: >-
-  We build the layer nobody photographs — the one that decides whether a
+  We build the layer nobody photographs – the one that decides whether a
   Bradenton bathroom or floor lasts five years or twenty-five. Subfloor
   repaired and levelled, membrane bonded and sealed at every corner, and a
   24-hour flood test before a single tile is set.
@@ -38,7 +38,7 @@ trust:
   - icon: check
     title: Certified Assemblies
     body: >-
-      Schluter®-certified crews, installed to the manufacturer's written spec —
+      Schluter®-certified crews, installed to the manufacturer's written spec –
       the condition their system warranty actually depends on, not a
       close-enough version of it.
   - icon: map
@@ -63,7 +63,7 @@ localPoints:
       field, so a hairline in the concrete doesn't telegraph into your floor.
   - title: What salt air and humidity do behind the wall
     body: >-
-      Tile and grout are the wear layer, not the waterproofing — every shower is
+      Tile and grout are the wear layer, not the waterproofing – every shower is
       expected to get wet behind the tile. In this climate an assembly that
       isn't continuous at the corners, seams, and drain flange doesn't dry out
       between uses; it rots the framing quietly for a decade.
@@ -80,7 +80,7 @@ included:
   # Same four cards as /services/waterproofing-subfloor-preparation, rewritten for Bradenton.
   - title: Inspection & moisture testing
     body: >-
-      Before anything is ordered we check the substrate — flatness across the
+      Before anything is ordered we check the substrate – flatness across the
       room, deflection underfoot, framing opened where rot is suspected, and
       relative humidity in the slab where a moisture-sensitive floor is going
       down.
@@ -101,7 +101,7 @@ included:
     body: >-
       A continuous bonded membrane across the pan, walls, and curb, tied in at
       every corner, seam, and pipe penetration, with the drain flange bonded to
-      the sheet rather than caulked to it — then plugged and flood-tested for 24
+      the sheet rather than caulked to it – then plugged and flood-tested for 24
       hours.
     image: /assets/images/gallery-showers/showers-waterproofing-kerdi.webp
     alt: >-
@@ -124,8 +124,8 @@ project:
   budget: $6,200
   story: >-
     920 square feet of main living area in a 2006 slab home, prepped for
-    large-format porcelain. The in-situ probes came back at 88% RH — well over
-    the adhesive's limit — so the slab got a moisture-mitigation coating before
+    large-format porcelain. The in-situ probes came back at 88% RH – well over
+    the adhesive's limit – so the slab got a moisture-mitigation coating before
     anything else. Two seasonal cracks were bridged with crack-isolation
     membrane, then the whole floor was levelled to 1/8" in 10 feet and handed
     over to the tile crew flat.
@@ -222,14 +222,14 @@ pricing:
       - Uncoupling or crack-isolation membrane
 areaTitle: Bradenton and the rest of Manatee County
 areaBody: >-
-  Bradenton is home base, and we work the whole Suncoast from here — Palmetto
+  Bradenton is home base, and we work the whole Suncoast from here – Palmetto
   and Ellenton to the north, Lakewood Ranch and Parrish east of I-75, and out to
   Anna Maria, Holmes Beach, and Longboat Key on the water.
 
 faqs:
   - q: Is sealed grout enough to keep a shower from leaking?
     a: >-
-      No. Grout and tile are the wear layer, not the waterproofing — both are
+      No. Grout and tile are the wear layer, not the waterproofing – both are
       porous, and every shower assembly is expected to get wet behind the tile.
       What keeps water out of the framing is a continuous bonded membrane
       underneath, sealed at the corners, seams, and drain. If that layer is
@@ -246,7 +246,7 @@ faqs:
     a: >-
       We plug the drain, fill the finished pan with water, and leave it 24
       hours, marking the level at the start and checking it at the end. Yes,
-      every shower — and we photograph both ends of the hold. It's the only way
+      every shower – and we photograph both ends of the hold. It's the only way
       to know a pan is watertight before tile buries it, and where the job is
       permitted we time it so the Manatee County or City of Bradenton inspection
       lands on the same visit.
@@ -263,10 +263,10 @@ faqs:
       far flatter than most Florida slabs come out of the ground. We measure the
       room first, and if it misses, we flatten it with patch or self-levelling
       underlayment. Setting large tile on a wavy substrate is what produces
-      lippage — the edges you catch with a bare foot.
+      lippage – the edges you catch with a bare foot.
   - q: Do you test slab moisture before a floor goes down?
     a: >-
-      On slab-on-grade, yes — and in Bradenton that's nearly every home.
+      On slab-on-grade, yes – and in Bradenton that's nearly every home.
       Hardwood, LVP, and most adhesives have a moisture limit, and a slab here
       can read high years after the pour. We run in-situ relative humidity
       probes per ASTM F2170, and if the number is over the limit we specify a
@@ -275,7 +275,7 @@ faqs:
     a: >-
       You get a photo of it and a price for the repair before we carry on. Rot
       means cutting back to sound framing, replacing the sheathing, and finding
-      out where the water came from — a failed pan, a leaking supply line, or a
+      out where the water came from – a failed pan, a leaking supply line, or a
       toilet flange that's been weeping for years. In older Bradenton baths it's
       the most common thing we find under a mortar-bed floor. Tiling over it
       only hides it for a season.
@@ -285,7 +285,7 @@ related:
     blurb: Curbless entries, Schluter® waterproofing, and frameless glass.
   - label: Flooring in Bradenton
     href: /services/flooring/bradenton-fl
-    blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
+    blurb: Hardwood, LVP, and porcelain over slab – moisture-tested first.
   - label: All waterproofing & prep work
     href: /services/waterproofing-subfloor-preparation
     blurb: How we build the layer under the tile everywhere on the Suncoast.

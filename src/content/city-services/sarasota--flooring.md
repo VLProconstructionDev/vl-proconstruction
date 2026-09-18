@@ -13,7 +13,7 @@ seoDescription: 'Hardwood, engineered & LVP flooring installers in Sarasota, FL.
 heroCity: Sarasota
 heroService: Flooring
 heroSubhead: >-
-  We install hardwood, engineered wood, and LVP for Sarasota homeowners — Gulf
+  We install hardwood, engineered wood, and LVP for Sarasota homeowners – Gulf
   Gate and Arlington Park ranches, Palmer Ranch villas, and the condo towers
   downtown and out on the keys. Slab moisture tested and logged before a single
   plank leaves the box.
@@ -33,7 +33,7 @@ trust:
     title: Warranty Stays Intact
     body: >-
       Moisture readings logged, acclimation timed, expansion gaps preserved,
-      underlayment matched to the manufacturer's spec — the conditions your
+      underlayment matched to the manufacturer's spec – the conditions your
       floor's warranty actually depends on.
   - icon: crew
     title: In-House Crews
@@ -53,7 +53,7 @@ localPoints:
     body: >-
       Gulf Coast slabs push moisture year-round, and it's the number one reason
       wood floors cup and fail here. We test and log the slab before we
-      recommend a product — sometimes that means engineered or LVP instead of
+      recommend a product – sometimes that means engineered or LVP instead of
       solid hardwood, and we'll say so.
   - title: Condo floors have a sound rating to hit
     body: >-
@@ -82,7 +82,7 @@ included:
     body: >-
       Solid and engineered hardwood to NWFA spec, acclimation logged. On most
       Sarasota slabs engineered oak over a moisture membrane is the safer
-      call — same look, no cupping.
+      call – same look, no cupping.
     image: /assets/images/hsf-hardwood.webp
     alt: >-
       Gray-toned engineered hardwood flooring installed through a home landing
@@ -96,7 +96,7 @@ included:
     alt: Light luxury vinyl plank flooring running down a bright office hallway
   - title: Floor Preparation
     body: >-
-      Gulf Coast slabs push moisture year-round — the top reason wood floors
+      Gulf Coast slabs push moisture year-round – the top reason wood floors
       fail here. We test the slab first, then prep: adhesive removal, subfloor
       repair, self-levelling, flattening.
     image: /assets/images/hsf-floor-prep.webp
@@ -108,7 +108,7 @@ project:
   timeline: 6 working days
   budget: $13,900
   story: >-
-    A Palmer Ranch villa — 1,240 sq ft of tile and carpet out, wide-plank oak
+    A Palmer Ranch villa – 1,240 sq ft of tile and carpet out, wide-plank oak
     in, dining room through the hallway in one continuous run. The old tile had
     been set straight on the slab with no membrane, so the thinset came off and
     the floor was re-levelled first. The slab then read too wet for solid oak,
@@ -169,7 +169,7 @@ process:
 
 pricingTitle: What does new flooring cost in Sarasota, FL?
 pricingIntro: >-
-  Every floor is different — but here's an honest range based on real projects
+  Every floor is different – but here's an honest range based on real projects
   we've completed across Sarasota and Sarasota County. Prices are installed, per
   square foot, labor and materials.
 pricing:
@@ -205,7 +205,7 @@ pricing:
       - Full trim carpentry package
 areaTitle: Sarasota and the rest of Sarasota County
 areaBody: >-
-  We work the whole Suncoast — downtown Sarasota, St. Armands, and Southside
+  We work the whole Suncoast – downtown Sarasota, St. Armands, and Southside
   Village, out to Siesta Key and Longboat Key on the water, south through Gulf
   Gate, Palmer Ranch, Osprey, and Nokomis to Venice, and east to Lakewood Ranch
   and University Park.
@@ -217,7 +217,7 @@ faqs:
       plumbing, framing, or structure is a finish, and both City of Sarasota
       Development Services and Sarasota County treat it that way. If the job
       includes subfloor repair, a wall coming out, or post-flood structural
-      work, it needs a permit — and we pull it. We tell you which side of that
+      work, it needs a permit – and we pull it. We tell you which side of that
       line your project falls on at the first visit, in writing.
   - q: My condo association or HOA needs approval. Can you handle that?
     a: >-
@@ -238,7 +238,7 @@ faqs:
       underlayment, trim, and haul-away.
   - q: Can I put solid hardwood over a slab in Sarasota?
     a: >-
-      Sometimes — but the slab decides, not the catalogue. Solid wood over a
+      Sometimes – but the slab decides, not the catalogue. Solid wood over a
       Gulf Coast slab needs either a very low moisture reading or a plywood
       sleeper system, which adds height and cost. We test first and show you the
       numbers. On most Sarasota slabs engineered oak over a moisture membrane is
@@ -246,7 +246,7 @@ faqs:
   - q: Can you put flooring over terrazzo?
     a: >-
       Usually, yes. Terrazzo is flat and stable, which makes it a good
-      substrate — a floating floor can often go straight over it with the right
+      substrate – a floating floor can often go straight over it with the right
       underlayment, and a glue-down needs it scarified so the adhesive can bond.
       We check for cracks and old patches first, and in Arlington Park and
       Southside Village we'll tell you when the terrazzo is worth restoring

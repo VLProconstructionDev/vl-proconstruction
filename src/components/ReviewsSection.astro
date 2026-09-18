@@ -49,7 +49,7 @@ const STARS = [0, 1, 2, 3, 4];
           id="rvTrack"
           tabindex="0"
           role="region"
-          aria-label="Customer reviews — scroll for more"
+          aria-label="Customer reviews – scroll for more"
         >
           {reviews.map((r) => (
             <li class="rv-card">
@@ -407,6 +407,22 @@ const STARS = [0, 1, 2, 3, 4];
      the affordance for the swipe. */
   @media (min-width: 768px) {
     .rv-card { flex-basis: calc((100% - 18px) / 2); }
+  }
+
+  /* xl: panel and card row share one grid row. The track already fills that
+     row, so the panel has to stretch with it — left to `align-self: start` it
+     hugs its own content and stops short of the card bottoms whenever a review
+     runs long. It centres its body in whatever height the cards set. */
+  @media (min-width: 1280px) {
+    .rv-panel {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+    }
+    .rv-panel-body {
+      flex: 1;
+      align-content: center;
+    }
   }
 
   /* Rating beside the badge column — the panel is wide enough for it once

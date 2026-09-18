@@ -12,7 +12,7 @@ seoDescription: 'Custom shower builders in Bradenton, FL. Schluter waterproofing
 heroCity: Bradenton
 heroService: Custom Showers
 heroSubhead: >-
-  We build custom showers and wet rooms for Bradenton homeowners — Palma Sola
+  We build custom showers and wet rooms for Bradenton homeowners – Palma Sola
   bungalows, West Bradenton ranches, and the newer builds out past I-75.
   Waterproofed to Schluter spec, flood-tested before a single tile goes down.
 stats:
@@ -31,7 +31,7 @@ trust:
     title: Certified Installation
     body: >-
       Schluter®-certified crews. Every membrane is installed and flood-tested
-      for 24 hours to the manufacturer's written spec — the condition your
+      for 24 hours to the manufacturer's written spec – the condition your
       warranty actually depends on.
   - icon: crew
     title: In-House Crews
@@ -89,7 +89,7 @@ included:
       Schluter Kerdi board waterproofing with sealed seams and a shower pan drain
   - title: Tile & stone setting
     body: >-
-      Large-format porcelain, mosaic, and natural stone set by hand — mitered
+      Large-format porcelain, mosaic, and natural stone set by hand – mitered
       edges, lighted niches, benches, and heated floors. Grout sealed before we
       call it done.
     image: /assets/images/gallery-showers/showers-gray-curbless-glass.webp
@@ -97,7 +97,7 @@ included:
       Curbless walk-in shower with gray stone tile and frameless glass
   - title: Frameless glass
     body: >-
-      Measured after the tile is set, not before — so the panels sit flush. We
+      Measured after the tile is set, not before – so the panels sit flush. We
       coordinate the fabricator, schedule the install, and are on site when it
       lands.
     image: /assets/images/gallery-showers/showers-glass-frameless.webp
@@ -116,7 +116,7 @@ project:
     went.
   image: /assets/images/project-bradenton-custom-showers.webp
   imageAlt: >-
-    Master bath in Palma Sola, Bradenton — a freestanding tub against a blue
+    Master bath in Palma Sola, Bradenton – a freestanding tub against a blue
     hexagon tile feature wall, flanked by two arched, marble-lined walk-in
     shower entries
 
@@ -171,7 +171,7 @@ process:
 
 pricingTitle: What does a custom shower cost in Bradenton, FL?
 pricingIntro: >-
-  Every bathroom is different — but here's an honest range based on real
+  Every bathroom is different – but here's an honest range based on real
   projects we've completed across Bradenton and Manatee County.
 pricing:
   - eyebrow: Alcove Replacement
@@ -206,14 +206,14 @@ pricing:
       - Reframing and plumbing relocation
 areaTitle: Bradenton and the rest of Manatee County
 areaBody: >-
-  Bradenton is home base, and we work the whole Suncoast from here — Palmetto
+  Bradenton is home base, and we work the whole Suncoast from here – Palmetto
   and Ellenton to the north, Lakewood Ranch and Parrish east of I-75, and out to
   Anna Maria, Holmes Beach, and Longboat Key on the water.
 
 faqs:
   - q: Do I need a permit for a shower remodel in Bradenton?
     a: >-
-      Yes, for anything that touches plumbing, framing, or waterproofing — which
+      Yes, for anything that touches plumbing, framing, or waterproofing – which
       a custom shower always does. We pull it. Inside city limits that's the
       City of Bradenton Building Department; in unincorporated Bradenton it's
       Manatee County Building & Development Services. Review typically takes 2–4
@@ -221,7 +221,7 @@ faqs:
       never adds a day to your build.
   - q: My HOA or condo association needs approval. Can you handle that?
     a: >-
-      We'll give you the packet most Bradenton associations ask for — scope of
+      We'll give you the packet most Bradenton associations ask for – scope of
       work, our license and liability certificate, working hours, and the
       elevator or stairwell protection plan. River Strand, Perico Bay, and most
       Longboat Key buildings also cap work hours and require a certificate
@@ -268,7 +268,7 @@ related:
     blurb: Floors, walls, backsplashes, and slab work across Manatee County.
   - label: Flooring in Bradenton
     href: /services/flooring/bradenton-fl
-    blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
+    blurb: Hardwood, LVP, and porcelain over slab – moisture-tested first.
   - label: All custom shower work
     href: /services/custom-showers
     blurb: How we build showers everywhere on the Suncoast, not just Bradenton.
