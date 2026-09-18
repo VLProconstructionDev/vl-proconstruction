@@ -13,7 +13,7 @@ seoDescription: 'Full bathroom remodels in Bradenton, FL. Demo to tile, vanity &
 heroCity: Bradenton
 heroService: Bathroom Remodeling
 heroSubhead: >-
-  We remodel whole bathrooms for Bradenton homeowners — Palma Sola bungalows,
+  We remodel whole bathrooms for Bradenton homeowners – Palma Sola bungalows,
   West Bradenton ranches, and the newer builds out past I-75. One crew from
   demolition to the final grout line, with the waterproofing flood-tested
   before any tile goes on.
@@ -39,7 +39,7 @@ trust:
     title: Waterproofed and Flood-Tested
     body: >-
       Every shower or tub assembly is built to Schluter® spec and flood-tested
-      for 24 hours before tile — the condition your warranty actually depends
+      for 24 hours before tile – the condition your warranty actually depends
       on, documented with photos.
   - icon: map
     title: Based in Bradenton
@@ -65,7 +65,7 @@ localPoints:
     body: >-
       A remodel here fails at the ceiling as often as the floor. We size the
       exhaust fan to the room, duct it outside rather than into the attic, and
-      put it on a timer — the difference between a bathroom that dries and one
+      put it on a timer – the difference between a bathroom that dries and one
       that grows mold behind new paint.
 localImage: /assets/images/card-bath.webp
 localImageAlt: >-
@@ -97,7 +97,7 @@ included:
       Tub alcove lined floor to ceiling in large-format marble-look porcelain
   - title: Tile & surfaces
     body: >-
-      Floor, wall, and feature tile set to a layout we dry-lay first — porcelain,
+      Floor, wall, and feature tile set to a layout we dry-lay first – porcelain,
       marble, and large-format slab, with tight joints, mitered edges, and
       grout sealed before we call it done.
     image: /assets/images/gallery-tile-2026/tile-2.webp
@@ -121,14 +121,14 @@ project:
   budget: $31,800
   story: >-
     A 1972 hall bath, 46 square feet, gutted to the studs. The owners kept the
-    tub — it was the only bath the kids used — but everything around it changed:
+    tub – it was the only bath the kids used – but everything around it changed:
     marble-look porcelain to the ceiling, a floating vanity to buy back floor
     space, and new rough-in for the mirror light. The cast-iron waste line was
     original and had to be cut out, which is where four of the twenty-four days
     went.
   image: /assets/images/gallery-tile-2026/tile-6.webp
   imageAlt: >-
-    Remodeled hall bath in Bayshore Gardens, Bradenton — marble-look porcelain
+    Remodeled hall bath in Bayshore Gardens, Bradenton – marble-look porcelain
     tub surround, floating navy vanity, and a round black-framed mirror
 
 reviews:
@@ -165,7 +165,7 @@ process:
     body: >-
       We measure the room, open an access point to see what's behind the wall,
       talk through layout, tile, and fixtures, and leave you with a written
-      line-item price — no allowances that move later.
+      line-item price – no allowances that move later.
     image: /assets/images/process-plan.webp
   - title: Design
     body: >-
@@ -183,7 +183,7 @@ process:
 
 pricingTitle: What does a bathroom remodel cost in Bradenton, FL?
 pricingIntro: >-
-  Every bathroom is different — but here's an honest range based on real
+  Every bathroom is different – but here's an honest range based on real
   projects we've completed across Bradenton and Manatee County. Prices include
   labor, materials, permit fees, and haul-away.
 pricing:
@@ -219,14 +219,14 @@ pricing:
       - Reframing, window, and door changes
 areaTitle: Bradenton and the rest of Manatee County
 areaBody: >-
-  Bradenton is home base, and we work the whole Suncoast from here — Palmetto
+  Bradenton is home base, and we work the whole Suncoast from here – Palmetto
   and Ellenton to the north, Lakewood Ranch and Parrish east of I-75, and out to
   Anna Maria, Holmes Beach, and Longboat Key on the water.
 
 faqs:
   - q: Do I need a permit to remodel a bathroom in Bradenton?
     a: >-
-      Yes, for anything that moves plumbing or electrical — which a full remodel
+      Yes, for anything that moves plumbing or electrical – which a full remodel
       always does. We pull it. Inside city limits that's the City of Bradenton
       Building Department; in unincorporated Bradenton it's Manatee County
       Building & Development Services. Review typically takes 2–4 business days,
@@ -266,7 +266,7 @@ faqs:
       can decide whether the new layout is worth it before anything is cut.
   - q: My HOA or condo association needs approval. Can you handle that?
     a: >-
-      We'll give you the packet most Bradenton associations ask for — scope of
+      We'll give you the packet most Bradenton associations ask for – scope of
       work, our license and liability certificate, working hours, and the
       elevator or stairwell protection plan. River Strand, Perico Bay, and most
       Longboat Key buildings also cap work hours and require a certificate
@@ -278,7 +278,7 @@ faqs:
       Bradenton baths built before the mid-90s often hide a failed mortar bed or
       a supply line that's been weeping for years, and it's the single most
       common surprise we find. We cut back to sound framing, replace the
-      sheathing, and fix the source — tiling over it only hides it for a season.
+      sheathing, and fix the source – tiling over it only hides it for a season.
 related:
   - label: Custom Showers in Bradenton
     href: /services/custom-showers/bradenton-fl

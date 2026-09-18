@@ -11,7 +11,7 @@ seoDescription: 'Tile & natural-stone installers in Sarasota, FL. Porcelain, mar
 heroCity: Sarasota
 heroService: Tile & Natural Stone
 heroSubhead: >-
-  We set tile and natural stone for Sarasota homeowners — Gulf Gate and
+  We set tile and natural stone for Sarasota homeowners – Gulf Gate and
   Arlington Park ranches, Southside Village bungalows, and the condo towers
   downtown and out on the keys. Slab moisture tested, sound ratings met, every
   stone sealed to its absorption rate.
@@ -31,7 +31,7 @@ trust:
     title: Flat Floors, Tight Lines
     body: >-
       Leveling clips, back-buttering, and full mortar coverage on every tile.
-      We hold lippage inside the TCNA allowance for the format we're setting —
+      We hold lippage inside the TCNA allowance for the format we're setting –
       not "close enough by eye."
   - icon: crew
     title: In-House Crews
@@ -57,12 +57,12 @@ localPoints:
     body: >-
       Gulf Gate, Arlington Park, and Southside Village homes sit on 1950s–60s
       slabs, often with original terrazzo or old vinyl and mastic. Terrazzo can
-      be tiled over — but only after it's scarified and bonded properly, and
+      be tiled over – but only after it's scarified and bonded properly, and
       only once we know what's under the vinyl.
   - title: Stone sealed for humidity and salt air
     body: >-
       Marble, travertine, and limestone each get an impregnating sealer on their
-      own schedule, based on absorption rate — the difference between stone that
+      own schedule, based on absorption rate – the difference between stone that
       patinas and stone that stains a mile from the Gulf.
 localImage: /assets/images/gallery-tile-2026/tile-2.webp
 localImageAlt: >-
@@ -159,7 +159,7 @@ process:
   - title: Design
     body: >-
       We dry-lay the pattern, set the starting line off the longest sightline,
-      confirm transitions and trim, then — in a condo — file the association
+      confirm transitions and trim, then – in a condo – file the association
       packet with the sound rating and book the elevator before tile is
       ordered.
     image: /assets/images/process-2.webp
@@ -173,7 +173,7 @@ process:
 
 pricingTitle: What does tile installation cost in Sarasota, FL?
 pricingIntro: >-
-  Every floor is different — but here's an honest range based on real projects
+  Every floor is different – but here's an honest range based on real projects
   we've completed across Sarasota and Sarasota County. Prices are installed,
   per square foot, labor and materials.
 pricing:
@@ -209,7 +209,7 @@ pricing:
       - Stone-specific setting mortar and grout
 areaTitle: Sarasota and the rest of Sarasota County
 areaBody: >-
-  We work the whole Suncoast — downtown Sarasota, St. Armands, and Southside
+  We work the whole Suncoast – downtown Sarasota, St. Armands, and Southside
   Village, out to Siesta Key and Longboat Key on the water, south through Gulf
   Gate, Palmer Ranch, Osprey, and Nokomis to Venice, and east to Lakewood Ranch
   and University Park.
@@ -221,12 +221,12 @@ faqs:
       touch plumbing, framing, or waterproofing is a finish, and both City of
       Sarasota Development Services and Sarasota County treat it that way. The
       moment the job includes a shower, a relocated drain, or structural work,
-      it needs a permit — and we pull it. We tell you which side of that line
+      it needs a permit – and we pull it. We tell you which side of that line
       your project falls on at the first visit, in writing.
   - q: My condo association or HOA needs approval. Can you handle that?
     a: >-
       Yes, and in Sarasota this is usually the real gate, not the permit. You
-      get the packet buildings here ask for — scope of work, our license and
+      get the packet buildings here ask for – scope of work, our license and
       liability certificate naming the association as additional insured, posted
       work hours, and the elevator and corridor protection plan. Hard surfaces
       above the ground floor also trigger a sound-transmission minimum, so we
@@ -250,7 +250,7 @@ faqs:
       biggest reason a tile floor here lasts.
   - q: Can you tile over the terrazzo in my mid-century Sarasota home?
     a: >-
-      Often, yes — terrazzo is a sound substrate, but it's dense and sealed, so
+      Often, yes – terrazzo is a sound substrate, but it's dense and sealed, so
       nothing bonds to it as-is. It has to be mechanically scarified or covered
       with an uncoupling membrane, and any soft spots or old patches dealt with
       first. We'll also tell you honestly when the terrazzo is worth restoring
@@ -260,7 +260,7 @@ faqs:
     a: >-
       Yes, though we'll be working room by room. We seal off the work area with
       a zippered barrier, run negative-air dust control, protect the path in and
-      out, and clean up every afternoon. The one real constraint is cure time —
+      out, and clean up every afternoon. The one real constraint is cure time –
       you can't walk a freshly set floor for about 24 hours, so we sequence the
       rooms so you always have a way through the house.
   - q: How long does a Sarasota tile job take?
@@ -284,7 +284,7 @@ related:
     blurb: Curbless entries, Schluter waterproofing, and frameless glass.
   - label: Flooring
     href: /services/flooring
-    blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
+    blurb: Hardwood, LVP, and porcelain over slab – moisture-tested first.
   - label: All tile & natural stone work
     href: /services/tile-natural-stone
     blurb: How we set tile everywhere on the Suncoast, not just Sarasota.

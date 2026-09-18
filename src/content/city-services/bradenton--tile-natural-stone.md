@@ -12,7 +12,7 @@ seoDescription: 'Tile & natural-stone installers in Bradenton, FL. Porcelain, ma
 heroCity: Bradenton
 heroService: Tile & Natural Stone
 heroSubhead: >-
-  We set tile and natural stone for Bradenton homeowners — Palma Sola bungalows,
+  We set tile and natural stone for Bradenton homeowners – Palma Sola bungalows,
   West Bradenton ranches, and the newer builds out past I-75. Slab moisture
   tested, crack isolation where the slab needs it, every stone sealed to its
   absorption rate.
@@ -32,7 +32,7 @@ trust:
     title: Flat Floors, Tight Lines
     body: >-
       Leveling clips, back-buttering, and full mortar coverage on every tile.
-      We hold lippage inside the TCNA allowance for the format we're setting —
+      We hold lippage inside the TCNA allowance for the format we're setting –
       not "close enough by eye."
   - icon: crew
     title: In-House Crews
@@ -61,7 +61,7 @@ localPoints:
   - title: Stone sealed for humidity and salt air
     body: >-
       Marble, travertine, and limestone each get an impregnating sealer on their
-      own schedule, based on absorption rate — the difference between stone that
+      own schedule, based on absorption rate – the difference between stone that
       patinas and stone that stains in a coastal climate.
 localImage: /assets/images/tile-natural-stone.webp
 localImageAlt: >-
@@ -104,7 +104,7 @@ project:
   timeline: 12 working days
   budget: $18,400
   story: >-
-    A whole-home tile package in a 1980s ranch — the kitchen pictured here, plus
+    A whole-home tile package in a 1980s ranch – the kitchen pictured here, plus
     two full baths and the laundry, 340 sq ft in all. The backsplash is
     marble-look porcelain in a vertical stack, where every joint runs the full
     height of the wall and a sixteenth of an inch out at the counter shows by
@@ -167,7 +167,7 @@ process:
 
 pricingTitle: What does tile installation cost in Bradenton, FL?
 pricingIntro: >-
-  Every floor is different — but here's an honest range based on real projects
+  Every floor is different – but here's an honest range based on real projects
   we've completed across Bradenton and Manatee County. Prices are installed,
   per square foot, labor and materials.
 pricing:
@@ -203,7 +203,7 @@ pricing:
       - Stone-specific setting mortar and grout
 areaTitle: Bradenton and the rest of Manatee County
 areaBody: >-
-  Bradenton is home base, and we work the whole Suncoast from here — Palmetto
+  Bradenton is home base, and we work the whole Suncoast from here – Palmetto
   and Ellenton to the north, Lakewood Ranch and Parrish east of I-75, and out to
   Anna Maria, Holmes Beach, and Longboat Key on the water.
 
@@ -214,11 +214,11 @@ faqs:
       touch plumbing, framing, or waterproofing is a finish, and Manatee County
       and the City of Bradenton both treat it that way. The moment the job
       includes a shower, a relocated drain, or structural work, it needs a
-      permit — and we pull it. We tell you which side of that line your project
+      permit – and we pull it. We tell you which side of that line your project
       falls on at the first visit, in writing.
   - q: My HOA or condo association needs approval. Can you handle that?
     a: >-
-      We'll give you the packet most Bradenton associations ask for — scope of
+      We'll give you the packet most Bradenton associations ask for – scope of
       work, our license and liability certificate, working hours, and the
       elevator or stairwell protection plan. Tile above the ground floor also
       usually triggers a sound-transmission requirement, so we specify an
@@ -243,7 +243,7 @@ faqs:
     a: >-
       Yes, though we'll be working room by room. We seal off the work area with
       a zippered barrier, run negative-air dust control, protect the path in and
-      out, and clean up every afternoon. The one real constraint is cure time —
+      out, and clean up every afternoon. The one real constraint is cure time –
       you can't walk a freshly set floor for about 24 hours, so we sequence the
       rooms so you always have a way through the house.
   - q: How long does a Bradenton tile job take?
@@ -266,7 +266,7 @@ related:
     blurb: Curbless entries, Schluter waterproofing, and frameless glass.
   - label: Flooring in Bradenton
     href: /services/flooring
-    blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
+    blurb: Hardwood, LVP, and porcelain over slab – moisture-tested first.
   - label: All tile & natural stone work
     href: /services/tile-natural-stone
     blurb: How we set tile everywhere on the Suncoast, not just Bradenton.

@@ -2,7 +2,7 @@
 title: 'What Makes a Home Feel Outdated in 2026'
 seoTitle: 'What Makes a Home Feel Outdated in 2026'
 description: 'What makes a Florida home feel outdated in 2026, and the 6 fixes that actually change how a room reads. Free estimate: (941) 203-1020'
-lede: 'A dated house is rarely dated everywhere. It is usually four or five specific surfaces doing the work — and once you can name them, you stop spending money on the ones that were never the problem.'
+lede: 'A dated house is rarely dated everywhere. It is usually four or five specific surfaces doing the work – and once you can name them, you stop spending money on the ones that were never the problem.'
 publishedAt: 2026-09-15
 author: Abel Leytner
 authorImage: /assets/images/blog/authors/abel-leytner.webp
@@ -15,7 +15,7 @@ draft: false
 ---
 
 People almost never call us and say "my house is outdated." They say the kitchen feels dark,
-or the bathroom feels small, or the whole place feels like someone else's house — and they
+or the bathroom feels small, or the whole place feels like someone else's house – and they
 can't point at why.
 
 There's a reason for that. A room reads as dated through a handful of large surfaces, not
@@ -39,13 +39,13 @@ Here's what's actually aging Gulf Coast homes in 2026, in the order it costs to 
 
 This is the biggest one, and the one people skip because it feels like the most disruptive.
 
-A lot of houses here run three or four different floors — tile in the entry, carpet in the
-bedrooms, laminate in the living room, a fifth thing in the lanai — with a metal transition
+A lot of houses here run three or four different floors – tile in the entry, carpet in the
+bedrooms, laminate in the living room, a fifth thing in the lanai – with a metal transition
 strip at every doorway. Every strip is a visual wall. The house reads as a series of small
 compartments, which is exactly the thing an open plan was supposed to undo.
 
 The single change that modernizes a whole home fastest is one continuous floor through the
-main living space. Not a trend — a structural decision about how big the house feels.
+main living space. Not a trend – a structural decision about how big the house feels.
 
 <div class="factbox">
   <div><span class="fb-k">Reads dated</span><span class="fb-v">12×12 glossy tile on a diagonal, 3/8" grout</span></div>
@@ -56,7 +56,7 @@ main living space. Not a trend — a structural decision about how big the house
 Two specifics that matter more here than anywhere else. First, grout color: a mid-gray or a
 color matched to the tile ages far better than bright white, which turns gray anyway, just
 unevenly. Second, substrate. Large-format tile and wide plank both telegraph every dip in a
-slab, so flatness work is part of the job, not an upsell — that's most of what we're doing on
+slab, so flatness work is part of the job, not an upsell – that's most of what we're doing on
 [hard surface flooring](/services/flooring) before anything gets laid. If you're collecting
 bids right now, [how flooring quotes differ in Sarasota](/blog/hard-surface-flooring-companies-sarasota)
 covers what the gap between them usually is.
@@ -65,7 +65,7 @@ covers what the gap between them usually is.
 
 Builder beige was a 2004 decision that most of this market is still living with. Under the
 warm LED bulbs everyone switched to, that beige pulls visibly yellow, and every white thing in
-the room — trim, cabinets, ceiling — looks slightly dirty next to it.
+the room – trim, cabinets, ceiling – looks slightly dirty next to it.
 
 Paint is the cheapest thing on this list by an order of magnitude and does more per dollar than
 anything else. Three rules:
@@ -75,11 +75,11 @@ anything else. Three rules:
 2. **Sample on the actual wall, in the actual light.** Paint a 2-foot square and look at it at
    8 a.m., 3 p.m., and under your lamps. Chips lie.
 3. **Trim one step off the wall, not a different color family.** The dated look is stark white
-   trim against yellow-beige walls — maximum contrast in the least flattering place.
+   trim against yellow-beige walls – maximum contrast in the least flattering place.
 
 > **Ceilings count.** A popcorn or heavy knockdown ceiling dates a room as hard as the walls
 > do, and it's the one surface nobody samples. If you're painting anyway, price the scrape at
-> the same time — the room is already empty and masked.
+> the same time – the room is already empty and masked.
 
 ## Cabinets in an orange wood tone
 
@@ -89,11 +89,11 @@ warm. Everything you put near them has to negotiate with that orange.
 
 You usually don't need new boxes. In order of cost:
 
-- **Refinish or paint** the existing doors and frames — by far the cheapest path, and it works
+- **Refinish or paint** the existing doors and frames – by far the cheapest path, and it works
   when the boxes are solid and the door style is simple.
-- **Reface** — new doors and drawer fronts on the existing boxes. Fixes both color and a dated
+- **Reface** – new doors and drawer fronts on the existing boxes. Fixes both color and a dated
   door profile (raised-panel arch tops, cathedral doors) without touching the layout.
-- **Replace** — worth it when the layout itself is the problem: a wall between the kitchen and
+- **Replace** – worth it when the layout itself is the problem: a wall between the kitchen and
   living room, a peninsula where an island belongs, or upper cabinets that stop a foot short of
   the ceiling.
 
@@ -106,19 +106,19 @@ the space above them entirely, is one of the cheapest structural-looking wins in
 The dated pairing is speckled, high-movement granite plus a 4-inch piece of the same stone
 stuck to the wall, with painted drywall above it.
 
-Two separate problems. The counter is busy — a field of speckle competes with the floor, the
+Two separate problems. The counter is busy – a field of speckle competes with the floor, the
 cabinets, and anything you set on it. And the short splash is a builder shortcut that reads
 exactly like what it is: an unfinished wall with a strip of stone at the bottom.
 
 The current move is a quieter counter and a taller splash. Quartz in a soft white or a subtle
 vein, or a natural stone chosen for a calm field rather than maximum drama, and tile running
-the full height to the uppers — behind the range at minimum, all the way around if the budget
+the full height to the uppers – behind the range at minimum, all the way around if the budget
 allows. That single change makes a kitchen look designed rather than assembled. It's the most
 common request in our [tile and natural stone](/services/tile-natural-stone) work, and it's
 usually a one-day install once the counter is set.
 
 > **The honest caveat on stone.** Marble and travertine are beautiful and they etch. In a
-> kitchen or a busy bath, that's a maintenance schedule, not a defect — but you should choose
+> kitchen or a busy bath, that's a maintenance schedule, not a defect – but you should choose
 > it knowing that, not find out in year two.
 
 ## A tub-shower combo behind a sliding glass door
@@ -130,7 +130,7 @@ room. It makes a small bathroom feel smaller.
 
 Converting that alcove to a walk-in shower is the highest-impact bathroom change most people
 here can make, and it does three things at once: it modernizes the room, it opens the sightline
-so the bathroom reads larger, and it's the aging-in-place move — which matters in this market,
+so the bathroom reads larger, and it's the aging-in-place move – which matters in this market,
 where a lot of buyers are specifically looking for a step-free entry.
 
 <div class="factbox">
@@ -139,7 +139,7 @@ where a lot of buyers are specifically looking for a step-free entry.
   <div><span class="fb-k">Keep one tub</span><span class="fb-v">If it's the only one in the house</span></div>
 </div>
 
-Two things to decide early, because both are structural. Curbed or curbless — a flush entry on
+Two things to decide early, because both are structural. Curbed or curbless – a flush entry on
 a slab means a recessed pour or an engineered sloped assembly, designed in from day one, not
 changed in week two. And whether you keep a tub somewhere in the house; if this is your only
 one, resale generally wants at least one bathtub left standing. We walk through the whole
@@ -155,15 +155,15 @@ shadow or depth, and the whole house sits at one brightness all day.
 
 Modern lighting is layered:
 
-- **Ambient** — the cans, dimmable, and fewer of them than you think.
-- **Task** — under-cabinet in the kitchen, sconces at a vanity, a reading lamp.
-- **A real fixture** — one object with presence. Pendants over an island, a fixture over the
+- **Ambient** – the cans, dimmable, and fewer of them than you think.
+- **Task** – under-cabinet in the kitchen, sconces at a vanity, a reading lamp.
+- **A real fixture** – one object with presence. Pendants over an island, a fixture over the
   dining table. This is the piece that makes a photo of the room look intentional.
 
 And one detail that quietly ruins otherwise good rooms: mixed color temperature. When the cans
 are 2700K, the under-cabinet strip is 4000K, and someone put a 5000K daylight bulb in the
 pantry, the house looks mismatched in a way people feel but never diagnose. Pick one
-temperature — 2700K or 3000K in living spaces — and make everything match. It costs the price
+temperature – 2700K or 3000K in living spaces – and make everything match. It costs the price
 of bulbs.
 
 ## What we'd actually do first
@@ -171,31 +171,31 @@ of bulbs.
 If you're weighing a full remodel against doing this in pieces, the honest ranking by
 impact-per-dollar:
 
-1. **Paint** — walls, trim, and the ceiling if it's textured. Days, not weeks.
-2. **Lighting** — bulbs matched, dimmers added, one real fixture where it counts.
-3. **Backsplash to the ceiling** — one day, and the kitchen changes character.
+1. **Paint** – walls, trim, and the ceiling if it's textured. Days, not weeks.
+2. **Lighting** – bulbs matched, dimmers added, one real fixture where it counts.
+3. **Backsplash to the ceiling** – one day, and the kitchen changes character.
 4. **Continuous flooring** through the main living space.
-5. **The shower** — the single biggest change to how a bathroom feels.
-6. **Cabinets** — refinish or reface before you consider replacing.
+5. **The shower** – the single biggest change to how a bathroom feels.
+6. **Cabinets** – refinish or reface before you consider replacing.
 
 Doing one through three in a weekend-and-a-half is a real strategy, and it tells you whether
 four through six are still worth doing. Plenty of people stop after three.
 
 What's *not* on this list is worth saying too: you almost never need to move a wall to make a
-house feel current, and the fixtures and hardware everyone starts with — pulls, faucets, a new
-mirror — matter far less than the six surfaces above. They're the last 5%, and they don't
+house feel current, and the fixtures and hardware everyone starts with – pulls, faucets, a new
+mirror – matter far less than the six surfaces above. They're the last 5%, and they don't
 rescue a room that's still fighting an orange floor.
 
 ## FAQs
 
 **Does an outdated kitchen actually affect resale?**
-Yes, but not the way people assume. Buyers here rarely subtract the true cost of a remodel —
+Yes, but not the way people assume. Buyers here rarely subtract the true cost of a remodel –
 they subtract what they *imagine* it costs, which is usually higher. A dated kitchen and a
 1990s primary bath are the two rooms that set a buyer's number for the whole house.
 
 **Is white-on-white going to look dated in five years?**
-An all-white room with nothing else going on will. A warm white with texture doing the work —
-wood tone, stone with a quiet vein, a real light fixture, matte black or brass hardware —
+An all-white room with nothing else going on will. A warm white with texture doing the work –
+wood tone, stone with a quiet vein, a real light fixture, matte black or brass hardware –
 doesn't, because it isn't relying on the color to be interesting.
 
 **Do I have to replace tile floors to make the house feel current?**
@@ -208,7 +208,7 @@ Paint plus matched bulbs. Under a thousand dollars in most homes, done in days, 
 every photograph of the house. Do it before you decide anything expensive.
 
 **How long does a whole-home refresh take?**
-Surface work — paint, lighting, backsplash, flooring — typically runs 2–4 weeks depending on
+Surface work – paint, lighting, backsplash, flooring – typically runs 2–4 weeks depending on
 square footage and whether you're living in it. Adding a bathroom or kitchen build-out puts it
 at 6–10 weeks. Sequence matters: dust-making work first, finishes last.
 
@@ -216,12 +216,12 @@ at 6–10 weeks. Sequence matters: dust-making work first, finishes last.
 
 You don't have to do the whole house, and you shouldn't start by picking materials. Start by
 naming which of the six surfaces above is actually doing the damage in the room you like least
-— it's usually one or two, not all of them.
+– it's usually one or two, not all of them.
 
 VL Pro Construction builds [custom showers](/services/custom-showers),
 [tile and natural stone](/services/tile-natural-stone), and
 [hard surface flooring](/services/flooring) across Bradenton, Lakewood Ranch, Sarasota,
-Longboat Key, Siesta Key, and Venice — see [everything we do](/services) or
+Longboat Key, Siesta Key, and Venice – see [everything we do](/services) or
 [where we work](/locations). If a bathroom is where you're starting,
 [the seven mistakes that cost the most](/blog/bathroom-remodel-mistakes) is worth ten minutes
 first.
