@@ -117,14 +117,9 @@ const schema = [
       <TrustPill />
 
       <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,2.6rem)] sm:text-[clamp(2.6rem,6.8vw,6.05rem)] text-center">
-        <!-- All three lines live INSIDE the h1: "Remodeling Experts" used to
-             sit in the sibling div below, so the heading a crawler read was
-             two lines while the page showed three. Both spans are blocks, so
-             the stack renders exactly as before. -->
         <h1>
           <span>{d.heroCity}</span><br />
           <span class="text-brand block">{d.heroService}</span>
-          <span class="block">Remodeling Experts</span>
         </h1>
         <div class="flex flex-col items-center gap-3 sm:gap-5 mt-3 sm:mt-5">
           <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.45] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">{d.heroSubhead}</p>
