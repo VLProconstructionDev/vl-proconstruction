@@ -40,10 +40,10 @@ const whyChooseUs = [
    of inventing a mark. Heights are per-brand — these aspect ratios differ
    enough that one shared height makes the wide marks look twice the size. */
 const partners = [
-  { src: '/assets/images/brand/floordecor-white.svg', alt: 'Floor & Decor', h: 'h-[17px]' },
-  { src: '/assets/images/brand/tileoutlets-white.webp', alt: 'Tile Outlets of America', h: 'h-[20px]' },
-  { type: 'prosource', alt: 'ProSource Wholesale' },
-  { src: '/assets/images/brand/yourflooring-white.webp', alt: 'Your Flooring Warehouse', h: 'h-[29px]' },
+  { src: '/assets/images/brand/floordecor-white.svg', alt: 'Floor & Decor', h: 'h-[17px]', href: 'https://www.flooranddecor.com/' },
+  { src: '/assets/images/brand/tileoutlets-white.webp', alt: 'Tile Outlets of America', h: 'h-[20px]', href: 'https://tileoutlets.com/' },
+  { type: 'prosource', alt: 'ProSource Wholesale', href: 'https://www.prosourcewholesale.com/' },
+  { src: '/assets/images/brand/yourflooring-white.webp', alt: 'Your Flooring Warehouse', h: 'h-[29px]', href: 'https://www.yourflooringwarehouse.com/' },
 ];
 ---
 
@@ -75,7 +75,7 @@ const partners = [
             Certifications &amp; Memberships
           </p>
           <div class="mt-6 flex items-center gap-6">
-            <div class="flex items-center gap-3">
+            <a href="https://www.schluter.com/" target="_blank" rel="noopener" title="Schluter Systems" class="brandlink flex items-center gap-3">
               <img
                 src="/assets/images/brand/schluter-white.webp"
                 width="408"
@@ -88,9 +88,9 @@ const partners = [
               <p class="shrink-0 text-[13px] font-medium leading-[1.25] tracking-[-0.02em] text-white/70">
                 Schluter&reg;<br />Certified
               </p>
-            </div>
+            </a>
             <span class="h-7 w-px shrink-0 bg-white/15" aria-hidden="true"></span>
-            <div class="flex items-center gap-3">
+            <a href="https://www.tile-assn.com/" target="_blank" rel="noopener" title="National Tile Contractors Association" class="brandlink flex items-center gap-3">
               <img
                 src="/assets/images/brand/ntca-white.webp"
                 width="240"
@@ -103,7 +103,7 @@ const partners = [
               <p class="shrink-0 text-[13px] font-medium leading-[1.25] tracking-[-0.02em] text-white/70">
                 NTCA<br />Member
               </p>
-            </div>
+            </a>
           </div>
 
           <p class="mt-10 text-[15px] font-medium text-white">
@@ -114,11 +114,16 @@ const partners = [
           <ul class="mt-6 grid grid-cols-2 gap-x-5 gap-y-2 max-w-[280px]">
             {partners.map((partner) => (
               <li class="flex h-8 items-center">
+                <a
+                  href={partner.href}
+                  target="_blank"
+                  rel="noopener"
+                  title={partner.alt}
+                  aria-label={partner.alt}
+                  class="brandlink inline-flex items-center"
+                >
                 {partner.type === 'prosource' ? (
-                  <span
-                    class="inline-flex flex-col items-center leading-none text-white/60"
-                    aria-label={partner.alt}
-                  >
+                  <span class="inline-flex flex-col items-center leading-none text-white opacity-60">
                     <span class="text-[13px] font-extrabold tracking-[-0.02em]">ProSource</span>
                     <span class="mt-1 text-[6px] font-semibold tracking-[0.34em]">WHOLESALE</span>
                   </span>
@@ -131,6 +136,7 @@ const partners = [
                     class:list={['block w-auto opacity-60', partner.h]}
                   />
                 )}
+                </a>
               </li>
             ))}
           </ul>

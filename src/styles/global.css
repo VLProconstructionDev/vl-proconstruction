@@ -925,3 +925,35 @@ button:focus-visible {
   text-transform: uppercase;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
 }
+
+/* ===== Brand / credential logo links =====================================
+   The credential marks (Schluter, NTCA) and supplier logos are links to the
+   brand they name. The mark and its label are ONE target, so the whole
+   lockup is the anchor. The resting opacity stays on the child img/p (the
+   Tailwind `opacity-90` / `opacity-60` utilities each layout already sets, so
+   nothing changes at rest); hover/focus lifts it to full. Only opacity and
+   transform animate. */
+.brandlink {
+  border-radius: 4px;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.brandlink :where(img, p, span) {
+  transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.brandlink:hover :where(img, p, span),
+.brandlink:focus-visible :where(img, p, span) {
+  opacity: 1;
+}
+.brandlink:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 6px;
+}
+.brandlink:active {
+  transform: scale(0.97);
+}
+@media (prefers-reduced-motion: reduce) {
+  .brandlink,
+  .brandlink :where(img, p, span) {
+    transition: none;
+  }
+}
