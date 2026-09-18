@@ -13,6 +13,7 @@
  */
 import { getCollection, getEntry } from 'astro:content';
 import LocationServiceLayout from '@/layouts/LocationServiceLayout.astro';
+import LocationArticleLayout from '@/layouts/LocationArticleLayout.astro';
 import { locationSlug } from '@/lib/urls';
 
 export async function getStaticPaths() {
@@ -38,6 +39,11 @@ export async function getStaticPaths() {
 }
 
 const { entry, location, service } = Astro.props;
+
+// Two shells, picked by the pair file's `template`. `sections` is the original
+// run of full-bleed bands; `article` is the long-form treatment the
+// bathroom-remodeling and waterproofing service pages use.
+const Layout = entry.data.template === 'article' ? LocationArticleLayout : LocationServiceLayout;
 ---
 
-<LocationServiceLayout entry={entry} location={location} service={service} />
+<Layout entry={entry} location={location} service={service} />

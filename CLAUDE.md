@@ -66,7 +66,8 @@ src/
   layouts/
     BaseLayout.astro       — wraps every page
     ServiceLayout.astro    — collection-driven service-page shell (used only by the PARKED service×location route)
-    LocationServiceLayout.astro — city × service page (see below)
+    LocationServiceLayout.astro — city × service page, banded shell (see below)
+    LocationArticleLayout.astro — city × service page, long-form shell (`template: article`)
     BlogPostLayout.astro   — blog post shell (title block, hero, .post-body prose, keep-reading)
   components/
     SEO.astro              — <head> meta, OG, Twitter, JSON-LD
@@ -76,6 +77,7 @@ src/
     EstimateInline.astro   — inline step 1 (dark form section; home + blog pages)
     ServiceAreaMap.astro   — interactive service-area map (MapLibre GL, lazy-loaded)
     ServiceHero.astro      — dark hero shared by service pages
+    ArticleStyles.astro    — CSS for the long-form article treatment (.post-body/.intro-card/.rail-*)
     Breadcrumbs.astro      — accessible breadcrumb list
     PostCard.astro         — blog post card (photo + New ribbon + meta + title + excerpt)
     PostMeta.astro         — date · author avatar + name · clock + read time
@@ -147,6 +149,8 @@ JSON-LD builders: `localBusinessSchema()` (GeneralContractor, included on every 
 
 ### City × service pages (`/services/[service]/[city]-[state]`)
 Local-SEO landing pages: `src/pages/services/[service]/[location].astro` (thin route) + `src/layouts/LocationServiceLayout.astro` (the whole page) + the **`cityServices`** content collection + `src/lib/urls.ts` (`locationSlug()` / `cityServicePath()` — the slug `bradenton` + `FL` → `bradenton-fl` is defined there and nowhere else). Live: Sarasota × custom showers and tile & natural stone. Four more pair files exist but carry `published: false` (all three Bradenton pairs + Sarasota flooring) — flip the flag to ship one.
+
+Two shells render these pages, picked by the pair file's `template` field (`src/content.config.ts`). `sections` (the default) is `LocationServiceLayout` — the 12 full-bleed bands described below. `article` is `LocationArticleLayout` — the long-form treatment the `/services/curbless-walk-in-showers` page uses: the same dark hero, then one prose column on `#f6f5f3` beside a sticky rail (estimate card, table of contents built from the page's own h2s, phone). It reads exactly the same frontmatter — nothing is authored per template, so flipping the flag needs no new copy — but it has no service-area map and no before/after band. Live on `bradenton--curbless-walk-in-showers` and `sarasota--curbless-walk-in-showers`. The article CSS lives in `src/components/ArticleStyles.astro`, shared by the service pages and this layout so they cannot drift.
 
 The `[service]` segment is dynamic, but `/services/custom-showers` still resolves to the hand-designed `src/pages/services/custom-showers/index.astro` — Astro gives static path segments priority. Only `[service]/[location]` is dynamic; there is deliberately no `[service]/index.astro`.
 

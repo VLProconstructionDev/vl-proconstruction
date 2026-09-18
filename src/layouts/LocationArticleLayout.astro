@@ -1,0 +1,473 @@
+---
+/**
+ * City × service page, long-form treatment — the shell used by pair files that
+ * set `template: article`.
+ *
+ * Same data as LocationServiceLayout, different shape: instead of eleven
+ * full-bleed bands it renders the service-page article layout — the standard
+ * dark hero, then one prose column on #f6f5f3 beside a sticky rail (estimate
+ * card, table of contents, phone). Styles come from <ArticleStyles />, shared
+ * with /services/bathroom-remodeling and the waterproofing page.
+ *
+ * Nothing here is authored: every section reads a field the pair file already
+ * carries, so switching a page's template needs no new copy.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArticleStyles from '@components/ArticleStyles.astro';
+import EstimateInline from '@components/EstimateInline.astro';
+import TrustPill from '@components/TrustPill.astro';
+import { site } from '@/lib/site';
+import { serviceSchema, breadcrumbSchema } from '@/lib/schema';
+import { cityServicePath } from '@/lib/urls';
+
+interface Props {
+  entry: CollectionEntry<'cityServices'>;
+  location: CollectionEntry<'locations'>;
+  service: CollectionEntry<'services'>;
+}
+
+const { entry, location, service } = Astro.props;
+const d = entry.data;
+/** The markdown body is the "local expertise" prose — it opens that section. */
+const { Content } = await render(entry);
+
+const city = d.heroCity;
+const cityState = `${location.data.name}, ${location.data.state}`;
+const path = cityServicePath(location, service.id);
+const serviceLower = service.data.shortName.toLowerCase();
+
+// Phones get a still job photo where desktop plays the hero clip — the same
+// shot each service wears on the home-page card.
+const HERO_PHOTO: Record<string, string> = {
+  'custom-showers': '/assets/images/card-bath.webp',
+  'tile-natural-stone': '/assets/images/card-kitchen.webp',
+  'hard-surface-flooring': '/assets/images/card-home.webp',
+  flooring: '/assets/images/card-home.webp',
+  'bathroom-remodeling': '/assets/images/process-4.webp',
+  'waterproofing-subfloor-preparation': '/assets/images/surface-preparation.webp',
+  'curbless-walk-in-showers': '/assets/images/gallery-showers/showers-gray-curbless-glass.webp',
+};
+const heroPhoto = HERO_PHOTO[service.id] ?? '/assets/images/hero-poster-0715.webp';
+
+/**
+ * Headings and the rail's table of contents come from one list, so a section
+ * can never be in the page and missing from the rail (or the reverse). A
+ * section drops out of both when its data is empty.
+ */
+const sections = [
+  { slug: 'overview', text: `${city} ${serviceLower}`, show: true },
+  { slug: 'included', text: d.includedTitle, show: d.included.length > 0 },
+  { slug: 'local', text: d.localTitle.replace(/\s*\|\s*/g, ' '), show: d.localPoints.length > 0 },
+  { slug: 'why-us', text: 'Why homeowners choose VL Pro', show: d.trust.length > 0 },
+  { slug: 'project', text: `A recent project in ${d.project.neighborhood}`, show: true },
+  { slug: 'process', text: 'How the work runs', show: d.process.length > 0 },
+  { slug: 'cost', text: d.pricingTitle, show: d.pricing.length > 0 },
+  { slug: 'reviews', text: `What ${city} homeowners say`, show: d.reviews.length > 0 },
+  { slug: 'area', text: d.areaTitle, show: true },
+  { slug: 'faqs', text: `${city} ${serviceLower} FAQs`, show: d.faqs.length > 0 },
+  { slug: 'company', text: 'About VL Proconstruction', show: true },
+];
+const toc = sections.filter((s) => s.show);
+const has = (slug: string) => toc.some((s) => s.slug === slug);
+const heading = (slug: string) => toc.find((s) => s.slug === slug)?.text ?? '';
+
+const schema = [
+  serviceSchema({
+    name: `${service.data.title} in ${cityState}`,
+    description: d.seoDescription,
+    slug: service.id,
+    areaServed: cityState,
+    url: path,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Services', url: '/services' },
+    { name: service.data.shortName, url: `/services/${service.id}` },
+    { name: location.data.name, url: path },
+  ]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: d.faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={d.seoTitle ?? `${service.data.shortName} in ${cityState} — ${site.name}`}
+  description={d.seoDescription}
+  canonical={path}
+  schema={schema}
+  navTheme="dark"
+>
+  <ArticleStyles />
+
+  <!-- ===================== HERO (identical to the service pages) ===================== -->
+  <section id="hero" class="relative min-h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
+    <img src={heroPhoto} alt="" aria-hidden="true" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover md:hidden" />
+    <video class="absolute inset-0 w-full h-full object-cover hidden md:block" data-desktop-only muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1"></video>
+    <div class="absolute inset-0 bg-black/65"></div>
+
+    <div class="relative z-20 min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:py-0 sm:pb-24 lg:pb-[90px] sm:pt-[182px] gap-5 lg:gap-6">
+      <TrustPill />
+
+      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,2.6rem)] sm:text-[clamp(2.6rem,6.8vw,6.05rem)] text-center">
+        <h1>
+          <span>{d.heroCity}</span><br />
+          <span class="text-brand block">{d.heroService}</span>
+        </h1>
+        <div class="flex flex-col items-center gap-3 sm:gap-5">
+          <span>Remodeling Experts</span>
+          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.45] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">{d.heroSubhead}</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center gap-8">
+        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
+          <a href={site.phoneHref} class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">{site.phone}</a>
+        </div>
+        <div class="w-full flex flex-col gap-8 lg:mt-[120px] lg:mx-auto lg:max-w-[1320px] lg:flex-row lg:items-end lg:justify-between">
+          <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
+            {d.stats.map((s) => (
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count={s.count}>{s.count}</span>{s.suffix}</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">
+                  {s.label.split('|').map((part) => part.trim()).join(' ')}
+                </span>
+              </div>
+            ))}
+          </div>
+          <!-- Credential marks: reversed so they read on the dark hero; the
+               images are decorative and the label beside each one names it. -->
+          <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Featured<br />On</p>
+              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-white.webp" width="480" height="134" alt="Yahoo" class="block h-[22px] sm:h-7 w-auto opacity-90" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ARTICLE BODY + RAIL ===================== -->
+  <div class="bg-[#f6f5f3]" data-nav-theme="light">
+    <div class="post-wrap px-5 sm:px-10 lg:px-[60px] py-16 lg:py-20">
+      <div class="grid gap-x-[60px] xl:gap-x-[80px] gap-y-12 lg:grid-cols-[minmax(0,1fr)_340px]">
+
+        <div class="min-w-0">
+          <div class="post-body">
+
+            <div class="intro-card">
+              <p class="intro-eyebrow">Family-owned on the Suncoast since 2004</p>
+              <h2 id="overview">{city} {serviceLower}</h2>
+              <p class="intro-lead">{d.heroSubhead}</p>
+            </div>
+
+            {d.stats.length > 0 && (
+              <div class="stat-tiles">
+                {d.stats.map((s) => (
+                  <div class="stat-tile">
+                    <b>{s.count}{s.suffix}</b>
+                    <span>{s.label.split('|').map((part) => part.trim()).join(' ')}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {has('included') && (
+              <>
+                <h2 id="included">{heading('included')}</h2>
+                <p>{d.includedIntro}</p>
+                <div class="pj-grid">
+                  {d.included.map((item) => (
+                    <div class="pj-c">
+                      <h3>{item.title}</h3>
+                      <p>{item.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {has('local') && (
+              <>
+                <h2 id="local">{heading('local')}</h2>
+                <Content />
+                {d.localPoints.map((point) => (
+                  <>
+                    <h3>{point.title}</h3>
+                    <p>{point.body}</p>
+                  </>
+                ))}
+              </>
+            )}
+
+            {has('why-us') && (
+              <>
+                <h2 id="why-us">{heading('why-us')}</h2>
+                <ul>
+                  {d.trust.map((t) => (
+                    <li><strong>{t.title}.</strong> {t.body}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            <h2 id="project">{heading('project')}</h2>
+            <p>{d.project.story}</p>
+            <div class="factbox">
+              <div><span class="fb-k">Neighborhood</span><span class="fb-v">{d.project.neighborhood}</span></div>
+              <div><span class="fb-k">Completed</span><span class="fb-v">{d.project.year}</span></div>
+              <div><span class="fb-k">On site</span><span class="fb-v">{d.project.timeline}</span></div>
+              <div><span class="fb-k">Project cost</span><span class="fb-v">{d.project.budget}</span></div>
+            </div>
+            <figure class="pj-figure">
+              <img src={d.project.image} alt={d.project.imageAlt} loading="lazy" decoding="async" />
+            </figure>
+
+            {has('process') && (
+              <>
+                <h2 id="process">{heading('process')}</h2>
+                <div class="steps">
+                  {d.process.map((step, i) => (
+                    <div class="step">
+                      <span class="step-n" aria-hidden="true">{i + 1}</span>
+                      <h3>{step.title}</h3>
+                      <p>{step.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {has('cost') && (
+              <>
+                <h2 id="cost">{heading('cost')}</h2>
+                <p>{d.pricingIntro}</p>
+                <table>
+                  <thead>
+                    <tr><th>Scope</th><th>Typical range</th><th>What it covers</th></tr>
+                  </thead>
+                  <tbody>
+                    {d.pricing.map((tier) => (
+                      <tr>
+                        <td>{tier.featured ? <span class="row-us">{tier.sub}</span> : tier.eyebrow}</td>
+                        <td>{tier.featured ? tier.headline : tier.sub.startsWith('$') ? tier.sub : `${tier.headline} ${tier.sub}`}</td>
+                        <td>{tier.features.join('; ')}.</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
+
+            {has('reviews') && (
+              <>
+                <h2 id="reviews">{heading('reviews')}</h2>
+                {d.reviews.map((r) => (
+                  <blockquote>
+                    <p>{r.quote}</p>
+                    <p><strong>{r.name}</strong> — {r.neighborhood}</p>
+                  </blockquote>
+                ))}
+              </>
+            )}
+
+            <h2 id="area">{heading('area')}</h2>
+            <p>{d.areaBody}</p>
+            {location.data.neighborhoods.length > 0 && (
+              <p>
+                Neighborhoods we work in around {city}: {location.data.neighborhoods.join(', ')}.
+              </p>
+            )}
+
+            {has('faqs') && (
+              <>
+                <h2 id="faqs">{heading('faqs')}</h2>
+                <div class="faq-list" id="faqList">
+                  {d.faqs.map((item) => (
+                    <div class="faq-c">
+                      <h3>
+                        <button type="button" class="faq-cq" aria-expanded="true">
+                          <span class="pr-4">{item.q}</span>
+                          <span class="faq-ci" aria-hidden="true"></span>
+                        </button>
+                      </h3>
+                      <div class="faq-ca"><p>{item.a}</p></div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+            <h2 id="company">About VL Proconstruction</h2>
+            <p>
+              <strong>{site.legalName}</strong> is a family-owned remodeling company based in
+              Bradenton, Florida, working {city} and the rest of the Suncoast. Licensed and
+              insured, Schluter®-certified for waterproofing, NTCA members, with in-house design
+              and trades and a full workmanship warranty on every project. Reach us at{' '}
+              <a href={site.phoneHref}>{site.phone}</a>, or see{' '}
+              <a href="/locations/">everywhere we work</a>.
+            </p>
+
+            {d.related.length > 0 && (
+              <>
+                <hr />
+                <p>
+                  Keep looking:{' '}
+                  {d.related.map((link, i) => (
+                    <>
+                      {i > 0 && (i === d.related.length - 1 ? ', and ' : ', ')}
+                      <a href={link.href}>{link.label}</a>
+                    </>
+                  ))}.
+                </p>
+              </>
+            )}
+          </div>
+        </div>
+
+        <!-- Rail — desktop only: on a phone it would only push the article
+             down, and the sticky mobile CTA already covers the action. -->
+        <aside class="hidden lg:block">
+          <div class="rail-sticky">
+            <div class="rail-cta">
+              <p class="text-[22px] font-bold leading-[1.2] tracking-[-0.025em] text-ink">
+                Get a free<br />{city} estimate
+              </p>
+              <p class="mt-3 text-[13.5px] leading-[1.55] text-graydesc">
+                We walk the job with you, then put the scope and the price in writing.
+              </p>
+              <a href="#estimate" class="btn js-open-estimate mt-6 inline-flex items-center justify-center w-full h-12 rounded-full bg-brand hover:bg-[#e03f1c] text-white font-semibold text-[14px] capitalize">
+                Request Estimate
+              </a>
+            </div>
+
+            <nav class="rail-card rail-toc" aria-labelledby="tocTitle">
+              <p id="tocTitle" class="rail-eyebrow">On this page</p>
+              <!-- data-lenis-prevent: without it Lenis eats the wheel event
+                   over this box and scrolls the page instead of the list. -->
+              <ol class="toc-list toc-scroll" data-lenis-prevent>
+                {toc.map((h) => (
+                  <li class="toc-item">
+                    <a href={`#${h.slug}`} class="toc-link">{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+
+            <div class="rail-card text-center">
+              <p class="text-[13.5px] leading-[1.55] text-graydesc">
+                Call us directly — we answer weekdays, 8am–6pm.
+              </p>
+              <a href={site.phoneHref} class="btn mt-3 inline-block font-poppins text-[20px] font-bold tracking-[-0.01em] text-ink hover:text-brand">
+                {site.phone}
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing form — inline step 1 of the estimate wizard. -->
+  <EstimateInline />
+
+  <script is:inline>
+    // FAQ accordion — single-open. Answers ship expanded and are collapsed
+    // here, so they stay readable if this script never runs.
+    (function () {
+      const list = document.getElementById('faqList');
+      if (!list) return;
+      list.classList.add('js-faq');
+      const items = [...list.querySelectorAll('.faq-c')].map((c) => ({
+        q: c.querySelector('.faq-cq'),
+        a: c.querySelector('.faq-ca'),
+      }));
+      const collapse = (it) => { it.q.setAttribute('aria-expanded', 'false'); it.a.style.height = '0px'; };
+      const expand = (it) => { it.q.setAttribute('aria-expanded', 'true'); it.a.style.height = it.a.scrollHeight + 'px'; };
+      items.forEach((it) => {
+        collapse(it);
+        it.q.addEventListener('click', () => {
+          const open = it.q.getAttribute('aria-expanded') === 'true';
+          items.forEach(collapse);
+          if (!open) expand(it);
+        });
+      });
+      window.addEventListener('resize', () => {
+        const open = items.find((it) => it.q.getAttribute('aria-expanded') === 'true');
+        if (open) open.a.style.height = open.a.scrollHeight + 'px';
+      }, { passive: true });
+    })();
+
+    // Count-up animation for the hero stats
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const nums = document.querySelectorAll('.stat-num');
+      const fmt = (v, d) => d ? v.toFixed(d) : String(Math.round(v));
+      const runCount = (el) => {
+        const target = parseFloat(el.dataset.count);
+        const dec = (el.dataset.count.split('.')[1] || '').length;
+        const duration = 1500; let st = null;
+        const tick = (now) => { if (st === null) st = now; const p = Math.min((now - st) / duration, 1); const e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(target * e, dec); if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target, dec); };
+        requestAnimationFrame(tick);
+      };
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        nums.forEach((el) => { el.textContent = fmt(parseFloat(el.dataset.count), (el.dataset.count.split('.')[1] || '').length); });
+      } else {
+        nums.forEach((el) => { el.textContent = fmt(0, (el.dataset.count.split('.')[1] || '').length); });
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { runCount(e.target); io.unobserve(e.target); } }); }, { threshold: 0.6 });
+        nums.forEach((el) => io.observe(el));
+      }
+    })();
+
+    // Paints the section the reader is in. Nothing here moves the page — the
+    // links are plain anchors, so this only highlights the current one.
+    (() => {
+      const links = [...document.querySelectorAll('.toc-link')];
+      if (!links.length || !('IntersectionObserver' in window)) return;
+      const byId = new Map(
+        links.map((a) => [decodeURIComponent(a.hash.slice(1)), a]).filter(([id]) => id),
+      );
+      const targets = [...byId.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+      if (!targets.length) return;
+
+      let current = null;
+      const setActive = (id) => {
+        if (id === current) return;
+        current = id;
+        links.forEach((a) => a.classList.remove('is-active'));
+        byId.get(id)?.classList.add('is-active');
+      };
+      const io = new IntersectionObserver(
+        () => {
+          const above = targets
+            .map((el) => ({ el, top: el.getBoundingClientRect().top }))
+            .filter((t) => t.top <= 160);
+          const pick = above.length ? above[above.length - 1].el : targets[0];
+          setActive(pick.id);
+        },
+        { rootMargin: '-140px 0px -70% 0px', threshold: [0, 1] },
+      );
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
+</BaseLayout>
