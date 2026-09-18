@@ -214,11 +214,12 @@ const SHOW_RELATED = false;
       <TrustPill />
 
       <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,2.6rem)] sm:text-[clamp(2.6rem,6.8vw,6.05rem)] text-center">
-        <!-- One heading, one text run: the city is a bare text node and the
-             only span is the inline colour on the service name. No wrapper
-             span on line 1 and no `block` on line 2 — the <br> already breaks
-             the line, so a full-width empty box never sits under the words. -->
-        <h1>{d.heroCity}<br /><span class="text-brand">{d.heroService}</span></h1>
+        <!-- One heading, one text run: the city and "Remodeling Experts" are
+             bare text nodes and the only span is the inline colour on the
+             service name. No wrapper span on line 1 and no `block` on line 2 —
+             the <br>s do the breaks, so no full-width empty box sits under the
+             words and all three lines are inside the h1. -->
+        <h1>{d.heroCity}<br /><span class="text-brand">{d.heroService}</span><br />Remodeling Experts</h1>
         <div class="flex flex-col items-center gap-3 sm:gap-5 mt-3 sm:mt-5">
           <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.45] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">{d.heroSubhead}</p>
         </div>
