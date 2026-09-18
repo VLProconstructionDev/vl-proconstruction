@@ -1,0 +1,846 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '@/lib/schema';
+import { site } from '@/lib/site';
+import TrustPill from '@components/TrustPill.astro';
+import EstimateInline from '@components/EstimateInline.astro';
+
+const description =
+  'Curbless & walk-in shower installation in Bradenton & Sarasota, FL. Zero-threshold pans, linear drains, benches & frameless glass. Free estimate.';
+
+/**
+ * Same two-part build as /services/bathroom-remodeling and
+ * /services/waterproofing-subfloor-preparation:
+ *   1. the standard service-page hero (video, H1, CTAs), identical across
+ *      every service page so the site doesn't fork;
+ *   2. a long-form body laid out like a blog post (.post-wrap + .post-body +
+ *      the sticky rail), because this page's job is to answer questions.
+ *
+ * The prose styles are copied from BlogPostLayout — they live in that layout
+ * rather than global.css, so a page outside /blog carries its own copy.
+ *
+ * This page is the entry-and-slope half of shower work: how you get in, how
+ * the water gets out, and what a curb costs you later. /services/custom-showers
+ * is the design-and-finish half, so the two link to each other rather than
+ * repeating copy, and the assembly detail lives on the waterproofing page.
+ */
+
+/** Sidebar table of contents — kept in sync with the H2 ids in the body. */
+const toc = [
+  { slug: 'walk-in', text: 'Walk-in and curbless showers' },
+  { slug: 'types', text: 'The showers we build' },
+  { slug: 'curbless', text: 'Curbless on a Florida slab' },
+  { slug: 'why-vl-pro', text: 'Why homeowners choose VL Pro' },
+  { slug: 'process', text: 'How your shower gets built' },
+  { slug: 'cost', text: 'What a walk-in shower costs' },
+  { slug: 'accessible', text: 'Aging in place, done well' },
+  { slug: 'offer', text: 'Save on your project' },
+  { slug: 'faqs', text: 'Walk-in shower FAQs' },
+  { slug: 'company', text: 'About VL Proconstruction' },
+];
+
+/**
+ * Entry pairs for the carousel under the hero. Not a before/after — the
+ * choice this page turns on is curbed versus curbless, so each pair carries
+ * its own two labels instead of the fixed "Before"/"After" tags the bathroom
+ * page uses.
+ * TODO(client): one real pair so far. Add more as Vladimir sends them —
+ * the arrows, dots and counter appear automatically from the second entry on.
+ */
+const baPairs = [
+  {
+    before: '/assets/images/gallery-showers/showers-glass-frameless.webp',
+    beforeTag: 'Low curb + knee wall',
+    beforeAlt: 'Walk-in shower with a low tiled curb, marble-look porcelain walls, a pebble pan floor, a glass knee wall and frameless panels',
+    after: '/assets/images/gallery-showers/showers-gray-curbless-glass.webp',
+    afterTag: 'Curbless entry',
+    afterAlt: 'Curbless walk-in shower in grey large-format tile with a pebble pan floor, the bathroom floor running straight in and frameless glass on brass hardware',
+  },
+];
+
+/** Mirrors the visible "The showers we build" section. */
+const projectTypes = [
+  'Curbless and zero-threshold showers',
+  'Tub-to-shower conversions',
+  'Low-curb walk-in showers',
+  'Wet rooms and doorless showers',
+  'Accessible and roll-in showers',
+  'Frameless glass enclosures',
+];
+
+/**
+ * Eight questions. The same array renders the visible Q&As and the FAQPage
+ * JSON-LD, so schema and page copy cannot drift.
+ */
+const faqs = [
+  {
+    q: 'What is the difference between a walk-in shower and a curbless shower?',
+    a: 'A walk-in shower is any shower you step into instead of stepping over a tub wall — most have a low tiled curb, usually 3 to 5 inches. A curbless shower has no curb at all: the bathroom floor runs straight into the shower. Every curbless shower is a walk-in; not every walk-in is curbless. Curbless costs more because of the slab or framing work underneath, and it is what you want for wheelchair access, a walker, or simply a room that reads as one continuous floor.',
+  },
+  {
+    q: 'Can you build a curbless shower on a concrete slab?',
+    a: 'Yes, and most of the ones we build here are on slab. There are two ways to get the fall you need without a curb — saw-cut and recess the slab under the shower footprint, or build an engineered sloped assembly and bring the bathroom floor up to meet it. Which one fits depends on your drain location, the slab or joist depth, and how the doorway threshold lands. It has to be designed in from the start, so we settle it at the walkthrough rather than mid-build.',
+  },
+  {
+    q: 'Will a curbless shower flood the bathroom?',
+    a: 'Not when it is designed right. Three things control the water: enough fall to the drain across the whole pan, a drain sized and positioned for the flow, and glass or a wall placed to catch spray. A linear drain at the back wall lets the entire pan slope one way, which is why we use one on most curbless builds, and a shallow recessed threshold at the entry catches anything that does travel. Done properly the floor outside stays dry.',
+  },
+  {
+    q: 'How much does a walk-in shower cost in Bradenton or Sarasota?',
+    a: 'A standard walk-in shower with a low curb in the existing footprint runs about $9,000 to $14,000. A curbless build runs $13,000 to $20,000, and a wet room or a large primary-suite shower runs $20,000 and up. The variables are the slab work, the tile you choose, and the glass. We price the curbed and curbless versions of your room side by side so the difference is a number rather than a guess.',
+  },
+  {
+    q: 'Do I need a permit for a walk-in shower?',
+    a: 'If the shower stays where it is and nothing moves, usually not. Converting a tub to a walk-in shower, adding or relocating a drain, cutting the slab, or altering a wall does need one — and a curbless build almost always touches at least one of those. We pull the permit as the licensed contractor of record with Manatee County, Sarasota County or your city building department, and we meet the inspections. Condo and deed-restricted communities may also need association approval first.',
+  },
+  {
+    q: 'How long does it take?',
+    a: 'A walk-in shower in the existing footprint runs about 2 to 3 weeks. A curbless build runs 3 to 4 weeks, because the slab work and the 24-hour flood test both happen before any tile is set. Frameless glass adds another 2 to 3 weeks after the tile is finished — it is templated off the finished tile rather than off the framing, so it cannot be ordered ahead.',
+  },
+  {
+    q: 'How do you keep the shower from leaking?',
+    a: 'A continuous waterproof system behind the tile, not sealed grout and caulk. We build every pan on a Schluter®-certified bonded membrane, tie it in at the corners, the entry and the drain flange, and fill it for a 24-hour flood test before a single tile goes on. Tile and grout are the wear layer. Get the layer underneath right and the shower lasts decades — skip it and water is in the framing within a few years.',
+  },
+  {
+    q: 'Is a walk-in shower harder to keep clean than a tub?',
+    a: 'Easier, in our experience — no tub ledge to reach over and no sliding door track to scrub. What decides it is the tile and the glass. Large-format tile means fewer grout lines, and a mosaic or pebble pan gives you grip without much upkeep. On the glass we recommend a factory-applied protective coating; the water here is hard enough that untreated glass spots within a season.',
+  },
+];
+
+const schema = [
+  serviceSchema({
+    name: 'Curbless & Walk-In Shower Installation',
+    description,
+    slug: 'curbless-walk-in-showers',
+    areaServed: 'Bradenton–Sarasota, FL',
+    offers: projectTypes,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Services', url: '/services' },
+    { name: 'Curbless & Walk-In Showers', url: '/services/curbless-walk-in-showers' },
+  ]),
+  faqSchema(faqs),
+];
+---
+
+<BaseLayout
+  title="Curbless & Walk-In Showers Bradenton"
+  description={description}
+  schema={schema}
+  navTheme="dark"
+>
+  <style is:global>
+    /* ===== Stage carousel (second section) =====
+       Copy column on the left, the pair on the right; the arrows sit half off
+       the photos so they read as controls on top of the images, not chrome
+       beside them. Controls only render from the second pair onwards. */
+    .bax-shot { position: relative; overflow: hidden; border-radius: 16px; aspect-ratio: 3 / 2; background: #141414; }
+    .bax-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .bax-tag {
+      position: absolute; bottom: 0; padding: 11px 22px;
+      /* Translucent so the photo reads through the tag; the blur keeps the
+         label legible over a busy or light-toned corner. */
+      background: rgba(20,20,20,.55); color: #fff;
+      -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px);
+      font-size: 13.5px; font-weight: 700; letter-spacing: .01em;
+    }
+    .bax-tag-before { left: 0; border-top-right-radius: 14px; }
+    .bax-tag-after { right: 0; border-top-left-radius: 14px; }
+
+    .bax-arrow {
+      position: absolute; top: 50%; z-index: 3;
+      display: grid; place-items: center; width: 56px; height: 56px;
+      border-radius: 9999px; background: #fff; color: #1e1e1e;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.1);
+      transform: translateY(-50%);
+      transition: transform .2s cubic-bezier(.22,1,.36,1), color .2s;
+    }
+    .bax-arrow svg { width: 20px; height: 20px; }
+    .bax-arrow:hover, .bax-arrow:focus-visible { color: #f54b25; transform: translateY(-50%) scale(1.06); }
+    .bax-arrow:active { transform: translateY(-50%) scale(0.97); }
+    .bax-prev { left: -28px; }
+    .bax-next { right: -28px; }
+    @media (max-width: 767px) { .bax-arrow { width: 44px; height: 44px; } .bax-prev { left: -14px; } .bax-next { right: -14px; } }
+    @media (prefers-reduced-motion: reduce) {
+      .bax-arrow { transition: color .2s; }
+      .bax-arrow:hover, .bax-arrow:focus-visible, .bax-arrow:active { transform: translateY(-50%); }
+    }
+
+    .bax-count { font-size: 15px; letter-spacing: -.01em; color: #959595; }
+    .bax-count strong { color: #1e1e1e; font-weight: 600; }
+    .bax-dot {
+      width: 9px; height: 9px; border-radius: 9999px; background: rgba(0,0,0,.18);
+      transition: background-color .2s;
+    }
+    .bax-dot.is-active { background: #f54b25; }
+    .bax-dot:hover, .bax-dot:focus-visible { background: rgba(245,75,37,.55); }
+
+
+    /* ===== Article body — the same treatment as a blog post =====
+       Copied from BlogPostLayout: those styles are scoped to that layout, so a
+       page outside /blog carries its own copy rather than importing it. */
+    .post-wrap { max-width: 1400px; margin-inline: auto; }
+
+    /* Body copy matches the hero's body pair — 13.5px on phones, 16.5px from sm up.
+       Every nested paragraph inherits it rather than setting its own size. */
+    .post-body { max-width: 820px; color: #2b2b2b; font-size: 13.5px; line-height: 1.72; }
+    @media (min-width: 640px) { .post-body { font-size: 16.5px; } }
+    .post-body > * + * { margin-top: 1.35em; }
+    /* Section headings use the home page's section-H2 recipe — bold, tight
+       leading and tracking — sized down only so a long heading doesn't take
+       four lines in this column. No capitalize transform: the copy is
+       sentence case on purpose. */
+    .post-body h2 {
+      margin-top: 2.2em; color: #1e1e1e; font-weight: 700;
+      font-size: clamp(1.75rem, 3vw, 2.6rem); line-height: 1.05; letter-spacing: -0.03em;
+    }
+    .post-body > h2:first-child { margin-top: 0; }
+    .post-body h3 {
+      margin-top: 2em; color: #1e1e1e; font-weight: 600;
+      font-size: clamp(1.02rem, 1.35vw, 1.15rem); line-height: 1.3; letter-spacing: -0.02em;
+    }
+    .post-body strong { color: #1e1e1e; font-weight: 600; }
+    .post-body a { color: #f54b25; text-decoration: underline; text-underline-offset: 3px; }
+    .post-body a:hover { color: #c23c18; }
+    .post-body a:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
+    .post-body ul { padding-left: 1.35em; list-style: disc; }
+    .post-body li + li { margin-top: 0.5em; }
+    .post-body hr { margin-top: 2.4em; border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); }
+
+    /* A four-column table is wider than a phone — it scrolls in its own box
+       rather than pushing the page sideways (html/body use overflow-x: clip,
+       so an overflowing table would just be cut off). */
+    .post-body table {
+      display: block; width: 100%; max-width: 100%; overflow-x: auto;
+      border-collapse: collapse; font-size: 14px; line-height: 1.45;
+    }
+    .post-body thead, .post-body tbody { min-width: 560px; }
+    .post-body tr { display: table; width: 100%; table-layout: fixed; }
+    .post-body th, .post-body td { padding: 9px 12px; border-bottom: 1px solid rgba(0, 0, 0, 0.09); text-align: left; }
+    .post-body thead th {
+      background: #000; color: #fff; font-weight: 600;
+      padding-top: 15px; padding-bottom: 15px;
+      font-size: 13px; letter-spacing: 0.01em; border-bottom: 0;
+    }
+    /* The scope most people land on, marked the way a blog table marks our row. */
+    .post-body tbody tr:has(.row-us) { background: rgba(245, 75, 37, 0.055); }
+    .post-body tbody tr:has(.row-us) td:first-child { box-shadow: inset 3px 0 0 #f54b25; }
+    .post-body .row-us { font-style: normal; }
+
+    /* Pull-out callout — one real takeaway, not a box per section. */
+    .post-body blockquote {
+      padding: 20px 24px; border-left: 3px solid #f54b25;
+      background: #f0ebe5; color: #4e4e4e;
+      line-height: 1.75;
+    }
+    .post-body blockquote > * + * { margin-top: 0.85em; }
+    .post-body blockquote strong { color: #1e1e1e; font-weight: 700; }
+    .post-body blockquote > :first-child { margin-top: 0; }
+    @media (max-width: 480px) { .post-body blockquote { padding: 16px 18px; } }
+
+    /* ===== Intro card =====
+       The opening block sits in its own bordered card, closed by a row of
+       stat tiles — the page's one piece of chrome before the prose starts. */
+    .intro-card {
+      border: 1px solid rgba(0,0,0,.1); border-radius: 14px; background: #fff;
+      padding: 30px 32px 32px;
+    }
+    .intro-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 13px; font-weight: 700; letter-spacing: .01em; color: #c23c18;
+    }
+    .intro-eyebrow::before { content: ''; flex: none; width: 3px; height: 17px; border-radius: 2px; background: #f54b25; }
+    /* .post-body's flow spacing only reaches its own children, so the card sets its own. */
+    .intro-card > * + * { margin-top: 1.3em; }
+    .post-body .intro-card h2 { margin-top: 16px; font-size: clamp(1.4rem, 2.2vw, 1.9rem); line-height: 1.14; }
+    .post-body .intro-card .intro-lead { margin-top: 0.9em; color: #1e1e1e; }
+    @media (max-width: 560px) { .intro-card { padding: 22px 20px 24px; } }
+
+    .stat-tiles {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px; margin-top: 14px;
+    }
+    .stat-tile {
+      border: 1px solid rgba(0,0,0,.1); border-radius: 14px; background: #fff;
+      padding: 21px 16px; text-align: center;
+    }
+    .stat-tile b {
+      display: block; color: #1e1e1e; font-weight: 700;
+      font-size: clamp(1.25rem, 1.8vw, 1.6rem); line-height: 1.1; letter-spacing: -.035em;
+    }
+    .stat-tile span { display: block; margin-top: 6px; font-size: 12.5px; font-weight: 600; color: #4e4e4e; }
+
+    /* ===== "What we prepare and waterproof" cards =====
+       A brand rule across the top of each card is the only colour; everything
+       else stays on the page's hairline system. */
+    .pj-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); margin-top: 1.8em; }
+    .pj-c {
+      border: 1px solid rgba(0,0,0,.1); border-top: 3px solid #f54b25; border-radius: 12px;
+      background: #fff; padding: 20px 19px 22px;
+    }
+    .post-body .pj-c h3 { margin-top: 0; font-size: 15.5px; font-weight: 700; line-height: 1.3; }
+    /* The cards sit three-up in a narrow column, so their copy stays a step
+       below the page's body size — at 16.5px it wraps every three words. */
+    .post-body .pj-c p { margin-top: 9px; font-size: 14px; line-height: 1.6; color: #4e4e4e; }
+
+    /* ===== Process timeline =====
+       Numbered discs joined by a rule — this list really is a sequence, which
+       is why it gets numbers when nothing else on the page does. */
+    .steps { margin-top: 1.8em; }
+    .step { position: relative; padding-left: 54px; padding-bottom: 26px; }
+    .step:last-child { padding-bottom: 0; }
+    .step::before {
+      content: ''; position: absolute; left: 17px; top: 42px; bottom: 0;
+      width: 2px; background: rgba(245,75,37,.22);
+    }
+    .step:last-child::before { display: none; }
+    .step-n {
+      position: absolute; left: 0; top: 0; display: grid; place-items: center;
+      width: 36px; height: 36px; border-radius: 9999px;
+      background: #f54b25; color: #fff; font-size: 14px; font-weight: 700; line-height: 1;
+    }
+    .post-body .step h3 { margin-top: 5px; font-size: 15.5px; font-weight: 700; line-height: 1.3; }
+    .post-body .step p { margin-top: 9px; line-height: 1.7; color: #4e4e4e; }
+    @media (max-width: 480px) {
+      .step { padding-left: 50px; }
+      .step-n { width: 34px; height: 34px; font-size: 14px; }
+      .step::before { left: 16px; top: 40px; }
+    }
+
+    /* At-a-glance company facts. */
+    .factbox {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+      gap: 1px; margin-top: 1.6em; background: rgba(0, 0, 0, 0.11);
+      border: 1px solid rgba(0, 0, 0, 0.11); border-radius: 2px; overflow: hidden;
+    }
+    .factbox > div { padding: 11px 14px; background: #f6f5f3; }
+    .factbox .fb-k {
+      display: block; margin-bottom: 3px;
+      color: #959595; font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .factbox .fb-v { display: block; color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 1.45; }
+    @media (max-width: 520px) {
+      .factbox { grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); }
+      .factbox > div { padding: 9px 11px; }
+    }
+
+    /* ===== FAQ accordion =====
+       The home page's hairline rows, not cards: a rule between questions, a
+       24px +/- mark that turns brand orange when open. Answers ship in the
+       markup expanded and are only collapsed by JS, so they stay readable
+       (and crawlable) if the script never runs. */
+    .faq-list { margin-top: 1.6em; }
+    .faq-c { border-bottom: 1px solid rgba(0,0,0,.1); }
+    .faq-c:first-child { border-top: 1px solid rgba(0,0,0,.1); }
+    .post-body .faq-c h3 { margin-top: 0; }
+    .faq-cq {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 28px;
+      padding: 18px 0; text-align: left; cursor: pointer; color: #1e1e1e;
+      font-size: clamp(0.95rem, 1.1vw, 1.0625rem); font-weight: 600; line-height: 1.4; letter-spacing: -.01em;
+      transition: color .2s;
+    }
+    .faq-cq:hover, .faq-cq:focus-visible { color: #c23c18; }
+    .faq-ci { position: relative; flex: none; width: 20px; height: 20px; }
+    .faq-ci::before, .faq-ci::after {
+      content: ''; position: absolute; background: #1e1e1e;
+      transition: transform .3s ease, opacity .3s ease, background-color .2s;
+    }
+    .faq-ci::before { top: 50%; left: 0; right: 0; height: 1.8px; transform: translateY(-50%); }
+    .faq-ci::after { left: 50%; top: 0; bottom: 0; width: 1.8px; transform: translateX(-50%); }
+    .faq-cq[aria-expanded="true"] .faq-ci::after { transform: translateX(-50%) scaleY(0); opacity: 0; }
+    .faq-cq[aria-expanded="true"] .faq-ci::before { background: #f54b25; }
+    .faq-ca { overflow: hidden; }
+    .post-body .faq-ca p { margin-top: 0; padding-bottom: 20px; line-height: 1.7; color: #4e4e4e; }
+    .js-faq .faq-ca { transition: height .3s cubic-bezier(.4,0,.2,1); }
+    @media (prefers-reduced-motion: reduce) {
+      .js-faq .faq-ca { transition: none; }
+      .faq-ci::before, .faq-ci::after { transition: background-color .2s; }
+    }
+
+    /* ===== Sticky rail =====
+       Capped at the viewport and laid out as a column, so the bottom card is
+       always reachable: the CTA and phone cards keep their height and the TOC
+       scrolls inside its own card. */
+    .rail-sticky {
+      position: sticky; top: 112px;
+      display: flex; flex-direction: column; gap: 20px;
+      max-height: calc(100dvh - 112px - 28px);
+    }
+    .rail-sticky > .rail-cta,
+    .rail-sticky > .rail-card:last-child { flex: none; }
+    .rail-toc { display: flex; flex-direction: column; min-height: 0; }
+    .toc-scroll {
+      min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+      scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+    }
+    .toc-scroll::-webkit-scrollbar { width: 4px; }
+    .toc-scroll::-webkit-scrollbar-thumb { border-radius: 9999px; background: rgba(0, 0, 0, 0.18); }
+
+    .rail-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.01em; color: #959595; }
+    .rail-card { padding: 22px; border: 1px solid rgba(0, 0, 0, 0.1); background: #fff; }
+    .rail-cta { padding: 26px 24px; border: 1px solid rgba(0, 0, 0, 0.1); background: #fff; text-align: center; }
+
+    .toc-list { margin-top: 14px; }
+    .toc-item + .toc-item { border-top: 1px solid rgba(0, 0, 0, 0.08); }
+    .toc-link {
+      display: flex; gap: 10px; padding: 11px 0;
+      font-size: 14px; line-height: 1.45; letter-spacing: -0.01em; color: #4e4e4e;
+      transition: color 0.2s ease;
+    }
+    .toc-link::before {
+      content: ''; flex: none; width: 5px; height: 5px; margin-top: 7px;
+      border-radius: 9999px; background: rgba(0, 0, 0, 0.22);
+      transition: background-color 0.2s ease;
+    }
+    .toc-link:hover { color: #1e1e1e; }
+    .toc-link:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
+    .toc-link.is-active { color: #f54b25; font-weight: 600; }
+    .toc-link.is-active::before { background: #f54b25; }
+  </style>
+
+  <!-- ===================== HERO (identical to the other service pages) ===================== -->
+  <section id="hero" class="relative min-h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
+    <!-- Phone: a still job photo instead of the hero video — a curbless shower
+         we built, and it spares cellular the ~2 MB clip. -->
+    <img src="/assets/images/gallery-showers/showers-gray-curbless-glass.webp" alt="" aria-hidden="true" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover md:hidden" />
+    <video class="absolute inset-0 w-full h-full object-cover hidden md:block" data-desktop-only muted loop playsinline preload="none" data-webm="/assets/video/hero-0715.webm" data-mp4="/assets/video/hero-0715.mp4" poster="/assets/images/hero-poster-0715.webp" aria-hidden="true" tabindex="-1"></video>
+    <div class="absolute inset-0 bg-black/65"></div>
+    <div class="relative z-20 h-full min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:pt-[172px] sm:pb-24 lg:pb-[90px] gap-5 lg:gap-6">
+      <TrustPill />
+      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,3rem)] sm:text-[clamp(3rem,6.8vw,6.05rem)] text-center">
+        <h1>
+          <span>Sarasota <br class="sm:hidden" />&amp; Bradenton Area</span><br />
+          <span class="text-brand block">Curbless &amp; <br class="sm:hidden" />Walk-In Showers</span>
+        </h1>
+        <div class="flex flex-col items-center gap-3 sm:gap-5">
+          <span>Contractors</span>
+          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[560px]">Step in, not over. Zero-threshold pans, linear drains and frameless glass — built on a Schluter®-certified assembly and flood-tested for 24 hours before a single tile is set.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center gap-8">
+        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
+          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(503) 781-4657</a>
+        </div>
+        <!-- Bottom row: stats on the left, the marks we build to on the right.
+             Both are trust signals, not sections — the label is a <p>, never a
+             heading, so the page outline starts at the H1 and stays clean. -->
+        <div class="w-full flex flex-col gap-8 lg:mt-[96px] lg:mx-auto lg:max-w-[1320px] lg:flex-row lg:items-end lg:justify-between">
+          <div class="flex flex-col items-start gap-3 sm:gap-4">
+            <p class="font-normal capitalize text-[14.5px] sm:text-[16px] lg:text-[17px] leading-[1.2] tracking-[-0.03em] text-white/80">Why Gulf Coast Homeowners Trust VL Pro:</p>
+            <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">Years of excellence</span>
+              </div>
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="100">100</span>%</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">Warranty Coverage</span>
+              </div>
+              <div class="flex flex-col items-start">
+                <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="1300">1300</span>+</span>
+                <span class="font-poppins text-[13px] sm:text-[14px] font-semibold capitalize text-white tracking-[-0.03em] leading-[1.25]">Projects Completed</span>
+              </div>
+            </div>
+          </div>
+          <!-- Credential marks: each logo carries its own claim, so the row states
+               what the badges mean. Images are decorative — the label names them. -->
+          <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
+            </div>
+            <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+              <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Featured<br />On</p>
+              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-white.webp" width="480" height="134" alt="Yahoo" class="block h-[22px] sm:h-7 w-auto opacity-90" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CURBED OR CURBLESS ===================== -->
+  <section id="before-after" class="bg-white" data-nav-theme="light">
+    <div class="mx-auto max-w-[1600px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[100px]">
+      <div class="grid gap-12 lg:gap-16 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:items-center">
+
+        <div>
+          <h2 class="font-bold text-ink leading-[1.1] tracking-[-0.03em] text-[clamp(1.9rem,3.2vw,2.8rem)]">
+            Curbed or curbless
+          </h2>
+          <p class="mt-6 text-[13.5px] sm:text-[16.5px] leading-[1.65] tracking-[-0.01em] text-graydesc max-w-[42ch]">
+            Both of these are walk-in showers. The one on the left steps over a low tiled curb; the one on the right has none, so the bathroom floor runs straight in. The difference is four inches of tile — and everything that had to happen under the slab to remove it.
+          </p>
+
+          {baPairs.length > 1 && (
+            <div class="mt-9 flex items-center gap-5">
+              <p class="bax-count"><strong id="baxNum">1</strong> / {baPairs.length}</p>
+              <div class="flex items-center gap-2.5">
+                {baPairs.map((_, i) => (
+                  <button type="button" class:list={['bax-dot', i === 0 && 'is-active']} data-bax-dot={i} aria-label={`Show project ${i + 1}`}></button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div class="relative">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+            <figure class="bax-shot">
+              <img id="baxBefore" src={baPairs[0].before} alt={baPairs[0].beforeAlt} loading="lazy" decoding="async" />
+              <figcaption class="bax-tag bax-tag-before" id="baxTagBefore">{baPairs[0].beforeTag}</figcaption>
+            </figure>
+            <figure class="bax-shot">
+              <img id="baxAfter" src={baPairs[0].after} alt={baPairs[0].afterAlt} loading="lazy" decoding="async" />
+              <figcaption class="bax-tag bax-tag-after" id="baxTagAfter">{baPairs[0].afterTag}</figcaption>
+            </figure>
+          </div>
+
+          {baPairs.length > 1 && (
+            <>
+              <button type="button" class="btn bax-arrow bax-prev" id="baxPrev" aria-label="Previous project">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+              </button>
+              <button type="button" class="btn bax-arrow bax-next" id="baxNext" aria-label="Next project">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ARTICLE BODY + RAIL ===================== -->
+  <div class="bg-[#f6f5f3]" data-nav-theme="light">
+    <div class="post-wrap px-5 sm:px-10 lg:px-[60px] py-16 lg:py-20">
+      <div class="grid gap-x-[60px] xl:gap-x-[80px] gap-y-12 lg:grid-cols-[minmax(0,1fr)_340px]">
+
+        <div class="min-w-0">
+          <div class="post-body">
+
+            <div class="intro-card">
+              <p class="intro-eyebrow">Family-owned on the Suncoast since 2004</p>
+              <h2 id="walk-in">Bradenton &amp; Sarasota Curbless &amp; Walk-In Showers</h2>
+              <p class="intro-lead">A shower you step into rather than climb over — designed, permitted and built by one in-house crew.</p>
+              <p>A walk-in shower is the change people notice every single morning. No tub wall to swing a leg over, no sliding door track collecting grime, and a room that looks twice its size the moment the glass replaces a curtain. Curbless takes it one step further: the bathroom floor runs straight into the shower with nothing to step over at all.</p>
+              <p>What makes that work is not visible in any photo. A shower with no curb has no backstop, so every drop of water is controlled by the fall built into the pan, the drain that carries it, and the membrane that keeps it out of your framing. Get those three right and a curbless shower is drier than the curbed one it replaced. Get them wrong and you have a wet bathroom floor for as long as you own the house.</p>
+              <p>We build both here, and we will tell you plainly which one your room wants. Twenty-two years and more than 1,300 projects in, we have opened up enough Florida bathrooms to know what the slab is likely to allow before we start cutting it.</p>
+            </div>
+
+            <div class="stat-tiles">
+              <div class="stat-tile"><b>0"</b><span>Threshold on a curbless build</span></div>
+              <div class="stat-tile"><b>24 hrs</b><span>Flood test before tile</span></div>
+              <div class="stat-tile"><b>Schluter®</b><span>Certified installers</span></div>
+              <div class="stat-tile"><b>Full</b><span>Workmanship warranty</span></div>
+            </div>
+
+            <h2 id="types">The showers we build</h2>
+            <p>Every one of these is a walk-in. Which one fits comes down to your slab, your drain, and how long you plan to be in the house:</p>
+
+            <div class="pj-grid">
+              <div class="pj-c">
+                <h3>Curbless &amp; zero-threshold</h3>
+                <p>No curb, no lip, no trip hazard — the bathroom floor carries straight into the shower over a recessed or engineered sloped pan, usually draining to a linear drain at the back wall.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Low-curb walk-in</h3>
+                <p>The workhorse: a 3–5" tiled curb, frameless glass, and none of the slab work. Most of the look and most of the daily comfort of curbless, at a noticeably lower number.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Tub-to-shower conversion</h3>
+                <p>The alcove tub nobody has used in fifteen years, rebuilt as a roomy walk-in shower in the same footprint — the most requested upgrade in Bradenton and Sarasota. <a href="/blog/tub-to-shower-conversion-bradenton/">What a conversion involves</a>.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Wet rooms &amp; doorless</h3>
+                <p>Shower and tub sharing one waterproofed, fully tiled zone, or a walk-in long enough to skip the door entirely. The whole area gets the shower's waterproofing, not just the pan.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Accessible &amp; roll-in</h3>
+                <p>A 36" clear opening, a 1/2" beveled threshold or none at all, a bench, and real blocking set in the walls for grab bars now or later — built to read as a good bathroom, not a clinical one.</p>
+              </div>
+              <div class="pj-c">
+                <h3>Frameless glass enclosures</h3>
+                <p>Templated off finished tile rather than off framing, so the panels sit plumb and the seams close. Coated glass as standard — untreated glass spots within a season in water this hard.</p>
+              </div>
+            </div>
+
+            <h2 id="curbless">Curbless on a Florida slab</h2>
+            <p>Almost every home between Palmetto and Venice is slab-on-grade, and that is the whole story of curbless construction here. A shower pan needs roughly a quarter inch of fall per foot to drain. In a house with a crawlspace or joists you borrow that depth from the framing. On a slab there is nothing to borrow from — so the depth has to be made.</p>
+            <p>There are two honest ways to do it, and we price whichever your room actually allows:</p>
+            <ul>
+              <li><strong>Recess the slab.</strong> Saw-cut the shower footprint, break out the concrete, re-route the drain, and re-pour low so the finished tile lands flush with the bathroom floor. The cleanest result, and the one that needs a permit and an inspection.</li>
+              <li><strong>Build the floor up.</strong> An engineered sloped assembly over the existing slab, with the rest of the bathroom floor raised to meet it and the transition handled at the doorway. No concrete work — but it only works where the door swing and the threshold height allow it.</li>
+            </ul>
+            <p>A <strong>linear drain</strong> set against the back wall does the rest. Because the entire pan can then slope in one direction instead of four, large-format tile can run into the shower uncut, the fall is gentler underfoot, and there is no dish-shaped low point at the centre of the floor.</p>
+
+            <blockquote>
+              <p><strong>The detail that decides it:</strong> where your existing drain sits. A curbless shower wants its drain at the wall, and moving one on a slab means cutting concrete — which is exactly the work a curb exists to avoid. We check the drain location at the walkthrough, before anyone falls in love with a drawing, because it is the difference between a straightforward build and a four-figure line item.</p>
+            </blockquote>
+
+            <h2 id="why-vl-pro">Why homeowners choose VL Pro</h2>
+            <p>There are a lot of remodelers between Palmetto and Venice. Here is what actually differs about working with us:</p>
+            <ul>
+              <li><strong>One in-house crew.</strong> The same people demo the alcove and set the last piece of glass trim. No subcontractor handoffs, and nobody blaming the last trade.</li>
+              <li><strong>Schluter®-certified waterproofing.</strong> Every pan is built on a certified bonded membrane and flood-tested for 24 hours before a single tile goes on. See <a href="/services/waterproofing-subfloor-preparation/">how the assembly goes in</a>.</li>
+              <li><strong>Both versions priced.</strong> You get the curbed number and the curbless number for your room at the walkthrough, so the decision is made on a price rather than a feeling.</li>
+              <li><strong>Permits pulled and inspected.</strong> We file as the licensed contractor of record with Manatee County, Sarasota County or your city building department, and we meet the inspector.</li>
+              <li><strong>Glass measured off finished tile.</strong> Templated after the tile is set, never off the framing — which is why our panels close instead of needing a bead of caulk to hide the gap.</li>
+              <li><strong>Certified for the surfaces we install.</strong> Large-format tile, natural stone, XL porcelain slab and glass tile, and members of the National Tile Contractors Association.</li>
+            </ul>
+
+            <h2 id="process">How your shower gets built</h2>
+            <p>Every shower we build runs through the same four phases, so you always know where the project stands and what happens next.</p>
+
+            <div class="steps">
+              <div class="step">
+                <span class="step-n" aria-hidden="true">1</span>
+                <h3>Walkthrough &amp; detailed estimate</h3>
+                <p>We measure the room, find the existing drain, check what the slab and the door threshold will allow, and talk through curbed versus curbless honestly. You leave with an itemized scope, both prices and a start date — not a range. No cost, no obligation.</p>
+              </div>
+              <div class="step">
+                <span class="step-n" aria-hidden="true">2</span>
+                <h3>Design, selections &amp; permit</h3>
+                <p>Drain type and position, pan slope, bench and niche layout, tile, fixtures and glass are settled and ordered before anything comes apart. If the build cuts the slab or moves a drain, we pull the permit while the materials are in transit.</p>
+              </div>
+              <div class="step">
+                <span class="step-n" aria-hidden="true">3</span>
+                <h3>Demo, slope &amp; waterproofing</h3>
+                <p>Out comes the tub or the old pan. We recess or build up the floor, set the drain, and install blocking for the bench and grab bars while the walls are open. Then the membrane goes on, gets tied in at every corner and at the entry, and the pan is filled and held for 24 hours before tile.</p>
+              </div>
+              <div class="step">
+                <span class="step-n" aria-hidden="true">4</span>
+                <h3>Tile, glass &amp; walkthrough</h3>
+                <p>Tile is set to a planned grid so the cuts land where nobody looks, grout is sealed, fixtures go on, and the glass is templated off the finished tile and installed last. We clean the room, walk it with you, and fix everything on your list before we call it done.</p>
+              </div>
+            </div>
+
+            <h2 id="cost">What a walk-in shower costs in Bradenton and Sarasota</h2>
+            <p>Three things move the number: whether there is a curb, whether the drain moves, and what goes on the walls. Most walk-in showers in this market run between <strong>$9,000 and $20,000</strong> and take two to four weeks, plus two to three weeks for glass. These are typical ranges for our area — your estimate is built to your actual room.</p>
+
+            <table>
+              <thead>
+                <tr><th>Scope</th><th>Typical range</th><th>Timeline</th><th>Includes</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Low-curb walk-in</td>
+                  <td>$9K – $14K</td>
+                  <td>2–3 weeks</td>
+                  <td>Existing footprint and drain, waterproofed pan, tiled curb and walls, niche, frameless glass panel.</td>
+                </tr>
+                <tr>
+                  <td><span class="row-us">Curbless walk-in</span></td>
+                  <td>$13K – $20K</td>
+                  <td>3–4 weeks</td>
+                  <td>The above plus slab recess or built-up sloped assembly, linear drain, flush entry, bench and grab-bar blocking.</td>
+                </tr>
+                <tr>
+                  <td>Wet room / primary suite</td>
+                  <td>$20K and up</td>
+                  <td>4–6 weeks</td>
+                  <td>Larger waterproofed zone, two shower positions or a tub inside the glass, stone or slab walls, custom enclosure.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>Two items sit outside those ranges often enough to name: relocating a drain on slab adds roughly <strong>$2,000–$6,000</strong>, and if demolition uncovers a rotted subfloor or a pan that has been leaking for years, you get a photo of it and a price for the repair before we carry on.</p>
+
+            <h2 id="accessible">Aging in place, done well</h2>
+            <p>Most of the curbless showers we build are not for a wheelchair today. They are for a homeowner who intends to stay in the house, and who would rather do the work once — while the walls are already open — than do it under pressure after a fall.</p>
+            <p>That means a wide opening, a pan with no lip at all, slip-resistant tile in the pan rather than polished stone, a bench sized to actually sit on, and real wood blocking set behind the tile so grab bars can be mounted anywhere on those walls later without opening anything up. Where the build is fully accessible, ADA guidance asks for a 60" × 30" clear interior, a 36" opening, and no threshold over 1/2" with that half inch beveled.</p>
+            <p>None of it has to look medical. Specified properly, the bar is a towel bar, the bench is a ledge, and the flush floor just reads as a bigger room.</p>
+
+            <h2 id="offer">Save on your project</h2>
+            <h3>$1000 off your project, plus a free in-home design consultation</h3>
+            <p>Ask about the current offer when you book. Terms and restrictions apply, and it is valid on projects over $10,000. The in-home consultation is free either way — we measure the room, find the drain, and price the curbed and curbless versions side by side before you commit to anything.</p>
+
+            <h2 id="faqs">Bradenton and Sarasota walk-in shower FAQs</h2>
+            <div class="faq-list" id="faqList">
+              {faqs.map((item) => (
+                <div class="faq-c">
+                  <h3>
+                    <button type="button" class="faq-cq" aria-expanded="true">
+                      <span class="pr-4">{item.q}</span>
+                      <span class="faq-ci" aria-hidden="true"></span>
+                    </button>
+                  </h3>
+                  <div class="faq-ca"><p>{item.a}</p></div>
+                </div>
+              ))}
+            </div>
+
+            <h2 id="company">About VL Proconstruction</h2>
+            <p><strong>{site.legalName}</strong> is a family-owned remodeling company based in Bradenton, Florida, serving the Bradenton–Sarasota metro and the wider Suncoast — Palmetto, Ellenton, Parrish, Lakewood Ranch, University Park, Nokomis, Venice, Anna Maria Island, Holmes Beach, Bradenton Beach, Longboat Key and Siesta Key. Licensed and insured, Schluter®-certified for waterproofing, NTCA members, with in-house design and trades and full workmanship warranty on every project. Reach us at <a href={site.phoneHref}>{site.phone}</a>, or see <a href="/locations/">everywhere we work</a>.</p>
+
+            <hr />
+            <p>Looking at the whole room? We also do <a href="/services/bathroom-remodeling/">full bathroom remodels</a>, <a href="/services/custom-showers/">custom showers</a>, <a href="/services/tile-natural-stone/">tile and natural stone</a>, and <a href="/services/waterproofing-subfloor-preparation/">waterproofing and subfloor prep</a>.</p>
+          </div>
+        </div>
+
+        <!-- Rail — desktop only: on a phone it would only push the article
+             down, and the sticky mobile CTA already covers the action. -->
+        <aside class="hidden lg:block">
+          <div class="rail-sticky">
+            <div class="rail-cta">
+              <p class="text-[22px] font-bold leading-[1.2] tracking-[-0.025em] text-ink">
+                Get a free<br />shower estimate
+              </p>
+              <p class="mt-3 text-[13.5px] leading-[1.55] text-graydesc">
+                We measure the room and price the curbed and curbless versions side by side.
+              </p>
+              <a href="#estimate" class="btn js-open-estimate mt-6 inline-flex items-center justify-center w-full h-12 rounded-full bg-brand hover:bg-[#e03f1c] text-white font-semibold text-[14px] capitalize">
+                Request Estimate
+              </a>
+            </div>
+
+            <nav class="rail-card rail-toc" aria-labelledby="tocTitle">
+              <p id="tocTitle" class="rail-eyebrow">On this page</p>
+              <!-- data-lenis-prevent: without it Lenis eats the wheel event
+                   over this box and scrolls the page instead of the list. -->
+              <ol class="toc-list toc-scroll" data-lenis-prevent>
+                {toc.map((h) => (
+                  <li class="toc-item">
+                    <a href={`#${h.slug}`} class="toc-link">{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+
+            <div class="rail-card text-center">
+              <p class="text-[13.5px] leading-[1.55] text-graydesc">
+                Call us directly — we answer weekdays, 8am–6pm.
+              </p>
+              <a href={site.phoneHref} class="btn mt-3 inline-block font-poppins text-[20px] font-bold tracking-[-0.01em] text-ink hover:text-brand">
+                {site.phone}
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- Closing form — inline step 1 of the estimate wizard. -->
+  <EstimateInline />
+
+  <script is:inline define:vars={{ baPairs }}>
+    // Stage carousel — swaps both photos and both tags at once. No autoplay:
+    // the reader compares the pair at their own pace.
+    (function () {
+      const prev = document.getElementById('baxPrev');
+      const next = document.getElementById('baxNext');
+      const before = document.getElementById('baxBefore');
+      const after = document.getElementById('baxAfter');
+      const tagBefore = document.getElementById('baxTagBefore');
+      const tagAfter = document.getElementById('baxTagAfter');
+      const num = document.getElementById('baxNum');
+      const dots = [...document.querySelectorAll('[data-bax-dot]')];
+      if (!before || !after || baPairs.length < 2) return;
+
+      let at = 0;
+      const show = (i) => {
+        at = (i + baPairs.length) % baPairs.length;
+        const p = baPairs[at];
+        before.src = p.before; before.alt = p.beforeAlt;
+        after.src = p.after; after.alt = p.afterAlt;
+        if (tagBefore) tagBefore.textContent = p.beforeTag;
+        if (tagAfter) tagAfter.textContent = p.afterTag;
+        if (num) num.textContent = String(at + 1);
+        dots.forEach((d, di) => d.classList.toggle('is-active', di === at));
+      };
+      prev?.addEventListener('click', () => show(at - 1));
+      next?.addEventListener('click', () => show(at + 1));
+      dots.forEach((d, di) => d.addEventListener('click', () => show(di)));
+    })();
+
+    // FAQ accordion — single-open. Answers ship expanded and are collapsed
+    // here, so they stay readable if this script never runs.
+    (function () {
+      const list = document.getElementById('faqList');
+      if (!list) return;
+      list.classList.add('js-faq');
+      const items = [...list.querySelectorAll('.faq-c')].map((c) => ({
+        q: c.querySelector('.faq-cq'),
+        a: c.querySelector('.faq-ca'),
+      }));
+      const collapse = (it) => { it.q.setAttribute('aria-expanded', 'false'); it.a.style.height = '0px'; };
+      const expand = (it) => { it.q.setAttribute('aria-expanded', 'true'); it.a.style.height = it.a.scrollHeight + 'px'; };
+      items.forEach((it) => {
+        collapse(it);
+        it.q.addEventListener('click', () => {
+          const open = it.q.getAttribute('aria-expanded') === 'true';
+          items.forEach(collapse);
+          if (!open) expand(it);
+        });
+      });
+      window.addEventListener('resize', () => {
+        const open = items.find((it) => it.q.getAttribute('aria-expanded') === 'true');
+        if (open) open.a.style.height = open.a.scrollHeight + 'px';
+      }, { passive: true });
+    })();
+
+    // Count-up animation for the hero stats
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const nums = document.querySelectorAll('.stat-num');
+      const fmt = (v, d) => d ? v.toFixed(d) : String(Math.round(v));
+      const runCount = (el) => {
+        const target = parseFloat(el.dataset.count);
+        const dec = (el.dataset.count.split('.')[1] || '').length;
+        const duration = 1500; let st = null;
+        const tick = (now) => { if (st === null) st = now; const p = Math.min((now - st) / duration, 1); const e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(target * e, dec); if (p < 1) requestAnimationFrame(tick); else el.textContent = fmt(target, dec); };
+        requestAnimationFrame(tick);
+      };
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        nums.forEach((el) => { el.textContent = fmt(parseFloat(el.dataset.count), (el.dataset.count.split('.')[1] || '').length); });
+      } else {
+        nums.forEach((el) => { el.textContent = fmt(0, (el.dataset.count.split('.')[1] || '').length); });
+        const io = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) { runCount(e.target); io.unobserve(e.target); } }); }, { threshold: 0.6 });
+        nums.forEach((el) => io.observe(el));
+      }
+    })();
+
+    // Paints the section the reader is in. Nothing here moves the page — the
+    // links are plain anchors, so this only highlights the current one.
+    (() => {
+      const links = [...document.querySelectorAll('.toc-link')];
+      if (!links.length || !('IntersectionObserver' in window)) return;
+      const byId = new Map(
+        links.map((a) => [decodeURIComponent(a.hash.slice(1)), a]).filter(([id]) => id),
+      );
+      const targets = [...byId.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+      if (!targets.length) return;
+
+      let current = null;
+      const setActive = (id) => {
+        if (id === current) return;
+        current = id;
+        links.forEach((a) => a.classList.remove('is-active'));
+        byId.get(id)?.classList.add('is-active');
+      };
+      const io = new IntersectionObserver(
+        () => {
+          // The heading nearest the top of the viewport that is still above it.
+          const above = targets
+            .map((el) => ({ el, top: el.getBoundingClientRect().top }))
+            .filter((t) => t.top <= 160);
+          const pick = above.length ? above[above.length - 1].el : targets[0];
+          setActive(pick.id);
+        },
+        { rootMargin: '-140px 0px -70% 0px', threshold: [0, 1] },
+      );
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
+</BaseLayout>
