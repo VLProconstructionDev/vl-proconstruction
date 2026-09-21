@@ -51,7 +51,7 @@ trust:
 
 localTitle: What laying a floor in | Sarasota actually involves
 localPoints:
-  - title: Slab moisture decides the floor
+  - title: The slab reading picks the product
     body: >-
       A slab in this climate gives off vapor all year, and that is what cups
       and crowns wood floors. The reading comes first and the product second –
@@ -124,6 +124,7 @@ project:
     Wide-plank light engineered oak running from a dining room down the hallway
     of a Palmer Ranch home in Sarasota, with a reclaimed-wood accent wall
 
+reviewsTitle: Sarasota homeowners on our floors
 reviews:
   - quote: Absolutely amazing work fixed our floors after hurricane!
     name: Avetal Mor
@@ -149,20 +150,21 @@ reviews:
     avatar: /assets/images/review-2-avatar.webp
     image: /assets/images/review-2.webp
 
+processTitle: Slab reading to final threshold
 process:
-  - title: Consult
+  - title: Assess
     body: >-
       We measure every room, take moisture and flatness readings off the slab,
       and settle product, plank width, and direction with you – then leave a
       written line-item price.
     image: /assets/images/process-plan.webp
-  - title: Design
+  - title: Specify
     body: >-
       We confirm the floor the moisture reading supports, file the association
       packet with its sound rating where there is one, then order with the
       right overage and acclimate on site.
     image: /assets/images/process-2.webp
-  - title: Build
+  - title: Install
     body: >-
       Old floor and baseboards come out, the subfloor is ground and levelled,
       the vapor barrier goes down, and the planks are racked so seams fall
@@ -206,7 +208,7 @@ pricing:
       - Site-finished sand-and-seal option
       - Custom stain matching and borders
       - Full trim carpentry package
-areaTitle: Sarasota and the rest of Sarasota County
+areaTitle: Floors across Sarasota County
 areaBody: >-
   Floors go in across Sarasota County – the downtown and St. Armands towers
   where the association sets a sound rating, the mid-century slabs of Arlington

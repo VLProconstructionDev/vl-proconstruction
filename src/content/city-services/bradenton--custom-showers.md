@@ -120,6 +120,7 @@ project:
     hexagon tile feature wall, flanked by two arched, marble-lined walk-in
     shower entries
 
+reviewsTitle: Bradenton shower owners, in their words
 reviews:
   - quote: >-
       Vlad and his team are phenomenal! We couldn't be happier with our new
@@ -149,6 +150,7 @@ reviews:
     avatar: /assets/images/review-2-avatar.webp
     image: /assets/images/review-2.webp
 
+processTitle: How a Bradenton shower gets built
 process:
   - title: Consult
     body: >-

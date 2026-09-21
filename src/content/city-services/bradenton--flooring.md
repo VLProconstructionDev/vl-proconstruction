@@ -114,6 +114,7 @@ project:
     Wide-plank light engineered oak running from a dining room down the hallway of
     a Palma Sola home in Bradenton, with a reclaimed-wood accent wall
 
+reviewsTitle: Bradenton floors, reviewed by the owners
 reviews:
   - quote: Absolutely amazing work fixed our floors after hurricane!
     name: Avetal Mor
@@ -139,20 +140,21 @@ reviews:
     avatar: /assets/images/review-2-avatar.webp
     image: /assets/images/review-2.webp
 
+processTitle: How your Bradenton floor goes in
 process:
-  - title: Consult
+  - title: Assess
     body: >-
       We measure the rooms, test the slab or subfloor for moisture and
       flatness, talk through product, plank width, and direction, and leave
       you with a written line-item price.
     image: /assets/images/process-plan.webp
-  - title: Design
+  - title: Specify
     body: >-
       We confirm the floor the moisture reading supports, order it with the
       right overage, and let it acclimate on site for the manufacturer's
       window with humidity logged.
     image: /assets/images/process-2.webp
-  - title: Build
+  - title: Install
     body: >-
       Old floor and baseboards out, subfloor ground and self-levelled, vapor
       barrier down, then planks racked and installed with expansion gaps held
@@ -196,7 +198,7 @@ pricing:
       - Site-finished sand-and-seal option
       - Custom stain matching and borders
       - Full trim carpentry package
-areaTitle: Bradenton and the rest of Manatee County
+areaTitle: Floors across Manatee County
 areaBody: >-
   We lay floors across Manatee County from our Bradenton base – north through
   Palmetto and Ellenton, east to Parrish and the Lakewood Ranch villages, and

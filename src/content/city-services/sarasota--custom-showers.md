@@ -130,6 +130,7 @@ project:
     hexagon tile feature wall, flanked by two arched, marble-lined walk-in
     shower entries
 
+reviewsTitle: What Sarasota clients tell us
 reviews:
   - quote: >-
       Vlad and his team are phenomenal! We couldn't be happier with our new
@@ -159,6 +160,7 @@ reviews:
     avatar: /assets/images/review-2-avatar.webp
     image: /assets/images/review-2.webp
 
+processTitle: From first visit to finished glass
 process:
   - title: Consult
     body: >-

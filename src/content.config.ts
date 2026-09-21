@@ -145,6 +145,8 @@ const cityServices = defineCollection({
     }),
 
     // — 7. Reviews (this service AND this city) —
+    // Optional heading above the carousel; omit it for the shared default.
+    reviewsTitle: z.string().optional(),
     reviews: z
       .array(
         z.object({
@@ -158,6 +160,8 @@ const cityServices = defineCollection({
       .default([]),
 
     // — 8. Process, 4 steps —
+    // Optional heading; omit it and the layout falls back to "Our Process".
+    processTitle: z.string().optional(),
     process: z
       .array(z.object({ title: z.string(), body: z.string(), image: z.string() }))
       .default([]),

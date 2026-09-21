@@ -60,7 +60,7 @@ localPoints:
       slabs, often with original terrazzo or old vinyl and mastic. Terrazzo can
       be tiled over – but only after it's scarified and bonded properly, and
       only once we know what's under the vinyl.
-  - title: Stone sealed for humidity and salt air
+  - title: Sealed for salt air, stone by stone
     body: >-
       Marble, travertine, and limestone each get an impregnating sealer on their
       own schedule, based on absorption rate – the difference between stone that
@@ -122,6 +122,7 @@ project:
     backsplash set in a vertical stack, white shaker cabinets, and brass
     hardware
 
+reviewsTitle: Sarasota tile clients on the result
 reviews:
   - quote: >-
       Abel and his brothers are top notch installers. I have been in the
@@ -152,21 +153,22 @@ reviews:
     avatar: /assets/images/review-4-avatar.webp
     image: /assets/images/review-4.webp
 
+processTitle: Dry-lay to sealed grout
 process:
-  - title: Consult
+  - title: Survey
     body: >-
       We measure the rooms, read the substrate for flatness and moisture, and
       settle format, pattern, and grout color with you – then leave a written
       line-item price.
     image: /assets/images/process-plan.webp
-  - title: Design
+  - title: Lay Out
     body: >-
       We dry-lay the pattern, set the starting line off the longest sightline,
       confirm transitions and trim, then – in a condo – file the association
       packet with the sound rating and book the elevator before tile is
       ordered.
     image: /assets/images/process-2.webp
-  - title: Build
+  - title: Set
     body: >-
       Old floor up, substrate ground and levelled, membrane rolled and bonded,
       then tile set by hand with full coverage behind every piece. Grout tooled,
@@ -210,7 +212,7 @@ pricing:
       - Impregnating sealer, applied to absorption rate
       - Honing and grout-haze polishing
       - Stone-specific setting mortar and grout
-areaTitle: Sarasota and the rest of Sarasota County
+areaTitle: Tile and stone across Sarasota County
 areaBody: >-
   We set tile everywhere in Sarasota County – the Siesta Key and Longboat
   condos, downtown and St. Armands, the 1950s and 60s houses in Gulf Gate and

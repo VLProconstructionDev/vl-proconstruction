@@ -116,6 +116,7 @@ project:
     Kitchen in West Bradenton with a marble-look porcelain backsplash set in a
     vertical stack, white shaker cabinets, and brass hardware
 
+reviewsTitle: What Manatee County tile clients say
 reviews:
   - quote: >-
       Abel and his brothers are top notch installers. I have been in the
@@ -146,20 +147,21 @@ reviews:
     avatar: /assets/images/review-4-avatar.webp
     image: /assets/images/review-4.webp
 
+processTitle: How a Bradenton tile floor is set
 process:
-  - title: Consult
+  - title: Survey
     body: >-
       We measure the rooms, check the slab or subfloor for flatness and
       moisture, talk through format, layout, and grout, and leave you with a
       written line-item price.
     image: /assets/images/process-plan.webp
-  - title: Design
+  - title: Lay Out
     body: >-
       We dry-lay the pattern, set the starting line off the longest sightline,
       confirm transitions and trim, then order tile with the right overage
       before demo starts.
     image: /assets/images/process-2.webp
-  - title: Build
+  - title: Set
     body: >-
       Old floor up, substrate ground and self-levelled, membrane installed,
       then every tile set by hand with full mortar coverage. Grout tooled,
@@ -203,7 +205,7 @@ pricing:
       - Impregnating sealer, applied to absorption rate
       - Honing and grout-haze polishing
       - Stone-specific setting mortar and grout
-areaTitle: Bradenton and the rest of Manatee County
+areaTitle: Tile and stone across Manatee County
 areaBody: >-
   Tile and stone work runs out from Bradenton across the whole county –
   Palmetto and Ellenton, Parrish and Lakewood Ranch east of I-75, Bayshore

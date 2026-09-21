@@ -392,13 +392,13 @@ const SHOW_RELATED = false;
 
   <!-- ============ 7 · REVIEWS ============ -->
   <!-- UI: shared ReviewsSection, with this city + service's own reviews. -->
-  <ReviewsSection reviews={cityReviews} tone="white" pad="pt-20 lg:pt-[110px] pb-8 lg:pb-12" />
+  <ReviewsSection reviews={cityReviews} tone="white" pad="pt-20 lg:pt-[110px] pb-8 lg:pb-12" title={d.reviewsTitle} />
 
   <!-- ============ 8 · PROCESS ============ -->
   <!-- UI: service-page #process sticky steps + parallax photos. -->
   <section id="process" class="bg-white" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-12 lg:pt-16">
-      <h2 class="font-semibold capitalize text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.9rem,7.5vw,5.75rem)]">Our Process</h2>
+      <h2 class="font-semibold capitalize text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.9rem,7.5vw,5.75rem)]">{d.processTitle ?? 'Our Process'}</h2>
     </div>
     <div class="bg-[#faf9f8] mt-10 lg:mt-14 pb-20 lg:pb-[100px]">
       <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px]">
