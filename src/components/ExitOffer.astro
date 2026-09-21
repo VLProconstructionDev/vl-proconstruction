@@ -32,6 +32,10 @@ const { auto = false } = Astro.props;
  *
  * `?offer=1` on the URL forces it open for previewing.
  *
+ * `window.vlShowOffer()` opens it on demand — the way a page with the
+ * automatic triggers disarmed (`autoOffer={false}` on BaseLayout) brings the
+ * offer up at its own moment, e.g. the guide page right after a signup.
+ *
  * Body-lock mirrors EstimateWizard's `top: -scrollY` approach so the two
  * behave identically with Lenis running.
  */
@@ -633,6 +637,10 @@ const { auto = false } = Astro.props;
         dwellTimer = null;
       }
     }
+
+    // Manual opener for pages that disarm the automatic triggers and decide
+    // their own moment (the guide landing page calls this after signup).
+    window.vlShowOffer = show;
 
     if (preview) {
       show();
