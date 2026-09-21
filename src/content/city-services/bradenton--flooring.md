@@ -41,8 +41,9 @@ trust:
   - icon: map
     title: Based in Bradenton
     body: >-
-      We're based in 34211, so most of Manatee County is inside a 20-minute
-      drive. Punch-list items get handled the same week, not the next month.
+      Our shop is in 34211, so the acclimation window gets checked in person
+      instead of guessed at over the phone – and a board that lifts six months
+      later is a short drive, not a scheduling problem.
 
 localTitle: What laying a floor in | Bradenton actually involves
 localPoints:
@@ -69,8 +70,9 @@ localImageAlt: >-
 
 includedTitle: What's included in a Bradenton floor installation
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  Everything below is in the quote: the tear-out, whatever prep the slab turns
+  out to need, the floor itself, and the trim that closes it. No line items
+  appear later.
 included:
   # Same three cards as /services/flooring, copy rewritten for Bradenton.
   - title: Hardwood Flooring
@@ -196,10 +198,14 @@ pricing:
       - Full trim carpentry package
 areaTitle: Bradenton and the rest of Manatee County
 areaBody: >-
-  Bradenton is home base, and we work the whole Suncoast from here – Palmetto
-  and Ellenton to the north, Lakewood Ranch and Parrish east of I-75, and out to
-  Anna Maria, Holmes Beach, and Longboat Key on the water.
+  We lay floors across Manatee County from our Bradenton base – north through
+  Palmetto and Ellenton, east to Parrish and the Lakewood Ranch villages, and
+  over the bridges to Anna Maria, Holmes Beach, and Longboat Key, where the salt
+  air and the slab readings both argue for engineered wood.
 
+faqIntro: >-
+  When a permit applies, what a floor costs here, acclimation, and whether you
+  can live through it. Still unsure? Give us a call.
 faqs:
   - q: Do I need a permit for new flooring in Bradenton?
     a: >-
@@ -209,14 +215,15 @@ faqs:
       repair, a wall coming out, or post-flood structural work, it needs a permit
       – and we pull it. We tell you which side of that line your project falls
       on at the first visit, in writing.
-  - q: My HOA or condo association needs approval. Can you handle that?
+  - q: Will my HOA or condo board need to approve the floor?
     a: >-
-      We'll give you the packet most Bradenton associations ask for – scope of
-      work, our license and liability certificate, working hours, and the
-      elevator or stairwell protection plan. Hard-surface flooring above the
-      ground floor almost always triggers a sound-rating minimum, so we spec an
-      underlayment that meets it and list the rating on the submittal. You
-      submit it; we've never had one rejected.
+      Usually – and with flooring it's the approval, not the permit, that sets
+      your start date. Above the ground floor a hard surface almost always has
+      to clear a sound-rating minimum, so we specify an underlayment that meets
+      it and put the rating on the submittal. With it goes the paperwork
+      Bradenton boards ask for: scope of work, our license and liability
+      certificate, posted working hours, and the stairwell or elevator
+      protection plan. You file it; none of ours has come back rejected.
   - q: What does flooring cost in Bradenton?
     a: >-
       Most Bradenton floors land between $6 and $18 per square foot installed.
@@ -238,7 +245,7 @@ faqs:
       the moisture content of both the planks and the subfloor before we open a
       box. Skipping that window is one of the fastest ways to void a floor's
       warranty.
-  - q: Can we stay in the house while you work?
+  - q: Can we stay in the house while the floor goes in?
     a: >-
       Yes, though we'll be working room by room. We seal off the work area with
       a zippered barrier, run negative-air dust control, protect the path in and

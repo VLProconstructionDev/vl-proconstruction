@@ -467,7 +467,7 @@ const SHOW_RELATED = false;
   <section id="faqs" class="bg-[#faf9f8]" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[100px]">
       <h2 class="font-bold capitalize leading-[1.02] tracking-[-0.03em] text-[clamp(2.1rem,5vw,4rem)]">{d.heroCity} {service.data.shortName.toLowerCase()} questions</h2>
-      <p class="mt-5 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[600px]">Permits, associations, cost, living in the house, and how long it takes. Still have a question? Give us a call.</p>
+      <p class="mt-5 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[600px]">{d.faqIntro ?? 'Permits, associations, cost, living in the house, and how long it takes. Still have a question? Give us a call.'}</p>
       <div id="faqList" class="mt-12 lg:mt-16">
         {d.faqs.map((f) => (
           <div class="faq-item">

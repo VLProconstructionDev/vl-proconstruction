@@ -32,29 +32,31 @@ trust:
   - icon: shield
     title: Warranty Stays Intact
     body: >-
-      Moisture readings logged, acclimation timed, expansion gaps preserved,
-      underlayment matched to the manufacturer's spec – the conditions your
-      floor's warranty actually depends on.
+      A floor warranty is a list of conditions, not a promise. We meet every
+      one of them – slab readings written down, acclimation run to the clock,
+      expansion gaps held at every wall, underlayment to the letter of the spec
+      sheet.
   - icon: crew
     title: In-House Crews
     body: >-
-      The same four people who quote your floor are the ones who install it. We
-      don't subcontract demolition, subfloor prep, or trim carpentry to anyone.
+      One four-person crew carries your floor from tear-out to the last
+      threshold. Prep, plank, and trim carpentry all belong to us, so nobody
+      turns up blaming the stage before them.
   - icon: map
     title: In Sarasota Weekly
     body: >-
-      We're based just up the road in Manatee County, about 25 minutes from
-      downtown Sarasota, and our crews are in Sarasota County most days of the
-      week. Punch-list items get handled the same week, not the next month.
+      Manatee County shop, Sarasota County jobs most days of the week. Being 25
+      minutes out is why we can start acclimation on a Monday and still be there
+      to log the humidity every day until install.
 
 localTitle: What laying a floor in | Sarasota actually involves
 localPoints:
   - title: Slab moisture decides the floor
     body: >-
-      Gulf Coast slabs push moisture year-round, and it's the number one reason
-      wood floors cup and fail here. We test and log the slab before we
-      recommend a product – sometimes that means engineered or LVP instead of
-      solid hardwood, and we'll say so.
+      A slab in this climate gives off vapor all year, and that is what cups
+      and crowns wood floors. The reading comes first and the product second –
+      if the number says engineered or LVP rather than solid oak, we show you
+      the number and say so.
   - title: Condo floors have a sound rating to hit
     body: >-
       Above the ground floor, downtown towers and the key buildings set a
@@ -74,8 +76,9 @@ localImageAlt: >-
 
 includedTitle: What's included in a Sarasota floor installation
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  Priced as one job rather than a stack of trades – demo, slab prep,
+  underlayment, plank, and trim carpentry all come from the same crew and the
+  same quote.
 included:
   # Same three cards as /services/flooring, copy rewritten for Sarasota.
   - title: Hardwood Flooring
@@ -96,9 +99,9 @@ included:
     alt: Light luxury vinyl plank flooring running down a bright office hallway
   - title: Floor Preparation
     body: >-
-      Gulf Coast slabs push moisture year-round – the top reason wood floors
-      fail here. We test the slab first, then prep: adhesive removal, subfloor
-      repair, self-levelling, flattening.
+      Most of what goes wrong with a floor happens underneath it. Old mastic
+      and thinset come off, soft spots get repaired, dips get self-levelled, and
+      the slab is moisture-tested before anything is bonded down.
     image: /assets/images/hsf-floor-prep.webp
     alt: Freshly poured self-leveling underlayment curing across a prepped subfloor
 
@@ -149,9 +152,9 @@ reviews:
 process:
   - title: Consult
     body: >-
-      We measure the rooms, test the slab or subfloor for moisture and
-      flatness, talk through product, plank width, and direction, and leave
-      you with a written line-item price.
+      We measure every room, take moisture and flatness readings off the slab,
+      and settle product, plank width, and direction with you – then leave a
+      written line-item price.
     image: /assets/images/process-plan.webp
   - title: Design
     body: >-
@@ -161,17 +164,17 @@ process:
     image: /assets/images/process-2.webp
   - title: Build
     body: >-
-      Old floor and baseboards out, subfloor ground and self-levelled, vapor
-      barrier down, then planks racked and installed with expansion gaps held
-      at every wall. Trim and thresholds fitted, and we walk the floor with
-      you before handing over care and warranty paperwork.
+      Old floor and baseboards come out, the subfloor is ground and levelled,
+      the vapor barrier goes down, and the planks are racked so seams fall
+      randomly and the run holds its line. Trim and thresholds last, then a
+      walkthrough and your care and warranty paperwork.
     image: /assets/images/process-4.webp
 
 pricingTitle: What does new flooring cost in Sarasota, FL?
 pricingIntro: >-
-  Every floor is different – but here's an honest range based on real projects
-  we've completed across Sarasota and Sarasota County. Prices are installed, per
-  square foot, labor and materials.
+  The product is only half the number – the slab reading and the prep it calls
+  for are the other half. These are real installed figures from Sarasota County
+  jobs, labor and materials, per square foot.
 pricing:
   - eyebrow: Luxury Vinyl Plank
     headline: $7/sq ft
@@ -205,11 +208,14 @@ pricing:
       - Full trim carpentry package
 areaTitle: Sarasota and the rest of Sarasota County
 areaBody: >-
-  We work the whole Suncoast – downtown Sarasota, St. Armands, and Southside
-  Village, out to Siesta Key and Longboat Key on the water, south through Gulf
-  Gate, Palmer Ranch, Osprey, and Nokomis to Venice, and east to Lakewood Ranch
-  and University Park.
+  Floors go in across Sarasota County – the downtown and St. Armands towers
+  where the association sets a sound rating, the mid-century slabs of Arlington
+  Park, Southside Village, and Gulf Gate, and the newer builds east through
+  Palmer Ranch, University Park, and Lakewood Ranch, down to Osprey and Venice.
 
+faqIntro: >-
+  Sound ratings, terrazzo, acclimation windows, and what a floor runs in
+  Sarasota County. Something we missed? Give us a call.
 faqs:
   - q: Do I need a permit for new flooring in Sarasota?
     a: >-
@@ -219,7 +225,7 @@ faqs:
       includes subfloor repair, a wall coming out, or post-flood structural
       work, it needs a permit – and we pull it. We tell you which side of that
       line your project falls on at the first visit, in writing.
-  - q: My condo association or HOA needs approval. Can you handle that?
+  - q: Will my condo board need to approve the flooring?
     a: >-
       Yes, and for flooring in Sarasota it's usually the real gate, not the
       permit. Hard-surface flooring above the ground floor almost always
@@ -251,20 +257,21 @@ faqs:
       We check for cracks and old patches first, and in Arlington Park and
       Southside Village we'll tell you when the terrazzo is worth restoring
       rather than covering.
-  - q: How long should the floor acclimate before installation?
+  - q: How long does the wood sit on site before you install it?
     a: >-
-      We follow the manufacturer's spec, which is typically 3–7 days on site
-      with the AC running at normal living conditions. We log the humidity and
-      the moisture content of both the planks and the subfloor before we open a
-      box. Skipping that window is one of the fastest ways to void a floor's
-      warranty.
-  - q: Can we stay in the house while you work?
+      As long as the manufacturer's spec calls for – usually three to seven
+      days, with the AC running at the temperature you actually live at. Before
+      a box is opened we take moisture readings on both the planks and the
+      subfloor and log the room humidity. Cutting that window short is one of
+      the quickest ways to lose a floor's warranty.
+  - q: Do we need to move out while you install?
     a: >-
-      Yes, though we'll be working room by room. We seal off the work area with
-      a zippered barrier, run negative-air dust control, protect the path in and
-      out, and clean up every afternoon. Glue-down floors need about 24 hours
-      before furniture goes back, so we sequence the rooms to keep a path
-      through the house open the whole time.
+      No – we work one room at a time for exactly that reason. The active room
+      is sealed behind a zippered barrier with negative-air dust control, the
+      path in and out is protected, and everything is cleaned down each
+      afternoon. A glue-down floor needs roughly 24 hours before furniture goes
+      back, so the room order is planned to leave you a way through the house
+      the whole time.
   - q: How long does a Sarasota floor take start to finish?
     a: >-
       Budget two to three weeks from signed quote to finished trim. Acclimation

@@ -30,14 +30,16 @@ trust:
   - icon: check
     title: Certified Installation
     body: >-
-      Schluter®-certified crews. Every membrane is installed and flood-tested
-      for 24 hours to the manufacturer's written spec – the condition your
-      warranty actually depends on.
+      Schluter®-certified crews, and the flood test never gets shortened to
+      make a condo elevator window. Twenty-four hours of standing water,
+      photographed, before a single tile is set – that record is what keeps the
+      manufacturer's warranty valid.
   - icon: crew
     title: In-House Crews
     body: >-
-      The same four people who quote your shower are the ones who build it. We
-      don't subcontract demolition, waterproofing, or tile to anyone.
+      Four people, badged for your building, on site from demo through glass.
+      No part of your shower – the tear-out, the membrane, the tile – gets
+      handed to a subcontractor we don't employ.
   - icon: map
     title: In Sarasota Weekly
     body: >-
@@ -71,8 +73,8 @@ localImageAlt: >-
 
 includedTitle: What's included in a Sarasota shower build
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  One price, one crew, one person to call – from the first day of demo to the
+  morning the glass lands. Nothing changes hands mid-build.
 included:
   - title: Demolition & haul-away
     body: >-
@@ -94,17 +96,17 @@ included:
       Schluter Kerdi board waterproofing with sealed seams and a shower pan drain
   - title: Tile & stone setting
     body: >-
-      Large-format porcelain, mosaic, and natural stone set by hand – mitered
-      edges, lighted niches, benches, and heated floors. Grout sealed before we
-      call it done.
+      Every tile set by hand, whatever the format – mitered outside corners, a
+      lit niche, a bench that reads as part of the wall, heated floors if you
+      want them. Stone sealed and grout tooled before we call it finished.
     image: /assets/images/gallery-showers/showers-gray-curbless-glass.webp
     alt: >-
       Curbless walk-in shower with gray stone tile and frameless glass
   - title: Frameless glass
     body: >-
-      Measured after the tile is set, not before – so the panels sit flush. We
-      coordinate the fabricator, schedule the install, and are on site when it
-      lands.
+      The fabricator templates off finished tile, never off framing, which is
+      why the panels land flush instead of shimmed. We book the measure, the
+      build, and the service elevator, and we're there when the glass arrives.
     image: /assets/images/gallery-showers/showers-glass-frameless.webp
     alt: >-
       Frameless glass enclosure on a marble walk-in shower with a rain head
@@ -160,8 +162,9 @@ reviews:
 process:
   - title: Consult
     body: >-
-      We measure the bathroom, check the subfloor and drain, talk through curb
-      height, glass, and tile, and leave you with a written line-item price.
+      We measure the bathroom, camera the drain, read the slab, and talk
+      through entry height, glass, and tile – then leave you a written
+      line-item price rather than a lump sum.
     image: /assets/images/process-plan.webp
   - title: Design
     body: >-
@@ -171,16 +174,16 @@ process:
     image: /assets/images/process-2.webp
   - title: Build
     body: >-
-      Strip to studs, set the pan, flood-test the membrane, and set every tile
-      by hand. Glass is measured off the finished tile, then we walk the
-      shower with you, detail-clean the room, and hand over care and warranty
-      paperwork.
+      Down to studs and slab, pan built and sloped, membrane flood-tested for a
+      full day, then tile set by hand. The glass is templated off that finished
+      tile. We walk it with you, detail-clean the room, and leave the care and
+      warranty paperwork behind.
     image: /assets/images/process-4.webp
 
 pricingTitle: What does a custom shower cost in Sarasota, FL?
 pricingIntro: >-
-  Every bathroom is different – but here's an honest range based on real
-  projects we've completed across Sarasota and Sarasota County.
+  What a shower costs here comes down to the entry, the drain, and the glass.
+  These are real figures from showers we've finished across Sarasota County.
 pricing:
   - eyebrow: Alcove Replacement
     headline: $11K
@@ -219,6 +222,9 @@ areaBody: >-
   Gate, Palmer Ranch, Osprey, and Nokomis to Venice, and east to Lakewood Ranch
   and University Park.
 
+faqIntro: >-
+  Condo approvals, permits, cost, and what a shower build actually does to
+  your week. Anything we haven't covered? Give us a call.
 faqs:
   - q: Do I need a permit for a shower remodel in Sarasota?
     a: >-
@@ -246,13 +252,14 @@ faqs:
       with a linear drain and large-format tile runs $15,000–$26,000; a full wet
       room starts around $26,000. Those ranges include demo, waterproofing, tile
       setting, permit fees, and haul-away.
-  - q: Can we stay in the house while you work?
+  - q: Can we live here while the shower is being built?
     a: >-
-      Almost always, as long as you have a second bathroom. We seal the doorway
-      with a zippered barrier, run negative-air dust control, protect the path
-      in and out, and clean the work area every afternoon. Water is only shut
-      off for a few hours on the plumbing day, and we tell you which day that is
-      at the start – in a condo we book that shutoff with the building.
+      Yes, provided there's a second bathroom in the house. The doorway gets a
+      zippered barrier and negative-air dust control, the route in and out is
+      protected, and the room is cleaned down every afternoon. The only real
+      disruption is a few hours without water on plumbing day – you'll know
+      which day that is before we start, and in a condo we book that shutoff
+      with the building.
   - q: How long does a Sarasota shower take start to finish?
     a: >-
       Budget three to four weeks from signed quote to finished glass. Permitting
@@ -261,13 +268,13 @@ faqs:
       measured until the tile is set. The Gulf Gate job on this page ran 9
       working days of build time. Condo approvals can add a week or two on the
       front end, which we'll tell you about up front.
-  - q: Do you offer a warranty on the waterproofing?
+  - q: What's covered if the waterproofing ever fails?
     a: >-
-      Yes. Our labor is warranted for two years and the Schluter®-KERDI system
-      carries the manufacturer's own coverage, which stays valid because every
-      membrane is installed to their written spec and flood-tested for 24 hours.
-      You get the flood-test photos and the product documentation with your
-      final invoice.
+      Two things: our own labor warranty, which runs two years, and Schluter's
+      manufacturer coverage on the KERDI system itself. The second only holds if
+      the membrane went in exactly to their written spec – which is why the
+      24-hour flood test gets photographed, and why those photos and the product
+      documentation come to you with the final invoice.
   - q: Can you build a curbless shower in a mid-century Sarasota home?
     a: >-
       Usually – but we scope the drain first. Gulf Gate and Arlington Park homes

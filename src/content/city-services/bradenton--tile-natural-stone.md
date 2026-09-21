@@ -42,8 +42,9 @@ trust:
   - icon: map
     title: Based in Bradenton
     body: >-
-      We're based in 34211, so most of Manatee County is inside a 20-minute
-      drive. Punch-list items get handled the same week, not the next month.
+      Home is 34211, ten minutes from most of the jobs on this page. We can
+      swing by mid-cure to read a self-leveler pour, and a grout touch-up after
+      handover happens the week you call.
 
 localTitle: What setting tile in | Bradenton actually involves
 localPoints:
@@ -70,8 +71,9 @@ localImageAlt: >-
 
 includedTitle: What's included in a Bradenton tile installation
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  One quote covers the whole floor: what comes out, what the slab needs, what
+  gets set, and the grout and sealer that finish it. Nothing is added to the
+  number halfway through.
 included:
   # Same three cards as /services/tile-natural-stone, copy rewritten for Bradenton.
   - title: Tile Installation
@@ -167,9 +169,9 @@ process:
 
 pricingTitle: What does tile installation cost in Bradenton, FL?
 pricingIntro: >-
-  Every floor is different – but here's an honest range based on real projects
-  we've completed across Bradenton and Manatee County. Prices are installed,
-  per square foot, labor and materials.
+  Tile pricing turns on format, on layout, and on what the slab needs before
+  anything is bonded to it. These are real installed figures from Manatee County
+  jobs – labor and materials, per square foot.
 pricing:
   - eyebrow: Standard Porcelain
     headline: $9/sq ft
@@ -203,10 +205,14 @@ pricing:
       - Stone-specific setting mortar and grout
 areaTitle: Bradenton and the rest of Manatee County
 areaBody: >-
-  Bradenton is home base, and we work the whole Suncoast from here – Palmetto
-  and Ellenton to the north, Lakewood Ranch and Parrish east of I-75, and out to
-  Anna Maria, Holmes Beach, and Longboat Key on the water.
+  Tile and stone work runs out from Bradenton across the whole county –
+  Palmetto and Ellenton, Parrish and Lakewood Ranch east of I-75, Bayshore
+  Gardens and Cortez to the south, and the island addresses on Anna Maria,
+  Holmes Beach, and Longboat Key.
 
+faqIntro: >-
+  Permits, slab cracks, cost per square foot, and how long a tile floor takes.
+  Still have a question? Give us a call.
 faqs:
   - q: Do I need a permit to retile a floor in Bradenton?
     a: >-
@@ -216,14 +222,14 @@ faqs:
       includes a shower, a relocated drain, or structural work, it needs a
       permit – and we pull it. We tell you which side of that line your project
       falls on at the first visit, in writing.
-  - q: My HOA or condo association needs approval. Can you handle that?
+  - q: Does my association have to sign off before the tile goes in?
     a: >-
-      We'll give you the packet most Bradenton associations ask for – scope of
-      work, our license and liability certificate, working hours, and the
-      elevator or stairwell protection plan. Tile above the ground floor also
-      usually triggers a sound-transmission requirement, so we specify an
-      acoustic underlayment that meets it. You submit it; we've never had one
-      rejected.
+      Often, and we put the submittal together for you – scope of work, our
+      license and liability certificate, the hours we'll be on site, and how the
+      stairwell or elevator gets protected. Tile on an upper floor also tends to
+      carry a sound-transmission requirement, which we meet with an acoustic
+      membrane and note on the paperwork. You file it; none of ours has come
+      back rejected.
   - q: What does tile installation cost in Bradenton?
     a: >-
       Most Bradenton tile jobs land between $9 and $26 per square foot
@@ -239,7 +245,7 @@ faqs:
       control joints with an uncoupling or crack-isolation membrane and carry
       the movement joints up through the tile field. That membrane is the single
       biggest reason a tile floor here lasts.
-  - q: Can we stay in the house while you work?
+  - q: Can we stay in the house while you set tile?
     a: >-
       Yes, though we'll be working room by room. We seal off the work area with
       a zippered barrier, run negative-air dust control, protect the path in and

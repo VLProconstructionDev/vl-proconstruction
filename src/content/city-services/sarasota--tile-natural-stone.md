@@ -30,30 +30,31 @@ trust:
   - icon: check
     title: Flat Floors, Tight Lines
     body: >-
-      Leveling clips, back-buttering, and full mortar coverage on every tile.
-      We hold lippage inside the TCNA allowance for the format we're setting –
-      not "close enough by eye."
+      Large format is unforgiving, so every tile is back-buttered, clipped, and
+      bedded in full mortar. Lippage gets measured against the TCNA allowance
+      for that format – not judged from standing height.
   - icon: crew
     title: In-House Crews
     body: >-
-      The same four people who quote your floor are the ones who set it. We
-      don't subcontract demolition, substrate prep, or tile to anyone.
+      The crew that walks your floor on day one is the crew tooling grout on
+      the last day. Tear-out, substrate prep, and setting all stay in house –
+      no rotating trades, nobody to point at.
   - icon: map
     title: In Sarasota Weekly
     body: >-
-      We're based just up the road in Manatee County, about 25 minutes from
-      downtown Sarasota, and our crews are in Sarasota County most days of the
-      week. Punch-list items get handled the same week, not the next month.
+      We're 25 minutes north in Manatee County and on Sarasota jobs most days,
+      which matters on tile – someone is on site while the self-leveler cures,
+      and back inside the week for any grout or sealer touch-up.
 
 localTitle: What setting tile in | Sarasota actually involves
 localPoints:
-  - title: Condo floors have a sound rating to hit
+  - title: Hard surfaces need the building's sound number
     body: >-
       Above the ground floor, downtown towers and the key buildings set a
       minimum IIC or STC number for hard surfaces. We spec an acoustic
       membrane that meets your building's figure and list the rating on the
       submittal, so approval isn't a guessing game.
-  - title: Mid-century floors get read before they get covered
+  - title: What's under a 1950s floor decides the prep
     body: >-
       Gulf Gate, Arlington Park, and Southside Village homes sit on 1950s–60s
       slabs, often with original terrazzo or old vinyl and mastic. Terrazzo can
@@ -71,22 +72,24 @@ localImageAlt: >-
 
 includedTitle: What's included in a Sarasota tile installation
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  A single crew and a single price, from the first box out of the service
+  elevator to the last sealed joint. Nothing gets handed to a trade you haven't
+  met.
 included:
   # Same three cards as /services/tile-natural-stone, copy rewritten for Sarasota.
   - title: Tile Installation
     body: >-
-      Floors, walls, backsplashes, and lanai surfaces in porcelain, ceramic,
-      glass, and large format. Dry-laid off the longest sightline, then set
-      with full mortar coverage and leveling clips.
+      Porcelain, ceramic, glass, and thin slab – floors, feature walls,
+      backsplashes, and lanais. The pattern is dry-laid and the starting line
+      struck off the longest sightline before any mortar is mixed.
     image: /assets/images/tile-surface-prep.webp
     alt: Star-and-cross patterned floor tile in navy and cream
   - title: Natural Stone
     body: >-
-      Marble, travertine, limestone, slate, and quartzite. Each gets the
-      setting mortar and sealer its absorption rate calls for, so the stone
-      patinas instead of staining in salt air.
+      Marble, travertine, limestone, slate, and quartzite – each with its own
+      absorption rate, and each with the setting mortar and impregnating sealer
+      that rate calls for. Handled right, the stone ages; handled wrong, it
+      stains.
     image: /assets/images/tile-natural-stone.webp
     alt: Travertine stone flooring in a bright living room with a stone fireplace
   - title: Surface Preparation
@@ -152,9 +155,9 @@ reviews:
 process:
   - title: Consult
     body: >-
-      We measure the rooms, check the slab or subfloor for flatness and
-      moisture, talk through format, layout, and grout, and leave you with a
-      written line-item price.
+      We measure the rooms, read the substrate for flatness and moisture, and
+      settle format, pattern, and grout color with you – then leave a written
+      line-item price.
     image: /assets/images/process-plan.webp
   - title: Design
     body: >-
@@ -165,17 +168,17 @@ process:
     image: /assets/images/process-2.webp
   - title: Build
     body: >-
-      Old floor up, substrate ground and self-levelled, membrane installed,
-      then every tile set by hand with full mortar coverage. Grout tooled,
-      natural stone sealed, thresholds fitted, and we walk the floor with you
-      before handing over care and warranty paperwork.
+      Old floor up, substrate ground and levelled, membrane rolled and bonded,
+      then tile set by hand with full coverage behind every piece. Grout tooled,
+      stone sealed, thresholds fitted, and a walkthrough before the care and
+      warranty paperwork changes hands.
     image: /assets/images/process-4.webp
 
 pricingTitle: What does tile installation cost in Sarasota, FL?
 pricingIntro: >-
-  Every floor is different – but here's an honest range based on real projects
-  we've completed across Sarasota and Sarasota County. Prices are installed,
-  per square foot, labor and materials.
+  What a tile floor costs here depends on the format, the layout, and whether a
+  condo sound rating is in play. These are real installed figures from Sarasota
+  County jobs – labor and materials, per square foot.
 pricing:
   - eyebrow: Standard Porcelain
     headline: $10/sq ft
@@ -209,11 +212,14 @@ pricing:
       - Stone-specific setting mortar and grout
 areaTitle: Sarasota and the rest of Sarasota County
 areaBody: >-
-  We work the whole Suncoast – downtown Sarasota, St. Armands, and Southside
-  Village, out to Siesta Key and Longboat Key on the water, south through Gulf
-  Gate, Palmer Ranch, Osprey, and Nokomis to Venice, and east to Lakewood Ranch
-  and University Park.
+  We set tile everywhere in Sarasota County – the Siesta Key and Longboat
+  condos, downtown and St. Armands, the 1950s and 60s houses in Gulf Gate and
+  Arlington Park, and out east through Palmer Ranch and University Park to
+  Nokomis and Venice.
 
+faqIntro: >-
+  Association sign-off, mid-century terrazzo, slab movement, and what tile
+  costs here. Ask us anything we haven't covered.
 faqs:
   - q: Do I need a permit to retile a floor in Sarasota?
     a: >-
@@ -223,7 +229,7 @@ faqs:
       moment the job includes a shower, a relocated drain, or structural work,
       it needs a permit – and we pull it. We tell you which side of that line
       your project falls on at the first visit, in writing.
-  - q: My condo association or HOA needs approval. Can you handle that?
+  - q: Does the association have to sign off before we tile?
     a: >-
       Yes, and in Sarasota this is usually the real gate, not the permit. You
       get the packet buildings here ask for – scope of work, our license and
@@ -240,14 +246,14 @@ faqs:
       crack-isolation or acoustic membrane runs $15–$22; natural stone starts
       around $22 and climbs with the material. Those ranges include demo,
       substrate prep, setting materials, grout, sealing, and haul-away.
-  - q: Will cracks in my slab come through the new tile?
+  - q: Will the cracks in my slab telegraph through the tile?
     a: >-
-      Not if the floor is built for them. Suncoast slabs move seasonally, and a
-      hairline crack in concrete will telegraph straight through tile that's
-      bonded directly to it. We read the slab first, then bridge the cracks and
-      control joints with an uncoupling or crack-isolation membrane and carry
-      the movement joints up through the tile field. That membrane is the single
-      biggest reason a tile floor here lasts.
+      Only if nothing is done about them. Concrete here moves with the seasons,
+      and tile bonded straight onto a cracked slab will split along the same
+      line within a year or two. The answer is to decouple the two: we map the
+      cracks and control joints, bridge them with an uncoupling or
+      crack-isolation membrane, and carry the movement joints up through the
+      tile field instead of grouting over them.
   - q: Can you tile over the terrazzo in my mid-century Sarasota home?
     a: >-
       Often, yes – terrazzo is a sound substrate, but it's dense and sealed, so
@@ -256,13 +262,13 @@ faqs:
       first. We'll also tell you honestly when the terrazzo is worth restoring
       instead of covering, which in Arlington Park and Southside Village it
       sometimes is.
-  - q: Can we stay in the house while you work?
+  - q: Is the house livable while the tile goes down?
     a: >-
-      Yes, though we'll be working room by room. We seal off the work area with
-      a zippered barrier, run negative-air dust control, protect the path in and
-      out, and clean up every afternoon. The one real constraint is cure time –
-      you can't walk a freshly set floor for about 24 hours, so we sequence the
-      rooms so you always have a way through the house.
+      Yes. Tile goes in room by room behind a zippered barrier with negative-air
+      dust control, the route in and out protected and the site cleaned down
+      every afternoon. Cure time is the one thing that genuinely constrains you
+      – a freshly set floor is off limits for about 24 hours – so the rooms are
+      sequenced to keep a path open through the house.
   - q: How long does a Sarasota tile job take?
     a: >-
       Budget one to two weeks for a typical floor. Demo and substrate prep is
@@ -271,13 +277,13 @@ faqs:
       transitions take another 1–2 days. The Siesta Key job on this page ran 10
       working days for 480 square feet of thin-slab porcelain, elevator time
       included.
-  - q: Can you match tile in an existing floor?
+  - q: Can you match the tile already in my house?
     a: >-
-      Often, yes. Send us photos of what's in place plus a spare tile if you
-      have one, and we'll tell you honestly whether the line is still in
-      production, whether a current dye lot will read as a match, or whether a
-      deliberate transition at a doorway is the better-looking answer than a
-      near-miss.
+      Sometimes. Send photos of what's down plus a spare tile if one survived,
+      and we'll check whether the line is still made and whether a current dye
+      lot would genuinely read as the same floor. When it wouldn't, we'll say so
+      – a deliberate threshold at a doorway looks far better than a near-miss
+      pretending to be a match.
 related:
   - label: Custom Showers in Sarasota
     href: /services/custom-showers/sarasota-fl
