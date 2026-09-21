@@ -175,7 +175,7 @@ process:
       Rot cut back to sound framing and re-sheathed, loose subfloor
       re-fastened, mitigation coating where the slab needs it, then patch or
       self-levelling underlayment to bring the room inside tolerance.
-    image: /assets/images/process-2.webp
+    image: /assets/images/process-3.webp
   - title: Waterproof & flood-test
     body: >-
       Membrane bonded across pan, walls, and curb, sealed at every corner,

@@ -173,7 +173,7 @@ process:
       We finalize tile layout, niche and bench placement, slope, and drain
       type, then pull the permit – and, in a condo, file the association
       packet and book the elevator – before demo starts.
-    image: /assets/images/process-2.webp
+    image: /assets/images/process-3.webp
   - title: Build
     body: >-
       Down to studs and slab, pan built and sloped, membrane flood-tested for a

@@ -163,7 +163,7 @@ process:
       We confirm the floor the moisture reading supports, file the association
       packet with its sound rating where there is one, then order with the
       right overage and acclimate on site.
-    image: /assets/images/process-2.webp
+    image: /assets/images/process-3.webp
   - title: Install
     body: >-
       Old floor and baseboards come out, the subfloor is ground and levelled,

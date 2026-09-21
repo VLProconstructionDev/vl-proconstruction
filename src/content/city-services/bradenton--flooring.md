@@ -153,7 +153,7 @@ process:
       We confirm the floor the moisture reading supports, order it with the
       right overage, and let it acclimate on site for the manufacturer's
       window with humidity logged.
-    image: /assets/images/process-2.webp
+    image: /assets/images/process-3.webp
   - title: Install
     body: >-
       Old floor and baseboards out, subfloor ground and self-levelled, vapor

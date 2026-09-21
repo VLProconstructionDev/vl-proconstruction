@@ -162,7 +162,7 @@ process:
       We finalize tile layout, niche and bench placement, slope, and drain
       type, then pull the Manatee County permit and order everything before
       demo starts.
-    image: /assets/images/process-2.webp
+    image: /assets/images/process-3.webp
   - title: Build
     body: >-
       Strip to studs, set the pan, flood-test the membrane, and set every tile

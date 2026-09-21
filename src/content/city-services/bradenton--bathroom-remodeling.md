@@ -172,7 +172,7 @@ process:
       We lock the layout and the plumbing locations, finalize tile and vanity
       selections, then pull the Manatee County or City of Bradenton permit and
       get every material on site before demo starts.
-    image: /assets/images/process-2.webp
+    image: /assets/images/process-3.webp
   - title: Build
     body: >-
       Strip to studs, rough-in the new plumbing and electrical, waterproof and

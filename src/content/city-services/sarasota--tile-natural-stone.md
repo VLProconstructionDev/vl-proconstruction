@@ -167,7 +167,7 @@ process:
       confirm transitions and trim, then – in a condo – file the association
       packet with the sound rating and book the elevator before tile is
       ordered.
-    image: /assets/images/process-2.webp
+    image: /assets/images/process-3.webp
   - title: Set
     body: >-
       Old floor up, substrate ground and levelled, membrane rolled and bonded,

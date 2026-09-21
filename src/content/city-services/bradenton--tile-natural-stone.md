@@ -160,7 +160,7 @@ process:
       We dry-lay the pattern, set the starting line off the longest sightline,
       confirm transitions and trim, then order tile with the right overage
       before demo starts.
-    image: /assets/images/process-2.webp
+    image: /assets/images/process-3.webp
   - title: Set
     body: >-
       Old floor up, substrate ground and self-levelled, membrane installed,
