@@ -5,6 +5,7 @@ import { site } from '@/lib/site';
 import TrustPill from '@components/TrustPill.astro';
 import EstimateInline from '@components/EstimateInline.astro';
 import ServiceAreaMap from '@components/ServiceAreaMap.astro';
+import ArticleStyles from '@components/ArticleStyles.astro';
 
 const description =
   'Shower waterproofing & subfloor prep in Bradenton & Sarasota, FL. Schluter®-certified assemblies, 24-hour flood test, slab moisture testing. Free estimate.';
@@ -75,7 +76,7 @@ const projectTypes = [
 const faqs = [
   {
     q: 'Is sealed grout enough to keep a shower from leaking?',
-    a: 'No. Tile and grout are the wear layer, not the waterproofing — both are porous, and every shower assembly is expected to get wet behind the tile. What keeps water out of the framing is a continuous bonded membrane underneath, sealed at every corner, seam and pipe penetration. If that layer is missing or was never tied in properly, no amount of sealer or fresh caulk will save it; you are re-caulking a leak, not fixing one.',
+    a: 'No. Tile and grout are the wear layer, not the waterproofing – both are porous, and every shower assembly is expected to get wet behind the tile. What keeps water out of the framing is a continuous bonded membrane underneath, sealed at every corner, seam and pipe penetration. If that layer is missing or was never tied in properly, no amount of sealer or fresh caulk will save it; you are re-caulking a leak, not fixing one.',
   },
   {
     q: 'What is a flood test, and do you do one on every shower?',
@@ -83,27 +84,27 @@ const faqs = [
   },
   {
     q: 'How flat does my subfloor have to be before tile?',
-    a: 'For large-format tile the standard is 1/8 inch of variation in 10 feet — considerably flatter than most Florida slabs come out of the ground, and flatter than a sheet subfloor that has been carrying furniture for fifteen years. We measure the room before quoting, and if it misses we flatten it with patch or self-leveling underlayment. Setting big tile on a wavy substrate is what produces lippage: the edges you catch with a bare foot and cannot fix afterwards.',
+    a: 'For large-format tile the standard is 1/8 inch of variation in 10 feet – considerably flatter than most Florida slabs come out of the ground, and flatter than a sheet subfloor that has been carrying furniture for fifteen years. We measure the room before quoting, and if it misses we flatten it with patch or self-leveling underlayment. Setting big tile on a wavy substrate is what produces lippage: the edges you catch with a bare foot and cannot fix afterwards.',
   },
   {
     q: 'Can you do the waterproofing if someone else is setting the tile?',
-    a: 'Yes. We take waterproofing and subfloor prep as standalone work all the time — for homeowners running their own project, and for other contractors who would rather hand this part to a Schluter®-certified crew. You get the flood-test photos and the manufacturer documentation, the tile setter picks it up from there, and our workmanship warranty covers the assembly we built.',
+    a: 'Yes. We take waterproofing and subfloor prep as standalone work all the time – for homeowners running their own project, and for other contractors who would rather hand this part to a Schluter®-certified crew. You get the flood-test photos and the manufacturer documentation, the tile setter picks it up from there, and our workmanship warranty covers the assembly we built.',
   },
   {
     q: 'What happens if you find a rotted subfloor once the tile is off?',
-    a: 'You get a photo of it and a price for the repair before we carry on. Rot means cutting back to sound framing, replacing the sheathing, and working out where the water came from — a failed pan, a weeping supply line, or a toilet flange that has been leaking quietly for years. Fixing the wood without finding the source just resets the clock, so we chase it down first.',
+    a: 'You get a photo of it and a price for the repair before we carry on. Rot means cutting back to sound framing, replacing the sheathing, and working out where the water came from – a failed pan, a weeping supply line, or a toilet flange that has been leaking quietly for years. Fixing the wood without finding the source just resets the clock, so we chase it down first.',
   },
   {
     q: 'Do you test the slab for moisture before a floor goes down?',
-    a: 'On slab-on-grade, yes. Hardwood, LVP and most adhesives have a published moisture limit, and a slab on the Gulf Coast can read high years after the pour — there is a lot of water table under this coast. We run in-situ relative humidity probes per ASTM F2170, and if the reading is over the manufacturer limit we price a moisture-mitigation coating rather than let a warranty claim show up in year two.',
+    a: 'On slab-on-grade, yes. Hardwood, LVP and most adhesives have a published moisture limit, and a slab on the Gulf Coast can read high years after the pour – there is a lot of water table under this coast. We run in-situ relative humidity probes per ASTM F2170, and if the reading is over the manufacturer limit we price a moisture-mitigation coating rather than let a warranty claim show up in year two.',
   },
   {
     q: 'How long does the preparation and waterproofing phase take?',
-    a: 'A standard shower pan and walls take two to three days including the 24-hour flood test. A curbless or wet-room assembly runs three to five, because the substrate has to be recessed or ramped and the linear drain set dead level first. Floor prep is usually one to two days: pour, cure, and then the membrane. None of it is the phase to compress — every day saved here is borrowed against the finished surface.',
+    a: 'A standard shower pan and walls take two to three days including the 24-hour flood test. A curbless or wet-room assembly runs three to five, because the substrate has to be recessed or ramped and the linear drain set dead level first. Floor prep is usually one to two days: pour, cure, and then the membrane. None of it is the phase to compress – every day saved here is borrowed against the finished surface.',
   },
   {
     q: 'Do you warranty the waterproofing?',
-    a: 'We back our workmanship on the whole assembly — the membrane, the seams and corners, the drain connection and the substrate under it. Because we install to the manufacturer specification as a Schluter®-certified contractor, the material warranty stays intact too, and we hand you that paperwork at the walkthrough. We are family-owned and local, so if you ever need us we are twenty minutes away.',
+    a: 'We back our workmanship on the whole assembly – the membrane, the seams and corners, the drain connection and the substrate under it. Because we install to the manufacturer specification as a Schluter®-certified contractor, the material warranty stays intact too, and we hand you that paperwork at the walkthrough. We are family-owned and local, so if you ever need us we are twenty minutes away.',
   },
 ];
 
@@ -130,10 +131,23 @@ const schema = [
   schema={schema}
   navTheme="dark"
 >
-  <!-- Article-layout styles (.post-body, .intro-card, .stat-tiles, .pj-grid,
-       .rail-*, .toc-*, the before/after carousel and the cost table) are shared
-       with the other article-style service pages and the city × service pages,
-       so they live in global.css under "SERVICE ARTICLE PAGES". -->
+  <ArticleStyles />
+
+  <style is:global>
+    /* ----- Service-area map edge fade (same treatment as the home page) ----- */
+    .area-map-fade { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.8) 10%, #000 14%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 6%, rgba(0,0,0,.8) 10%, #000 14%); }
+    @media (min-width: 1024px) {
+      .area-map-fade { -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 7%, rgba(0,0,0,.8) 11%, #000 15%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.12) 3%, rgba(0,0,0,.45) 7%, rgba(0,0,0,.8) 11%, #000 15%); }
+    }
+    .area-map-fade::before { content: ''; position: absolute; inset: 0; z-index: 450; pointer-events: none;
+      -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 8%, transparent 11%);
+      mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 8%, transparent 11%); }
+    @media (min-width: 1024px) {
+      .area-map-fade::before { -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 9%, transparent 12%);
+        mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,.55) 4%, rgba(0,0,0,.2) 9%, transparent 12%); }
+    }
+  </style>
 
   <!-- ===================== HERO (identical to the other service pages) ===================== -->
   <section id="hero" class="relative min-h-screen overflow-hidden text-white bg-black" data-nav-theme="dark">
@@ -144,13 +158,12 @@ const schema = [
     <div class="absolute inset-0 bg-black/65"></div>
     <div class="relative z-20 h-full min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:pt-[172px] sm:pb-24 lg:pb-[90px] gap-5 lg:gap-6">
       <TrustPill />
-      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,3rem)] sm:text-[clamp(3rem,6.8vw,6.05rem)] text-center">
+      <div class="font-semibold normal-case leading-[1.06] sm:leading-[1.02] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(2.2rem,9.4vw,3.1rem)] sm:text-[clamp(3.4rem,6.6vw,5.9rem)] text-center text-balance">
         <h1>
-          <span>Sarasota <br class="sm:hidden" />&amp; Bradenton Area</span><br />
-          <span class="text-brand block">Waterproofing &amp; <br class="sm:hidden" />Subfloor Preparation</span>
+          Sarasota <br class="sm:hidden" />&amp; Bradenton<br />
+          Waterproofing &amp; Subfloor Prep
         </h1>
-        <div class="flex flex-col items-center gap-3 sm:gap-5">
-          <span>Contractors</span>
+        <div class="flex flex-col items-center gap-3 sm:gap-5 mt-5 sm:mt-6">
           <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[560px]">The layer nobody photographs and everything depends on. Schluter®-certified assemblies, subfloors brought flat and sound, and a 24-hour flood test before a single tile is set.</p>
         </div>
       </div>
@@ -158,7 +171,7 @@ const schema = [
       <div class="flex flex-col items-center gap-8">
         <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
           <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
-          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(503) 781-4657</a>
+          <a href="tel:+19412031020" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(941) 203-1020</a>
         </div>
         <!-- Bottom row: stats on the left, the marks we build to on the right.
              Both are trust signals, not sections — the label is a <p>, never a
@@ -184,20 +197,20 @@ const schema = [
           <!-- Credential marks: each logo carries its own claim, so the row states
                what the badges mean. Images are decorative — the label names them. -->
           <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
-            <div class="flex items-center gap-2.5 sm:gap-3.5">
+            <a href="https://www.schluter.com/" target="_blank" rel="noopener" title="Schluter Systems" class="brandlink flex items-center gap-2.5 sm:gap-3.5">
               <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
-            </div>
+            </a>
             <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
-            <div class="flex items-center gap-2.5 sm:gap-3.5">
+            <a href="https://www.tile-assn.com/" target="_blank" rel="noopener" title="National Tile Contractors Association" class="brandlink flex items-center gap-2.5 sm:gap-3.5">
               <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
-            </div>
+            </a>
             <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
-            <div class="flex items-center gap-2.5 sm:gap-3.5">
+            <a href="https://finance.yahoo.com/small-business/articles/vl-pro-construction-marks-22-085900059.html" target="_blank" rel="noopener" title="VL Proconstruction featured on Yahoo Finance" class="brandlink flex items-center gap-2.5 sm:gap-3.5">
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Featured<br />On</p>
-              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-white.webp" width="480" height="134" alt="Yahoo" class="block h-[22px] sm:h-7 w-auto opacity-90" />
-            </div>
+              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-finance-white.svg" width="736" height="110" alt="Yahoo Finance" class="block h-[19px] sm:h-6 w-auto opacity-90" />
+            </a>
           </div>
         </div>
       </div>
@@ -214,7 +227,7 @@ const schema = [
             The stage you only see once
           </h2>
           <p class="mt-6 text-[13.5px] sm:text-[16.5px] leading-[1.65] tracking-[-0.01em] text-graydesc max-w-[42ch]">
-            Once the tile is on, nobody can tell which showers were built right. These photos are how ours look the day before — the pans, membranes and substrates that decide what the room does over the next twenty years.
+            Once the tile is on, nobody can tell which showers were built right. These photos are how ours look the day before – the pans, membranes and substrates that decide what the room does over the next twenty years.
           </p>
 
           {baPairs.length > 1 && (
@@ -267,10 +280,10 @@ const schema = [
             <div class="intro-card">
               <p class="intro-eyebrow">Family-owned on the Suncoast since 2004</p>
               <h2 id="waterproofing">Bradenton &amp; Sarasota Waterproofing &amp; Subfloor Preparation</h2>
-              <p class="intro-lead">The part of the job that is finished before anyone can admire it — and the part that decides whether the rest of it lasts.</p>
+              <p class="intro-lead">The part of the job that is finished before anyone can admire it – and the part that decides whether the rest of it lasts.</p>
               <p>Nearly every tile failure we are called out to look at is a prep failure. The tile did not crack because the tile was bad; it cracked because the slab moved and nothing isolated it. The shower did not leak because the grout aged; it leaked because there was no continuous membrane behind it, or because the drain was caulked to the pan instead of bonded to it. By the time a homeowner sees the symptom, the cause has been buried for years.</p>
-              <p>So we treat this as its own trade. We build the assembly under the surface — subfloor repaired, flattened and isolated, wet zones wrapped in a bonded waterproof membrane, seams and corners and pipe penetrations sealed — and we flood-test it before anything goes on top. On a slab we measure moisture rather than guess at it.</p>
-              <p>It is the phase every schedule wants to compress, and the only one where a saved day costs you the whole surface. Twenty-two years and more than 1,300 projects in, we have opened up enough Florida bathrooms to know what is usually behind the tile before we start — and when we find something we did not expect, you get a photo of it and a price for the difference before we carry on.</p>
+              <p>So we treat this as its own trade. We build the assembly under the surface – subfloor repaired, flattened and isolated, wet zones wrapped in a bonded waterproof membrane, seams and corners and pipe penetrations sealed – and we flood-test it before anything goes on top. On a slab we measure moisture rather than guess at it.</p>
+              <p>It is the phase every schedule wants to compress, and the only one where a saved day costs you the whole surface. Twenty-two years and more than 1,300 projects in, we have opened up enough Florida bathrooms to know what is usually behind the tile before we start – and when we find something we did not expect, you get a photo of it and a price for the difference before we carry on.</p>
             </div>
 
             <div class="stat-tiles">
@@ -281,12 +294,12 @@ const schema = [
             </div>
 
             <h2 id="work">What we prepare and waterproof</h2>
-            <p>Some of this is a phase inside a larger remodel we are already running. Some of it is the whole job — a leaking shower to rebuild from the pan up, or a slab to get flat and dry before someone else's floor goes down:</p>
+            <p>Some of this is a phase inside a larger remodel we are already running. Some of it is the whole job – a leaking shower to rebuild from the pan up, or a slab to get flat and dry before someone else's floor goes down:</p>
 
             <div class="pj-grid">
               <div class="pj-c">
                 <h3>Shower pan &amp; wall waterproofing</h3>
-                <p>Sloped pan, bonded flange drain, and a continuous membrane up the walls and over the curb — sealed at every inside corner, change of plane and pipe penetration, then flood-tested. <a href="/services/custom-showers/">Custom shower installation</a>.</p>
+                <p>Sloped pan, bonded flange drain, and a continuous membrane up the walls and over the curb – sealed at every inside corner, change of plane and pipe penetration, then flood-tested. <a href="/services/custom-showers/">Custom shower installation</a>.</p>
               </div>
               <div class="pj-c">
                 <h3>Curbless showers &amp; wet rooms</h3>
@@ -294,7 +307,7 @@ const schema = [
               </div>
               <div class="pj-c">
                 <h3>Subfloor repair &amp; rot removal</h3>
-                <p>Soft sheathing cut back to sound framing, re-blocked and replaced, and the source of the water tracked down — a failed pan, a weeping supply line, a toilet flange that has been leaking quietly since the house was built.</p>
+                <p>Soft sheathing cut back to sound framing, re-blocked and replaced, and the source of the water tracked down – a failed pan, a weeping supply line, a toilet flange that has been leaking quietly since the house was built.</p>
               </div>
               <div class="pj-c">
                 <h3>Self-leveling &amp; flattening</h3>
@@ -316,7 +329,7 @@ const schema = [
               <li><strong>No membrane at all.</strong> Tile set on greenboard or bare cement board, with sealed grout doing the job the waterproofing was supposed to do. Common in anything built before the mid-2000s, and still common in a fast flip.</li>
               <li><strong>A membrane that stops short.</strong> The field gets covered and the corners, the curb top and the bench do not. Water finds the discontinuity, not the good part.</li>
               <li><strong>The drain connection.</strong> A bonded flange drain clamps the membrane into the drain body. Caulk around a standard drain is not that, and it is the single most common leak point we open up.</li>
-              <li><strong>Movement nobody planned for.</strong> No isolation between the slab and the tile, and no soft joint where the floor meets the wall or changes plane — so the first seasonal movement goes straight into the grout line.</li>
+              <li><strong>Movement nobody planned for.</strong> No isolation between the slab and the tile, and no soft joint where the floor meets the wall or changes plane – so the first seasonal movement goes straight into the grout line.</li>
             </ul>
 
             <blockquote>
@@ -328,7 +341,7 @@ const schema = [
             <ul>
               <li><strong>Schluter®-certified installers.</strong> We build to the manufacturer's specification, which is what keeps their material warranty intact on top of our own workmanship warranty.</li>
               <li><strong>Every pan flood-tested.</strong> 24 hours, photographed at the start and the end of the hold. No shower we build gets tiled on an untested assembly, including the ones running late.</li>
-              <li><strong>We measure instead of guessing.</strong> Flatness across the room and moisture in the slab get numbers before anything is ordered — not a look and a shrug.</li>
+              <li><strong>We measure instead of guessing.</strong> Flatness across the room and moisture in the slab get numbers before anything is ordered – not a look and a shrug.</li>
               <li><strong>One in-house crew.</strong> The people who prep the room are the people who tile it, so nobody is inheriting somebody else's substrate and hoping.</li>
               <li><strong>Findings come with photos.</strong> When we open a wall and there is rot behind it, you get the picture and the price for the difference before we carry on.</li>
               <li><strong>Available as standalone work.</strong> Running your own project, or a contractor who would rather hand this part off? We do the prep and waterproofing, hand over the documentation, and step back out.</li>
@@ -341,7 +354,7 @@ const schema = [
               <div class="step">
                 <span class="step-n" aria-hidden="true">1</span>
                 <h3>Inspection, measurement &amp; estimate</h3>
-                <p>We come to the house, check the substrate for flatness and deflection, look for the signs of a leak that is already running, and test slab moisture where a floor is going down. You leave with an itemized scope and a price — not a range. No cost, no obligation.</p>
+                <p>We come to the house, check the substrate for flatness and deflection, look for the signs of a leak that is already running, and test slab moisture where a floor is going down. You leave with an itemized scope and a price – not a range. No cost, no obligation.</p>
               </div>
               <div class="step">
                 <span class="step-n" aria-hidden="true">2</span>
@@ -351,7 +364,7 @@ const schema = [
               <div class="step">
                 <span class="step-n" aria-hidden="true">3</span>
                 <h3>Waterproofing assembly</h3>
-                <p>The pan is sloped, the bonded flange drain is set, and the membrane goes on continuous across the pan, up the walls and over the curb — with every seam, inside corner, change of plane and pipe penetration sealed to the manufacturer's spec.</p>
+                <p>The pan is sloped, the bonded flange drain is set, and the membrane goes on continuous across the pan, up the walls and over the curb – with every seam, inside corner, change of plane and pipe penetration sealed to the manufacturer's spec.</p>
               </div>
               <div class="step">
                 <span class="step-n" aria-hidden="true">4</span>
@@ -361,7 +374,7 @@ const schema = [
             </div>
 
             <h2 id="cost">What preparation and waterproofing cost in Bradenton and Sarasota</h2>
-            <p>Inside a full remodel this is a line item, not a separate bill. As standalone work it comes down to the size of the wet zone, how far out of flat the substrate starts, and what we find once the old surface is off. These are typical ranges for our area — your estimate is built to your actual room.</p>
+            <p>Inside a full remodel this is a line item, not a separate bill. As standalone work it comes down to the size of the wet zone, how far out of flat the substrate starts, and what we find once the old surface is off. These are typical ranges for our area – your estimate is built to your actual room.</p>
 
             <!-- TODO(client): confirm these bands and timelines before they get
                  cloned onto the city pages. -->
@@ -394,12 +407,12 @@ const schema = [
             <p>Subfloor rot, a slab that reads over the moisture limit, and a floor that starts badly out of flat are the three things that move the number, and none of them can be priced honestly from a photo. We quote what we can see, flag what we suspect, and put a price on the rest the day it is uncovered.</p>
 
             <h2 id="standards">The standards we build to</h2>
-            <p>Waterproofing is one of the few parts of a remodel with published, testable standards, which is convenient — it means "built right" is a measurement rather than an opinion. We build to the manufacturer's installation specification as Schluter®-certified installers, which is what keeps their material warranty in force alongside ours, and to the tile industry's flatness tolerance of 1/8 inch in 10 feet for large-format work. Slab moisture is measured with in-situ relative humidity probes per ASTM F2170 rather than a surface meter, because the surface of a slab tells you about the weather and not about the slab.</p>
+            <p>Waterproofing is one of the few parts of a remodel with published, testable standards, which is convenient – it means "built right" is a measurement rather than an opinion. We build to the manufacturer's installation specification as Schluter®-certified installers, which is what keeps their material warranty in force alongside ours, and to the tile industry's flatness tolerance of 1/8 inch in 10 feet for large-format work. Slab moisture is measured with in-situ relative humidity probes per ASTM F2170 rather than a surface meter, because the surface of a slab tells you about the weather and not about the slab.</p>
             <p>The details that do not appear in any specification matter just as much: the exhaust fan sized for the room and ducted outside rather than into the attic, soft joints where the floor meets the wall and at every change of plane, and a substrate we will not set tile on if it is not rated for what is going on it. None of it shows in a finished-room photo. All of it is why the room still looks right in year fifteen.</p>
 
             <h2 id="offer">Save on your project</h2>
             <h3>$1000 off your remodel, plus a free in-home consultation</h3>
-            <p>Ask about the current offer when you book. Terms and restrictions apply, and it is valid on projects over $10,000. The in-home consultation is free either way — we check the substrate, test the slab where it matters, tell you what we would do and what it costs, and leave you with that whether or not you hire us.</p>
+            <p>Ask about the current offer when you book. Terms and restrictions apply, and it is valid on projects over $10,000. The in-home consultation is free either way – we check the substrate, test the slab where it matters, tell you what we would do and what it costs, and leave you with that whether or not you hire us.</p>
 
             <h2 id="faqs">Bradenton and Sarasota waterproofing FAQs</h2>
             <div class="faq-list" id="faqList">
@@ -417,10 +430,10 @@ const schema = [
             </div>
 
             <h2 id="company">About VL Proconstruction</h2>
-            <p><strong>{site.legalName}</strong> is a family-owned remodeling company based in Bradenton, Florida, serving the Bradenton–Sarasota metro and the wider Suncoast — Palmetto, Ellenton, Parrish, Lakewood Ranch, University Park, Nokomis, Venice, Anna Maria Island, Holmes Beach, Bradenton Beach, Longboat Key and Siesta Key. Licensed and insured, Schluter®-certified for waterproofing, NTCA members, with in-house design and trades and full workmanship warranty on every project. Reach us at <a href={site.phoneHref}>{site.phone}</a>, or see <a href="/locations/">everywhere we work</a>.</p>
+            <p><strong>{site.legalName}</strong> is a family-owned remodeling company based in Bradenton, Florida, serving the Bradenton–Sarasota metro and the wider Suncoast – Palmetto, Ellenton, Parrish, Lakewood Ranch, University Park, Nokomis, Venice, Anna Maria Island, Holmes Beach, Bradenton Beach, Longboat Key and Siesta Key. Licensed and insured, Schluter®-certified for waterproofing, NTCA members, with in-house design and trades and full workmanship warranty on every project. Reach us at <a href={site.phoneHref}>{site.phone}</a>, or see <a href="/locations/">everywhere we work</a>.</p>
 
             <hr />
-            <p>This work is included in every <a href="/services/bathroom-remodeling/">bathroom remodel</a>, <a href="/services/custom-showers/">custom shower</a>, <a href="/services/tile-natural-stone/">tile and stone</a> and <a href="/services/flooring/">flooring</a> job we run — and it is available on its own when that is all you need.</p>
+            <p>This work is included in every <a href="/services/bathroom-remodeling/">bathroom remodel</a>, <a href="/services/custom-showers/">custom shower</a>, <a href="/services/tile-natural-stone/">tile and stone</a> and <a href="/services/flooring/">flooring</a> job we run – and it is available on its own when that is all you need.</p>
           </div>
         </div>
 
@@ -455,7 +468,7 @@ const schema = [
 
             <div class="rail-card text-center">
               <p class="text-[13.5px] leading-[1.55] text-graydesc">
-                Call us directly — we answer weekdays, 8am–6pm.
+                Call us directly – we answer weekdays, 8am–6pm.
               </p>
               <a href={site.phoneHref} class="btn mt-3 inline-block font-poppins text-[20px] font-bold tracking-[-0.01em] text-ink hover:text-brand">
                 {site.phone}
@@ -470,12 +483,12 @@ const schema = [
   <!-- ===================== SERVICE AREA ===================== -->
   <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
-      <div class="lg:max-w-[44%]">
-        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
-          Waterproofing<br />Across the Gulf Coast
+      <div class="lg:max-w-[min(calc(42vw-108px),calc(852px-8vw))]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,min(calc(3.95vw-10px),calc(81px-0.77vw)),4.75rem)]">
+          Waterproofing in<br />Bradenton &amp; Sarasota
         </h2>
         <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
-          We waterproof showers and prep subfloors for homeowners and builders throughout the Bradenton–Sarasota metro — Palmetto and Parrish down to Siesta Key and Venice.
+          We waterproof showers and prep subfloors for homeowners and builders throughout the Bradenton–Sarasota metro – Palmetto and Parrish down to Siesta Key and Venice.
         </p>
       </div>
     </div>

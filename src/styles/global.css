@@ -930,314 +930,34 @@ button:focus-visible {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
 }
 
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   SERVICE ARTICLE PAGES
-   The editorial layout: hero → before/after carousel → long-form .post-body
-   article beside a sticky TOC rail → EstimateInline.
-
-   Shared by the hand-designed service pages (/services/bathroom-remodeling,
-   /services/waterproofing-subfloor-preparation) and by LocationArticleLayout,
-   which gives city × service pages the same shape. These rules used to be
-   duplicated verbatim inside each of the two page files; they were byte-identical
-   apart from three comment lines, so they live here now. Edit once, not per page.
-   ───────────────────────────────────────────────────────────────────────────── */
-/* ===== Before / after + stage carousel (second section) =====
-   Copy column on the left, the pair on the right; the arrows sit half off
-   the photos so they read as controls on top of the images, not chrome
-   beside them. Controls only render from the second pair onwards. */
-.bax-shot { position: relative; overflow: hidden; border-radius: 16px; aspect-ratio: 3 / 2; background: #141414; }
-.bax-shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.bax-tag {
-  position: absolute; bottom: 0; padding: 11px 22px;
-  /* Translucent so the photo reads through the tag; the blur keeps the
-     label legible over a busy or light-toned corner. */
-  background: rgba(20,20,20,.55); color: #fff;
-  -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px);
-  font-size: 13.5px; font-weight: 700; letter-spacing: .01em;
+/* ===== Brand / credential logo links =====================================
+   The credential marks (Schluter, NTCA) and supplier logos are links to the
+   brand they name. The mark and its label are ONE target, so the whole
+   lockup is the anchor. The resting opacity stays on the child img/p (the
+   Tailwind `opacity-90` / `opacity-60` utilities each layout already sets, so
+   nothing changes at rest); hover/focus lifts it to full. Only opacity and
+   transform animate. */
+.brandlink {
+  border-radius: 4px;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.bax-tag-before { left: 0; border-top-right-radius: 14px; }
-.bax-tag-after { right: 0; border-top-left-radius: 14px; }
-
-.bax-arrow {
-  position: absolute; top: 50%; z-index: 3;
-  display: grid; place-items: center; width: 56px; height: 56px;
-  border-radius: 9999px; background: #fff; color: #1e1e1e;
-  box-shadow: 0 8px 24px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.1);
-  transform: translateY(-50%);
-  transition: transform .2s cubic-bezier(.22,1,.36,1), color .2s;
+.brandlink :where(img, p, span) {
+  transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.bax-arrow svg { width: 20px; height: 20px; }
-.bax-arrow:hover, .bax-arrow:focus-visible { color: #f54b25; transform: translateY(-50%) scale(1.06); }
-.bax-arrow:active { transform: translateY(-50%) scale(0.97); }
-.bax-prev { left: -28px; }
-.bax-next { right: -28px; }
-@media (max-width: 767px) { .bax-arrow { width: 44px; height: 44px; } .bax-prev { left: -14px; } .bax-next { right: -14px; } }
+.brandlink:hover :where(img, p, span),
+.brandlink:focus-visible :where(img, p, span) {
+  opacity: 1;
+}
+.brandlink:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 6px;
+}
+.brandlink:active {
+  transform: scale(0.97);
+}
 @media (prefers-reduced-motion: reduce) {
-  .bax-arrow { transition: color .2s; }
-  .bax-arrow:hover, .bax-arrow:focus-visible, .bax-arrow:active { transform: translateY(-50%); }
-}
-
-.bax-count { font-size: 15px; letter-spacing: -.01em; color: #959595; }
-.bax-count strong { color: #1e1e1e; font-weight: 600; }
-.bax-dot {
-  width: 9px; height: 9px; border-radius: 9999px; background: rgba(0,0,0,.18);
-  transition: background-color .2s;
-}
-.bax-dot.is-active { background: #f54b25; }
-.bax-dot:hover, .bax-dot:focus-visible { background: rgba(245,75,37,.55); }
-
-
-/* ===== Article body — the same treatment as a blog post =====
-   Copied from BlogPostLayout: those styles are scoped to that layout, so a
-   page outside /blog carries its own copy rather than importing it. */
-.post-wrap { max-width: 1400px; margin-inline: auto; }
-
-/* Body copy matches the hero's body pair — 13.5px on phones, 16.5px from sm up.
-   Every nested paragraph inherits it rather than setting its own size. */
-.post-body { max-width: 820px; color: #2b2b2b; font-size: 13.5px; line-height: 1.72; }
-@media (min-width: 640px) { .post-body { font-size: 16.5px; } }
-.post-body > * + * { margin-top: 1.35em; }
-/* Section headings use the home page's section-H2 recipe — bold, tight
-   leading and tracking — sized down only so a long heading doesn't take
-   four lines in this column. No capitalize transform: the copy is
-   sentence case on purpose. */
-.post-body h2 {
-  margin-top: 2.2em; color: #1e1e1e; font-weight: 700;
-  font-size: clamp(1.75rem, 3vw, 2.6rem); line-height: 1.05; letter-spacing: -0.03em;
-}
-.post-body > h2:first-child { margin-top: 0; }
-.post-body h3 {
-  margin-top: 2em; color: #1e1e1e; font-weight: 600;
-  font-size: clamp(1.02rem, 1.35vw, 1.15rem); line-height: 1.3; letter-spacing: -0.02em;
-}
-.post-body strong { color: #1e1e1e; font-weight: 600; }
-.post-body a { color: #f54b25; text-decoration: underline; text-underline-offset: 3px; }
-.post-body a:hover { color: #c23c18; }
-.post-body a:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
-.post-body ul { padding-left: 1.35em; list-style: disc; }
-.post-body li + li { margin-top: 0.5em; }
-.post-body hr { margin-top: 2.4em; border: 0; border-top: 1px solid rgba(0, 0, 0, 0.1); }
-
-/* A four-column table is wider than a phone — it scrolls in its own box
-   rather than pushing the page sideways (html/body use overflow-x: clip,
-   so an overflowing table would just be cut off). */
-.post-body table {
-  display: block; width: 100%; max-width: 100%; overflow-x: auto;
-  border-collapse: collapse; font-size: 14px; line-height: 1.45;
-}
-.post-body thead, .post-body tbody { min-width: 560px; }
-.post-body tr { display: table; width: 100%; table-layout: fixed; }
-.post-body th, .post-body td { padding: 9px 12px; border-bottom: 1px solid rgba(0, 0, 0, 0.09); text-align: left; }
-.post-body thead th {
-  background: #000; color: #fff; font-weight: 600;
-  padding-top: 15px; padding-bottom: 15px;
-  font-size: 13px; letter-spacing: 0.01em; border-bottom: 0;
-}
-/* The tier/scope most people land on, marked the way a blog table marks our row. */
-.post-body tbody tr:has(.row-us) { background: rgba(245, 75, 37, 0.055); }
-.post-body tbody tr:has(.row-us) td:first-child { box-shadow: inset 3px 0 0 #f54b25; }
-.post-body .row-us { font-style: normal; }
-
-/* Pull-out callout — one real takeaway, not a box per section. */
-.post-body blockquote {
-  padding: 20px 24px; border-left: 3px solid #f54b25;
-  background: #f0ebe5; color: #4e4e4e;
-  line-height: 1.75;
-}
-.post-body blockquote > * + * { margin-top: 0.85em; }
-.post-body blockquote strong { color: #1e1e1e; font-weight: 700; }
-.post-body blockquote > :first-child { margin-top: 0; }
-@media (max-width: 480px) { .post-body blockquote { padding: 16px 18px; } }
-
-/* ===== Intro card =====
-   The opening block sits in its own bordered card, closed by a row of
-   stat tiles — the page's one piece of chrome before the prose starts. */
-.intro-card {
-  border: 1px solid rgba(0,0,0,.1); border-radius: 14px; background: #fff;
-  padding: 30px 32px 32px;
-}
-.intro-eyebrow {
-  display: flex; align-items: center; gap: 14px;
-  font-size: 13px; font-weight: 700; letter-spacing: .01em; color: #c23c18;
-}
-.intro-eyebrow::before { content: ''; flex: none; width: 3px; height: 17px; border-radius: 2px; background: #f54b25; }
-/* .post-body's flow spacing only reaches its own children, so the card sets its own. */
-.intro-card > * + * { margin-top: 1.3em; }
-.post-body .intro-card h2 { margin-top: 16px; font-size: clamp(1.4rem, 2.2vw, 1.9rem); line-height: 1.14; }
-.post-body .intro-card .intro-lead { margin-top: 0.9em; color: #1e1e1e; }
-@media (max-width: 560px) { .intro-card { padding: 22px 20px 24px; } }
-
-.stat-tiles {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 14px; margin-top: 14px;
-}
-.stat-tile {
-  border: 1px solid rgba(0,0,0,.1); border-radius: 14px; background: #fff;
-  padding: 21px 16px; text-align: center;
-}
-.stat-tile b {
-  display: block; color: #1e1e1e; font-weight: 700;
-  font-size: clamp(1.25rem, 1.8vw, 1.6rem); line-height: 1.1; letter-spacing: -.035em;
-}
-.stat-tile span { display: block; margin-top: 6px; font-size: 12.5px; font-weight: 600; color: #4e4e4e; }
-
-/* ===== "Projects / scopes we take on" cards =====
-   A brand rule across the top of each card is the only colour; everything
-   else stays on the page's hairline system. */
-.pj-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); margin-top: 1.8em; }
-.pj-c {
-  border: 1px solid rgba(0,0,0,.1); border-top: 3px solid #f54b25; border-radius: 12px;
-  background: #fff; padding: 20px 19px 22px;
-}
-.post-body .pj-c h3 { margin-top: 0; font-size: 15.5px; font-weight: 700; line-height: 1.3; }
-/* The cards sit three-up in a narrow column, so their copy stays a step
-   below the page's body size — at 16.5px it wraps every three words. */
-.post-body .pj-c p { margin-top: 9px; font-size: 14px; line-height: 1.6; color: #4e4e4e; }
-
-/* ===== Process timeline =====
-   Numbered discs joined by a rule — this list really is a sequence, which
-   is why it gets numbers when nothing else on the page does. */
-.steps { margin-top: 1.8em; }
-.step { position: relative; padding-left: 54px; padding-bottom: 26px; }
-.step:last-child { padding-bottom: 0; }
-.step::before {
-  content: ''; position: absolute; left: 17px; top: 42px; bottom: 0;
-  width: 2px; background: rgba(245,75,37,.22);
-}
-.step:last-child::before { display: none; }
-.step-n {
-  position: absolute; left: 0; top: 0; display: grid; place-items: center;
-  width: 36px; height: 36px; border-radius: 9999px;
-  background: #f54b25; color: #fff; font-size: 14px; font-weight: 700; line-height: 1;
-}
-.post-body .step h3 { margin-top: 5px; font-size: 15.5px; font-weight: 700; line-height: 1.3; }
-.post-body .step p { margin-top: 9px; line-height: 1.7; color: #4e4e4e; }
-@media (max-width: 480px) {
-  .step { padding-left: 50px; }
-  .step-n { width: 34px; height: 34px; font-size: 14px; }
-  .step::before { left: 16px; top: 40px; }
-}
-
-/* At-a-glance company facts. */
-.factbox {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
-  gap: 1px; margin-top: 1.6em; background: rgba(0, 0, 0, 0.11);
-  border: 1px solid rgba(0, 0, 0, 0.11); border-radius: 2px; overflow: hidden;
-}
-.factbox > div { padding: 11px 14px; background: #f6f5f3; }
-.factbox .fb-k {
-  display: block; margin-bottom: 3px;
-  color: #959595; font-size: 10.5px; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-}
-.factbox .fb-v { display: block; color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 1.45; }
-@media (max-width: 520px) {
-  .factbox { grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); }
-  .factbox > div { padding: 9px 11px; }
-}
-
-/* ===== FAQ accordion =====
-   The home page's hairline rows, not cards: a rule between questions, a
-   24px +/- mark that turns brand orange when open. Answers ship in the
-   markup expanded and are only collapsed by JS, so they stay readable
-   (and crawlable) if the script never runs. */
-.faq-list { margin-top: 1.6em; }
-.faq-c { border-bottom: 1px solid rgba(0,0,0,.1); }
-.faq-c:first-child { border-top: 1px solid rgba(0,0,0,.1); }
-.post-body .faq-c h3 { margin-top: 0; }
-.faq-cq {
-  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 28px;
-  padding: 18px 0; text-align: left; cursor: pointer; color: #1e1e1e;
-  font-size: clamp(0.95rem, 1.1vw, 1.0625rem); font-weight: 600; line-height: 1.4; letter-spacing: -.01em;
-  transition: color .2s;
-}
-.faq-cq:hover, .faq-cq:focus-visible { color: #c23c18; }
-.faq-ci { position: relative; flex: none; width: 20px; height: 20px; }
-.faq-ci::before, .faq-ci::after {
-  content: ''; position: absolute; background: #1e1e1e;
-  transition: transform .3s ease, opacity .3s ease, background-color .2s;
-}
-.faq-ci::before { top: 50%; left: 0; right: 0; height: 1.8px; transform: translateY(-50%); }
-.faq-ci::after { left: 50%; top: 0; bottom: 0; width: 1.8px; transform: translateX(-50%); }
-.faq-cq[aria-expanded="true"] .faq-ci::after { transform: translateX(-50%) scaleY(0); opacity: 0; }
-.faq-cq[aria-expanded="true"] .faq-ci::before { background: #f54b25; }
-.faq-ca { overflow: hidden; }
-.post-body .faq-ca p { margin-top: 0; padding-bottom: 20px; line-height: 1.7; color: #4e4e4e; }
-.js-faq .faq-ca { transition: height .3s cubic-bezier(.4,0,.2,1); }
-@media (prefers-reduced-motion: reduce) {
-  .js-faq .faq-ca { transition: none; }
-  .faq-ci::before, .faq-ci::after { transition: background-color .2s; }
-}
-
-/* ===== Sticky rail =====
-   Capped at the viewport and laid out as a column, so the bottom card is
-   always reachable: the CTA and phone cards keep their height and the TOC
-   scrolls inside its own card. */
-.rail-sticky {
-  position: sticky; top: 112px;
-  display: flex; flex-direction: column; gap: 20px;
-  max-height: calc(100dvh - 112px - 28px);
-}
-.rail-sticky > .rail-cta,
-.rail-sticky > .rail-card:last-child { flex: none; }
-.rail-toc { display: flex; flex-direction: column; min-height: 0; }
-.toc-scroll {
-  min-height: 0; overflow-y: auto; overscroll-behavior: contain;
-  scrollbar-width: thin; scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
-}
-.toc-scroll::-webkit-scrollbar { width: 4px; }
-.toc-scroll::-webkit-scrollbar-thumb { border-radius: 9999px; background: rgba(0, 0, 0, 0.18); }
-
-.rail-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.01em; color: #959595; }
-.rail-card { padding: 22px; border: 1px solid rgba(0, 0, 0, 0.1); background: #fff; }
-.rail-cta { padding: 26px 24px; border: 1px solid rgba(0, 0, 0, 0.1); background: #fff; text-align: center; }
-
-.toc-list { margin-top: 14px; }
-.toc-item + .toc-item { border-top: 1px solid rgba(0, 0, 0, 0.08); }
-.toc-link {
-  display: flex; gap: 10px; padding: 11px 0;
-  font-size: 14px; line-height: 1.45; letter-spacing: -0.01em; color: #4e4e4e;
-  transition: color 0.2s ease;
-}
-.toc-link::before {
-  content: ''; flex: none; width: 5px; height: 5px; margin-top: 7px;
-  border-radius: 9999px; background: rgba(0, 0, 0, 0.22);
-  transition: background-color 0.2s ease;
-}
-.toc-link:hover { color: #1e1e1e; }
-.toc-link:focus-visible { outline: 2px solid rgba(245, 75, 37, 0.6); outline-offset: 3px; }
-.toc-link.is-active { color: #f54b25; font-weight: 600; }
-.toc-link.is-active::before { background: #f54b25; }
-
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   COMPLIANCE TABLE
-   Used by LocationServiceLayout's §5b section AND written as raw HTML inside
-   article-layout markdown bodies, so it can't live in either page.
-   ───────────────────────────────────────────────────────────────────────────── */
-/* — Compliance / jurisdiction table (§5b) —
-   Same hairline logic as the service pages' .cmp-row: no box, no card, the
-   rules do the work. Desktop is a real 3-column grid; under 860px each row
-   becomes a stacked block so nothing has to scroll sideways on a phone. */
-.jur-row { display: grid; grid-template-columns: minmax(0,1.05fr) 200px minmax(0,1.6fr); align-items: stretch; }
-.jur-row + .jur-row { border-top: 1px solid rgba(0,0,0,.09); }
-.jur-cell { display: flex; align-items: center; padding: 19px 16px; font-size: 14.5px; line-height: 1.45; letter-spacing: -.01em; }
-.jur-subject { padding-left: 0; font-weight: 600; color: #1e1e1e; }
-.jur-value { background: rgba(245,75,37,.06); border-left: 1px solid rgba(245,75,37,.28); border-right: 1px solid rgba(245,75,37,.28); color: #1e1e1e; font-weight: 500; }
-.jur-detail { color: rgba(30,30,30,.55); }
-.jur-head .jur-cell { align-items: flex-end; padding-top: 4px; padding-bottom: 22px; font-size: 13px; font-weight: 600; color: rgba(30,30,30,.5); }
-.jur-head .jur-value { border-top: 2px solid #f54b25; padding-top: 20px; color: #1e1e1e; }
-.jur-row:last-child .jur-value { border-bottom: 1px solid rgba(245,75,37,.28); }
-.jur-note { border-left: 2px solid rgba(245,75,37,.3); padding-left: 14px; }
-
-@media (max-width: 860px) {
-  .jur-row { grid-template-columns: 1fr; }
-  .jur-head { display: none; }
-  .jur-cell { padding: 0; }
-  .jur-row { padding: 18px 0; }
-  .jur-subject { font-size: 16px; }
-  .jur-value { margin-top: 8px; padding: 4px 10px; align-self: start; border: none; border-left: 2px solid rgba(245,75,37,.45); border-radius: 0; font-size: 14px; }
-  .jur-detail { margin-top: 10px; }
-  .jur-row:last-child .jur-value { border-bottom: none; }
+  .brandlink,
+  .brandlink :where(img, p, span) {
+    transition: none;
+  }
 }

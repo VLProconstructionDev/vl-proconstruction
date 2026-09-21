@@ -7,12 +7,12 @@ service: flooring
 published: true
 
 seoTitle: Hard-Surface Flooring Bradenton, FL
-seoDescription: 'Hardwood, engineered & LVP flooring installers in Bradenton, FL. NWFA-spec installs. $6–$18/sq ft. Call for a free quote: (503) 781-4657'
+seoDescription: 'Hardwood, engineered & LVP flooring installers in Bradenton, FL. NWFA-spec installs. $6–$18/sq ft. Call for a free quote: (941) 203-1020'
 
 heroCity: Bradenton
 heroService: Flooring
 heroSubhead: >-
-  We install hardwood, engineered wood, and LVP for Bradenton homeowners — Palma
+  We install hardwood, engineered wood, and LVP for Bradenton homeowners – Palma
   Sola bungalows, West Bradenton ranches, and the newer builds out past I-75.
   Slab moisture tested and logged before a single plank leaves the box.
 stats:
@@ -31,7 +31,7 @@ trust:
     title: Warranty Stays Intact
     body: >-
       Moisture readings logged, acclimation timed, expansion gaps preserved,
-      underlayment matched to the manufacturer's spec — the conditions your
+      underlayment matched to the manufacturer's spec – the conditions your
       floor's warranty actually depends on.
   - icon: crew
     title: In-House Crews
@@ -50,7 +50,7 @@ localPoints:
     body: >-
       Gulf Coast slabs push moisture year-round, and it's the number one reason
       wood floors cup and fail here. We test and log the slab before we
-      recommend a product — sometimes that means engineered or LVP instead of
+      recommend a product – sometimes that means engineered or LVP instead of
       solid hardwood, and we'll say so.
   - title: Vapor barrier and adhesive matched to the reading
     body: >-
@@ -77,7 +77,7 @@ included:
     body: >-
       Solid and engineered hardwood to NWFA spec, acclimation logged. On most
       Bradenton slabs engineered oak over a moisture membrane is the safer
-      call — same look, no cupping.
+      call – same look, no cupping.
     image: /assets/images/hsf-hardwood.webp
     alt: >-
       Gray-toned engineered hardwood flooring installed through a home landing
@@ -91,7 +91,7 @@ included:
     alt: Light luxury vinyl plank flooring running down a bright office hallway
   - title: Floor Preparation
     body: >-
-      Gulf Coast slabs push moisture year-round — the top reason wood floors
+      Gulf Coast slabs push moisture year-round – the top reason wood floors
       fail here. We test the slab first, then prep: adhesive removal, subfloor
       repair, self-levelling, flattening.
     image: /assets/images/hsf-floor-prep.webp
@@ -104,7 +104,7 @@ project:
   budget: $12,600
   story: >-
     A 1972 home, 1,150 sq ft of tile and carpet coming out, and the owners had
-    their heart set on solid oak. The slab tested too wet for it — so we showed
+    their heart set on solid oak. The slab tested too wet for it – so we showed
     them the readings and moved them to a 7" engineered oak over a moisture
     membrane, same look, flat in ten years.
   image: /assets/images/project-bradenton-hard-surface-flooring.webp
@@ -160,7 +160,7 @@ process:
 
 pricingTitle: What does new flooring cost in Bradenton, FL?
 pricingIntro: >-
-  Every floor is different — but here's an honest range based on real projects
+  Every floor is different – but here's an honest range based on real projects
   we've completed across Bradenton and Manatee County. Prices are installed, per
   square foot, labor and materials.
 pricing:
@@ -196,7 +196,7 @@ pricing:
       - Full trim carpentry package
 areaTitle: Bradenton and the rest of Manatee County
 areaBody: >-
-  Bradenton is home base, and we work the whole Suncoast from here — Palmetto
+  Bradenton is home base, and we work the whole Suncoast from here – Palmetto
   and Ellenton to the north, Lakewood Ranch and Parrish east of I-75, and out to
   Anna Maria, Holmes Beach, and Longboat Key on the water.
 
@@ -207,11 +207,11 @@ faqs:
       plumbing, framing, or structure is a finish, and Manatee County and the
       City of Bradenton both treat it that way. If the job includes subfloor
       repair, a wall coming out, or post-flood structural work, it needs a permit
-      — and we pull it. We tell you which side of that line your project falls
+      – and we pull it. We tell you which side of that line your project falls
       on at the first visit, in writing.
   - q: My HOA or condo association needs approval. Can you handle that?
     a: >-
-      We'll give you the packet most Bradenton associations ask for — scope of
+      We'll give you the packet most Bradenton associations ask for – scope of
       work, our license and liability certificate, working hours, and the
       elevator or stairwell protection plan. Hard-surface flooring above the
       ground floor almost always triggers a sound-rating minimum, so we spec an
@@ -226,7 +226,7 @@ faqs:
       underlayment, trim, and haul-away.
   - q: Can I put solid hardwood over a slab in Bradenton?
     a: >-
-      Sometimes — but the slab decides, not the catalogue. Solid wood over a
+      Sometimes – but the slab decides, not the catalogue. Solid wood over a
       Gulf Coast slab needs either a very low moisture reading or a plywood
       sleeper system, which adds height and cost. We test first and show you the
       numbers. On most Bradenton slabs engineered oak over a moisture membrane

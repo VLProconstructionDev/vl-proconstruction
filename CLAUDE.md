@@ -66,7 +66,8 @@ src/
   layouts/
     BaseLayout.astro       — wraps every page
     ServiceLayout.astro    — collection-driven service-page shell (used only by the PARKED service×location route)
-    LocationServiceLayout.astro — city × service page (see below)
+    LocationServiceLayout.astro — city × service page, banded shell (see below)
+    LocationArticleLayout.astro — city × service page, long-form shell (`template: article`)
     BlogPostLayout.astro   — blog post shell (title block, hero, .post-body prose, keep-reading)
   components/
     SEO.astro              — <head> meta, OG, Twitter, JSON-LD
@@ -76,6 +77,7 @@ src/
     EstimateInline.astro   — inline step 1 (dark form section; home + blog pages)
     ServiceAreaMap.astro   — interactive service-area map (MapLibre GL, lazy-loaded)
     ServiceHero.astro      — dark hero shared by service pages
+    ArticleStyles.astro    — CSS for the long-form article treatment (.post-body/.intro-card/.rail-*)
     Breadcrumbs.astro      — accessible breadcrumb list
     PostCard.astro         — blog post card (photo + New ribbon + meta + title + excerpt)
     PostMeta.astro         — date · author avatar + name · clock + read time
@@ -108,7 +110,7 @@ public/
 - `global.css` also holds the shared post-card styles (`.bl-*` — used by both the home-page teaser and `/blog`, including `.bl-noimg` for a post with no `heroImage` yet) plus shared `#navbar`/`.nav-*`/`#mobileMenu`/`.mm-*`/`.btn` styles that apply to the Header component site-wide, plus `scroll-margin-top: 104px` on all `[id]` elements and the scrollbar-hide + `overflow-x: hidden` resets.
 
 ### `src/lib/site.ts`
-Single source of truth for business info: `name` (`VL Proconstruction`), `legalName` (`VL Proconstruction LLC`, per the Google Maps listing), `tagline`, `url`, `logo`, `phone` (`(503) 781-4657`), `phoneHref`, `email` (real), `address` (Bradenton, FL), `geo`, `serviceAreas` (the Suncoast towns grouped by county — drives the Locations nav panel), `areaServed` (derived flat list: those towns + the two counties, for LocalBusiness JSON-LD), `social` (real Instagram + Google Maps links), `defaultOgImage`, `estimateWebhook` (Apps Script web-app URL for lead submissions — empty until deployed per `docs/leads-webhook/SETUP.md`), `googleMapsApiKey` (address autocomplete; ships client-side by design — must stay referrer-restricted in Google Cloud console), `recaptchaSiteKey` (reCAPTCHA v3, public by design; the secret lives only in the Apps Script). Imported by SEO, footer, header CTAs, schema builders, and the EstimateWizard script. The real address is in place (17416 Harvest Moon Way, Bradenton, FL 34211); the remaining `// TODO` is `geo` — the coordinates are a ZIP-34211 approximation, not the parcel, and should be replaced with the Google Business Profile pin so LocalBusiness JSON-LD matches the listing.
+Single source of truth for business info: `name` (`VL Proconstruction`), `legalName` (`VL Proconstruction LLC`, per the Google Maps listing), `tagline`, `url`, `logo`, `phone` (`(941) 203-1020`), `phoneHref`, `email` (real), `address` (Bradenton, FL), `geo`, `serviceAreas` (the Suncoast towns grouped by county — drives the Locations nav panel), `areaServed` (derived flat list: those towns + the two counties, for LocalBusiness JSON-LD), `social` (real Instagram + Google Maps links), `defaultOgImage`, `estimateWebhook` (Apps Script web-app URL for lead submissions — empty until deployed per `docs/leads-webhook/SETUP.md`), `googleMapsApiKey` (address autocomplete; ships client-side by design — must stay referrer-restricted in Google Cloud console), `recaptchaSiteKey` (reCAPTCHA v3, public by design; the secret lives only in the Apps Script). Imported by SEO, footer, header CTAs, schema builders, and the EstimateWizard script. The real address is in place (17416 Harvest Moon Way, Bradenton, FL 34211); the remaining `// TODO` is `geo` — the coordinates are a ZIP-34211 approximation, not the parcel, and should be replaced with the Google Business Profile pin so LocalBusiness JSON-LD matches the listing.
 
 ### `src/lib/schema.ts`
 JSON-LD builders: `localBusinessSchema()` (GeneralContractor, included on every page via BaseLayout — deliberately minimal for now; a `TODO(after Google Business Profile is set up)` comment lists the enrichment fields to add once GBP exists so values match the listing exactly), `serviceSchema()`, `breadcrumbSchema()`, `articleSchema()`. `SEO.astro` serializes the result into `<script type="application/ld+json">`.
@@ -147,6 +149,8 @@ JSON-LD builders: `localBusinessSchema()` (GeneralContractor, included on every 
 
 ### City × service pages (`/services/[service]/[city]-[state]`)
 Local-SEO landing pages: `src/pages/services/[service]/[location].astro` (thin route) + `src/layouts/LocationServiceLayout.astro` (the whole page) + the **`cityServices`** content collection + `src/lib/urls.ts` (`locationSlug()` / `cityServicePath()` — the slug `bradenton` + `FL` → `bradenton-fl` is defined there and nowhere else). Live: Sarasota × custom showers and tile & natural stone. Four more pair files exist but carry `published: false` (all three Bradenton pairs + Sarasota flooring) — flip the flag to ship one.
+
+Two shells render these pages, picked by the pair file's `template` field (`src/content.config.ts`). `sections` (the default) is `LocationServiceLayout` — the 12 full-bleed bands described below. `article` is `LocationArticleLayout` — the long-form treatment the `/services/bathroom-remodeling` and `/services/waterproofing-subfloor-preparation` pages use: the same dark hero, then one prose column on `#f6f5f3` beside a sticky rail (estimate card, table of contents built from the page's own h2s, phone). It reads exactly the same frontmatter — nothing is authored per template, so flipping the flag needs no new copy — but it has no service-area map and no before/after band. Live on `bradenton--bathroom-remodeling`, `bradenton--waterproofing-subfloor-preparation`, `sarasota--bathroom-remodeling` and `sarasota--waterproofing-subfloor-preparation`. One extra affordance: a pair file may write its own `## ` headings in the markdown body — the city-only material (flood zones, permit offices, condo rules, code standards) that no field can hold. When it does, those headings head the local-expertise section themselves (`localTitle` is not rendered) and take its place in the rail's contents; `localPoints` is then usually empty. A body of plain prose, as both Bradenton pairs have, behaves exactly as before. The article CSS lives in `src/components/ArticleStyles.astro`, shared by both service pages and this layout so the three cannot drift.
 
 The `[service]` segment is dynamic, but `/services/custom-showers` still resolves to the hand-designed `src/pages/services/custom-showers/index.astro` — Astro gives static path segments priority. Only `[service]/[location]` is dynamic; there is deliberately no `[service]/index.astro`.
 
