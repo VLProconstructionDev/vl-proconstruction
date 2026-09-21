@@ -31,7 +31,7 @@ interface Props {
 const { entry, location, service } = Astro.props;
 const d = entry.data;
 /** The markdown body is the "local expertise" prose — it opens that section. */
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 
 const city = d.heroCity;
 const cityState = `${location.data.name}, ${location.data.state}`;
@@ -51,6 +51,17 @@ const HERO_PHOTO: Record<string, string> = {
 const heroPhoto = HERO_PHOTO[service.id] ?? '/assets/images/hero-poster-0715.webp';
 
 /**
+ * A pair file may write its own `## ` headings in the body — the city-only
+ * material (flood zones, permit offices, condo rules) that no frontmatter field
+ * can hold. When it does, those headings ARE the local-expertise section: they
+ * head the prose themselves and stand in for `localTitle` in the rail. A body
+ * of plain prose adds nothing here and keeps the old behaviour.
+ * Astro has already slugged the ids.
+ */
+const bodyToc = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text }));
+const bodyLeads = bodyToc.length > 0;
+
+/**
  * Headings and the rail's table of contents come from one list, so a section
  * can never be in the page and missing from the rail (or the reverse). A
  * section drops out of both when its data is empty.
@@ -58,7 +69,7 @@ const heroPhoto = HERO_PHOTO[service.id] ?? '/assets/images/hero-poster-0715.web
 const sections = [
   { slug: 'overview', text: `${city} ${serviceLower}`, show: true },
   { slug: 'included', text: d.includedTitle, show: d.included.length > 0 },
-  { slug: 'local', text: d.localTitle.replace(/\s*\|\s*/g, ' '), show: d.localPoints.length > 0 },
+  { slug: 'local', text: d.localTitle.replace(/\s*\|\s*/g, ' '), show: d.localPoints.length > 0 || bodyLeads },
   { slug: 'why-us', text: 'Why homeowners choose VL Pro', show: d.trust.length > 0 },
   { slug: 'project', text: `A recent project in ${d.project.neighborhood}`, show: true },
   { slug: 'process', text: 'How the work runs', show: d.process.length > 0 },
@@ -68,9 +79,15 @@ const sections = [
   { slug: 'faqs', text: `${city} ${serviceLower} FAQs`, show: d.faqs.length > 0 },
   { slug: 'company', text: 'About VL Proconstruction', show: true },
 ];
-const toc = sections.filter((s) => s.show);
-const has = (slug: string) => toc.some((s) => s.slug === slug);
-const heading = (slug: string) => toc.find((s) => s.slug === slug)?.text ?? '';
+const shown = sections.filter((s) => s.show);
+const has = (slug: string) => shown.some((s) => s.slug === slug);
+const heading = (slug: string) => shown.find((s) => s.slug === slug)?.text ?? '';
+
+const at = shown.findIndex((s) => s.slug === 'local');
+const toc =
+  !bodyLeads || at === -1
+    ? shown
+    : [...shown.slice(0, at), ...bodyToc, ...shown.slice(at + 1)];
 
 const schema = [
   serviceSchema({
@@ -209,7 +226,7 @@ const schema = [
 
             {has('local') && (
               <>
-                <h2 id="local">{heading('local')}</h2>
+                {!bodyLeads && <h2 id="local">{heading('local')}</h2>}
                 <Content />
                 {d.localPoints.map((point) => (
                   <>
