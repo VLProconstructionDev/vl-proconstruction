@@ -21,6 +21,13 @@ interface Props {
    * contain the probe point and pin the navbar to one theme.
    */
   navTheme?: 'light' | 'dark';
+  /**
+   * Arm the exit-offer popup's automatic triggers (exit intent + 10s dwell).
+   * True everywhere by default; a page sets false when an unprompted popup
+   * would get in the way of its own conversion (e.g. the gated guide landing
+   * page, which opens the offer itself once the form is submitted).
+   */
+  autoOffer?: boolean;
 }
 
 const {
@@ -31,6 +38,7 @@ const {
   schema,
   canonical,
   navTheme = 'light',
+  autoOffer = true,
 } = Astro.props;
 
 // Always include the LocalBusiness schema site-wide, plus any page-specific schema.
@@ -144,9 +152,10 @@ const allSchema = [localBusinessSchema(), ...pageSchema];
     <EstimateWizard />
 
     <!-- Site-wide "Save $1000" tab plus the automatic exit-intent/dwell
-         popup, armed on EVERY page: 10 seconds on the page (or the cursor
-         leaving it) opens the offer, once per session across the whole site. -->
-    <ExitOffer auto />
+         popup, armed on every page that doesn't opt out via `autoOffer`:
+         10 seconds on the page (or the cursor leaving it) opens the offer,
+         once per session across the whole site. -->
+    <ExitOffer auto={autoOffer} />
 
     <!-- Hero video: the HTML ships NO <source> elements. Desktop injects and
          plays immediately. Phones show the poster during page load (the ~2 MB
