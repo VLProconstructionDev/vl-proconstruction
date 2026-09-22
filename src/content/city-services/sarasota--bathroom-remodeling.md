@@ -38,7 +38,7 @@ published: true
 template: article
 
 seoTitle: Bathroom Remodeling Sarasota, FL
-seoDescription: 'Bathroom remodeling in Sarasota, FL. Flood-zone and condo permitting handled, one in-house crew, fixed written quote. Free estimate: (503) 781-4657'
+seoDescription: 'Bathroom remodeling in Sarasota, FL. Flood-zone and condo permitting handled, one in-house crew, fixed written quote. Free estimate: (941) 203-1020'
 
 heroCity: Sarasota
 heroService: Bathroom Remodeling

@@ -8,7 +8,7 @@ published: true
 template: article
 
 seoTitle: Shower Waterproofing Bradenton, FL
-seoDescription: 'Shower waterproofing & subfloor prep in Bradenton, FL. Schluter® assemblies, 24-hour flood test. $1,800–$6,500. Free quote: (503) 781-4657'
+seoDescription: 'Shower waterproofing & subfloor prep in Bradenton, FL. Schluter® assemblies, 24-hour flood test. $1,800–$6,500. Free quote: (941) 203-1020'
 
 heroCity: Bradenton
 heroService: Waterproofing & Subfloor Prep

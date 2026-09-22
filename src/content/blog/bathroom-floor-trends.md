@@ -1,7 +1,7 @@
 ---
 title: 'What Is the Current Trend for Bathroom Floors?'
 seoTitle: 'Bathroom Floor Trends for 2026'
-description: 'Bathroom floor trends for 2026: large-format porcelain, warm neutrals, matte tile & curbless showers. Free estimate: (503) 781-4657'
+description: 'Bathroom floor trends for 2026: large-format porcelain, warm neutrals, matte tile & curbless showers. Free estimate: (941) 203-1020'
 lede: 'The short answer is large-format porcelain in a warm neutral, matte, with a tight grout joint – and the floor carrying straight into the shower. Here is why each of those won, and which ones are worth your money in a Florida bathroom.'
 publishedAt: 2026-09-16
 author: Abel Leytner
@@ -231,4 +231,4 @@ across Bradenton, Lakewood Ranch, Sarasota, Longboat Key, Siesta Key, and Venice
 materials, [where to actually buy the tile](/blog/lowes-vs-home-depot-tile) is worth reading
 first.
 
-[**Get a free in-home estimate**](/#estimate) or call [(503) 781-4657](tel:+15037814657).
+[**Get a free in-home estimate**](/#estimate) or call [(941) 203-1020](tel:+19412031020).
