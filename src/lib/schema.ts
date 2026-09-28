@@ -59,6 +59,7 @@ export function localBusinessSchema() {
 const SERVICE_CATALOG = [
   { slug: 'bathroom-remodeling', name: 'Bathroom Remodeling' },
   { slug: 'custom-showers', name: 'Custom Shower Installation' },
+  { slug: 'curbless-walk-in-showers', name: 'Curbless & Walk-In Shower Installation' },
   { slug: 'tile-natural-stone', name: 'Tile & Natural Stone Installation' },
   { slug: 'flooring', name: 'Hard-Surface Flooring Installation' },
   { slug: 'waterproofing-subfloor-preparation', name: 'Waterproofing & Subfloor Preparation' },
