@@ -6,7 +6,7 @@ import TrustPill from '@components/TrustPill.astro';
 import ReviewsSection from '@components/ReviewsSection.astro';
 
 const description =
-  'Custom shower builders in Bradenton & Sarasota, FL. Curbless, waterproof, built to stay leak-free. Call for a free quote: (503) 781-4657';
+  'Custom shower builders in Bradenton & Sarasota, FL. Curbless, waterproof, built to stay leak-free. Call for a free quote: (941) 203-1020';
 
 const schema = [
   serviceSchema({
@@ -24,7 +24,7 @@ const schema = [
 ---
 
 <BaseLayout
-  title="Custom Showers — VL Pro Construction"
+  title="Custom Showers – VL Pro Construction"
   description={description}
   schema={schema}
   navTheme="dark"
@@ -208,27 +208,26 @@ const schema = [
 
     <div class="relative z-20 h-full min-h-screen w-full mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] flex flex-col justify-center sm:justify-end pt-[158px] pb-[88px] sm:py-0 sm:pb-24 lg:pb-[90px] sm:pt-[130px] gap-5 lg:gap-6">
       <TrustPill />
-      <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,3rem)] sm:text-[clamp(3rem,6.8vw,6.05rem)] text-center">
+      <div class="font-semibold normal-case leading-[1.06] sm:leading-[1.02] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(2.2rem,9.4vw,3.1rem)] sm:text-[clamp(3.4rem,6.6vw,5.9rem)] text-center text-balance">
         <h1>
-          <span>Sarasota <br class="sm:hidden" />& Bradenton Area</span><br />
-          <span class="text-brand block">Custom Showers</span>
+          Sarasota <br class="sm:hidden" />&amp; Bradenton<br />
+          Custom Showers
         </h1>
-        <div class="flex flex-col items-center gap-3 sm:gap-5">
-          <span>Remodeling Experts</span>
-          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">We build custom showers and full wet rooms for homeowners and businesses across Sarasota and the surrounding areas — from waterproofing to frameless glass, a complete start to finish job backed by skilled craftsmanship and trusted local service.</p>
+        <div class="flex flex-col items-center gap-3 sm:gap-5 mt-5 sm:mt-6">
+          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">We build custom showers and wet rooms across the Gulf Coast. Schluter®-KERDI membrane, every seam sealed, flood-tested for a full 24 hours before one tile goes down – and frameless glass templated off the finished tile so the panels sit flush.</p>
         </div>
       </div>
       <div class="flex flex-col items-center gap-8">
         <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-center gap-3 sm:gap-4 w-full sm:w-auto">
           <a href="#estimate" class="btn js-open-estimate w-full sm:w-auto text-center bg-brand hover:bg-[#c23c18] rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-white">Free Estimate</a>
-          <a href="tel:+15037814657" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(503) 781-4657</a>
+          <a href="tel:+19412031020" class="btn w-full sm:w-auto text-center border border-[#a3a3a3] hover:border-white hover:bg-white/10 rounded-full px-8 py-3.5 text-[18px] font-semibold capitalize text-[#f2f2f2]">(941) 203-1020</a>
         </div>
         <!-- Bottom row: stats on the left, the marks we build to on the right.
              Capped narrower than the hero's 1920 grid and centred, so on a wide
              screen the two ends pull in off the edges. -->
         <div class="w-full flex flex-col gap-8 lg:mt-[96px] lg:mx-auto lg:max-w-[1320px] lg:flex-row lg:items-end lg:justify-between">
           <div class="flex flex-col items-start gap-3 sm:gap-4">
-            <h2 class="font-normal capitalize text-[14.5px] sm:text-[16px] lg:text-[17px] leading-[1.2] tracking-[-0.03em] text-white/80">Why Gulf Coast Homeowners Trust VL Pro:</h2>
+            <h2 class="font-normal capitalize text-[14.5px] sm:text-[16px] lg:text-[17px] leading-[1.2] tracking-[-0.03em] text-white/80">What a VL Pro shower is built to:</h2>
             <div class="grid grid-cols-3 gap-x-3 sm:gap-x-8 gap-y-5 lg:flex lg:flex-wrap lg:justify-start">
               <div class="flex flex-col items-start">
                 <span class="font-normal text-[2.05rem] sm:text-[clamp(2rem,3vw,2.8rem)] leading-[1.085] tracking-[-0.04em]"><span class="stat-num" data-count="22">22</span>+</span>
@@ -248,20 +247,20 @@ const schema = [
                what the badges mean. Reversed (white-on-transparent) marks, so they
                read on the dark hero; images are decorative — the label names them. -->
           <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
-            <div class="flex items-center gap-2.5 sm:gap-3.5">
+            <a href="https://www.schluter.com/" target="_blank" rel="noopener" title="Schluter Systems" class="brandlink flex items-center gap-2.5 sm:gap-3.5">
               <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
-            </div>
+            </a>
             <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
-            <div class="flex items-center gap-2.5 sm:gap-3.5">
+            <a href="https://www.tile-assn.com/" target="_blank" rel="noopener" title="National Tile Contractors Association" class="brandlink flex items-center gap-2.5 sm:gap-3.5">
               <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
-            </div>
+            </a>
             <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
-            <div class="flex items-center gap-2.5 sm:gap-3.5">
+            <a href="https://finance.yahoo.com/small-business/articles/vl-pro-construction-marks-22-085900059.html" target="_blank" rel="noopener" title="VL Proconstruction featured on Yahoo Finance" class="brandlink flex items-center gap-2.5 sm:gap-3.5">
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Featured<br />On</p>
-              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-white.webp" width="480" height="134" alt="Yahoo" class="block h-[22px] sm:h-7 w-auto opacity-90" />
-            </div>
+              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-finance-white.svg" width="736" height="110" alt="Yahoo Finance" class="block h-[19px] sm:h-6 w-auto opacity-90" />
+            </a>
           </div>
         </div>
       </div>
@@ -275,8 +274,8 @@ const schema = [
         <div>
                     <h2 class="font-semibold capitalize leading-[1.05] tracking-[-0.04em] text-[clamp(2.5rem,4vw,3.75rem)]">Custom Showers<br class="hidden sm:block" /> Built to Last</h2>
           <div class="mt-6 space-y-5 text-[13.5px] sm:text-[15.5px] leading-[1.75] tracking-[-0.01em] text-graydesc max-w-[560px]">
-            <p>Every shower is carefully designed, waterproofed, and installed using proven systems and premium materials, giving homeowners peace of mind that their investment is protected for years to come.</p>
-            <p>From custom showers and full wet rooms to curbless entries, built-in benches, recessed niches, heated shower floors, and frameless glass enclosures, we create personalized spaces built for long-term performance with the craftsmanship and attention to detail needed to get it done right the first time.</p>
+            <p>A shower fails at the layer nobody photographs. Ours is a bonded Schluter®-KERDI assembly – membrane, sealed seams, a sloped pan, and the drain flange bonded to the sheet rather than caulked to it – then plugged and flooded for 24 hours, which you are welcome to watch.</p>
+            <p>On a Gulf Coast slab a curbless entry usually means coring or trenching for a linear drain and building the fall into the pan rather than the floor. Benches, lit niches, heated floors and 316 marine-grade hardware get chosen the same way – for what the room and the salt air will have done to them in ten years.</p>
           </div>
           <div class="mt-11 grid grid-cols-3 gap-6 max-w-[560px]">
             <div class="flex flex-col items-start gap-3.5">
@@ -321,7 +320,7 @@ const schema = [
       <div class="flex flex-col lg:flex-row lg:items-center lg:gap-14">
         <div class="lg:w-[28%] lg:shrink-0">
           <img loading="lazy" decoding="async" src="/assets/images/logo.svg" alt="VL Pro Construction" class="h-10 w-auto mb-6" />
-          <h2 class="font-semibold leading-[1.04] tracking-[-0.03em] text-white text-[clamp(2.15rem,3vw,2.9rem)]">Certified for<br class="hidden lg:block" /> every surface</h2>
+          <h2 class="font-semibold leading-[1.1] tracking-[-0.03em] text-white text-[clamp(1.7rem,2.25vw,2.2rem)] max-w-[15ch] lg:max-w-none">Schluter® Waterproofing That Keeps Showers Leak-Free</h2>
         </div>
         <div class="mt-9 lg:mt-0 grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-7 lg:flex-1">
           <div class="flex items-start gap-3">
@@ -386,8 +385,8 @@ const schema = [
   <!-- ===================== SERVICES WE OFFER ===================== -->
   <section id="included" class="bg-white" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[100px]">
-      <h2 class="font-semibold capitalize leading-[1.05] tracking-[-0.04em] text-[clamp(2.5rem,4vw,3.75rem)]">Custom Shower Solutions</h2>
-      <p class="mt-5 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc">From demolition and waterproofing to precision tile installation, we provide complete custom shower solutions built for lasting performance.</p>
+      <h2 class="font-semibold normal-case leading-[1.05] tracking-[-0.04em] text-[clamp(2.5rem,4vw,3.75rem)]">Types of Custom Showers We Build</h2>
+      <p class="mt-5 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc">Four kinds of work, one crew, one price: the strip-out, the waterproofing assembly, the tile, and the glass that lands last.</p>
       <div class="mt-12 lg:mt-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <article class="svc-tile">
           <div class="svc-figure">
@@ -428,10 +427,10 @@ const schema = [
         <div class="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 p-6 sm:p-12 lg:p-14 lg:flex-1 lg:justify-center">
           <div class="max-w-[680px]">
             <h2 class="font-semibold tracking-[-0.035em] leading-[1.1] text-ink text-[clamp(1.7rem,2.8vw,2.6rem)]">
-              <span class="text-brand">Free</span> In Home Design Consultation
+              <span class="text-brand">Free</span> Shower Design Visit
             </h2>
             <p class="mt-3 sm:mt-4 text-[13.5px] sm:text-[clamp(0.95rem,1.15vw,1.0625rem)] tracking-[-0.02em] text-graydesc">
-              Sit down with a shower specialist to plan every detail:
+              Half an hour at your kitchen table settles what costs money later:
             </p>
             <ul class="consult-list mt-4 sm:mt-7 grid gap-1.5 sm:gap-3 sm:grid-cols-2">
               <li class="consult-chip"><span class="consult-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span>Layout &amp; Curb Options</li>
@@ -447,7 +446,7 @@ const schema = [
       </div>
       <!-- TODO: real phone number -->
       <div class="mt-4 sm:mt-6 flex justify-center">
-        <a href="tel:+15037814657" class="btn inline-flex items-center justify-center px-2 py-2 text-[16px] sm:text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
+        <a href="tel:+19412031020" class="btn inline-flex items-center justify-center px-2 py-2 text-[16px] sm:text-[17px] font-semibold capitalize text-brand underline decoration-brand/40 underline-offset-[6px] hover:decoration-brand">
           Get a Free Design Consultation
         </a>
       </div>
@@ -457,7 +456,7 @@ const schema = [
   <!-- ===================== PROCESS ===================== -->
   <section id="process" class="bg-white" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] pt-20 lg:pt-[120px]">
-      <h2 class="font-semibold capitalize text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.9rem,7.5vw,5.75rem)]">Our Process</h2>
+      <h2 class="font-semibold capitalize text-ink leading-[1.04] tracking-[-0.04em] text-[clamp(2.9rem,7.5vw,5.75rem)]">Building your shower</h2>
     </div>
     <div class="bg-[#faf9f8] mt-10 lg:mt-14 pb-20 lg:pb-[100px]">
       <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px]">
@@ -469,27 +468,27 @@ const schema = [
           <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">1</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
             <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Consult</h3>
-            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We look at your bathroom, talk through layout, drainage, and glass, and walk you through waterproofing options, pricing, and timeline.</p>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We measure the room, camera the existing drain and read the slab, then tell you what entry height it will actually take. You keep a written line-item price, not a lump sum.</p>
           </div>
         </div>
         <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
           <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
-            <img loading="lazy" decoding="async" src="/assets/images/process-2.webp" alt="Design and material planning" class="px-img" />
+            <img loading="lazy" decoding="async" src="/assets/images/process-3.webp" alt="VL Pro Construction crew tiling a shower part-way through the build" class="px-img" />
           </div>
           <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">2</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
             <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Design</h3>
-            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We finalize the tile layout, niche and bench placement, slope, and drain type, then confirm every material selection before demo begins.</p>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">Tile layout, niche and bench placement, slope and drain type get fixed on paper. We pull the county permit – review runs 2–5 business days – and every material is on site before demo day.</p>
           </div>
         </div>
         <div class="process-step grid grid-cols-1 md:grid-cols-[1.4fr_auto_1.3fr] gap-x-8 gap-y-4 md:gap-y-5 md:items-center py-8 border-t border-black/10">
           <div class="px-frame w-full sm:w-[420px] aspect-[16/11]">
-            <img loading="lazy" decoding="async" src="/assets/images/process-4.webp" alt="Finished, completed project" class="px-img" />
+            <img loading="lazy" decoding="async" src="/assets/images/process-4.webp" alt="Finished walk-in shower and bathroom on project completion" class="px-img" />
           </div>
           <span class="font-light leading-none tracking-[-0.02em] text-[clamp(2.75rem,5.5vw,6rem)] text-ink justify-self-start">3</span>
           <div class="md:col-span-1 md:pl-10 lg:pl-14 -mt-1 md:mt-0">
             <h3 class="text-[clamp(1.45rem,2.1vw,1.9rem)] font-semibold tracking-[-0.025em]">Build</h3>
-            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">We frame, set the pan, install and flood-test the waterproofing, then set each tile by hand and seal the grout. Frameless glass goes in last, and we walk the finished shower with you before we call it done.</p>
+            <p class="mt-2 text-[14px] leading-[1.6] text-graycard max-w-[560px]">Down to studs and slab, pan built and sloped, membrane bonded and flood-tested for 24 hours, then every tile set by hand. Glass is templated off that finished tile and fitted last. The flood-test photos come to you with the final invoice.</p>
           </div>
         </div>
         </div>
@@ -506,7 +505,7 @@ const schema = [
             Recent shower projects
           </h2>
           <p class="mt-4 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[560px]">
-            A look at the custom showers and wet rooms we've built across Bradenton &amp; Sarasota — curbless entries, tiled niches, benches, and frameless glass.
+            Real jobs from across the Gulf Coast – curbless entries cut into slab-on-grade, lit niches, built-in benches, and frameless panels measured off set tile.
           </p>
         </div>
       </div>
@@ -521,10 +520,10 @@ const schema = [
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[110px]">
       <div class="max-w-[820px]">
         <h2 class="text-[clamp(1.9rem,3.4vw,2.9rem)] font-semibold leading-[1.12] tracking-[-0.03em] text-ink">
-          The same craftsmanship for every client we serve.
+          Who We Build Showers For
         </h2>
         <p class="mt-5 max-w-[620px] text-[13.5px] sm:text-[15.5px] leading-[1.7] tracking-[-0.01em] text-graydesc">
-          From single-family homes to commercial buildouts, VL Pro Construction brings the same reliability and finish quality to every project — no matter who's on the other side of the table.
+          A single master bath or a run of identical units – the membrane goes in the same way, the flood test runs the same 24 hours, and the photos come to you either way.
         </p>
       </div>
 
@@ -537,7 +536,7 @@ const schema = [
           </span>
           <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Homeowners</h3>
           <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
-          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Turning your vision into a space you'll love, with honest guidance every step of the way.</p>
+          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">A shower built around how you'll use it in twenty years, not just how it photographs on handover day.</p>
         </article>
 
         <!-- Builders -->
@@ -548,7 +547,7 @@ const schema = [
           </span>
           <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Builders</h3>
           <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
-          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">A dependable partner who hits deadlines and delivers clean, quality work on every job.</p>
+          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Waterproofing you can hand straight to an inspector, documented per unit and delivered on the date agreed.</p>
         </article>
 
         <!-- Remodeling Contractors -->
@@ -559,7 +558,7 @@ const schema = [
           </span>
           <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Remodeling Contractors</h3>
           <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
-          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Skilled hands for tile, flooring, and finish work when you need it done right.</p>
+          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Pan, membrane, glass, and tile handled as one scope – so nobody ends up owning half a shower.</p>
         </article>
 
         <!-- Commercial Clients -->
@@ -570,7 +569,7 @@ const schema = [
           </span>
           <h3 class="mt-6 sm:mt-8 text-[22px] sm:text-[30px] font-semibold tracking-[-0.02em] leading-[1.15] text-ink">Commercial Clients</h3>
           <span class="card-rule mt-5 sm:mt-auto block h-0.5 w-6 rounded-full bg-black/15" aria-hidden="true"></span>
-          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Professional, on-schedule renovations that keep your business moving.</p>
+          <p class="mt-4 text-[13.5px] sm:text-[14.5px] leading-[1.65] tracking-[-0.01em] text-graydesc">Hotel and multi-unit bathrooms built to a repeatable spec, with the schedule held.</p>
         </article>
       </div>
     </div>
@@ -579,13 +578,13 @@ const schema = [
   <!-- ===================== REVIEWS ===================== -->
   <!-- ===================== REVIEWS ===================== -->
   <!-- Shared component — Google review cards + the trust panel. -->
-  <ReviewsSection tone="white" pad="py-20 lg:py-[110px]" />
+  <ReviewsSection tone="white" pad="py-20 lg:py-[110px]" title="Shower clients, in their words" />
 
   <!-- ===================== FAQ ===================== -->
   <section id="faqs" class="bg-[#faf9f8]" data-nav-theme="light">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-20 lg:py-[100px]">
-      <h2 class="font-bold capitalize leading-[1.02] tracking-[-0.03em] text-[clamp(2.1rem,5vw,4rem)]">Frequently asked questions</h2>
-      <p class="mt-5 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[600px]">Answers to what homeowners ask most about custom showers — waterproofing, timelines, and curbless designs. Still have a question? Give us a call.</p>
+      <h2 class="font-bold capitalize leading-[1.02] tracking-[-0.03em] text-[clamp(2.1rem,5vw,4rem)]">Shower questions we get asked</h2>
+      <p class="mt-5 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-graydesc max-w-[600px]">What the flood test actually proves, how many days the glass really adds, and whether your slab will take a curbless entry. Anything we've missed, call us.</p>
       <div id="faqList" class="mt-12 lg:mt-16">
         <div class="faq-item">
           <button class="faq-q" aria-expanded="true">
@@ -606,7 +605,7 @@ const schema = [
             <span class="text-[clamp(1.05rem,1.5vw,1.35rem)] font-semibold tracking-[-0.01em] pr-4">Can you build a curbless, barrier-free shower?</span>
             <span class="faq-ico" aria-hidden="true"></span>
           </button>
-          <div class="faq-a"><div class="faq-a-inner"><p class="text-[13.5px] sm:text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Absolutely. Curbless entries with linear drains are one of our specialties — great for accessibility and a clean, modern look.</p></div></div>
+          <div class="faq-a"><div class="faq-a-inner"><p class="text-[13.5px] sm:text-[15px] leading-[1.7] text-graydesc max-w-[860px]">Absolutely. Curbless entries with linear drains are one of our specialties – great for accessibility and a clean, modern look.</p></div></div>
         </div>
         <div class="faq-item">
           <button class="faq-q" aria-expanded="true">
@@ -622,12 +621,12 @@ const schema = [
   <!-- ===================== SERVICE AREA ===================== -->
   <section id="service-area" class="relative bg-black text-white overflow-hidden" data-nav-theme="dark">
     <div class="mx-auto max-w-[1920px] px-5 sm:px-10 lg:px-[60px] py-16 lg:py-[170px] lg:min-h-[720px] flex items-center">
-      <div class="lg:max-w-[44%]">
-        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,5.5vw,4.75rem)]">
-          Custom Showers<br />Across the Gulf Coast
+      <div class="lg:max-w-[min(calc(42vw-108px),calc(852px-8vw))]">
+        <h2 class="font-bold leading-[1.02] tracking-[-0.025em] text-[clamp(2.5rem,min(calc(3.95vw-10px),calc(81px-0.77vw)),4.75rem)]">
+          Custom Showers in<br />Bradenton &amp; Sarasota
         </h2>
         <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
-          We build custom showers and wet rooms for homeowners across the Bradenton–Sarasota metro — from Anna Maria Island to Venice — waterproofed and tiled to last.
+          Anna Maria Island down to Venice, and east to Lakewood Ranch – every shower built to the same written spec, whichever county pulls the permit.
         </p>
       </div>
     </div>
@@ -658,7 +657,7 @@ const schema = [
             <button type="button" class="btn w-full rounded-full bg-brand hover:bg-[#e03f1c] py-4 text-[15px] font-semibold capitalize text-white" id="step1Next">Next</button>
           </div>
           <!-- TODO: real phone -->
-          <p class="mt-5 text-center text-[14px] text-white/55">Questions? Call: <a href="tel:+15037814657" class="text-brand hover:underline">(503) 781-4657</a></p>
+          <p class="mt-5 text-center text-[14px] text-white/55">Questions? Call: <a href="tel:+19412031020" class="text-brand hover:underline">(941) 203-1020</a></p>
         </div>
       </div>
 

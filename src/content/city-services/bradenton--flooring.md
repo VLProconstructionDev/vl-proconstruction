@@ -7,12 +7,12 @@ service: flooring
 published: true
 
 seoTitle: Hard-Surface Flooring Bradenton, FL
-seoDescription: 'Hardwood, engineered & LVP flooring installers in Bradenton, FL. NWFA-spec installs. $6–$18/sq ft. Call for a free quote: (503) 781-4657'
+seoDescription: 'Hardwood, engineered & LVP flooring installers in Bradenton, FL. NWFA-spec installs. $6–$18/sq ft. Call for a free quote: (941) 203-1020'
 
 heroCity: Bradenton
 heroService: Flooring
 heroSubhead: >-
-  We install hardwood, engineered wood, and LVP for Bradenton homeowners — Palma
+  We install hardwood, engineered wood, and LVP for Bradenton homeowners – Palma
   Sola bungalows, West Bradenton ranches, and the newer builds out past I-75.
   Slab moisture tested and logged before a single plank leaves the box.
 stats:
@@ -31,7 +31,7 @@ trust:
     title: Warranty Stays Intact
     body: >-
       Moisture readings logged, acclimation timed, expansion gaps preserved,
-      underlayment matched to the manufacturer's spec — the conditions your
+      underlayment matched to the manufacturer's spec – the conditions your
       floor's warranty actually depends on.
   - icon: crew
     title: In-House Crews
@@ -41,8 +41,9 @@ trust:
   - icon: map
     title: Based in Bradenton
     body: >-
-      We're based in 34211, so most of Manatee County is inside a 20-minute
-      drive. Punch-list items get handled the same week, not the next month.
+      Our shop is in 34211, so the acclimation window gets checked in person
+      instead of guessed at over the phone – and a board that lifts six months
+      later is a short drive, not a scheduling problem.
 
 localTitle: What laying a floor in | Bradenton actually involves
 localPoints:
@@ -50,7 +51,7 @@ localPoints:
     body: >-
       Gulf Coast slabs push moisture year-round, and it's the number one reason
       wood floors cup and fail here. We test and log the slab before we
-      recommend a product — sometimes that means engineered or LVP instead of
+      recommend a product – sometimes that means engineered or LVP instead of
       solid hardwood, and we'll say so.
   - title: Vapor barrier and adhesive matched to the reading
     body: >-
@@ -69,15 +70,16 @@ localImageAlt: >-
 
 includedTitle: What's included in a Bradenton floor installation
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  Everything below is in the quote: the tear-out, whatever prep the slab turns
+  out to need, the floor itself, and the trim that closes it. No line items
+  appear later.
 included:
   # Same three cards as /services/flooring, copy rewritten for Bradenton.
   - title: Hardwood Flooring
     body: >-
       Solid and engineered hardwood to NWFA spec, acclimation logged. On most
       Bradenton slabs engineered oak over a moisture membrane is the safer
-      call — same look, no cupping.
+      call – same look, no cupping.
     image: /assets/images/hsf-hardwood.webp
     alt: >-
       Gray-toned engineered hardwood flooring installed through a home landing
@@ -91,7 +93,7 @@ included:
     alt: Light luxury vinyl plank flooring running down a bright office hallway
   - title: Floor Preparation
     body: >-
-      Gulf Coast slabs push moisture year-round — the top reason wood floors
+      Gulf Coast slabs push moisture year-round – the top reason wood floors
       fail here. We test the slab first, then prep: adhesive removal, subfloor
       repair, self-levelling, flattening.
     image: /assets/images/hsf-floor-prep.webp
@@ -104,7 +106,7 @@ project:
   budget: $12,600
   story: >-
     A 1972 home, 1,150 sq ft of tile and carpet coming out, and the owners had
-    their heart set on solid oak. The slab tested too wet for it — so we showed
+    their heart set on solid oak. The slab tested too wet for it – so we showed
     them the readings and moved them to a 7" engineered oak over a moisture
     membrane, same look, flat in ten years.
   image: /assets/images/project-bradenton-hard-surface-flooring.webp
@@ -112,6 +114,7 @@ project:
     Wide-plank light engineered oak running from a dining room down the hallway of
     a Palma Sola home in Bradenton, with a reclaimed-wood accent wall
 
+reviewsTitle: Bradenton floors, reviewed by the owners
 reviews:
   - quote: Absolutely amazing work fixed our floors after hurricane!
     name: Avetal Mor
@@ -137,20 +140,21 @@ reviews:
     avatar: /assets/images/review-2-avatar.webp
     image: /assets/images/review-2.webp
 
+processTitle: How your Bradenton floor goes in
 process:
-  - title: Consult
+  - title: Assess
     body: >-
       We measure the rooms, test the slab or subfloor for moisture and
       flatness, talk through product, plank width, and direction, and leave
       you with a written line-item price.
     image: /assets/images/process-plan.webp
-  - title: Design
+  - title: Specify
     body: >-
       We confirm the floor the moisture reading supports, order it with the
       right overage, and let it acclimate on site for the manufacturer's
       window with humidity logged.
-    image: /assets/images/process-2.webp
-  - title: Build
+    image: /assets/images/process-3.webp
+  - title: Install
     body: >-
       Old floor and baseboards out, subfloor ground and self-levelled, vapor
       barrier down, then planks racked and installed with expansion gaps held
@@ -160,7 +164,7 @@ process:
 
 pricingTitle: What does new flooring cost in Bradenton, FL?
 pricingIntro: >-
-  Every floor is different — but here's an honest range based on real projects
+  Every floor is different – but here's an honest range based on real projects
   we've completed across Bradenton and Manatee County. Prices are installed, per
   square foot, labor and materials.
 pricing:
@@ -194,12 +198,16 @@ pricing:
       - Site-finished sand-and-seal option
       - Custom stain matching and borders
       - Full trim carpentry package
-areaTitle: Bradenton and the rest of Manatee County
+areaTitle: Floors across Manatee County
 areaBody: >-
-  Bradenton is home base, and we work the whole Suncoast from here — Palmetto
-  and Ellenton to the north, Lakewood Ranch and Parrish east of I-75, and out to
-  Anna Maria, Holmes Beach, and Longboat Key on the water.
+  We lay floors across Manatee County from our Bradenton base – north through
+  Palmetto and Ellenton, east to Parrish and the Lakewood Ranch villages, and
+  over the bridges to Anna Maria, Holmes Beach, and Longboat Key, where the salt
+  air and the slab readings both argue for engineered wood.
 
+faqIntro: >-
+  When a permit applies, what a floor costs here, acclimation, and whether you
+  can live through it. Still unsure? Give us a call.
 faqs:
   - q: Do I need a permit for new flooring in Bradenton?
     a: >-
@@ -207,16 +215,17 @@ faqs:
       plumbing, framing, or structure is a finish, and Manatee County and the
       City of Bradenton both treat it that way. If the job includes subfloor
       repair, a wall coming out, or post-flood structural work, it needs a permit
-      — and we pull it. We tell you which side of that line your project falls
+      – and we pull it. We tell you which side of that line your project falls
       on at the first visit, in writing.
-  - q: My HOA or condo association needs approval. Can you handle that?
+  - q: Will my HOA or condo board need to approve the floor?
     a: >-
-      We'll give you the packet most Bradenton associations ask for — scope of
-      work, our license and liability certificate, working hours, and the
-      elevator or stairwell protection plan. Hard-surface flooring above the
-      ground floor almost always triggers a sound-rating minimum, so we spec an
-      underlayment that meets it and list the rating on the submittal. You
-      submit it; we've never had one rejected.
+      Usually – and with flooring it's the approval, not the permit, that sets
+      your start date. Above the ground floor a hard surface almost always has
+      to clear a sound-rating minimum, so we specify an underlayment that meets
+      it and put the rating on the submittal. With it goes the paperwork
+      Bradenton boards ask for: scope of work, our license and liability
+      certificate, posted working hours, and the stairwell or elevator
+      protection plan. You file it; none of ours has come back rejected.
   - q: What does flooring cost in Bradenton?
     a: >-
       Most Bradenton floors land between $6 and $18 per square foot installed.
@@ -226,7 +235,7 @@ faqs:
       underlayment, trim, and haul-away.
   - q: Can I put solid hardwood over a slab in Bradenton?
     a: >-
-      Sometimes — but the slab decides, not the catalogue. Solid wood over a
+      Sometimes – but the slab decides, not the catalogue. Solid wood over a
       Gulf Coast slab needs either a very low moisture reading or a plywood
       sleeper system, which adds height and cost. We test first and show you the
       numbers. On most Bradenton slabs engineered oak over a moisture membrane
@@ -238,7 +247,7 @@ faqs:
       the moisture content of both the planks and the subfloor before we open a
       box. Skipping that window is one of the fastest ways to void a floor's
       warranty.
-  - q: Can we stay in the house while you work?
+  - q: Can we stay in the house while the floor goes in?
     a: >-
       Yes, though we'll be working room by room. We seal off the work area with
       a zippered barrier, run negative-air dust control, protect the path in and

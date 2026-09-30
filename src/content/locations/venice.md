@@ -10,7 +10,7 @@ neighborhoods:
   - South Venice
   - Wellen Park
   - Nokomis
-intro: From historic Venice Island cottages to brand-new Wellen Park builds, we bring the same standard — tile set flat, showers that stay waterproof, and floors that handle coastal humidity.
+intro: From historic Venice Island cottages to brand-new Wellen Park builds, we bring the same standard – tile set flat, showers that stay waterproof, and floors that handle coastal humidity.
 heroImage: /assets/images/gallery/work-20.webp
 order: 4
 ---

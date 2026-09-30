@@ -19,3 +19,14 @@
 # because the guide may be revised under the same filename.
 /guides/*
   Cache-Control: public, max-age=86400
+
+# Robots directives as a response header as well as the <meta name="robots">
+# tag SEO.astro emits — some crawlers and auditors read only the header, and
+# it is the only way to state them for non-HTML files (the OG card, the PDF).
+# /404 overrides it; a 404 status is already never indexed, but the page is
+# reachable at its own path with a 200.
+/*
+  X-Robots-Tag: index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1
+
+/404
+  X-Robots-Tag: noindex

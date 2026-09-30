@@ -31,7 +31,16 @@ const stats = [
 ];
 ---
 
-<BaseLayout title={title} description={description} schema={schema} navTheme="dark">
+<!-- autoOffer={false}: no exit-intent/dwell popup covering the form on a page
+     whose whole job is the signup. GuideSignupForm opens the offer itself
+     (window.vlShowOffer) once the email is in. -->
+<BaseLayout
+  title={title}
+  description={description}
+  schema={schema}
+  navTheme="dark"
+  autoOffer={false}
+>
   <section class="bg-black text-white" data-nav-theme="dark">
     <div class="px-5 sm:px-10 lg:px-[60px] pt-[128px] lg:pt-[150px] pb-16 lg:pb-24">
       <div class="mx-auto w-full max-w-[520px]">

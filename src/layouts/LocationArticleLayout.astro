@@ -31,7 +31,7 @@ interface Props {
 const { entry, location, service } = Astro.props;
 const d = entry.data;
 /** The markdown body is the "local expertise" prose — it opens that section. */
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 
 const city = d.heroCity;
 const cityState = `${location.data.name}, ${location.data.state}`;
@@ -52,6 +52,17 @@ const HERO_PHOTO: Record<string, string> = {
 const heroPhoto = HERO_PHOTO[service.id] ?? '/assets/images/hero-poster-0715.webp';
 
 /**
+ * A pair file may write its own `## ` headings in the body — the city-only
+ * material (flood zones, permit offices, condo rules) that no frontmatter field
+ * can hold. When it does, those headings ARE the local-expertise section: they
+ * head the prose themselves and stand in for `localTitle` in the rail. A body
+ * of plain prose adds nothing here and keeps the old behaviour.
+ * Astro has already slugged the ids.
+ */
+const bodyToc = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text }));
+const bodyLeads = bodyToc.length > 0;
+
+/**
  * Headings and the rail's table of contents come from one list, so a section
  * can never be in the page and missing from the rail (or the reverse). A
  * section drops out of both when its data is empty.
@@ -59,7 +70,7 @@ const heroPhoto = HERO_PHOTO[service.id] ?? '/assets/images/hero-poster-0715.web
 const sections = [
   { slug: 'overview', text: `${city} ${serviceLower}`, show: true },
   { slug: 'included', text: d.includedTitle, show: d.included.length > 0 },
-  { slug: 'local', text: d.localTitle.replace(/\s*\|\s*/g, ' '), show: d.localPoints.length > 0 },
+  { slug: 'local', text: d.localTitle.replace(/\s*\|\s*/g, ' '), show: d.localPoints.length > 0 || bodyLeads },
   { slug: 'why-us', text: 'Why homeowners choose VL Pro', show: d.trust.length > 0 },
   { slug: 'project', text: `A recent project in ${d.project.neighborhood}`, show: true },
   { slug: 'process', text: 'How the work runs', show: d.process.length > 0 },
@@ -69,9 +80,15 @@ const sections = [
   { slug: 'faqs', text: `${city} ${serviceLower} FAQs`, show: d.faqs.length > 0 },
   { slug: 'company', text: 'About VL Proconstruction', show: true },
 ];
-const toc = sections.filter((s) => s.show);
-const has = (slug: string) => toc.some((s) => s.slug === slug);
-const heading = (slug: string) => toc.find((s) => s.slug === slug)?.text ?? '';
+const shown = sections.filter((s) => s.show);
+const has = (slug: string) => shown.some((s) => s.slug === slug);
+const heading = (slug: string) => shown.find((s) => s.slug === slug)?.text ?? '';
+
+const at = shown.findIndex((s) => s.slug === 'local');
+const toc =
+  !bodyLeads || at === -1
+    ? shown
+    : [...shown.slice(0, at), ...bodyToc, ...shown.slice(at + 1)];
 
 const schema = [
   serviceSchema({
@@ -118,12 +135,13 @@ const schema = [
       <TrustPill />
 
       <div class="font-semibold capitalize leading-[1.06] sm:leading-[1.03] tracking-[-0.04em] sm:tracking-[-0.03em] text-[clamp(1.95rem,8.6vw,2.6rem)] sm:text-[clamp(2.6rem,6.8vw,6.05rem)] text-center">
-        <h1>
-          <span>{d.heroCity}</span><br />
-          <span class="text-brand block">{d.heroService}</span>
-        </h1>
-        <div class="flex flex-col items-center gap-3 sm:gap-5">
-          <span>Remodeling Experts</span>
+        <!-- One heading, one text run: the city and "Remodeling Experts" are
+             bare text nodes and the only span is the inline colour on the
+             service name. No wrapper span on line 1 and no `block` on line 2 —
+             the <br>s do the breaks, so no full-width empty box sits under the
+             words and all three lines are inside the h1. -->
+        <h1>{d.heroCity}<br /><span class="text-brand">{d.heroService}</span><br />Remodeling Experts</h1>
+        <div class="flex flex-col items-center gap-3 sm:gap-5 mt-3 sm:mt-5">
           <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.45] tracking-[-0.02em] text-[#f0f0f0] max-w-[540px]">{d.heroSubhead}</p>
         </div>
       </div>
@@ -147,20 +165,20 @@ const schema = [
           <!-- Credential marks: reversed so they read on the dark hero; the
                images are decorative and the label beside each one names it. -->
           <div class="hidden sm:flex items-center gap-5 sm:gap-7 lg:mr-9 lg:translate-y-[10px]">
-            <div class="flex items-center gap-2.5 sm:gap-3.5">
+            <a href="https://www.schluter.com/" target="_blank" rel="noopener" title="Schluter Systems" class="brandlink flex items-center gap-2.5 sm:gap-3.5">
               <img loading="lazy" decoding="async" src="/assets/images/brand/schluter-white.webp" width="408" height="240" alt="" class="block h-9 sm:h-11 w-auto opacity-90" />
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Schluter®<br />Certified</p>
-            </div>
+            </a>
             <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
-            <div class="flex items-center gap-2.5 sm:gap-3.5">
+            <a href="https://www.tile-assn.com/" target="_blank" rel="noopener" title="National Tile Contractors Association" class="brandlink flex items-center gap-2.5 sm:gap-3.5">
               <img loading="lazy" decoding="async" src="/assets/images/brand/ntca-white.webp" width="240" height="240" alt="" class="block h-14 sm:h-[66px] w-auto opacity-90" />
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">NTCA<br />Member</p>
-            </div>
+            </a>
             <span class="h-8 sm:h-10 w-px shrink-0 bg-white/20" aria-hidden="true"></span>
-            <div class="flex items-center gap-2.5 sm:gap-3.5">
+            <a href="https://finance.yahoo.com/small-business/articles/vl-pro-construction-marks-22-085900059.html" target="_blank" rel="noopener" title="VL Proconstruction featured on Yahoo Finance" class="brandlink flex items-center gap-2.5 sm:gap-3.5">
               <p class="shrink-0 font-poppins text-[11px] sm:text-[14px] font-medium text-[#e9e9e9] tracking-[-0.03em] leading-[1.25]">Featured<br />On</p>
-              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-white.webp" width="480" height="134" alt="Yahoo" class="block h-[22px] sm:h-7 w-auto opacity-90" />
-            </div>
+              <img loading="lazy" decoding="async" src="/assets/images/brand/yahoo-finance-white.svg" width="736" height="110" alt="Yahoo Finance" class="block h-[19px] sm:h-6 w-auto opacity-90" />
+            </a>
           </div>
         </div>
       </div>
@@ -209,7 +227,7 @@ const schema = [
 
             {has('local') && (
               <>
-                <h2 id="local">{heading('local')}</h2>
+                {!bodyLeads && <h2 id="local">{heading('local')}</h2>}
                 <Content />
                 {d.localPoints.map((point) => (
                   <>
@@ -285,7 +303,7 @@ const schema = [
                 {d.reviews.map((r) => (
                   <blockquote>
                     <p>{r.quote}</p>
-                    <p><strong>{r.name}</strong> — {r.neighborhood}</p>
+                    <p><strong>{r.name}</strong> – {r.neighborhood}</p>
                   </blockquote>
                 ))}
               </>
@@ -376,7 +394,7 @@ const schema = [
 
             <div class="rail-card text-center">
               <p class="text-[13.5px] leading-[1.55] text-graydesc">
-                Call us directly — we answer weekdays, 8am–6pm.
+                Call us directly – we answer weekdays, 8am–6pm.
               </p>
               <a href={site.phoneHref} class="btn mt-3 inline-block font-poppins text-[20px] font-bold tracking-[-0.01em] text-ink hover:text-brand">
                 {site.phone}

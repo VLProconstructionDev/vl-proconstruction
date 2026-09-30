@@ -26,6 +26,14 @@ const ogImageURL = new URL(image, site.url).toString();
 
 const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
 
+/* Robots directive on every page, not just the noindex ones: an auditor that
+   finds no tag has to assume the default, and the max-* directives are what
+   let Google use a full-size image thumbnail and an untrimmed snippet. The
+   same string goes out as the X-Robots-Tag header from `public/_headers`. */
+const robots = noindex
+  ? 'noindex, nofollow'
+  : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
 const schemaArray = schema
   ? Array.isArray(schema)
     ? schema
@@ -36,7 +44,7 @@ const schemaArray = schema
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
-{noindex && <meta name="robots" content="noindex, nofollow" />}
+<meta name="robots" content={robots} />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />

@@ -12,9 +12,9 @@ neighborhoods:
   - Del Webb
   - Waterside
   - Esplanade
-intro: Lakewood Ranch's newer homes come builder-grade — and most of our work here is upgrading them. Custom master showers, large-format tile floors, and hardwood that replaces the original carpet.
+intro: Lakewood Ranch's newer homes come builder-grade – and most of our work here is upgrading them. Custom master showers, large-format tile floors, and hardwood that replaces the original carpet.
 heroImage: /assets/images/gallery/work-32.webp
 order: 3
 ---
 
-Lakewood Ranch homeowners call us most often to take a builder-grade bathroom or floor to custom quality. We work across the Ranch — Country Club, Waterside, Del Webb, Esplanade — with designs that match the community's standard.
+Lakewood Ranch homeowners call us most often to take a builder-grade bathroom or floor to custom quality. We work across the Ranch – Country Club, Waterside, Del Webb, Esplanade – with designs that match the community's standard.

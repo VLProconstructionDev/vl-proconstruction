@@ -3,7 +3,7 @@ title: Custom Shower Installation
 shortName: Custom Showers
 description: Fully custom walk-in showers with waterproofing that lasts, from tile selection through the final grout line.
 seoTitle: Custom Shower Installation
-seoDescription: 'Design-and-build custom showers with proper waterproofing, curbless entries and premium tile. Call for a free quote: (503) 781-4657'
+seoDescription: 'Design-and-build custom showers with proper waterproofing, curbless entries and premium tile. Call for a free quote: (941) 203-1020'
 heroImage: /assets/images/custom-showers-built-to-last.webp
 order: 1
 features:
@@ -28,7 +28,7 @@ faqs:
   - q: Do you handle the plumbing and glass?
     a: We coordinate with licensed plumbers and glass fabricators. You get one point of contact for the whole build.
   - q: Can you do curbless (barrier-free) showers?
-    a: Yes — we plan the floor slope, linear drain, and joist framing needed for a clean curbless entry.
+    a: Yes – we plan the floor slope, linear drain, and joist framing needed for a clean curbless entry.
 ---
 
-Custom showers are the highest-craft work we do. Waterproofing is done right the first time, tile is set to layout, and every detail — from niche placement to grout joint width — is planned before the first cut.
+Custom showers are the highest-craft work we do. Waterproofing is done right the first time, tile is set to layout, and every detail – from niche placement to grout joint width – is planned before the first cut.

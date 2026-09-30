@@ -9,8 +9,8 @@ export const site = {
   tagline: 'Custom Showers, Tile & Natural Stone, Hard-Surface Flooring',
   url: 'https://vlproco.com',
   logo: '/assets/images/favicon.png',
-  phone: '(503) 781-4657',
-  phoneHref: 'tel:+15037814657',
+  phone: '(941) 203-1020',
+  phoneHref: 'tel:+19412031020',
   email: 'info@vlproco.com',
   address: {
     streetAddress: '17416 Harvest Moon Way',

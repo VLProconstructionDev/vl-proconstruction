@@ -145,6 +145,8 @@ const cityServices = defineCollection({
     }),
 
     // — 7. Reviews (this service AND this city) —
+    // Optional heading above the carousel; omit it for the shared default.
+    reviewsTitle: z.string().optional(),
     reviews: z
       .array(
         z.object({
@@ -158,6 +160,8 @@ const cityServices = defineCollection({
       .default([]),
 
     // — 8. Process, 4 steps —
+    // Optional heading; omit it and the layout falls back to "Our Process".
+    processTitle: z.string().optional(),
     process: z
       .array(z.object({ title: z.string(), body: z.string(), image: z.string() }))
       .default([]),
@@ -183,6 +187,9 @@ const cityServices = defineCollection({
     areaBody: z.string(),
 
     // — 11. FAQ, 5 questions —
+    // Optional standfirst above the accordion. Omit it and the layout falls
+    // back to a generic line; set it so no two pages open the FAQ the same way.
+    faqIntro: z.string().optional(),
     faqs: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
 
     // — 12. CTA + links —

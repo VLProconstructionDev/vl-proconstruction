@@ -7,12 +7,12 @@ service: tile-natural-stone
 published: true
 
 seoTitle: Tile & Natural Stone Bradenton, FL
-seoDescription: 'Tile & natural-stone installers in Bradenton, FL. Porcelain, marble, travertine. $9–$26/sq ft. Call for a free quote: (503) 781-4657'
+seoDescription: 'Tile & natural-stone installers in Bradenton, FL. Porcelain, marble, travertine. $9–$26/sq ft. Call for a free quote: (941) 203-1020'
 
 heroCity: Bradenton
 heroService: Tile & Natural Stone
 heroSubhead: >-
-  We set tile and natural stone for Bradenton homeowners — Palma Sola bungalows,
+  We set tile and natural stone for Bradenton homeowners – Palma Sola bungalows,
   West Bradenton ranches, and the newer builds out past I-75. Slab moisture
   tested, crack isolation where the slab needs it, every stone sealed to its
   absorption rate.
@@ -32,7 +32,7 @@ trust:
     title: Flat Floors, Tight Lines
     body: >-
       Leveling clips, back-buttering, and full mortar coverage on every tile.
-      We hold lippage inside the TCNA allowance for the format we're setting —
+      We hold lippage inside the TCNA allowance for the format we're setting –
       not "close enough by eye."
   - icon: crew
     title: In-House Crews
@@ -42,8 +42,9 @@ trust:
   - icon: map
     title: Based in Bradenton
     body: >-
-      We're based in 34211, so most of Manatee County is inside a 20-minute
-      drive. Punch-list items get handled the same week, not the next month.
+      Home is 34211, ten minutes from most of the jobs on this page. We can
+      swing by mid-cure to read a self-leveler pour, and a grout touch-up after
+      handover happens the week you call.
 
 localTitle: What setting tile in | Bradenton actually involves
 localPoints:
@@ -61,7 +62,7 @@ localPoints:
   - title: Stone sealed for humidity and salt air
     body: >-
       Marble, travertine, and limestone each get an impregnating sealer on their
-      own schedule, based on absorption rate — the difference between stone that
+      own schedule, based on absorption rate – the difference between stone that
       patinas and stone that stains in a coastal climate.
 localImage: /assets/images/tile-natural-stone.webp
 localImageAlt: >-
@@ -70,8 +71,9 @@ localImageAlt: >-
 
 includedTitle: What's included in a Bradenton tile installation
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  One quote covers the whole floor: what comes out, what the slab needs, what
+  gets set, and the grout and sealer that finish it. Nothing is added to the
+  number halfway through.
 included:
   # Same three cards as /services/tile-natural-stone, copy rewritten for Bradenton.
   - title: Tile Installation
@@ -104,7 +106,7 @@ project:
   timeline: 12 working days
   budget: $18,400
   story: >-
-    A whole-home tile package in a 1980s ranch — the kitchen pictured here, plus
+    A whole-home tile package in a 1980s ranch – the kitchen pictured here, plus
     two full baths and the laundry, 340 sq ft in all. The backsplash is
     marble-look porcelain in a vertical stack, where every joint runs the full
     height of the wall and a sixteenth of an inch out at the counter shows by
@@ -114,6 +116,7 @@ project:
     Kitchen in West Bradenton with a marble-look porcelain backsplash set in a
     vertical stack, white shaker cabinets, and brass hardware
 
+reviewsTitle: What Manatee County tile clients say
 reviews:
   - quote: >-
       Abel and his brothers are top notch installers. I have been in the
@@ -144,20 +147,21 @@ reviews:
     avatar: /assets/images/review-4-avatar.webp
     image: /assets/images/review-4.webp
 
+processTitle: How a Bradenton tile floor is set
 process:
-  - title: Consult
+  - title: Survey
     body: >-
       We measure the rooms, check the slab or subfloor for flatness and
       moisture, talk through format, layout, and grout, and leave you with a
       written line-item price.
     image: /assets/images/process-plan.webp
-  - title: Design
+  - title: Lay Out
     body: >-
       We dry-lay the pattern, set the starting line off the longest sightline,
       confirm transitions and trim, then order tile with the right overage
       before demo starts.
-    image: /assets/images/process-2.webp
-  - title: Build
+    image: /assets/images/process-3.webp
+  - title: Set
     body: >-
       Old floor up, substrate ground and self-levelled, membrane installed,
       then every tile set by hand with full mortar coverage. Grout tooled,
@@ -167,9 +171,9 @@ process:
 
 pricingTitle: What does tile installation cost in Bradenton, FL?
 pricingIntro: >-
-  Every floor is different — but here's an honest range based on real projects
-  we've completed across Bradenton and Manatee County. Prices are installed,
-  per square foot, labor and materials.
+  Tile pricing turns on format, on layout, and on what the slab needs before
+  anything is bonded to it. These are real installed figures from Manatee County
+  jobs – labor and materials, per square foot.
 pricing:
   - eyebrow: Standard Porcelain
     headline: $9/sq ft
@@ -201,12 +205,16 @@ pricing:
       - Impregnating sealer, applied to absorption rate
       - Honing and grout-haze polishing
       - Stone-specific setting mortar and grout
-areaTitle: Bradenton and the rest of Manatee County
+areaTitle: Tile and stone across Manatee County
 areaBody: >-
-  Bradenton is home base, and we work the whole Suncoast from here — Palmetto
-  and Ellenton to the north, Lakewood Ranch and Parrish east of I-75, and out to
-  Anna Maria, Holmes Beach, and Longboat Key on the water.
+  Tile and stone work runs out from Bradenton across the whole county –
+  Palmetto and Ellenton, Parrish and Lakewood Ranch east of I-75, Bayshore
+  Gardens and Cortez to the south, and the island addresses on Anna Maria,
+  Holmes Beach, and Longboat Key.
 
+faqIntro: >-
+  Permits, slab cracks, cost per square foot, and how long a tile floor takes.
+  Still have a question? Give us a call.
 faqs:
   - q: Do I need a permit to retile a floor in Bradenton?
     a: >-
@@ -214,16 +222,16 @@ faqs:
       touch plumbing, framing, or waterproofing is a finish, and Manatee County
       and the City of Bradenton both treat it that way. The moment the job
       includes a shower, a relocated drain, or structural work, it needs a
-      permit — and we pull it. We tell you which side of that line your project
+      permit – and we pull it. We tell you which side of that line your project
       falls on at the first visit, in writing.
-  - q: My HOA or condo association needs approval. Can you handle that?
+  - q: Does my association have to sign off before the tile goes in?
     a: >-
-      We'll give you the packet most Bradenton associations ask for — scope of
-      work, our license and liability certificate, working hours, and the
-      elevator or stairwell protection plan. Tile above the ground floor also
-      usually triggers a sound-transmission requirement, so we specify an
-      acoustic underlayment that meets it. You submit it; we've never had one
-      rejected.
+      Often, and we put the submittal together for you – scope of work, our
+      license and liability certificate, the hours we'll be on site, and how the
+      stairwell or elevator gets protected. Tile on an upper floor also tends to
+      carry a sound-transmission requirement, which we meet with an acoustic
+      membrane and note on the paperwork. You file it; none of ours has come
+      back rejected.
   - q: What does tile installation cost in Bradenton?
     a: >-
       Most Bradenton tile jobs land between $9 and $26 per square foot
@@ -239,11 +247,11 @@ faqs:
       control joints with an uncoupling or crack-isolation membrane and carry
       the movement joints up through the tile field. That membrane is the single
       biggest reason a tile floor here lasts.
-  - q: Can we stay in the house while you work?
+  - q: Can we stay in the house while you set tile?
     a: >-
       Yes, though we'll be working room by room. We seal off the work area with
       a zippered barrier, run negative-air dust control, protect the path in and
-      out, and clean up every afternoon. The one real constraint is cure time —
+      out, and clean up every afternoon. The one real constraint is cure time –
       you can't walk a freshly set floor for about 24 hours, so we sequence the
       rooms so you always have a way through the house.
   - q: How long does a Bradenton tile job take?
@@ -266,7 +274,7 @@ related:
     blurb: Curbless entries, Schluter waterproofing, and frameless glass.
   - label: Flooring in Bradenton
     href: /services/flooring
-    blurb: Hardwood, LVP, and porcelain over slab — moisture-tested first.
+    blurb: Hardwood, LVP, and porcelain over slab – moisture-tested first.
   - label: All tile & natural stone work
     href: /services/tile-natural-stone
     blurb: How we set tile everywhere on the Suncoast, not just Bradenton.

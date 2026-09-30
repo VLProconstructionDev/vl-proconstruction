@@ -269,6 +269,13 @@ const ACTION = 'https://assets.mailerlite.com/jsonp/2627446/forms/19824574543587
     if (!$) return;
     $('.ml-subscribe-form-45798565 .row-success').show();
     $('.ml-subscribe-form-45798565 .row-form').hide();
+
+    // The page disarms the exit-offer's automatic triggers (autoOffer={false}
+    // on BaseLayout) so nothing covers the form. Now that the email is in,
+    // show the offer — after a beat, so the thank-you panel registers first.
+    window.setTimeout(function () {
+      if (typeof window.vlShowOffer === 'function') window.vlShowOffer();
+    }, 1200);
   }
 </script>
 <script is:inline defer src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519"></script>

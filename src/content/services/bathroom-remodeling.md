@@ -1,9 +1,9 @@
 ---
 title: Bathroom Remodeling
 shortName: Bathroom Remodeling
-description: Whole-bathroom remodels from demolition to the final grout line — layout, waterproofing, tile, vanity, and fixtures handled by one crew.
+description: Whole-bathroom remodels from demolition to the final grout line – layout, waterproofing, tile, vanity, and fixtures handled by one crew.
 seoTitle: Bathroom Remodeling Bradenton, FL
-seoDescription: 'Full bathroom remodeling in Bradenton & Sarasota, FL. Demo to tile, vanity, and glass by one in-house crew. Free estimate: (503) 781-4657'
+seoDescription: 'Full bathroom remodeling in Bradenton & Sarasota, FL. Demo to tile, vanity, and glass by one in-house crew. Free estimate: (941) 203-1020'
 heroImage: /assets/images/ba-bath-after.webp
 order: 4
 features:
@@ -14,13 +14,13 @@ features:
   - Floor and wall tile through to the trim
 included:
   - title: Demolition and prep
-    body: The room comes down to the studs — old tile, mortar beds, and fixtures out, subfloor inspected for rot, floors and hallways protected, debris hauled away.
+    body: The room comes down to the studs – old tile, mortar beds, and fixtures out, subfloor inspected for rot, floors and hallways protected, debris hauled away.
     image: /assets/images/demolition-studs.webp
   - title: Shower and tub
     body: A new shower or tub built on a waterproofed assembly, flood-tested before a single tile goes on. Curbless entries, benches, and niches planned into the layout.
     image: /assets/images/gallery-showers-2026/showers-3.webp
   - title: Tile and surfaces
-    body: Floor, wall, and feature tile set to layout with tight joints and mitered edges — porcelain, marble, and large-format slab.
+    body: Floor, wall, and feature tile set to layout with tight joints and mitered edges – porcelain, marble, and large-format slab.
     image: /assets/images/gallery-tile-2026/tile-2.webp
   - title: Vanity and fixtures
     body: Vanity, countertop, mirror, lighting, and hardware set and aligned, with rough-in coordinated so every valve and outlet lands where the design says it should.
@@ -29,7 +29,7 @@ faqs:
   - q: How long does a full bathroom remodel take?
     a: A standard hall bath runs 3–5 weeks from demo to final walkthrough. A large primary suite with a wet room and custom glass runs 6–8 weeks. Tile and vanity lead times are the usual variable, so we confirm every material before demo starts.
   - q: What does a bathroom remodel cost in Bradenton or Sarasota?
-    a: Most full remodels in this market land between $18,000 and $45,000 depending on the size of the room, whether plumbing moves, and the tile you choose. We price the whole scope up front — no allowances that balloon later.
+    a: Most full remodels in this market land between $18,000 and $45,000 depending on the size of the room, whether plumbing moves, and the tile you choose. We price the whole scope up front – no allowances that balloon later.
   - q: Do I need a permit?
     a: Yes, for anything that moves plumbing or electrical. We pull the permit through Manatee or Sarasota County and handle the inspections; a cosmetic swap that keeps every fixture in place usually does not need one.
   - q: Can I use my bathroom during the remodel?
