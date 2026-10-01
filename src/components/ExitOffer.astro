@@ -54,8 +54,12 @@ const { auto = false } = Astro.props;
 
   <div class="xo-card" role="document" tabindex="-1">
     <div class="xo-photo">
+      <!-- data-src, not src: the overlay is a fixed inset:0 layer at opacity 0,
+           so the browser counts it as on-screen and loading="lazy" never
+           defers it — it would race the hero for bandwidth. The script sets
+           src after the page has loaded. -->
       <img
-        src="/assets/images/offer-handshake.webp"
+        data-src="/assets/images/offer-handshake.webp"
         alt="A VL Pro Construction estimator shaking hands with homeowners in their finished kitchen"
         width="1448"
         height="1086"
@@ -540,8 +544,18 @@ const { auto = false } = Astro.props;
       window.scrollTo(0, scrollY);
     }
 
+    // Fetch the photo once the page has finished loading, well before the
+    // dwell timer can open the popup; show() covers an earlier open.
+    var photo = el.querySelector('.xo-photo img[data-src]');
+    function loadPhoto() {
+      if (photo && !photo.getAttribute('src')) photo.src = photo.getAttribute('data-src');
+    }
+    if (document.readyState === 'complete') setTimeout(loadPhoto, 1500);
+    else window.addEventListener('load', function () { setTimeout(loadPhoto, 1500); }, { once: true });
+
     function show() {
       if (open) return;
+      loadPhoto();
       // Never stack on top of the estimate wizard or the mobile menu.
       var wiz = document.getElementById('estimateOverlay');
       if (wiz && wiz.classList.contains('open')) return;
