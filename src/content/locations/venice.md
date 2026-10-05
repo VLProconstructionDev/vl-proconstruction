@@ -15,4 +15,4 @@ heroImage: /assets/images/gallery/work-20.webp
 order: 4
 ---
 
-Venice and Wellen Park are a growing part of our service area. Whether it's a full bathroom remodel on the Island or flooring for a new build in Wellen Park, we treat every project with the same Gulf Coast-proven approach.
+Venice and Wellen Park are a growing part of our service area. Whether it's a new shower on the Island or flooring for a new build in Wellen Park, we treat every project with the same Gulf Coast-proven approach.

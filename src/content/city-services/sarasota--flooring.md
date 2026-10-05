@@ -225,7 +225,8 @@ faqs:
       plumbing, framing, or structure is a finish, and both City of Sarasota
       Development Services and Sarasota County treat it that way. If the job
       includes subfloor repair, a wall coming out, or post-flood structural
-      work, it needs a permit – and we pull it. We tell you which side of that
+      work, it needs a permit – pulled by the licensed general
+      contractor we work with. We tell you which side of that
       line your project falls on at the first visit, in writing.
   - q: Will my condo board need to approve the flooring?
     a: >-
@@ -233,7 +234,7 @@ faqs:
       permit. Hard-surface flooring above the ground floor almost always
       triggers a sound-rating minimum, so we spec an underlayment that meets
       your building's IIC number and list the rating on the submittal. You also
-      get scope of work, our license and liability certificate naming the
+      get scope of work, our liability insurance certificate naming the
       association as additional insured, posted work hours, and the elevator and
       corridor protection plan. Many downtown, Siesta Key, and Longboat
       buildings restrict work January through April, so we schedule around it.

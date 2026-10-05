@@ -222,12 +222,13 @@ faqs:
       touch plumbing, framing, or waterproofing is a finish, and Manatee County
       and the City of Bradenton both treat it that way. The moment the job
       includes a shower, a relocated drain, or structural work, it needs a
-      permit – and we pull it. We tell you which side of that line your project
+      permit – pulled by the licensed general
+      contractor we work with. We tell you which side of that line your project
       falls on at the first visit, in writing.
   - q: Does my association have to sign off before the tile goes in?
     a: >-
       Often, and we put the submittal together for you – scope of work, our
-      license and liability certificate, the hours we'll be on site, and how the
+      liability insurance certificate, the hours we'll be on site, and how the
       stairwell or elevator gets protected. Tile on an upper floor also tends to
       carry a sound-transmission requirement, which we meet with an acoustic
       membrane and note on the paperwork. You file it; none of ours has come

@@ -215,8 +215,10 @@ If you want the shortest usable version of all of this: **walk in, look straight
 something worth looking at there — then keep the plumbing on one wall.** Everything else on this
 page is a number that supports those two sentences.
 
-VL Pro Construction plans and builds [bathroom remodels](/services/bathroom-remodeling),
-[custom showers](/services/custom-showers), and
+VL Pro Construction handles the tile, waterproofing, and glass on
+[bathroom remodels](/services/bathroom-remodeling) – bringing in the general contractor we work
+with when a layout moves plumbing or needs a permit – and builds
+[custom showers](/services/custom-showers) and
 [curbless walk-in showers](/services/curbless-walk-in-showers) across Bradenton, Lakewood Ranch,
 Sarasota, Longboat Key, Siesta Key, and Venice — see [everything we do](/services) or
 [where we work](/locations). Before you finalize a plan, the

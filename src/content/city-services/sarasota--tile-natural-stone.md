@@ -229,13 +229,14 @@ faqs:
       touch plumbing, framing, or waterproofing is a finish, and both City of
       Sarasota Development Services and Sarasota County treat it that way. The
       moment the job includes a shower, a relocated drain, or structural work,
-      it needs a permit – and we pull it. We tell you which side of that line
+      it needs a permit – pulled by the licensed general
+      contractor we work with. We tell you which side of that line
       your project falls on at the first visit, in writing.
   - q: Does the association have to sign off before we tile?
     a: >-
       Yes, and in Sarasota this is usually the real gate, not the permit. You
-      get the packet buildings here ask for – scope of work, our license and
-      liability certificate naming the association as additional insured, posted
+      get the packet buildings here ask for – scope of work, our liability
+      insurance certificate naming the association as additional insured, posted
       work hours, and the elevator and corridor protection plan. Hard surfaces
       above the ground floor also trigger a sound-transmission minimum, so we
       spec an underlayment that meets your building's IIC number and list the

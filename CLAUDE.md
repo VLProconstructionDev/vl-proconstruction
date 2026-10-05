@@ -113,7 +113,7 @@ public/
 Single source of truth for business info: `name` (`VL Proconstruction`), `legalName` (`VL Proconstruction LLC`, per the Google Maps listing), `tagline`, `url`, `logo`, `phone` (`(941) 203-1020`), `phoneHref`, `email` (real), `address` (Bradenton, FL), `geo`, `serviceAreas` (the Suncoast towns grouped by county — drives the Locations nav panel), `areaServed` (derived flat list: those towns + the two counties, for LocalBusiness JSON-LD), `social` (real Instagram + Google Maps links), `defaultOgImage`, `estimateWebhook` (Apps Script web-app URL for lead submissions — empty until deployed per `docs/leads-webhook/SETUP.md`), `googleMapsApiKey` (address autocomplete; ships client-side by design — must stay referrer-restricted in Google Cloud console), `recaptchaSiteKey` (reCAPTCHA v3, public by design; the secret lives only in the Apps Script). Imported by SEO, footer, header CTAs, schema builders, and the EstimateWizard script. The real address is in place (17416 Harvest Moon Way, Bradenton, FL 34211); the remaining `// TODO` is `geo` — the coordinates are a ZIP-34211 approximation, not the parcel, and should be replaced with the Google Business Profile pin so LocalBusiness JSON-LD matches the listing.
 
 ### `src/lib/schema.ts`
-JSON-LD builders: `localBusinessSchema()` (GeneralContractor, included on every page via BaseLayout — deliberately minimal for now; a `TODO(after Google Business Profile is set up)` comment lists the enrichment fields to add once GBP exists so values match the listing exactly), `serviceSchema()`, `breadcrumbSchema()`, `articleSchema()`. `SEO.astro` serializes the result into `<script type="application/ld+json">`.
+JSON-LD builders: `localBusinessSchema()` (HomeAndConstructionBusiness — NOT GeneralContractor: the business is not a GC, see "Business scope" below; included on every page via BaseLayout — deliberately minimal for now; a `TODO(after Google Business Profile is set up)` comment lists the enrichment fields to add once GBP exists so values match the listing exactly), `serviceSchema()`, `breadcrumbSchema()`, `articleSchema()`. `SEO.astro` serializes the result into `<script type="application/ld+json">`.
 
 ### Layouts
 
@@ -205,12 +205,15 @@ Interaction: drag to pan, `+`/`−` buttons + double-click + pinch to zoom, rota
 
 Live pages:
 - Unique `<title>` (brand appended once by SEO.astro unless the title already contains it), meta description (all ≤160 chars, geo-scoped), canonical URL, OG + Twitter Card
-- LocalBusiness (GeneralContractor) JSON-LD on every page (via BaseLayout)
+- LocalBusiness (HomeAndConstructionBusiness) JSON-LD on every page (via BaseLayout)
 - Service + BreadcrumbList JSON-LD on the 3 static service pages (passed via the `schema` prop; `areaServed: "Bradenton–Sarasota, FL"`)
 - Blog JSON-LD on `/blog`; Article + BreadcrumbList on each post (`BlogPostLayout`)
 - `@astrojs/sitemap` emits `/sitemap-index.xml` + `/sitemap-0.xml` (9 public URLs; `/404` and drafts are excluded); `public/robots.txt` points at it
 
 Parked routes additionally emit (on release): FAQPage JSON-LD from `service.data.faqs` (ServiceLayout), Place JSON-LD on location landing pages.
+
+## Business scope (copy rule — client, 2026-10-05)
+VL is **not a general contractor** and is **not licensed to pull permits**. Its own crew does tile (incl. natural stone + hard-surface flooring), shower waterproofing, glass installation, and the demo/prep for those. It does **no plumbing or electrical work** and does not run full bathroom remodels itself — for anything needing permits, plumbing or electrical it "brings in a general contractor we work with" or "recommends a licensed plumber". Never write copy (or schema) claiming VL pulls permits, is the contractor of record, is a (licensed) GC, or moves plumbing/electrical. Neutral permit facts ("Manatee County requires a permit to…") are fine. Credentials claimed: Bonded & Insured, Schluter®-certified, NTCA member — not "Licensed".
 
 ## Gotchas
 - **Never put `data-nav-theme` on `<body>`** — the navbar theme-switcher picks the first `[data-nav-theme]` element containing its probe point, and body always matches, pinning the navbar to one theme. Sections only.

@@ -57,7 +57,9 @@ shower, and the work runs in this order:
 1. **Demolition.** Tub, surround, and the wall board behind it come out down to the studs.
 2. **Plumbing changes.** The tub drain sits at one end; a shower drain usually needs to move
    to the center, or be swapped for a linear drain at one wall. The valve gets raised and
-   often replaced with a pressure-balanced or thermostatic mixer.
+   often replaced with a pressure-balanced or thermostatic mixer. This is licensed plumber's
+   work, not ours – we recommend a plumber we trust, or bring in the general contractor we work
+   with when the job needs a permit.
 3. **Framing and floor prep.** If you want curbless, the joist bay under the shower usually
    has to be recessed so the shower floor sits flush with the bathroom floor.
 4. **Waterproofing.** This is the whole ballgame. We install
@@ -164,7 +166,9 @@ If your project runs into next year, permitting timing is worth a conversation w
 contractor.
 
 The practical advice: let your general contractor pull the permit and run the licensed trades
-under it. Unpermitted bathroom work has a way of surfacing at closing – an expensive surprise
+under it. We're a tile, waterproofing, and glass company, not a general contractor – so when a
+conversion needs a permit, we bring in the general contractor we work with to pull it and run
+the plumbing and electrical, and we build the shower around their rough-in. Unpermitted bathroom work has a way of surfacing at closing – an expensive surprise
 in a market where a lot of homes change hands.
 
 ## How to tell a shower built to last
@@ -181,7 +185,7 @@ Ask any contractor these five questions. The answers tell you almost everything.
    Schluter-certified installation and NTCA membership are real credentials, not badges.
 5. **What's the warranty, and on what?** Materials and workmanship should both be covered.
 
-For our part: VL Pro Construction is a family-owned, licensed and insured Florida contractor.
+For our part: VL Pro Construction is a family-owned, insured Florida tile and shower company.
 Our installers are Schluter-certified and we're an NTCA member and XL porcelain slab
 certified installer. We do the waterproofing in-house, we flood-test every shower before
 tile, and every project carries 100% full warranty coverage.

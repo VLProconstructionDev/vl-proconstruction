@@ -38,7 +38,7 @@ published: true
 template: article
 
 seoTitle: Bathroom Remodeling Sarasota, FL
-seoDescription: 'Bathroom remodeling in Sarasota, FL. Flood-zone and condo permitting handled, one in-house crew, fixed written quote. Free estimate: (941) 203-1020'
+seoDescription: 'Bathroom remodeling in Sarasota, FL – our crew does the waterproofing, tile and glass, with a GC partner for permits. Free estimate: (941) 203-1020'
 
 heroCity: Sarasota
 heroService: Bathroom Remodeling
@@ -65,11 +65,11 @@ trust:
       adopted ordinance before design starts — because on a barrier island the
       50% rule, not the tile, is what sets your ceiling.
   - icon: crew
-    title: One Crew, Not Five Trades
+    title: One Crew for the Tile Work
     body: >-
       The same people who quote your bathroom demo it, waterproof it, tile it and
-      set the vanity. No gap between trades for a condo elevator booking or a
-      rough-in inspection to fall through.
+      hang the glass. Plumbing, electrical and permits go through the general
+      contractor we work with, scheduled around our work.
   - icon: check
     title: Waterproofed and Flood-Tested
     body: >-
@@ -86,24 +86,24 @@ localImageAlt: >-
 
 includedTitle: What's included in a Sarasota bathroom remodel
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough — with the flood-zone check and the association packet handled
-  before demo rather than discovered during it.
+  Our crew does the demo, waterproofing, tile and glass. When the job needs
+  plumbing, electrical or a permit, we bring in the general contractor we work
+  with — and the flood-zone check happens before demo, not during it.
 included:
   - title: Flood zone, permit & association packet
     body: >-
-      We run the 50%-rule math for your jurisdiction, file as the licensed
-      contractor of record with the city, the county, Longboat Key, Venice or
-      North Port, and assemble whatever your board asks for — scope, license,
-      insurance certificate, work hours, elevator plan.
+      We flag the 50%-rule question for your jurisdiction early. We're not a
+      general contractor, so when a permit is needed our GC partner files it with
+      the city, the county, Longboat Key, Venice or North Port. Your board gets
+      our scope, insurance certificate, work hours and elevator plan.
     image: /assets/images/process-plan.webp
     alt: Site visit and measured plan for a Sarasota bathroom remodel
   - title: Demolition & what's under the slab
     body: >-
       Floor and corridor protection, dust control, and the room stripped to studs
-      and slab. We camera the drain and read the slab at the quote visit, so a
-      scaled cast-iron waste line is priced before you sign, not after the tub is
-      out.
+      and slab. We check the drain and the slab at the quote visit, so if a
+      scaled cast-iron waste line needs a plumber, you know before you sign, not
+      after the tub is out.
     image: /assets/images/demolition-studs.webp
     alt: >-
       Bathroom stripped to the studs with a vapor barrier on the alcove wall and
@@ -115,12 +115,12 @@ included:
       sound-control assembly goes in where the building requires one.
     image: /assets/images/gallery-showers-2026/showers-3.webp
     alt: Tub alcove lined floor to ceiling in large-format marble-look porcelain
-  - title: Tile, vanity, fixtures & glass
+  - title: Tile & glass
     body: >-
-      Floor, wall and feature tile set to a layout we dry-lay first, then vanity,
-      top, lighting and hardware. Frameless glass is measured off finished tile.
-      Hard water is worth spending on here, so the valves, cartridges and glass
-      coatings we specify are not the cheapest ones.
+      Floor, wall and feature tile set to a layout we dry-lay first. Frameless
+      glass is measured off finished tile and installed by our crew. Hard water
+      is worth spending on here, so the glass coatings we specify are not the
+      cheapest ones.
     image: /assets/images/gallery-tile-2026/tile-6.webp
     alt: >-
       Finished bath with a floating navy vanity, marble-look porcelain tub
@@ -135,9 +135,10 @@ project:
     A 1979 primary bath in unincorporated Sarasota County, taken back to slab.
     The owners wanted the tub gone and a curbless walk-in in its place, which on
     slab-on-grade meant cutting and recessing the fall rather than building it
-    up. The cast-iron waste line was scaled to about half its bore, so it came
-    out to the stack — six of the twenty-six days went there, priced off the
-    drain camera at the quote visit rather than as a discovery.
+    up. The cast-iron waste line was scaled to about half its bore, so the
+    plumber our GC partner brought in replaced it to the stack — six of the
+    twenty-six days went there, planned at the quote visit rather than found
+    mid-job.
   image: /assets/images/ba-bath-after.webp
   imageAlt: >-
     Remodeled Gulf Gate primary bath — freestanding tub against a blue hex
@@ -148,8 +149,9 @@ reviews: []
 pricingTitle: What a Sarasota bathroom remodel costs
 pricingIntro: >-
   Real ranges from jobs completed in Sarasota County, including demolition,
-  waterproofing, tile, fixtures, permit fees and haul-away. What moves the number
-  here is almost always slab plumbing, condo logistics, or a flood threshold.
+  waterproofing, tile, glass and haul-away. Plumbing, electrical and permits are
+  quoted by our GC partner when needed. What moves the number here is almost
+  always slab plumbing, condo logistics, or a flood threshold.
 pricing:
   - eyebrow: Guest or hall bath
     headline: $18K – $26K
@@ -158,14 +160,14 @@ pricing:
       - Same-footprint tub or shower replacement
       - Bonded membrane and a pan test before tile
       - Floor and wall tile, hand-set
-      - Vanity, toilet, fixtures and lighting
+      - Frameless or semi-frameless glass
       - 3–4 weeks on site
   - eyebrow: Most common
     headline: $26K – $45K
     sub: Full primary bath
     featured: true
     features:
-      - Layout change with plumbing relocated in the slab
+      - Layout change (slab plumbing via our GC partner)
       - Curbless walk-in shower on a linear drain
       - Large-format tile or natural stone
       - Double vanity and frameless glass, measured off finished tile
@@ -177,7 +179,7 @@ pricing:
       - Association packet and elevator scheduling
       - Sound-control assembly to the building's rating
       - Shower and tub in one enclosure
-      - Cast-iron replacement where found, heated floor
+      - Heated floor under tile
       - 6–9 weeks on site
 
 areaTitle: Sarasota and the rest of Sarasota County
@@ -195,10 +197,11 @@ faqs:
     a: >-
       A guest or hall bath runs $18,000–$26,000, a full primary bath
       $26,000–$45,000, and a condo or wet room starts around $45,000. Those
-      include demolition, waterproofing, tile, fixtures, permit fees and
-      haul-away. The number that moves most is whether the plumbing stays where
-      it is — nearly every home here is slab-on-grade, so relocating a drain
-      means cutting and re-pouring concrete.
+      cover demolition, waterproofing, tile, glass and haul-away; any plumbing,
+      electrical or permit work is quoted by the general contractor we bring
+      in. The number that moves most is whether the plumbing stays where it is —
+      nearly every home here is slab-on-grade, so relocating a drain means
+      cutting and re-pouring concrete.
   - q: What makes the price go up or down on a Sarasota bathroom?
     a: >-
       Four things, in roughly this order: whether the plumbing moves in the slab,
@@ -212,9 +215,10 @@ faqs:
       When the layout already works and the waterproofing is what aged out. If
       the room functions, the plumbing is sound and you are chasing a failed
       shower pan or tired finishes, a targeted repair is the honest answer and we
-      will say so. We push toward a full remodel when the drain line is failing,
-      the subfloor is soft, or the layout is the actual complaint — replacing
-      finishes over any of those buys you a few years, not twenty.
+      will say so. When the drain line is failing, the subfloor is soft, or the
+      layout is the actual complaint, we bring in our general contractor partner
+      for the bigger job — replacing finishes over any of those buys you a few
+      years, not twenty.
   - q: When would you tell someone not to start yet?
     a: >-
       When the flood-zone math has not been run, when a condo board has just
@@ -235,9 +239,10 @@ faqs:
   - q: How long does a Sarasota bathroom remodel normally take?
     a: >-
       Four to six weeks for a full primary bath from signed quote to walkthrough.
-      Permit review is 3–5 business days at the county and longer in the city,
-      demo is 2–3 days, rough-in and its inspection 3–4 days, waterproofing and
-      the pan test 2 days, tile 5–8 days, then fixtures, glass and the final.
+      When a permit is needed, review is 3–5 business days at the county and
+      longer in the city. Demo is 2–3 days, any plumbing rough-in by the
+      licensed trades and its inspection 3–4 days, waterproofing and the pan
+      test 2 days, tile 5–8 days, then glass and the final.
       Condo approval can add one to three weeks on the front end, and the
       inspection waits are the county's calendar rather than ours.
   - q: Which material and fixture choices change the job most?
@@ -247,22 +252,23 @@ faqs:
       structure, not the finish — the slope has to be built in, which on a slab
       usually means cutting and recessing. Frameless glass is measured off
       finished tile and adds 7–10 days at the end. Hard water is worth spending
-      on here: it scales valves and etches glass, so the coatings and cartridges
-      we specify are not the cheapest ones.
+      on here: it scales valves and etches glass, so the glass coatings we
+      specify are not the cheapest ones.
   - q: What should a homeowner know before booking?
     a: >-
       Three things. Your flood zone and jurisdiction, because they set a ceiling
       on what you can spend before the rules change. Your building's rules, if
       you are in a condo — board approval, work hours and a booked riser shut-off
-      come before the county permit. And what you want us to do if we open a wall
+      come before any county permit. And what you want us to do if we open a wall
       and find something, decided in advance, because a standing decision beats a
       phone call while a crew stands still.
   - q: What changes when a job gets complicated?
     a: >-
       You get a photo of what we found and a price for the difference before we
       carry on — that is the whole change-order process, and nothing proceeds
-      until you have said yes. If the complication is a failed drain line we
-      price the run to the stack rather than patching to the nearest joint. If it
+      until you have said yes. If the complication is a failed drain line, the
+      licensed plumber we bring in prices the run to the stack rather than
+      patching to the nearest joint. If it
       is the 50% threshold, we stop and re-scope with you, because at that point
       the cheaper project is usually a smaller one rather than a compliant
       rebuild.
@@ -302,11 +308,11 @@ What changes, and this is the part nobody writes down, is whether your jurisdict
 
 ## Bathroom remodel permits in Sarasota
 
-Inside city limits you are dealing with City of Sarasota Development Services. In Gulf Gate, Siesta Key, Palmer Ranch and the rest of unincorporated Sarasota County it is the county's Building Services division. Longboat Key, Venice and North Port each run their own. We file as the licensed contractor of record and meet the inspector. The same permitting applies to a standalone [custom shower build in Sarasota](/services/custom-showers/sarasota-fl/).
+Inside city limits you are dealing with City of Sarasota Development Services. In Gulf Gate, Siesta Key, Palmer Ranch and the rest of unincorporated Sarasota County it is the county's Building Services division. Longboat Key, Venice and North Port each run their own. We're not a general contractor and don't pull permits ourselves — when a job needs one, the licensed general contractor we work with files it and meets the inspector. The same permitting applies to a standalone [custom shower build in Sarasota](/services/custom-showers/sarasota-fl/).
 
 The city's rule is broad: a permit is required to erect, install, enlarge, alter, repair, remove, convert or replace any electrical, gas, mechanical or plumbing system. The exemptions are narrower than people expect — stopping a leak, clearing a stoppage, and removing and reinstalling a water closet, so long as the work doesn't replace valves, pipes or fixtures. Swapping a vanity with new supply lines is not exempt.
 
-Two inspections shape the schedule. Plumbing rough-in has to pass before walls close, and there is a final at the end. Plan review runs 3–5 business days at the county and longer in the city, and the wait between calling an inspection and getting one is the county's calendar, not ours. We build it into the timeline instead of discovering it.
+Two inspections shape the schedule. Plumbing rough-in has to pass before walls close, and there is a final at the end. Plan review runs 3–5 business days at the county and longer in the city, and the wait between calling an inspection and getting one is the county's calendar, not ours. We build our tile and waterproofing schedule around it instead of discovering it.
 
 | Phase | Typical duration |
 | --- | --- |
@@ -314,10 +320,10 @@ Two inspections shape the schedule. Plumbing rough-in has to pass before walls c
 | Permit review | 3–5 business days (county), longer in the city |
 | Condo board approval | 1–3 weeks, in parallel where possible |
 | Demolition and haul-away | 2–3 days |
-| Rough-in, then plumbing inspection | 3–4 days plus the inspection wait |
+| Plumbing rough-in (licensed plumber), then inspection | 3–4 days plus the inspection wait |
 | Waterproofing and pan test | 2 days |
 | Tile setting | 5–8 days |
-| Vanity, fixtures, glass, final inspection | 4–6 days |
+| Fixtures (licensed plumber), glass, final inspection | 4–6 days |
 
 The shortest version of this job is a [tub-to-shower conversion](/blog/tub-to-shower-conversion-bradenton/), which keeps the footprint and skips the layout work entirely.
 
@@ -328,7 +334,7 @@ The second thing that decides the job is the building. In a condo, the board sch
 What buildings here typically want before you start:
 
 - A written scope of work, sometimes with drawings
-- Our license and a liability certificate naming the association as additional insured
+- Our liability certificate naming the association as additional insured
 - Posted work hours, and a corridor and elevator protection plan
 - A booked service elevator and a scheduled riser shut-off
 - Proof the sound-control assembly meets the building's rating
@@ -339,8 +345,8 @@ Season matters too. Many buildings restrict renovation work from January through
 
 The third is the slab. The median Sarasota County home was built in 1988, and 37.8% of the county's entire housing stock went up between 1970 and 1989. That cohort is consistent about what it hides: cast-iron waste lines scaled down to half their bore, galvanized supply that has been closing up for forty years, and plumbing buried in the slab in a position the drawings disagree with.
 
-None of that is a reason to panic, and all of it is a reason to look first. We camera the drain and read the slab at the quote visit, so the surprise happens before you have signed rather than after the tub is out. Where the waste line has to be replaced we price the run to the stack as part of the job rather than as a discovery, and the [subfloor and waterproofing work](/services/waterproofing-subfloor-preparation/sarasota-fl/) is quoted with it rather than after it.
+None of that is a reason to panic, and all of it is a reason to look first. We check the drain and read the slab at the quote visit, so the surprise happens before you have signed rather than after the tub is out. We don't do plumbing ourselves: where the waste line has to be replaced, we bring in our general contractor partner or recommend a licensed plumber, and the [subfloor and waterproofing work](/services/waterproofing-subfloor-preparation/sarasota-fl/) is quoted alongside it rather than after it.
 
-Permit fees are a line on your quote, not a surprise at the end. So is the change order: if we open a wall and find something, you get a photo of it and a price for the difference before we carry on. We wrote up the rest in [7 bathroom remodel mistakes that cost homeowners thousands](/blog/bathroom-remodel-mistakes/), and if the floor is going too, [what actually holds up on a bathroom floor](/blog/bathroom-floor-trends/) is worth ten minutes before you choose.
+Nothing about the price is a surprise at the end, including the change order: if we open a wall and find something, you get a photo of it and a price for the difference before we carry on. We wrote up the rest in [7 bathroom remodel mistakes that cost homeowners thousands](/blog/bathroom-remodel-mistakes/), and if the floor is going too, [what actually holds up on a bathroom floor](/blog/bathroom-floor-trends/) is worth ten minutes before you choose.
 
-A contractor working one county over can tile a bathroom. What they can't do is tell you at the first visit which of those three is about to decide your budget. We design, permit and build across Sarasota County with one in-house crew — demolition, subfloor, waterproofing, rough-in, [tile](/services/tile-natural-stone/sarasota-fl/), vanity and glass — so there are no handoffs for the answer to get lost in.
+A contractor working one county over can tile a bathroom. What they can't do is tell you at the first visit which of those three is about to decide your budget. Across Sarasota County our own crew handles demolition, subfloor, waterproofing, [tile](/services/tile-natural-stone/sarasota-fl/) and glass; when a job needs plumbing, electrical or a permit, we bring in the licensed general contractor we work with, so you still have one point of contact.

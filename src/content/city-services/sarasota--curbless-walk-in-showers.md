@@ -79,8 +79,8 @@ localImageAlt: >-
 
 includedTitle: What's included in a Sarasota curbless build
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  Our crew handles the demo, waterproofing, tile and glass. When a drain moves
+  or a permit is needed, we bring in the general contractor we work with.
 included:
   - title: Entry & slope design
     body: >-
@@ -94,8 +94,9 @@ included:
       walls, and a low tiled entry
   - title: Slab work & framing
     body: >-
-      On grade we recess the pour or re-core for the drain; above it we build an
-      engineered sloped assembly on the deck. Either way the blocking for a
+      On grade we recess the pour, with any drain move done by the plumber our
+      GC partner brings in; above it we build an engineered sloped assembly on
+      the deck. Either way the blocking for a
       bench, niches, and grab bars goes in while the walls are still open.
     image: /assets/images/demolition-studs.webp
     alt: >-
@@ -128,8 +129,9 @@ project:
     A 1965 Gulf Gate ranch with original terrazzo running under the whole
     bathroom and a cast-iron waste line sitting dead center. The owners wanted a
     flush entry wide enough for a walker, and the terrazzo outside the bathroom
-    left alone. We cut only the pan opening, sleeved the cast iron, trenched a
-    linear drain in at the back wall, and built the fall into the pan — so the
+    left alone. We cut only the pan opening, the plumber we brought in sleeved
+    the cast iron and set a linear drain at the back wall, and we built the fall
+    into the pan — so the
     hex floor runs straight into the shower and nothing outside the room was
     touched.
   image: /assets/images/gallery-showers/showers-green-vertical-tile.webp
@@ -178,9 +180,10 @@ process:
   - title: Design
     body: >-
       We finalize drain type and position, the slope, tile layout, niche and
-      bench placement, and grab-bar blocking, then pull the permit — and, in a
-      condo, file the association packet and book the elevator and water shutoff
-      — before demo starts.
+      bench placement, and grab-bar blocking. If the drain moves, our general
+      contractor partner pulls the permit — and, in a condo, we file the
+      association packet and book the elevator and water shutoff — before demo
+      starts.
     image: /assets/images/process-2.webp
   - title: Build
     body: >-
@@ -210,12 +213,12 @@ pricing:
     featured: true
     features:
       - Flush entry with no lip to step over
-      - Slab cored or trenched for a linear drain
+      - Linear drain (plumbing via our GC partner)
       - Sloped assembly with sound mat above the ground floor
       - Large-format porcelain or natural stone
       - Lighted niche, built-in bench, grab-bar blocking
       - Frameless glass panel, templated off finished tile
-      - City of Sarasota or Sarasota County permit included
+      - Permit pulled by our GC partner when required
   - eyebrow: Roll-In Wet Room
     headline: $26K
     sub: $26,000 and up
@@ -225,7 +228,7 @@ pricing:
       - Heated shower floor
       - Custom bench, niches, and mitered edges
       - Full frameless glass enclosure
-      - Reframing, doorway widening, and plumbing relocation
+      - Reframing, doorway widening, and plumbing (via our GC partner)
 areaTitle: Sarasota and the rest of Sarasota County
 areaBody: >-
   We work the whole Suncoast — downtown Sarasota, St. Armands, and Southside
@@ -266,15 +269,17 @@ faqs:
       walk-in in the same footprint runs $11,000–$15,000; a curbless
       zero-threshold build with a linear drain and large-format tile runs
       $15,000–$26,000; a full roll-in wet room starts around $26,000. Those
-      ranges include demo, slab work, waterproofing, tile setting, permit fees,
-      and haul-away.
+      ranges include demo, waterproofing, tile setting, glass, and haul-away;
+      drain relocation and any permit are quoted by our general contractor
+      partner.
   - q: Do I need a permit for a walk-in shower in Sarasota?
     a: >-
       If the shower stays exactly where it is and nothing moves, usually not.
       Converting a tub to a walk-in, adding or relocating a drain, cutting the
       slab, or altering a wall does need one — and a curbless build almost
-      always touches at least one of those. We pull it as the licensed
-      contractor of record: City of Sarasota Development Services inside city
+      always touches at least one of those. We're not a general contractor, so
+      the licensed general contractor we work with pulls it: City of Sarasota
+      Development Services inside city
       limits, Sarasota County Building Services in Gulf Gate, Siesta Key, Palmer
       Ranch, and the rest of the unincorporated county. Review typically takes
       3–5 business days.

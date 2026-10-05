@@ -223,7 +223,7 @@ faqs:
 related:
   - label: Bathroom Remodeling in Sarasota
     href: /services/bathroom-remodeling/sarasota-fl
-    blurb: Flood-zone rules, permits, condo approvals and what a full remodel costs here.
+    blurb: Flood-zone rules, condo approvals and what a remodel costs here.
   - label: Custom Showers in Sarasota
     href: /services/custom-showers/sarasota-fl
     blurb: Curbless entries, benches and niches planned before demo.
@@ -254,7 +254,7 @@ Most of waterproofing is national — membranes, mortars and slope don't change 
 | Movement joints | <span class="row-us">TCNA EJ171</span> | Where soft joints go at perimeters, changes of plane and over substrate joints. Omitted joints are a leading cause of tented tile. |
 | Setting mortars | <span class="row-us">ANSI A118.4 / .11 / .15</span> | Modified thin-set, EGP for plywood, improved modified. The mortar is specified to the substrate, not chosen by what's on the truck. |
 
-<blockquote><p>Naming the standard by number is the whole credibility play, and it is the one claim in this trade a customer can actually check. We confirm the adopted pan-test section with the authority having jurisdiction on every permit — Sarasota County Building Services or City of Sarasota Development Services — and the inspector signs the test.</p></blockquote>
+<blockquote><p>Naming the standard by number is the whole credibility play, and it is the one claim in this trade a customer can actually check. On permitted jobs, pulled by the general contractor we work with, the adopted pan-test section is confirmed with the authority having jurisdiction — Sarasota County Building Services or City of Sarasota Development Services — and the inspector signs the test.</p></blockquote>
 
 ## How we prepare the substrate
 
