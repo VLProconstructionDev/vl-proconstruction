@@ -18,4 +18,4 @@ heroImage: /assets/images/gallery/work-14.webp
 order: 2
 ---
 
-From St. Armands to Palmer Ranch, we handle Sarasota's full range – high-end natural stone work in waterfront homes, custom walk-in showers, and hard-surface flooring built for Florida humidity. Licensed, insured, and a short drive from anywhere in Sarasota County.
+From St. Armands to Palmer Ranch, we handle Sarasota's full range – high-end natural stone work in waterfront homes, custom walk-in showers, and hard-surface flooring built for Florida humidity. Insured, and a short drive from anywhere in Sarasota County.

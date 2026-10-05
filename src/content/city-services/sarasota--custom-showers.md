@@ -38,8 +38,8 @@ trust:
     title: In-House Crews
     body: >-
       Four people, badged for your building, on site from demo through glass.
-      No part of your shower – the tear-out, the membrane, the tile – gets
-      handed to a subcontractor we don't employ.
+      None of our part of your shower – the tear-out, the membrane, the tile,
+      the glass – gets handed to a crew we don't employ.
   - icon: map
     title: In Sarasota Weekly
     body: >-
@@ -73,8 +73,9 @@ localImageAlt: >-
 
 includedTitle: What's included in a Sarasota shower build
 includedIntro: >-
-  One price, one crew, one person to call – from the first day of demo to the
-  morning the glass lands. Nothing changes hands mid-build.
+  One price, one person to call – our crew does the demo, waterproofing, tile
+  and glass, and the general contractor we work with covers any plumbing or
+  permit.
 included:
   - title: Demolition & haul-away
     body: >-
@@ -171,8 +172,9 @@ process:
   - title: Design
     body: >-
       We finalize tile layout, niche and bench placement, slope, and drain
-      type, then pull the permit – and, in a condo, file the association
-      packet and book the elevator – before demo starts.
+      type. If a permit is needed our general contractor partner pulls it –
+      and, in a condo, we file the association packet and book the elevator –
+      before demo starts.
     image: /assets/images/process-3.webp
   - title: Build
     body: >-
@@ -206,7 +208,7 @@ pricing:
       - Large-format porcelain or natural stone
       - Lighted niche and built-in bench
       - Frameless glass panel, measured off finished tile
-      - City of Sarasota or Sarasota County permit included
+      - Permit pulled by our GC partner when required
   - eyebrow: Full Wet Room
     headline: $26K
     sub: $26,000 and up
@@ -216,7 +218,7 @@ pricing:
       - Heated shower floor
       - Custom bench, niches, and mitered edges
       - Full frameless glass enclosure
-      - Reframing and plumbing relocation
+      - Reframing and plumbing (via our GC partner)
 areaTitle: Sarasota and the rest of Sarasota County
 areaBody: >-
   We work the whole Suncoast – downtown Sarasota, St. Armands, and Southside
@@ -231,17 +233,17 @@ faqs:
   - q: Do I need a permit for a shower remodel in Sarasota?
     a: >-
       Yes, for anything that touches plumbing, framing, or waterproofing – which
-      a custom shower always does. We pull it. Inside city limits that's City of
+      a custom shower usually does. We're not a general contractor, so the
+      licensed general contractor we work with pulls it. Inside city limits that's City of
       Sarasota Development Services; in Gulf Gate, Siesta Key, Palmer Ranch and
       the rest of unincorporated Sarasota County it's the county's Building
-      Services division. Review typically takes 3–5 business days, and the
-      inspection is scheduled around our flood test so it never adds a day to
-      your build.
+      Services division. Review typically takes 3–5 business days, and we
+      schedule our flood test around the inspection.
   - q: My condo association or HOA needs approval. Can you handle that?
     a: >-
       This is the part of a Sarasota job that catches people out, so we handle
-      it. You get the packet buildings here ask for – scope of work, our license
-      and liability certificate naming the association as additional insured,
+      it. You get the packet buildings here ask for – scope of work, our liability
+      insurance certificate naming the association as additional insured,
       posted work hours, and the elevator and corridor protection plan. Downtown
       towers and most Siesta Key and Longboat buildings also cap renovation
       season (many allow no work January through April) and require a booked
@@ -253,19 +255,20 @@ faqs:
       replacement in the same footprint runs $11,000–$15,000; a curbless walk-in
       with a linear drain and large-format tile runs $15,000–$26,000; a full wet
       room starts around $26,000. Those ranges include demo, waterproofing, tile
-      setting, permit fees, and haul-away.
+      setting, glass, and haul-away; any plumbing or permit work is quoted by
+      our general contractor partner.
   - q: Can we live here while the shower is being built?
     a: >-
       Yes, provided there's a second bathroom in the house. The doorway gets a
       zippered barrier and negative-air dust control, the route in and out is
       protected, and the room is cleaned down every afternoon. The only real
-      disruption is a few hours without water on plumbing day – you'll know
+      disruption is a few hours without water on the plumber's day – you'll know
       which day that is before we start, and in a condo we book that shutoff
       with the building.
   - q: How long does a Sarasota shower take start to finish?
     a: >-
-      Budget three to four weeks from signed quote to finished glass. Permitting
-      is 3–5 business days, the build itself is 6–14 days including a 24-hour
+      Budget three to four weeks from signed quote to finished glass. A permit, when
+      needed, is 3–5 business days, the build itself is 6–14 days including a 24-hour
       flood test, and frameless glass adds 7–10 days because it can't be
       measured until the tile is set. The Gulf Gate job on this page ran 9
       working days of build time. Condo approvals can add a week or two on the

@@ -62,7 +62,8 @@ localPoints:
       Set at the back wall, a linear drain lets the whole pan slope one way,
       which is what keeps a curbless entry from wetting the bathroom floor. On
       older Palma Sola and West Bradenton homes with a centered cast-iron waste
-      line, that means re-coring the slab rather than re-routing overhead.
+      line, that means re-coring the slab for a new drain location – plumbing
+      work we bring in a licensed plumber for.
   - title: Built for the next twenty years
     body: >-
       Most of these builds are aging-in-place decisions. We set real blocking in
@@ -77,8 +78,8 @@ localImageAlt: >-
 
 includedTitle: What's included in a Bradenton curbless build
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  Our crew handles the demo, waterproofing, tile and glass. When a drain moves
+  or a permit is needed, we bring in the general contractor we work with.
 included:
   - title: Entry & slope design
     body: >-
@@ -93,8 +94,8 @@ included:
   - title: Slab work & framing
     body: >-
       On slab-on-grade we recess the pour or build the engineered sloped
-      assembly, re-core for the drain where the old line sits wrong, and set
-      blocking for a bench, niches, and grab bars while the walls are still
+      assembly – any drain move is done by the plumber our GC partner brings in –
+      and set blocking for a bench, niches, and grab bars while the walls are still
       open.
     image: /assets/images/demolition-studs.webp
     alt: >-
@@ -126,8 +127,8 @@ project:
   story: >-
     A 1978 ranch, slab-on-grade, with a builder tub the owners hadn't used in a
     decade. They wanted an entry they could still walk into in twenty years and
-    nothing to trip on at the door. The old waste line sat dead center, so we
-    saw-cut and re-cored the slab for a linear drain at the back wall, which let
+    nothing to trip on at the door. The old waste line sat dead center, so the
+    plumber we brought in moved it to a linear drain at the back wall, which let
     the whole pan fall one way and the porcelain run flush out into the room.
     Blocking went in for two grab bars; only one is installed so far.
   image: /assets/images/gallery-showers/showers-gray-curbless-glass.webp
@@ -175,12 +176,14 @@ process:
   - title: Design
     body: >-
       We finalize drain type and position, the slope, tile layout, niche and
-      bench placement, and grab-bar blocking, then pull the City of Bradenton or
-      Manatee County permit and order everything before demo starts.
+      bench placement, and grab-bar blocking. If the drain moves, our general
+      contractor partner pulls the City of Bradenton or Manatee County permit,
+      and everything is ordered before demo starts.
     image: /assets/images/process-2.webp
   - title: Build
     body: >-
-      Strip to studs, cut and recess the slab, set the pan, flood-test the
+      Strip to studs, recess the slab with any drain work by the licensed
+      plumber, set the pan, flood-test the
       membrane for 24 hours, then set every tile by hand. Glass is templated off
       the finished tile, and we walk the shower with you, detail-clean the room,
       and hand over care and warranty paperwork.
@@ -206,12 +209,12 @@ pricing:
     featured: true
     features:
       - Flush entry with no lip to step over
-      - Slab saw-cut, recessed, or re-cored for a linear drain
+      - Slab recessed for a linear drain (plumbing via our GC partner)
       - Large-format porcelain or natural stone
       - Mosaic or pebble pan floor for grip
       - Lighted niche, built-in bench, grab-bar blocking
       - Frameless glass panel, templated off finished tile
-      - Bradenton or Manatee County permit included
+      - Permit pulled by our GC partner when required
   - eyebrow: Roll-In Wet Room
     headline: $22K
     sub: $22,000 and up
@@ -221,7 +224,7 @@ pricing:
       - Heated shower floor
       - Custom bench, niches, and mitered edges
       - Full frameless glass enclosure
-      - Reframing, doorway widening, and plumbing relocation
+      - Reframing, doorway widening, and plumbing (via our GC partner)
 areaTitle: Bradenton and the rest of Manatee County
 areaBody: >-
   Bradenton is home base, and we work the whole Suncoast from here — Palmetto
@@ -261,18 +264,19 @@ faqs:
       walk-in in the same footprint runs $9,500–$14,000; a curbless
       zero-threshold build with a linear drain and large-format tile runs
       $14,000–$22,000; a full roll-in wet room starts around $22,000. Those
-      ranges include demo, slab work, waterproofing, tile setting, permit fees,
-      and haul-away.
+      ranges include demo, waterproofing, tile setting, glass, and haul-away;
+      drain relocation and any permit are quoted by our general contractor
+      partner.
   - q: Do I need a permit for a walk-in shower in Bradenton or Manatee County?
     a: >-
       If the shower stays exactly where it is and nothing moves, usually not.
       Converting a tub to a walk-in, adding or relocating a drain, cutting the
       slab, or altering a wall does need one — and a curbless build almost
-      always touches at least one of those. We pull it as the licensed
-      contractor of record: City of Bradenton Building Department inside city
-      limits, Manatee County Building & Development Services outside them.
-      Review typically takes 2–4 business days, and the inspection is scheduled
-      around our flood test so it never adds a day to your build.
+      always touches at least one of those. We're not a general contractor, so
+      the licensed general contractor we work with pulls it: City of Bradenton
+      Building Department inside city limits, Manatee County Building &
+      Development Services outside them. Review typically takes 2–4 business
+      days, and we schedule our flood test around the inspection.
   - q: How long does a curbless shower take start to finish?
     a: >-
       A standard walk-in shower in the existing footprint runs about 2 to 3

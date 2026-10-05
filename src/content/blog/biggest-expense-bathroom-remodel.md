@@ -159,8 +159,10 @@ The useful estimate isn't the lowest one — it's the one that names the shower 
 waterproofing system, whether plumbing moves, and who's pulling the permit. Those four lines
 explain nearly every dollar of difference between bids.
 
-VL Pro Construction builds [bathroom remodels](/services/bathroom-remodeling),
-[custom showers](/services/custom-showers/bradenton-fl), and
+VL Pro Construction handles the tile, waterproofing, and glass on
+[bathroom remodels](/services/bathroom-remodeling) – bringing in the general contractor we work
+with for permits, plumbing, and electrical – and builds
+[custom showers](/services/custom-showers/bradenton-fl) and
 [tile and natural stone](/services/tile-natural-stone) across Bradenton, Lakewood Ranch,
 Sarasota, Longboat Key, Siesta Key, and Venice — see [everything we do](/services) or
 [where we work](/locations).

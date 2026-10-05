@@ -3,7 +3,7 @@ import { site } from './site';
 /** Reusable JSON-LD builders. Return plain objects — SEO.astro serializes them. */
 
 // TODO(after Google Business Profile is set up): add openingHoursSpecification and
-// hasCredential (license number), pulling the values from the GBP listing so they
+// hasCredential (any trade license/registration), pulling the values from the GBP listing so they
 // match exactly. aggregateRating is deliberately NOT emitted: the reviews shown on
 // this site are the business's own, and Google treats self-serving LocalBusiness
 // review markup as ineligible for rich results.
@@ -15,7 +15,7 @@ export function localBusinessSchema() {
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'GeneralContractor',
+    '@type': 'HomeAndConstructionBusiness',
     '@id': `${site.url}/#business`,
     name: site.legalName,
     alternateName: site.name,

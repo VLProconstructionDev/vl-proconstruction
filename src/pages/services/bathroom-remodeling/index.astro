@@ -9,7 +9,7 @@ import ArticleStyles from '@components/ArticleStyles.astro';
 import ReviewsSection from '@components/ReviewsSection.astro';
 
 const description =
-  'Full bathroom remodeling in Bradenton & Sarasota, FL. Demo to final grout by one in-house crew, Manatee or Sarasota permits pulled. Free design consultation.';
+  'Bathroom remodels in Bradenton & Sarasota, FL: our crew does the tile, shower waterproofing and glass; our GC partner handles permits and plumbing.';
 
 /**
  * Two parts, deliberately:
@@ -24,7 +24,9 @@ const description =
  *
  * Bathroom remodeling is the whole-room service — the shower, tile, and
  * flooring pages are the components it contains, so this page links out to
- * all three rather than repeating their copy.
+ * all three rather than repeating their copy. Scope note (client, 2026-10):
+ * VL does the tile, waterproofing and glass; it is not a GC and does no
+ * plumbing, electrical or permits — a partner GC or plumber covers those.
  */
 
 /** Sidebar table of contents — kept in sync with the H2 ids in the body. */
@@ -62,7 +64,7 @@ const projectTypes = [
   'Primary bath suites',
   'Guest and powder rooms',
   'Accessible and aging-in-place bathrooms',
-  'Full bathroom remodels',
+  'Bathroom remodels with our general contractor partner',
 ];
 
 /**
@@ -72,19 +74,19 @@ const projectTypes = [
 const faqs = [
   {
     q: 'How long does a bathroom remodel take?',
-    a: 'A focused refresh – vanity, tile, fixtures, nothing moving – runs about 3 to 5 weeks. A full remodel with a shower rebuild or a tub-to-shower conversion runs 4 to 6 weeks, and a primary suite with layout changes runs 6 to 8 weeks. Tile and vanity lead times are the usual variable, so we confirm every material before demo starts and give you a dated schedule before the first day.',
+    a: 'A focused refresh – vanity, tile, fixtures, nothing moving – runs about 3 to 5 weeks. A refresh with a shower rebuild or a tub-to-shower conversion runs 4 to 6 weeks, and a primary suite with layout changes runs 6 to 8 weeks. Tile and vanity lead times are the usual variable, so we confirm every material before demo starts and give you a dated schedule before the first day. When the job needs plumbing, electrical or a permit, the general contractor we work with sets that part of the schedule, and we build ours around it.',
   },
   {
     q: 'How much does a bathroom remodel cost in Bradenton or Sarasota?',
-    a: 'Most remodels in this market land between $18,000 and $45,000. A focused refresh runs $18K–$26K, a full remodel with a walk-in shower runs $26K–$38K, and a primary suite with a custom shower and a freestanding tub runs $38K and up. Room size, tile selection and whether the plumbing moves are the biggest variables.',
+    a: 'Most remodels in this market land between $18,000 and $45,000. A focused refresh runs $18K–$26K, a refresh with a new walk-in shower runs $26K–$38K, and a primary suite with a custom shower and a freestanding tub runs $38K and up. Room size, tile selection and whether the plumbing moves are the biggest variables. We price our tile, waterproofing and glass work; any plumbing, electrical and permit work is priced by the general contractor or plumber we bring in.',
   },
   {
     q: 'Can I save money by keeping the existing plumbing layout?',
-    a: 'Yes, often by thousands. Nearly every home here is slab-on-grade, so moving a toilet or a shower drain means cutting and re-pouring concrete, plus extra permitting. Keeping the fixtures where they are and spending the difference on tile and glass buys a noticeably better-looking room for the same money. We price both options at the walkthrough so you can choose.',
+    a: 'Yes, often by thousands. Nearly every home here is slab-on-grade, so moving a toilet or a shower drain means cutting and re-pouring concrete, plus a licensed plumber and a permit – work we bring in a general contractor partner for, since we do not do plumbing ourselves. Keeping the fixtures where they are and spending the difference on tile and glass buys a noticeably better-looking room for the same money. We help you price both options so you can choose.',
   },
   {
     q: 'Do you handle permits and inspections?',
-    a: 'Yes. We pull the permit as the licensed contractor of record with Manatee County, Sarasota County, or whichever city your address falls in – Bradenton, Palmetto, Sarasota or Venice – and we meet every required inspection. You do not manage paperwork or talk to inspectors. A cosmetic swap that leaves every fixture in place usually needs no permit at all, and we will tell you which one you have before you commit.',
+    a: 'Not ourselves – we are a tile, waterproofing and glass company, not a general contractor, so we do not pull permits. When a project needs one, we bring in a licensed general contractor we work with, who files with Manatee County, Sarasota County or your city and meets the inspections, and we build our part around that. A cosmetic swap that leaves every fixture in place usually needs no permit at all, and we will tell you which one you have before you commit.',
   },
   {
     q: 'Do I need HOA or condo association approval?',
@@ -160,7 +162,7 @@ const schema = [
           Bathroom Remodeling
         </h1>
         <div class="flex flex-col items-center gap-3 sm:gap-5 mt-5 sm:mt-6">
-          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[560px]">Your new bathroom, delivered on time and on budget. One in-house crew from demolition to the last grout line – family-owned, 22 years on the Suncoast.</p>
+          <p class="text-[13.5px] sm:text-[16.5px] font-medium normal-case leading-[1.4] tracking-[-0.02em] text-[#f0f0f0] max-w-[560px]">Your new bathroom, delivered on time and on budget. Our own crew for the tile, waterproofing and glass – family-owned, 22 years on the Suncoast.</p>
         </div>
       </div>
 
@@ -276,15 +278,15 @@ const schema = [
             <div class="intro-card">
               <p class="intro-eyebrow">Family-owned on the Suncoast since 2004</p>
               <h2 id="family-owned">Bradenton &amp; Sarasota Bathroom Remodeling</h2>
-              <p class="intro-lead">A bathroom built around how you actually live – designed, permitted and built by one in-house crew.</p>
-              <p>Your bathroom is the first room you use every morning and the last one at night, so it should work as well as it looks. We design and build bathrooms across Bradenton, Sarasota and the rest of the Suncoast, and we handle the whole thing ourselves: demolition, subfloor repair, waterproofing, tile, vanity, glass and the last bead of caulk. One company, one schedule, one crew that stands behind the result.</p>
-              <p>Most bathroom remodels go wrong in the handoffs. The demo crew leaves, the tile setter arrives and finds a rotted subfloor, and the schedule slips two weeks while everyone waits on somebody else's calendar. We do not have those handoffs, because there is nobody to hand off to – the people who quote your bathroom are the people in your house.</p>
+              <p class="intro-lead">A bathroom built around how you actually live – the tile, the waterproofing and the glass done by our own crew.</p>
+              <p>Your bathroom is the first room you use every morning and the last one at night, so it should work as well as it looks. We work on bathrooms across Bradenton, Sarasota and the rest of the Suncoast, and our own crew handles the parts that decide how the room looks and whether it lasts: demolition, subfloor prep, shower waterproofing, tile and glass. We do not do plumbing or electrical work, and we are not a general contractor – when a bathroom needs those, or a permit, we bring in a licensed general contractor we work with, or recommend a plumber we trust.</p>
+              <p>Most bathroom remodels go wrong in the handoffs. The demo crew leaves, the tile setter arrives and finds a rotted subfloor, and the schedule slips two weeks while everyone waits on somebody else's calendar. We keep those handoffs few and planned: our crew does the demo, prep, waterproofing, tile and glass back to back, and when a plumber or electrician is needed, it is a partner we already work with, scheduled before demo day.</p>
               <p>Twenty-two years and more than 1,300 projects in, we have opened up enough Florida bathrooms to know what is usually behind the tile before we start. When we find something we did not expect, you get a photo of it and a price for the difference before we carry on.</p>
             </div>
 
             <div class="stat-tiles">
               <div class="stat-tile"><b>2004</b><span>Family-owned since</span></div>
-              <div class="stat-tile"><b>In-House</b><span>Design &amp; build crews</span></div>
+              <div class="stat-tile"><b>In-House</b><span>Tile &amp; glass crews</span></div>
               <div class="stat-tile"><b>1300+</b><span>Projects completed</span></div>
               <div class="stat-tile"><b>Full</b><span>Workmanship warranty</span></div>
             </div>
@@ -307,26 +309,26 @@ const schema = [
               </div>
               <div class="pj-c">
                 <h3>Guest &amp; powder rooms</h3>
-                <p>Smaller-scope refreshes and full remodels for hall baths, guest baths and half-baths that still deserve to be done right – the honest option when the layout already works and the waterproofing is what aged out.</p>
+                <p>Smaller-scope refreshes and new showers for hall baths, guest baths and half-baths that still deserve to be done right – the honest option when the layout already works and the waterproofing is what aged out.</p>
               </div>
               <div class="pj-c">
                 <h3>Accessible &amp; aging-in-place</h3>
                 <p>Zero-threshold showers, real blocking set in the walls for grab bars, comfort-height fixtures and slip-resistant tile – accessibility that reads as a well-designed bathroom, not an institutional one.</p>
               </div>
               <div class="pj-c">
-                <h3>Full bathroom remodels</h3>
-                <p>Down-to-the-studs remodels with a new layout, <a href="/services/tile-natural-stone/">tile and stone</a>, vanity, lighting and <a href="/services/flooring/">flooring</a>, coordinated start to finish on one contract.</p>
+                <h3>Bigger remodels, with a partner</h3>
+                <p>A new layout, moved plumbing or new lighting means licensed trades and a permit. For those we bring in a general contractor we work with, and our crew does the <a href="/services/tile-natural-stone/">tile and stone</a>, waterproofing, glass and <a href="/services/flooring/">flooring</a>.</p>
               </div>
             </div>
 
             <h2 id="why-vl-pro">Why homeowners choose VL Pro</h2>
             <p>There are a lot of remodelers between Palmetto and Venice. Here is what actually differs about working with us:</p>
             <ul>
-              <li><strong>One in-house crew.</strong> The same people demo the room and set the last piece of trim. No subcontractor handoffs, and nobody blaming the last trade.</li>
+              <li><strong>Our own tile and glass crew.</strong> The same people demo the room, build the waterproofing, set the tile and hang the glass. Nobody blaming the last trade for what is behind the tile.</li>
               <li><strong>One point of contact.</strong> The person who quotes your bathroom is the person running it. You get their number, not a dispatch line.</li>
-              <li><strong>Fixed scope, priced before demo.</strong> The whole scope is priced up front – no allowances that balloon, and no change order that arrives without a photo of what we found attached to it.</li>
+              <li><strong>Fixed scope, priced before demo.</strong> Our whole scope is priced up front – no allowances that balloon, and no change order that arrives without a photo of what we found attached to it.</li>
               <li><strong>Schluter®-certified waterproofing.</strong> Every pan is built on a certified membrane and flood-tested for 24 hours before a single tile goes on.</li>
-              <li><strong>Permits pulled and inspected.</strong> We file as the licensed contractor of record with Manatee County, Sarasota County or your city building department, and we meet the inspector.</li>
+              <li><strong>A general contractor partner when you need one.</strong> We don't pull permits or do plumbing or electrical work. When your bathroom needs them, we bring in a licensed general contractor we work with, or recommend a plumber we trust.</li>
               <li><strong>Certified for the surfaces we install.</strong> Large-format tile, natural stone, XL porcelain slab, glass tile and art glass panel, and members of the National Tile Contractors Association.</li>
             </ul>
 
@@ -337,27 +339,27 @@ const schema = [
               <div class="step">
                 <span class="step-n" aria-hidden="true">1</span>
                 <h3>Free consultation &amp; detailed estimate</h3>
-                <p>We come to the house, measure the room, check what the plumbing and framing will actually allow, and talk through budget and timeline honestly. You leave with an itemized scope, a price and a start date – not a range. No cost, no obligation.</p>
+                <p>We come to the house, measure the room, look at what the existing plumbing and framing allow, and talk through budget and timeline honestly. You leave with an itemized scope, a price and a start date – not a range. No cost, no obligation.</p>
               </div>
               <div class="step">
                 <span class="step-n" aria-hidden="true">2</span>
-                <h3>Design, selections &amp; permit</h3>
-                <p>Tile, vanity, countertop, fixtures, lighting and paint are chosen and ordered before anything comes apart, so decisions happen on paper rather than mid-build when changes get expensive. If the layout moves plumbing, we pull the permit while the materials are in transit.</p>
+                <h3>Design &amp; selections</h3>
+                <p>Tile, vanity, countertop, fixtures, lighting and paint are chosen and ordered before anything comes apart, so decisions happen on paper rather than mid-build when changes get expensive. If the layout moves plumbing, the general contractor we bring in pulls the permit while the materials are in transit.</p>
               </div>
               <div class="step">
                 <span class="step-n" aria-hidden="true">3</span>
                 <h3>Demo, subfloor &amp; waterproofing</h3>
-                <p>The room comes down to the studs. We repair the subfloor, then build and flood-test the waterproofing assembly before the inspector signs it off. Floors and hallways are protected, dust is contained, and the debris leaves with us.</p>
+                <p>The room comes down to the studs. Any plumbing or electrical rough-in is done by the licensed trades first; then we prep the subfloor and build and flood-test the waterproofing assembly before any tile goes on. Floors and hallways are protected, dust is contained, and the debris leaves with us.</p>
               </div>
               <div class="step">
                 <span class="step-n" aria-hidden="true">4</span>
                 <h3>Finish &amp; walkthrough</h3>
-                <p>Tile goes in, grout is sealed, the vanity and fixtures are set, and the glass goes in last, measured off finished tile rather than off the framing. We clean the room, walk it with you, and fix everything on your list before we call it done.</p>
+                <p>Tile goes in, grout is sealed, and the glass goes in last, measured off finished tile rather than off the framing. We clean the room, walk it with you, and fix everything on your list before we call it done.</p>
               </div>
             </div>
 
             <h2 id="cost">What a bathroom remodel costs in Bradenton and Sarasota</h2>
-            <p>Bathroom cost comes down to three things: the size of the room, the materials you choose, and whether the plumbing or the layout has to move. Most remodels in this market run between <strong>$18,000 and $45,000</strong> and take three to eight weeks. These are typical ranges for our area – your estimate is built to your actual room.</p>
+            <p>Bathroom cost comes down to three things: the size of the room, the materials you choose, and whether the plumbing or the layout has to move. Most remodels in this market run between <strong>$18,000 and $45,000</strong> and take three to eight weeks. These are typical ranges for a whole bathroom in our area, including any plumbing and permit work our general contractor partner prices – your estimate is built to your actual room.</p>
 
             <table>
               <thead>
@@ -371,7 +373,7 @@ const schema = [
                   <td>New vanity, countertop, floor and wall tile, fixtures and lighting, with the existing layout kept.</td>
                 </tr>
                 <tr>
-                  <td><span class="row-us">Full remodel</span></td>
+                  <td><span class="row-us">Refresh + new shower</span></td>
                   <td>$26K – $38K</td>
                   <td>4–6 weeks</td>
                   <td>The above plus a walk-in shower or tub-to-shower conversion, tile surround, linear drain and frameless glass.</td>
@@ -386,7 +388,7 @@ const schema = [
             </table>
 
             <blockquote>
-              <p><strong>The one thing that moves the number most:</strong> whether you keep the existing plumbing locations. Nearly every home here is slab-on-grade, so relocating a toilet or a shower drain means cutting and re-pouring concrete plus extra permitting – often the difference between a $26K and a $40K bathroom of the same finish quality. We price both versions at the walkthrough so you can spend where it matters to you.</p>
+              <p><strong>The one thing that moves the number most:</strong> whether you keep the existing plumbing locations. Nearly every home here is slab-on-grade, so relocating a toilet or a shower drain means cutting and re-pouring concrete plus a plumber and a permit – often the difference between a $26K and a $40K bathroom of the same finish quality. We help you price both versions so you can spend where it matters to you.</p>
             </blockquote>
 
             <h2 id="finishes">Finishes and the details that last</h2>
@@ -395,7 +397,7 @@ const schema = [
 
             <h2 id="offer">Save on your project</h2>
             <h3>$1000 off your remodel, plus a free in-home design consultation</h3>
-            <p>Ask about the current offer when you book. Terms and restrictions apply, and it is valid on projects over $10,000. The in-home design consultation is free either way – we sit down with you and plan layout and fixture placement, tile, vanity and finishes, permits and inspections, and the budget and timeline, before you commit to anything.</p>
+            <p>Ask about the current offer when you book. Terms and restrictions apply, and it is valid on projects over $10,000. The in-home design consultation is free either way – we sit down with you and plan layout, tile, glass and finishes, whether you will need a plumber or a permit, and the budget and timeline, before you commit to anything.</p>
 
             <h2 id="faqs">Bradenton and Sarasota bathroom remodeling FAQs</h2>
             <div class="faq-list" id="faqList">
@@ -413,7 +415,7 @@ const schema = [
             </div>
 
             <h2 id="company">About VL Proconstruction</h2>
-            <p><strong>{site.legalName}</strong> is a family-owned remodeling company based in Bradenton, Florida, serving the Bradenton–Sarasota metro and the wider Suncoast – Palmetto, Ellenton, Parrish, Lakewood Ranch, University Park, Nokomis, Venice, Anna Maria Island, Holmes Beach, Bradenton Beach, Longboat Key and Siesta Key. Licensed and insured, Schluter®-certified for waterproofing, NTCA members, with in-house design and trades and full workmanship warranty on every project. Reach us at <a href={site.phoneHref}>{site.phone}</a>, or see <a href="/locations/">everywhere we work</a>.</p>
+            <p><strong>{site.legalName}</strong> is a family-owned tile, shower waterproofing and glass company based in Bradenton, Florida, serving the Bradenton–Sarasota metro and the wider Suncoast – Palmetto, Ellenton, Parrish, Lakewood Ranch, University Park, Nokomis, Venice, Anna Maria Island, Holmes Beach, Bradenton Beach, Longboat Key and Siesta Key. Bonded and insured, Schluter®-certified for waterproofing, NTCA members, with in-house tile and glass crews and a full workmanship warranty on our work. We don't do plumbing, electrical or permitted work ourselves – when a project needs it, we bring in a licensed general contractor we work with. Reach us at <a href={site.phoneHref}>{site.phone}</a>, or see <a href="/locations/">everywhere we work</a>.</p>
 
             <hr />
             <p>Only need one part of the job? We also do <a href="/services/custom-showers/">custom showers</a>, <a href="/services/tile-natural-stone/">tile and natural stone</a>, and <a href="/services/flooring/">hard-surface flooring</a> as standalone work.</p>
@@ -486,7 +488,7 @@ const schema = [
           Bathroom Remodels in<br />Bradenton &amp; Sarasota
         </h2>
         <p class="mt-6 text-[13.5px] sm:text-[15px] leading-[1.6] tracking-[-0.01em] text-white/55 max-w-[520px]">
-          We remodel bathrooms for homeowners across the Bradenton–Sarasota metro – from Anna Maria Island to Venice – one crew from demo to the final grout line.
+          Tile, shower waterproofing and glass for bathroom remodels across the Bradenton–Sarasota metro – from Anna Maria Island to Venice. Plumbing, electrical and permits go through the general contractor we work with.
         </p>
       </div>
     </div>

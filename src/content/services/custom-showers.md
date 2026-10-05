@@ -26,7 +26,7 @@ faqs:
   - q: How long does a custom shower take?
     a: Most bathroom-scale shower rebuilds run 2–4 weeks from demo to final grout, depending on tile lead times.
   - q: Do you handle the plumbing and glass?
-    a: We coordinate with licensed plumbers and glass fabricators. You get one point of contact for the whole build.
+    a: We install the glass ourselves. We don't do plumbing – when the shower needs it, we recommend a licensed plumber we trust or bring in the general contractor we work with, and build around their rough-in.
   - q: Can you do curbless (barrier-free) showers?
     a: Yes – we plan the floor slope, linear drain, and joist framing needed for a clean curbless entry.
 ---

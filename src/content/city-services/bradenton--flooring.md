@@ -215,7 +215,7 @@ faqs:
       plumbing, framing, or structure is a finish, and Manatee County and the
       City of Bradenton both treat it that way. If the job includes subfloor
       repair, a wall coming out, or post-flood structural work, it needs a permit
-      – and we pull it. We tell you which side of that line your project falls
+      – pulled by the licensed general contractor we work with. We tell you which side of that line your project falls
       on at the first visit, in writing.
   - q: Will my HOA or condo board need to approve the floor?
     a: >-
@@ -223,7 +223,7 @@ faqs:
       your start date. Above the ground floor a hard surface almost always has
       to clear a sound-rating minimum, so we specify an underlayment that meets
       it and put the rating on the submittal. With it goes the paperwork
-      Bradenton boards ask for: scope of work, our license and liability
+      Bradenton boards ask for: scope of work, our liability insurance
       certificate, posted working hours, and the stairwell or elevator
       protection plan. You file it; none of ours has come back rejected.
   - q: What does flooring cost in Bradenton?

@@ -67,8 +67,8 @@ localImageAlt: >-
 
 includedTitle: What's included in a Bradenton shower build
 includedIntro: >-
-  One crew, one quote, from the first swing of the hammer to the final
-  walkthrough. Nothing gets handed off mid-job.
+  Our crew handles the demo, waterproofing, tile and glass. When a drain moves
+  or a permit is needed, we bring in the general contractor we work with.
 included:
   - title: Demolition & haul-away
     body: >-
@@ -160,8 +160,8 @@ process:
   - title: Design
     body: >-
       We finalize tile layout, niche and bench placement, slope, and drain
-      type, then pull the Manatee County permit and order everything before
-      demo starts.
+      type. If the job needs a permit, our general contractor partner pulls it
+      with Manatee County, and everything is ordered before demo starts.
     image: /assets/images/process-3.webp
   - title: Build
     body: >-
@@ -195,7 +195,7 @@ pricing:
       - Large-format porcelain or natural stone
       - Lighted niche and built-in bench
       - Frameless glass panel, measured off finished tile
-      - Bradenton or Manatee County permit included
+      - Permit pulled by our GC partner when required
   - eyebrow: Full Wet Room
     headline: $22K
     sub: $22,000 and up
@@ -205,7 +205,7 @@ pricing:
       - Heated shower floor
       - Custom bench, niches, and mitered edges
       - Full frameless glass enclosure
-      - Reframing and plumbing relocation
+      - Reframing and plumbing (via our GC partner)
 areaTitle: Bradenton and the rest of Manatee County
 areaBody: >-
   Bradenton is home base, and we work the whole Suncoast from here – Palmetto
@@ -216,15 +216,15 @@ faqs:
   - q: Do I need a permit for a shower remodel in Bradenton?
     a: >-
       Yes, for anything that touches plumbing, framing, or waterproofing – which
-      a custom shower always does. We pull it. Inside city limits that's the
+      a custom shower usually does. We're not a general contractor, so the
+      licensed general contractor we work with pulls it. Inside city limits that's the
       City of Bradenton Building Department; in unincorporated Bradenton it's
       Manatee County Building & Development Services. Review typically takes 2–4
-      business days, and the inspection is scheduled around our flood test so it
-      never adds a day to your build.
+      business days, and we schedule our flood test around the inspection.
   - q: My HOA or condo association needs approval. Can you handle that?
     a: >-
       We'll give you the packet most Bradenton associations ask for – scope of
-      work, our license and liability certificate, working hours, and the
+      work, our liability insurance certificate, working hours, and the
       elevator or stairwell protection plan. River Strand, Perico Bay, and most
       Longboat Key buildings also cap work hours and require a certificate
       naming the association as additional insured; we issue that at no charge.
@@ -235,18 +235,19 @@ faqs:
       replacement in the same footprint runs $9,500–$14,000; a curbless walk-in
       with a linear drain and large-format tile runs $14,000–$22,000; a full wet
       room starts around $22,000. Those ranges include demo, waterproofing, tile
-      setting, permit fees, and haul-away.
+      setting, glass, and haul-away; any plumbing or permit work is quoted by
+      our general contractor partner.
   - q: Can we stay in the house while you work?
     a: >-
       Almost always, as long as you have a second bathroom. We seal the doorway
       with a zippered barrier, run negative-air dust control, protect the path
       in and out, and clean the work area every afternoon. Water is only shut
-      off for a few hours on the plumbing day, and we tell you which day that is
+      off for a few hours on the plumber's day, and we tell you which day that is
       at the start.
   - q: How long does a Bradenton shower take start to finish?
     a: >-
-      Budget three to four weeks from signed quote to finished glass. Permitting
-      is 2–4 business days, the build itself is 6–14 days including a 24-hour
+      Budget three to four weeks from signed quote to finished glass. A permit, when
+      needed, is 2–4 business days, the build itself is 6–14 days including a 24-hour
       flood test, and frameless glass adds 7–10 days because it can't be
       measured until the tile is set. The Palma Sola job on this page ran 11
       working days of build time.

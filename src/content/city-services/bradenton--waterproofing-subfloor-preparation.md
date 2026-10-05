@@ -248,8 +248,9 @@ faqs:
       hours, marking the level at the start and checking it at the end. Yes,
       every shower – and we photograph both ends of the hold. It's the only way
       to know a pan is watertight before tile buries it, and where the job is
-      permitted we time it so the Manatee County or City of Bradenton inspection
-      lands on the same visit.
+      permitted – through the general contractor we work with – we time it so
+      the Manatee County or City of Bradenton inspection lands on the same
+      visit.
   - q: Can you waterproof a shower if another contractor is setting the tile?
     a: >-
       Yes, and we do it regularly for Bradenton builders and remodelers. We
