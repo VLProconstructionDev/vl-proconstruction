@@ -62,7 +62,7 @@ export const site = {
   // Ships in the client bundle by design — MUST be restricted in Google Cloud
   // console to this site's domains + Maps JavaScript API / Places API only.
   // Empty = the address field works as a plain text input.
-  googleMapsApiKey: 'AIzaSyDjbUshWhItxE8cqBRU_pTW9OjNh748CA4',
+  googleMapsApiKey: 'AIzaSyB9qAcHtQCC04lAO0QO1xqMpoq9dKFrnpw',
   // reCAPTCHA v3 site key (public by design; the SECRET key lives only in the
   // Apps Script — see docs/leads-webhook/SETUP.md). Register both at
   // https://www.google.com/recaptcha/admin/create (score-based v3).
